@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<events>
+    <event>
+        <classroom name="204"/>
+        <duration>1</duration>
+        <hour>8</hour>
+        <studyGroup name="12A">
+            <numberOfParticipants>0</numberOfParticipants>
+        </studyGroup>
+        <subject name="Matematica">
+            <studyYear>12</studyYear>
+        </subject>
+        <teacher name="dpop">
+            <firstName>Dan</firstName>
+            <lastName>Pop</lastName>
+        </teacher>
+        <weekDay>1</weekDay>
+    </event>
+    <event>
+        <classroom name="204"/>
+        <duration>1</duration>
+        <hour>9</hour>
+        <studyGroup name="12B">
+            <numberOfParticipants>0</numberOfParticipants>
+        </studyGroup>
+        <subject name="Informatica">
+            <studyYear>12</studyYear>
+        </subject>
+        <teacher name="ctns">
+            <firstName>Catalina</firstName>
+            <lastName>Ilas</lastName>
+        </teacher>
+        <weekDay>1</weekDay>
+    </event>
+    <event>
+        <classroom name="101"/>
+        <duration>1</duration>
+        <hour>8</hour>
+        <studyGroup name="10B">
+            <numberOfParticipants>0</numberOfParticipants>
+        </studyGroup>
+        <subject name="Engleza">
+            <studyYear>10</studyYear>
+        </subject>
+        <teacher name="ctns">
+            <firstName>Catalina</firstName>
+            <lastName>Ilas</lastName>
+        </teacher>
+        <weekDay>1</weekDay>
+    </event>
+</events>

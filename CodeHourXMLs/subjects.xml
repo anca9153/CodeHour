@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<subjects>
+    <subject name="Matematica">
+        <studyYear>12</studyYear>
+    </subject>
+    <subject name="Informatica">
+        <studyYear>12</studyYear>
+    </subject>
+    <subject name="Engleza">
+        <studyYear>10</studyYear>
+    </subject>
+</subjects>

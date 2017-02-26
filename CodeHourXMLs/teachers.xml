@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<teachers>
+    <Teacher name="dpop">
+        <firstName>Dan</firstName>
+        <lastName>Pop</lastName>
+    </Teacher>
+    <Teacher name="ctns">
+        <firstName>Catalina</firstName>
+        <lastName>Ilas</lastName>
+    </Teacher>
+    <Teacher name="vhariuc">
+        <firstName>Virgil</firstName>
+        <lastName>Hariuc</lastName>
+    </Teacher>
+</teachers>
