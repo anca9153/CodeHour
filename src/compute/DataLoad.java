@@ -27,63 +27,30 @@ import java.util.List;
 public class DataLoad {
     private static String loadPath = new String("D:\\Dropbox\\Licenta\\CodeHour (github)\\CodeHour\\CodeHourXMLs\\");
 
-//    public static Events loadDataFromXML(){
-//        Events events = new Events();
-//        try{
-//            //Loading subjects
-//            File file = new File(loadPath + "subjects.xml");
-//            JAXBContext jaxbContext = JAXBContext.newInstance(Subjects.class);
-//            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//
-//            Subjects subjects = (Subjects) jaxbUnmarshaller.unmarshal(file);
-//            List<Subject> subjectList = subjects.getSubjectList();
-////            System.out.println("/nSubject list:");
-////            for(Subject subject : subjectList){
-////                System.out.println(subject.getName());
-////            }
-//
-//            //Loading studyGroups
-//            file = new File(loadPath + "studyGroups.xml");
-//            jaxbContext = JAXBContext.newInstance(StudyGroups.class);
-//            jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//
-//            StudyGroups studyGroups = (StudyGroups) jaxbUnmarshaller.unmarshal(file);
-//            List<StudyGroup> studyGroupsList = studyGroups.getStudyGroupList();
-////            System.out.println("/nStudyGroup list:");
-////            for(StudyGroup sg: studyGroupsList){
-////                System.out.println(sg.getName());
-////            }
-//
-//            //Loading teachers
-//            file = new File(loadPath + "teachers.xml");
-//            jaxbContext = JAXBContext.newInstance(Teachers.class);
-//            jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//
-//            Teachers teachers = (Teachers) jaxbUnmarshaller.unmarshal(file);
-//            List<Teacher> teachersList = teachers.getTeacherList();
-////            System.out.println("/nTeacher list:");
-////            for(Teacher teacher: teachersList){
-////                System.out.println(teacher.getName());
-////            }
-//
-//            //Loading events
-//            file = new File(loadPath + "events.xml");
-//            jaxbContext = JAXBContext.newInstance(Events.class);
-//            jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//
-//            events = (Events) jaxbUnmarshaller.unmarshal(file);
-//            List<Event> eventsList= events.getEventList();
-////            System.out.println("/nEvent list:");
-////            for(Event event: eventsList){
-////                System.out.println(event.getStudyGroup()+" "+event.getSubject());
-////            }
-//
-//        } catch (JAXBException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return events;
-//    }
+    public static Timetable loadDataFromXML(){
+        Timetable timetable = new Timetable();
+        try{
+            //Loading timetable
+            File file = new File(loadPath + "timetable.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+            timetable= (Timetable) jaxbUnmarshaller.unmarshal(file);
+            List<Event> eventList = timetable.getEvents().getEvents();
+//            System.out.println("Event list:");
+//            for(Event e: eventList) {
+//                System.out.println(e.getId());
+//                for (Resource r : e.getResources().getResources()){
+//                    System.out.println(r.getId()+" "+ r.getName()+" "+r.getResourceType());
+//                }
+//            }
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        return timetable;
+    }
 
     public static Timetable loadDataToXML() {
         Metadata metadata = new Metadata("Example Timetable", "Anca Ad", new Date(), "");

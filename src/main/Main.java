@@ -17,7 +17,7 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Timetable timetable = DataLoad.loadDataToXML();
+        Timetable timetable = DataLoad.loadDataFromXML();
 
 //        Events programmedEvents= Algorithm.getTimeTable(events.getEventList(), classrooms.getClassroomList());
 //        DataLoad.loadProgrammedEventsToXML(programmedEvents);
