@@ -2,6 +2,7 @@ package compute;
 
 import model.Metadata;
 import model.Timetable;
+import model.constraint.Constraint;
 import model.constraint.Constraints;
 import model.event.Event;
 import model.event.Events;
@@ -110,7 +111,12 @@ public class DataLoad {
 
         Events events = new Events(eventList);
 
-        Constraints constraints = new Constraints();
+        List<Constraint> constraintList = Arrays.asList(
+                new Constraint("assignResourceConstraint", true, 1, events),
+                new Constraint("assignTimeConstraint", true, 1, events)
+        );
+
+        Constraints constraints = new Constraints(constraintList);
 
         Timetable timetable = new Timetable("exampleTimetable", metadata, times, resourceTypes, resources, events, constraints);
 

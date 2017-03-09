@@ -1,5 +1,6 @@
 package model;
 
+import model.solution.Solutions;
 import model.time.Times;
 
 import model.constraint.Constraints;
@@ -24,6 +25,7 @@ public class Timetable {
     private Resources resources;
     private Events events;
     private Constraints constraints;
+    private Solutions solutions;
 
     public Timetable (){
 
@@ -100,5 +102,13 @@ public class Timetable {
     @XmlElement(name = "resourceTypes")
     public void setResourceTypes(ResourceTypes resourceTypes) {
         this.resourceTypes = resourceTypes;
+    }
+
+    public Solutions getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(Solutions solutions) {
+        this.solutions = solutions;
     }
 }

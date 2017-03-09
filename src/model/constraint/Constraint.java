@@ -1,5 +1,6 @@
 package model.constraint;
 
+import model.event.Events;
 import model.resource.Resources;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,16 +11,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "constraint")
 public class Constraint {
     private String id;
-    private String required;
-    private Resources appliesTo;
+    private boolean required;
+    private int weight;
+    private Events appliesTo;
 
     public Constraint(){
 
     }
 
-    public Constraint(String id, String required, Resources appliesTo) {
+    public Constraint(String id, boolean required, int weight, Events appliesTo) {
         this.id = id;
         this.required = required;
+        this.weight = weight;
         this.appliesTo = appliesTo;
     }
 
@@ -31,19 +34,27 @@ public class Constraint {
         this.id = id;
     }
 
-    public String getRequired() {
+    public boolean getRequired() {
         return required;
     }
 
-    public void setRequired(String required) {
+    public void setRequired(boolean required) {
         this.required = required;
     }
 
-    public Resources getAppliesTo() {
+    public Events getAppliesTo() {
         return appliesTo;
     }
 
-    public void setAppliesTo(Resources appliesTo) {
+    public void setAppliesTo(Events appliesTo) {
         this.appliesTo = appliesTo;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
