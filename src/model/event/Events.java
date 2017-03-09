@@ -11,14 +11,14 @@ import java.util.List;
  */
 @XmlRootElement(name = "events")
 public class Events {
-    private List<Event> eventList;
+    private List<Event> events;
 
-    public List<Event> getEventList() {
-        return eventList;
+    public List<Event> getEvents() {
+        return events;
     }
 
     @XmlElement(name = "event")
-    public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
