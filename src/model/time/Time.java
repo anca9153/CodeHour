@@ -34,4 +34,14 @@ public class Time {
     public void setDay(String day) {
         this.day = day;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if(other == null) return false;
+        if(other == this) return true;
+
+        Time t = (Time) other;
+        if(t.getId().matches(this.id)) return true;
+        return false;
+    }
 }

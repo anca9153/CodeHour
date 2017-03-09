@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "report")
 public class Report {
-    private int infesabilityValue;
+    private int infeasibilityValue;
     private int objectiveValue;
     private ConstraintViolatingResources cvrs;
 
@@ -18,18 +18,10 @@ public class Report {
 
     }
 
-    public Report(int infesabilityValue, int objectiveValue, ConstraintViolatingResources cvrs) {
-        this.infesabilityValue = infesabilityValue;
+    public Report(int infeasibilityValue, int objectiveValue, ConstraintViolatingResources cvrs) {
+        this.setInfeasibilityValue(infeasibilityValue);
         this.objectiveValue = objectiveValue;
         this.cvrs = cvrs;
-    }
-
-    public int getInfesabilityValue() {
-        return infesabilityValue;
-    }
-
-    public void setInfesabilityValue(int infesabilityValue) {
-        this.infesabilityValue = infesabilityValue;
     }
 
     public int getObjectiveValue() {
@@ -47,5 +39,13 @@ public class Report {
     @XmlElement(name = "constraintViolatingResources")
     public void setCvrs(ConstraintViolatingResources cvrs) {
         this.cvrs = cvrs;
+    }
+
+    public int getInfeasibilityValue() {
+        return infeasibilityValue;
+    }
+
+    public void setInfeasibilityValue(int infeasibilityValue) {
+        this.infeasibilityValue = infeasibilityValue;
     }
 }

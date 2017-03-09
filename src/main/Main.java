@@ -2,6 +2,7 @@ package main;
 
 import compute.Algorithm;
 import compute.DataLoad;
+import compute.GradingAlgorithm;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,6 +12,12 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import model.Timetable;
 import model.event.Events;
+import model.solution.Solution;
+import model.solution.Solutions;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Application {
     /**
@@ -19,8 +26,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         Timetable timetable = DataLoad.loadDataFromXML();
 
-//        Events programmedEvents= Algorithm.getTimeTable(events.getEventList(), classrooms.getClassroomList());
-//        DataLoad.loadProgrammedEventsToXML(programmedEvents);
+        Algorithm algorithm = new GradingAlgorithm();
+        DataLoad.loadSolvedTimetableToXML(algorithm.solve(timetable));
 
 //        launch(args);
     }

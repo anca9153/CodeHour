@@ -9,6 +9,7 @@ import model.event.Events;
 import model.resource.Resource;
 import model.resource.ResourceTypes;
 import model.resource.Resources;
+import model.solution.Solution;
 import model.time.Time;
 import model.time.Times;
 
@@ -51,6 +52,19 @@ public class DataLoad {
         }
 
         return timetable;
+    }
+
+    public static void loadSolvedTimetableToXML(Timetable timetable){
+        try {
+            File timetableFile = new File(loadPath + "solvedTimetable.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(timetable, timetableFile);
+//            marshaller.marshal(events, System.out);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Timetable loadDataToXML() {

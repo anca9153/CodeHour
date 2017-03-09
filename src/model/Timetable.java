@@ -108,6 +108,7 @@ public class Timetable {
         return solutions;
     }
 
+    @XmlElement(name = "solutions")
     public void setSolutions(Solutions solutions) {
         this.solutions = solutions;
     }
