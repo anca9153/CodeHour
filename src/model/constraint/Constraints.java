@@ -1,9 +1,8 @@
-package model.XMLModel;
-
-import model.Constraint;
+package model.constraint;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -13,6 +12,14 @@ import java.util.List;
 @XmlRootElement(name = "constraints")
 public class Constraints {
     private List<Constraint> constraints;
+
+    public Constraints(){
+
+    }
+
+    public Constraints(List<Constraint> constraints) {
+        this.constraints = constraints;
+    }
 
     public List<Constraint> getConstraints() {
         return constraints;

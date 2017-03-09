@@ -1,4 +1,11 @@
-package model.XMLModel;
+package model;
+
+import model.time.Times;
+
+import model.constraint.Constraints;
+import model.event.Events;
+import model.resource.ResourceTypes;
+import model.resource.Resources;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,6 +24,20 @@ public class Timetable {
     private Resources resources;
     private Events events;
     private Constraints constraints;
+
+    public Timetable (){
+
+    }
+
+    public Timetable(String id, Metadata metadata, Times times, ResourceTypes resourceTypes, Resources resources, Events events, Constraints constraints) {
+        this.id = id;
+        this.metadata = metadata;
+        this.times = times;
+        this.resourceTypes = resourceTypes;
+        this.resources = resources;
+        this.events = events;
+        this.constraints = constraints;
+    }
 
     public String getId() {
         return id;

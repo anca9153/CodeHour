@@ -1,4 +1,4 @@
-package model;
+package model.time;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,6 +9,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Time {
     private String id;
     private String day;
+
+    public Time(){
+
+    }
+
+    public Time(String id, String day) {
+        this.id = id;
+        this.day = day;
+    }
 
     public String getId() {
         return id;

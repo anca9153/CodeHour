@@ -1,4 +1,4 @@
-package model.XMLModel;
+package model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
@@ -12,6 +12,17 @@ public class Metadata {
     private String contributor;
     private Date date;
     private String description;
+
+    public Metadata(){
+
+    }
+
+    public Metadata(String name, String contributor, Date date, String description) {
+        this.name = name;
+        this.contributor = contributor;
+        this.date = date;
+        this.description = description;
+    }
 
     public String getName() {
         return name;

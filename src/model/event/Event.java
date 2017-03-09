@@ -1,6 +1,7 @@
-package model;
+package model.event;
 
-import model.XMLModel.Resources;
+import model.resource.Resources;
+import model.time.Time;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,6 +18,14 @@ public class Event {
     public Event(){
 
     }
+
+    public Event(String id, int duration, Time time, Resources resources) {
+        this.id = id;
+        this.duration = duration;
+        this.time = time;
+        this.resources = resources;
+    }
+
     public String getId() {
         return id;
     }

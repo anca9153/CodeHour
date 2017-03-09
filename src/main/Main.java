@@ -3,32 +3,24 @@ package main;
 import compute.Algorithm;
 import compute.DataLoad;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import model.Timetable;
-import model.XMLModel.Classrooms;
-import model.XMLModel.Events;
+import model.event.Events;
 
 public class Main extends Application {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Events events = DataLoad.loadDataFromXML();
-        Classrooms classrooms = DataLoad.getClassrooms();
+        Timetable timetable = DataLoad.loadDataToXML();
 
-//        Events events = DataLoad.loadDataToXML();
-
-        Events programmedEvents= Algorithm.getTimeTable(events.getEventList(), classrooms.getClassroomList());
-        DataLoad.loadProgrammedEventsToXML(programmedEvents);
+//        Events programmedEvents= Algorithm.getTimeTable(events.getEventList(), classrooms.getClassroomList());
+//        DataLoad.loadProgrammedEventsToXML(programmedEvents);
 
 //        launch(args);
     }

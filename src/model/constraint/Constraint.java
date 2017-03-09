@@ -1,6 +1,6 @@
-package model;
+package model.constraint;
 
-import model.XMLModel.Resources;
+import model.resource.Resources;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,6 +12,16 @@ public class Constraint {
     private String id;
     private String required;
     private Resources appliesTo;
+
+    public Constraint(){
+
+    }
+
+    public Constraint(String id, String required, Resources appliesTo) {
+        this.id = id;
+        this.required = required;
+        this.appliesTo = appliesTo;
+    }
 
     public String getId() {
         return id;

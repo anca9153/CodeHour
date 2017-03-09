@@ -1,4 +1,4 @@
-package model;
+package model.resource;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -8,7 +8,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "resource")
 public class Resource {
     private String id;
+    private String name;
     private String resourceType;
+
+    public Resource(){
+
+    }
+
+    public Resource(String id,String name, String resourceType) {
+        this.id = id;
+        this.name = name;
+        this.resourceType = resourceType;
+    }
 
     public String getId() {
         return id;
@@ -24,5 +35,13 @@ public class Resource {
 
     public void setResourceType(String resourceType) {
         this.resourceType = resourceType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

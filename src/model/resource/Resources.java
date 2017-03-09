@@ -1,6 +1,6 @@
-package model.XMLModel;
+package model.resource;
 
-import model.Resource;
+import model.resource.Resource;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,6 +12,14 @@ import java.util.List;
 @XmlRootElement(name = "resources")
 public class Resources {
     private List<Resource> resources;
+
+    public Resources(){
+
+    }
+
+    public Resources(List<Resource> resources) {
+        this.resources = resources;
+    }
 
     public List<Resource> getResources() {
         return resources;
