@@ -2,7 +2,7 @@ package main;
 
 import compute.Algorithm;
 import compute.DataLoad;
-import compute.GradingAlgorithm;
+import compute.algorithms.GradingAlgorithm;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -11,13 +11,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import model.Timetable;
-import model.event.Events;
-import model.solution.Solution;
-import model.solution.Solutions;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main extends Application {
     /**

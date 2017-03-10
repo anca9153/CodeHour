@@ -1,9 +1,8 @@
-package compute;
+package compute.algorithms;
 
+import compute.Algorithm;
 import model.Timetable;
 import model.constraint.Constraint;
-import model.constraint.ConstraintValidator;
-import model.constraint.Constraints;
 import model.event.Event;
 import model.event.Events;
 import model.solution.Solution;
@@ -58,7 +57,7 @@ public class GradingAlgorithm implements Algorithm {
             int bestCostValue = 1000;
             Time bestTime = null;
             for (Time t : timetable.getTimes().getTimes()) {
-                int costValue = getConflictingEventsCost(e, t);
+                int costValue = getConflictingEventsCost(t);
                 if (costValue < bestCostValue) {
                     bestCostValue = costValue;
                     bestTime = t;
@@ -72,15 +71,14 @@ public class GradingAlgorithm implements Algorithm {
     }
 
     private int computeInfeasibility(Event e){
-        ConstraintValidator validator = new ConstraintValidator(timetable.getEvents().getEvents());
         int infeasibility = 0;
         for(Constraint c : timetable.getConstraints().getConstraints()){
-            infeasibility += validator.validate(c, e);
+            infeasibility += c.validate(c, e);
         }
         return infeasibility;
     }
 
-    private int getConflictingEventsCost(Event event, Time time){
+    private int getConflictingEventsCost(Time time){
         int cost = 0;
         for(Event e : timetable.getEvents().getEvents()){
             if(e.getTime()!=null) {

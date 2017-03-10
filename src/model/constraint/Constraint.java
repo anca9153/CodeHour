@@ -1,15 +1,15 @@
 package model.constraint;
 
+import model.event.Event;
 import model.event.Events;
-import model.resource.Resources;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Created by Anca on 3/9/2017.
  */
-@XmlRootElement(name = "constraint")
-public class Constraint {
+@XmlTransient
+public abstract class Constraint {
     private String id;
     private boolean required;
     private int weight;
@@ -57,4 +57,6 @@ public class Constraint {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    public abstract int validate(Constraint constraint, Event event);
 }

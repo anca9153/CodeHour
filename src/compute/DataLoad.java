@@ -4,6 +4,8 @@ import model.Metadata;
 import model.Timetable;
 import model.constraint.Constraint;
 import model.constraint.Constraints;
+import model.constraint.types.AssignResourceConstraint;
+import model.constraint.types.AssignTimeConstraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
@@ -38,7 +40,7 @@ public class DataLoad {
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
             timetable= (Timetable) jaxbUnmarshaller.unmarshal(file);
-            List<Event> eventList = timetable.getEvents().getEvents();
+//            List<Event> eventList = timetable.getEvents().getEvents();
 //            System.out.println("Event list:");
 //            for(Event e: eventList) {
 //                System.out.println(e.getId());
@@ -46,6 +48,12 @@ public class DataLoad {
 //                    System.out.println(r.getId()+" "+ r.getName()+" "+r.getResourceType());
 //                }
 //            }
+
+            List<Constraint> constraintList = timetable.getConstraints().getConstraints();
+            System.out.println("Constraint list:");
+            for(Constraint c: constraintList) {
+                System.out.println(c.getId()+" weight: "+c.getWeight());
+            }
 
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -126,8 +134,8 @@ public class DataLoad {
         Events events = new Events(eventList);
 
         List<Constraint> constraintList = Arrays.asList(
-                new Constraint("assignResourceConstraint", true, 1, events),
-                new Constraint("assignTimeConstraint", true, 1, events)
+                new AssignResourceConstraint("assignResourceConstraint", true, 1, events),
+                new AssignTimeConstraint("assignTimeConstraint", true, 1, events)
         );
 
         Constraints constraints = new Constraints(constraintList);
