@@ -82,7 +82,7 @@ public class DataLoad {
         List<Time> timeList = new ArrayList<>();
 
         for(int day = 0; day<5; day++) {
-            for (int hour = 0; hour < 6; hour++) {
+            for (int hour = 0; hour < 2; hour++) {
                 Time time = new Time(new StringBuilder().append(String.valueOf(hour+1)).append("_").append(weekdays.get(day).substring(0, 3)).toString(), weekdays.get(day));
                 timeList.add(time);
             }
@@ -128,7 +128,9 @@ public class DataLoad {
                 new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(8), resourceList.get(14)))),
                 new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(9), resourceList.get(15)))),
                 new Event("ev7", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(10), resourceList.get(16)))),
-                new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(6), resourceList.get(12))))
+                new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(6), resourceList.get(12)))),
+                new Event("ev9", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13)))),
+                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13))))
         );
 
         Events events = new Events(eventList);

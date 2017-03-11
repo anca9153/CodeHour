@@ -1,6 +1,8 @@
 package model.resource;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Anca on 3/9/2017.
@@ -43,5 +45,15 @@ public class Resource {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if(other == null) return false;
+        if(other == this) return true;
+
+        Resource r = (Resource) other;
+        if(r.getId().matches(this.getId())) return true;
+        return false;
     }
 }

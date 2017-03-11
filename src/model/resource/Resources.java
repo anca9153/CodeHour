@@ -1,9 +1,11 @@
 package model.resource;
 
 import model.resource.Resource;
+import model.time.Time;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +30,17 @@ public class Resources {
     @XmlElement(name = "resource")
     public void setResources(List<Resource> resources) {
         this.resources = resources;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if(other == null) return false;
+        if(other == this) return true;
+
+        Resources rs = (Resources) other;
+        List<Resource> newList = new ArrayList<>(rs.getResources());
+        newList.removeAll(this.getResources());
+        return newList.size() == 0 ? true : false;
     }
 
 }

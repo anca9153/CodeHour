@@ -171,6 +171,48 @@
                         </resource>
                     </resources>
                 </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev9</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev10</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                </event>
             </appliesTo>
             <id>assignResourceConstraint</id>
             <required>true</required>
@@ -341,6 +383,48 @@
                         </resource>
                         <resource>
                             <id>102</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev9</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev10</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -521,10 +605,52 @@
                 </resource>
             </resources>
         </event>
+        <event>
+            <duration>1</duration>
+            <id>ev9</id>
+            <resources>
+                <resource>
+                    <id>vhariuc</id>
+                    <name>Virgil Hariuc</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>12A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>103</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+        </event>
+        <event>
+            <duration>1</duration>
+            <id>ev10</id>
+            <resources>
+                <resource>
+                    <id>vhariuc</id>
+                    <name>Virgil Hariuc</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>12A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>103</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+        </event>
     </events>
     <metadata>
         <contributor>Anca Ad</contributor>
-        <date>2017-03-10T16:40:56.611+02:00</date>
+        <date>2017-03-11T18:30:42.311+02:00</date>
         <description></description>
         <name>Example Timetable</name>
     </metadata>
@@ -630,44 +756,12 @@
             <id>2_mon</id>
         </time>
         <time>
-            <day>monday</day>
-            <id>3_mon</id>
-        </time>
-        <time>
-            <day>monday</day>
-            <id>4_mon</id>
-        </time>
-        <time>
-            <day>monday</day>
-            <id>5_mon</id>
-        </time>
-        <time>
-            <day>monday</day>
-            <id>6_mon</id>
-        </time>
-        <time>
             <day>tuesday</day>
             <id>1_tue</id>
         </time>
         <time>
             <day>tuesday</day>
             <id>2_tue</id>
-        </time>
-        <time>
-            <day>tuesday</day>
-            <id>3_tue</id>
-        </time>
-        <time>
-            <day>tuesday</day>
-            <id>4_tue</id>
-        </time>
-        <time>
-            <day>tuesday</day>
-            <id>5_tue</id>
-        </time>
-        <time>
-            <day>tuesday</day>
-            <id>6_tue</id>
         </time>
         <time>
             <day>wednesday</day>
@@ -678,22 +772,6 @@
             <id>2_wed</id>
         </time>
         <time>
-            <day>wednesday</day>
-            <id>3_wed</id>
-        </time>
-        <time>
-            <day>wednesday</day>
-            <id>4_wed</id>
-        </time>
-        <time>
-            <day>wednesday</day>
-            <id>5_wed</id>
-        </time>
-        <time>
-            <day>wednesday</day>
-            <id>6_wed</id>
-        </time>
-        <time>
             <day>thursday</day>
             <id>1_thu</id>
         </time>
@@ -702,44 +780,12 @@
             <id>2_thu</id>
         </time>
         <time>
-            <day>thursday</day>
-            <id>3_thu</id>
-        </time>
-        <time>
-            <day>thursday</day>
-            <id>4_thu</id>
-        </time>
-        <time>
-            <day>thursday</day>
-            <id>5_thu</id>
-        </time>
-        <time>
-            <day>thursday</day>
-            <id>6_thu</id>
-        </time>
-        <time>
             <day>friday</day>
             <id>1_fri</id>
         </time>
         <time>
             <day>friday</day>
             <id>2_fri</id>
-        </time>
-        <time>
-            <day>friday</day>
-            <id>3_fri</id>
-        </time>
-        <time>
-            <day>friday</day>
-            <id>4_fri</id>
-        </time>
-        <time>
-            <day>friday</day>
-            <id>5_fri</id>
-        </time>
-        <time>
-            <day>friday</day>
-            <id>6_fri</id>
         </time>
     </Times>
 </timetable>

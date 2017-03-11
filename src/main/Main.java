@@ -11,12 +11,19 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import model.Timetable;
+import model.resource.Resource;
+import model.resource.Resources;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main extends Application {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        Timetable timetable = DataLoad.loadDataToXML();
         Timetable timetable = DataLoad.loadDataFromXML();
 
         Algorithm algorithm = new GradingAlgorithm();

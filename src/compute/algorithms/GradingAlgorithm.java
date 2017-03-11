@@ -5,6 +5,7 @@ import model.Timetable;
 import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
+import model.resource.Resource;
 import model.solution.Solution;
 import model.solution.Solutions;
 import model.time.Time;
@@ -32,7 +33,7 @@ public class GradingAlgorithm implements Algorithm {
             }
         }
 
-        //Initialize grades with 0 for each event
+        //Initialize grades for each event
         for(Event e : timetable.getEvents().getEvents()){
             grades.put(e.getId(), 0);
         }
@@ -50,14 +51,15 @@ public class GradingAlgorithm implements Algorithm {
     private void solveToDoList(List<Event> toDoList){
         System.out.println("Events in iteration no " + iteration++);
         for(Event e: timetable.getEvents().getEvents()){
-            System.out.println(e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled"));
+            System.out.println(e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
         }
         if(toDoList.size() != 0) {
             Event e = toDoList.get(0);
-            int bestCostValue = 1000;
+            int bestCostValue = 10000;
             Time bestTime = null;
             for (Time t : timetable.getTimes().getTimes()) {
-                int costValue = getConflictingEventsCost(t);
+                int costValue = getConflictingEventsCost(t, e);
+                System.out.println(e.getId()+" "+costValue+ " "+ t.getId());
                 if (costValue < bestCostValue) {
                     bestCostValue = costValue;
                     bestTime = t;
@@ -78,14 +80,21 @@ public class GradingAlgorithm implements Algorithm {
         return infeasibility;
     }
 
-    private int getConflictingEventsCost(Time time){
+    private int getConflictingEventsCost(Time time, Event event){
         int cost = 0;
         for(Event e : timetable.getEvents().getEvents()){
-            if(e.getTime()!=null) {
-                if (time.equals(e.getTime())) {
-                    Integer eCost = grades.get(e.getId());
-                    cost += eCost != null ? eCost : 0;
+            if(e.getTime()!=null && time.equals(e.getTime())){
+                for(Resource r : event.getResources().getResources()){
+                    for(Resource re : e.getResources().getResources()){
+                        if(r.equals(re)) {
+                            cost++;
+                            System.out.println(e.getId()+" "+r.getId()+" "+cost);
+                        }
+                    }
                 }
+                Integer eCost = grades.get(e.getId());
+                System.out.println("ecost "+ eCost);
+                cost += eCost != null ? eCost : 0;
             }
         }
         return cost;
@@ -94,10 +103,17 @@ public class GradingAlgorithm implements Algorithm {
     private List<Event> unscheduleConflictingEvents(Event event){
         List<Event> conflictingEvents = new ArrayList<>();
         for(Event e: timetable.getEvents().getEvents()){
-            if(e.getId()!= event.getId() && event.getTime().equals(e.getTime())){
-                e.setTime(null);
-                grades.put(e.getId(), grades.get(e.getId()) + 1);
-                conflictingEvents.add(e);
+            if(!e.getId().matches(event.getId()) && event.getTime().equals(e.getTime())){
+                for(Resource r : event.getResources().getResources()){
+                    for(Resource re : e.getResources().getResources()){
+                        if(r.equals(re)) {
+                            e.setTime(null);
+                            grades.put(e.getId(), grades.get(e.getId()) + 1);
+                            conflictingEvents.add(e);
+                            break;
+                        }
+                    }
+                }
             }
         }
         return conflictingEvents;
