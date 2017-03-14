@@ -2,7 +2,9 @@ package model.constraint;
 
 import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
+import model.constraint.types.LimitIdleTimesConstraint;
 
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,8 +32,9 @@ public class Constraints {
     }
 
     @XmlElements({
-            @XmlElement(name = "constraint", type=AssignResourceConstraint.class),
-            @XmlElement(name = "constraint", type=AssignTimeConstraint.class)
+            @XmlElement(name = "assignResourceConstraint", type=AssignResourceConstraint.class),
+            @XmlElement(name = "assignTimeConstraint", type=AssignTimeConstraint.class),
+            @XmlElement(name = "limitIdleTimeConstraint", type=LimitIdleTimesConstraint.class)
     })
     public void setConstraints(List<Constraint> constraints) {
         this.constraints = constraints;

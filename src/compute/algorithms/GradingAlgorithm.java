@@ -18,6 +18,7 @@ import java.util.*;
 public class GradingAlgorithm implements Algorithm {
     private Timetable timetable;
     private Map<String, Integer> grades = new HashMap<>();
+    private List<Event> conflictingEvents = new ArrayList<>();
 
     @Override
     public Timetable solve(Timetable timetable) {
@@ -30,6 +31,7 @@ public class GradingAlgorithm implements Algorithm {
             if (inf > 0){
                 toDoList.add(e);
                 e.setTime(null);
+//                grades.put(e.getId(), inf);
             }
         }
 
@@ -46,6 +48,7 @@ public class GradingAlgorithm implements Algorithm {
         timetable.setSolutions(solutions);
         return timetable;
     }
+
     int iteration = 0;
 
     private void solveToDoList(List<Event> toDoList){
@@ -53,30 +56,49 @@ public class GradingAlgorithm implements Algorithm {
         for(Event e: timetable.getEvents().getEvents()){
             System.out.println(e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
         }
+        for(Event e: conflictingEvents){
+            System.out.println("conflicting "+e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
+        }
+
         if(toDoList.size() != 0) {
             Event e = toDoList.get(0);
             int bestCostValue = 10000;
             Time bestTime = null;
             for (Time t : timetable.getTimes().getTimes()) {
-                int costValue = getConflictingEventsCost(t, e);
-                System.out.println(e.getId()+" "+costValue+ " "+ t.getId());
+                e.setTime(t);
+                int costValue = computeInfeasibility(e);
                 if (costValue < bestCostValue) {
                     bestCostValue = costValue;
                     bestTime = t;
                 }
             }
+
             e.setTime(bestTime);
+            if(bestCostValue>0){
+                conflictingEvents.add(e);
+                timetable.getEvents().getEvents().remove(e);
+            }
             toDoList.remove(e);
-            toDoList.addAll(unscheduleConflictingEvents(e));
+            if(bestCostValue == 0){
+                toDoList.addAll(unscheduleConflictingEvents(e));
+            }
             solveToDoList(toDoList);
         }
     }
 
     private int computeInfeasibility(Event e){
         int infeasibility = 0;
-        for(Constraint c : timetable.getConstraints().getConstraints()){
-            infeasibility += c.validate(c, e);
+        for(Constraint c : timetable.getEventConstraints().getConstraints()){
+            infeasibility += c.validate(e);
         }
+        for(Constraint c: timetable.getResourceConstraints().getConstraints()){
+            for(Resource r: e.getResources().getResources()){
+                infeasibility += c.validate(r);
+            }
+        }
+        Time t = e.getTime();
+        e.setTime(null);
+        infeasibility += getConflictingEventsCost(t,e);
         return infeasibility;
     }
 
@@ -88,12 +110,11 @@ public class GradingAlgorithm implements Algorithm {
                     for(Resource re : e.getResources().getResources()){
                         if(r.equals(re)) {
                             cost++;
-                            System.out.println(e.getId()+" "+r.getId()+" "+cost);
+//                            System.out.println(e.getId()+" "+r.getId()+" "+cost);
                         }
                     }
                 }
                 Integer eCost = grades.get(e.getId());
-                System.out.println("ecost "+ eCost);
                 cost += eCost != null ? eCost : 0;
             }
         }
@@ -119,56 +140,5 @@ public class GradingAlgorithm implements Algorithm {
         return conflictingEvents;
     }
 
-//    public static Events getTimeTable(List<Event> events, List<Classroom> classroomsList){
-//        unprogrammedEvents = events;
-//        classrooms = classroomsList;
-//
-//        solve();
-//        Events finalEvents = new Events();
-//        finalEvents.setEventList(programmedEvents);
-//        return finalEvents;
-//    }
-//
-//    private static Event programEvent(Event currentEvent){
-//        for(Event e : programmedEvents){
-//            if(e.getWeekDay() == currentEvent.getWeekDay() && e.getHour() == currentEvent.getHour() && (e.getStudyGroup().equals(currentEvent.getStudyGroup()) || e.getTeacher().equals(currentEvent.getTeacher()) || e.getClassroom().equals(currentEvent.getClassroom()))){
-//                if(currentEvent.getHour() == endHour){
-//                    if(currentEvent.getWeekDay()== endWeekDay){
-//                        return null;
-//                    }
-//                    else{
-//                        currentEvent.setHour(startHour);
-//                        currentEvent.setWeekDay(currentEvent.getWeekDay()+1);
-//                        programEvent(currentEvent);
-//                    }
-//                }
-//                else {
-//                    currentEvent.setHour(currentEvent.getHour()+currentEvent.getDuration());
-//                    programEvent(currentEvent);
-//                }
-//                break;
-//            }
-//        }
-//        return currentEvent;
-//    }
-//
-//    private static void solve(){
-//        Event event;
-//        int eventDay = 1;
-//        int eventHour = startHour;
-//        if(unprogrammedEvents.size() != 0) {
-//            event = unprogrammedEvents.get(0);
-//            event.setHour(startHour);
-//            event.setWeekDay(startWeekDay);
-//            if(event.getClassroom()==null){
-//                Classroom classroom = classrooms.get(0);
-//                event.setClassroom(classroom);
-//            }
-//            Event programmedEvent = programEvent(event);
-//            programmedEvents.add(programmedEvent);
-//            unprogrammedEvents.remove(0);
-//            solve();
-//        }
-//    }
 
 }

@@ -6,12 +6,12 @@ import model.constraint.Constraint;
 import model.constraint.Constraints;
 import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
+import model.constraint.types.LimitIdleTimesConstraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
 import model.resource.ResourceTypes;
 import model.resource.Resources;
-import model.solution.Solution;
 import model.time.Time;
 import model.time.Times;
 
@@ -48,13 +48,6 @@ public class DataLoad {
 //                    System.out.println(r.getId()+" "+ r.getName()+" "+r.getResourceType());
 //                }
 //            }
-
-            List<Constraint> constraintList = timetable.getConstraints().getConstraints();
-            System.out.println("Constraint list:");
-            for(Constraint c: constraintList) {
-                System.out.println(c.getId()+" weight: "+c.getWeight());
-            }
-
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -123,26 +116,35 @@ public class DataLoad {
         List<Event> eventList = Arrays.asList(
                 new Event("ev1", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(5), resourceList.get(11)))),
                 new Event("ev2", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(5), resourceList.get(11)))),
-                new Event("ev3", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(6), resourceList.get(12)))),
+                new Event("ev3", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(6), resourceList.get(13)))),
                 new Event("ev4", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(7), resourceList.get(13)))),
-                new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(8), resourceList.get(14)))),
-                new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(9), resourceList.get(15)))),
+                new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(8), resourceList.get(14)))),
+                new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(10), resourceList.get(15)))),
                 new Event("ev7", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(10), resourceList.get(16)))),
-                new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(6), resourceList.get(12)))),
+                new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(6), resourceList.get(13)))),
                 new Event("ev9", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13)))),
-                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13))))
+                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13)))),
+                new Event("ev11", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(10), resourceList.get(13))))
         );
 
         Events events = new Events(eventList);
 
-        List<Constraint> constraintList = Arrays.asList(
-                new AssignResourceConstraint("assignResourceConstraint", true, 1, events),
-                new AssignTimeConstraint("assignTimeConstraint", true, 1, events)
+        List<Constraint> eventConstraintList = Arrays.asList(
+                new AssignResourceConstraint("assignResourceConstraint", true, 1, events, null),
+                new AssignTimeConstraint("assignTimeConstraint", true, 1, events, null)
+                );
+
+        Constraints eventConstraints = new Constraints(eventConstraintList);
+
+
+        List<Constraint> resourceConstraintList = Arrays.asList(
+                new LimitIdleTimesConstraint("limitIdleTimeConstraint", true, 1, 1, null, resources)
         );
 
-        Constraints constraints = new Constraints(constraintList);
+        Constraints resourceConstraints = new Constraints(resourceConstraintList);
 
-        Timetable timetable = new Timetable("exampleTimetable", metadata, times, resourceTypes, resources, events, constraints);
+
+        Timetable timetable = new Timetable("exampleTimetable", metadata, times, resourceTypes, resources, events, eventConstraints, resourceConstraints);
 
         try {
             File timetableFile = new File(loadPath + "timetable.xml");

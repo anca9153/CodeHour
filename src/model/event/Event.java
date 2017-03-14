@@ -1,5 +1,6 @@
 package model.event;
 
+import model.FitForConstraint;
 import model.resource.Resources;
 import model.time.Time;
 
@@ -9,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Created by Anca on 1/17/2017.
  */
 @XmlRootElement(name = "event")
-public class Event {
+public class Event extends FitForConstraint{
     private String id;
     private int duration;
     private Time time;

@@ -24,21 +24,23 @@ public class Timetable {
     private ResourceTypes resourceTypes;
     private Resources resources;
     private Events events;
-    private Constraints constraints;
+    private Constraints eventConstraints;
+    private Constraints resourceConstraints;
     private Solutions solutions;
 
     public Timetable (){
 
     }
 
-    public Timetable(String id, Metadata metadata, Times times, ResourceTypes resourceTypes, Resources resources, Events events, Constraints constraints) {
+    public Timetable(String id, Metadata metadata, Times times, ResourceTypes resourceTypes, Resources resources, Events events, Constraints eventConstraints, Constraints resourceConstraints) {
         this.id = id;
         this.metadata = metadata;
         this.times = times;
         this.resourceTypes = resourceTypes;
         this.resources = resources;
         this.events = events;
-        this.constraints = constraints;
+        this.setEventConstraints(eventConstraints);
+        this.setResourceConstraints(resourceConstraints);
     }
 
     public String getId() {
@@ -77,15 +79,6 @@ public class Timetable {
         this.times = times;
     }
 
-    public Constraints getConstraints() {
-        return constraints;
-    }
-
-    @XmlElement(name = "constraints")
-    public void setConstraints(Constraints constraints) {
-        this.constraints = constraints;
-    }
-
     public Resources getResources() {
         return resources;
     }
@@ -111,5 +104,23 @@ public class Timetable {
     @XmlElement(name = "solutions")
     public void setSolutions(Solutions solutions) {
         this.solutions = solutions;
+    }
+
+    public Constraints getEventConstraints() {
+        return eventConstraints;
+    }
+
+    @XmlElement(name = "eventConstraints")
+    public void setEventConstraints(Constraints eventConstraints) {
+        this.eventConstraints = eventConstraints;
+    }
+
+    public Constraints getResourceConstraints() {
+        return resourceConstraints;
+    }
+
+    @XmlElement(name = "resourceConstraints")
+    public void setResourceConstraints(Constraints resourceConstraints) {
+        this.resourceConstraints = resourceConstraints;
     }
 }

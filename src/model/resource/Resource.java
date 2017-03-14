@@ -1,14 +1,14 @@
 package model.resource;
 
+import model.FitForConstraint;
+
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "resource")
-public class Resource {
+public class Resource extends FitForConstraint{
     private String id;
     private String name;
     private String resourceType;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <timetable id="exampleTimetable">
-    <constraints>
-        <constraint>
-            <appliesTo>
+    <eventConstraints>
+        <assignResourceConstraint>
+            <appliesToEvents>
                 <event>
                     <duration>1</duration>
                     <id>ev1</id>
@@ -60,7 +60,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>102</id>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -92,8 +92,8 @@
                     <id>ev5</id>
                     <resources>
                         <resource>
-                            <id>vhariuc</id>
-                            <name>Virgil Hariuc</name>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
@@ -118,7 +118,7 @@
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
-                            <id>11A</id>
+                            <id>12A</id>
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
@@ -165,7 +165,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>102</id>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -213,13 +213,34 @@
                         </resource>
                     </resources>
                 </event>
-            </appliesTo>
+                <event>
+                    <duration>1</duration>
+                    <id>ev11</id>
+                    <resources>
+                        <resource>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                </event>
+            </appliesToEvents>
             <id>assignResourceConstraint</id>
             <required>true</required>
             <weight>1</weight>
-        </constraint>
-        <constraint>
-            <appliesTo>
+        </assignResourceConstraint>
+        <assignTimeConstraint>
+            <appliesToEvents>
                 <event>
                     <duration>1</duration>
                     <id>ev1</id>
@@ -277,7 +298,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>102</id>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -309,8 +330,8 @@
                     <id>ev5</id>
                     <resources>
                         <resource>
-                            <id>vhariuc</id>
-                            <name>Virgil Hariuc</name>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
@@ -335,7 +356,7 @@
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
-                            <id>11A</id>
+                            <id>12A</id>
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
@@ -382,7 +403,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>102</id>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -430,12 +451,33 @@
                         </resource>
                     </resources>
                 </event>
-            </appliesTo>
+                <event>
+                    <duration>1</duration>
+                    <id>ev11</id>
+                    <resources>
+                        <resource>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                </event>
+            </appliesToEvents>
             <id>assignTimeConstraint</id>
             <required>true</required>
             <weight>1</weight>
-        </constraint>
-    </constraints>
+        </assignTimeConstraint>
+    </eventConstraints>
     <events>
         <event>
             <duration>1</duration>
@@ -502,7 +544,7 @@
                     <resourceType>studyGroup</resourceType>
                 </resource>
                 <resource>
-                    <id>102</id>
+                    <id>103</id>
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
@@ -542,8 +584,8 @@
             <id>ev5</id>
             <resources>
                 <resource>
-                    <id>vhariuc</id>
-                    <name>Virgil Hariuc</name>
+                    <id>dpop</id>
+                    <name>Dan Pop</name>
                     <resourceType>teacher</resourceType>
                 </resource>
                 <resource>
@@ -558,8 +600,8 @@
                 </resource>
             </resources>
             <time>
-                <day>monday</day>
-                <id>1_mon</id>
+                <day>tuesday</day>
+                <id>1_tue</id>
             </time>
         </event>
         <event>
@@ -572,7 +614,7 @@
                     <resourceType>teacher</resourceType>
                 </resource>
                 <resource>
-                    <id>11A</id>
+                    <id>12A</id>
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
@@ -609,7 +651,7 @@
             </resources>
             <time>
                 <day>monday</day>
-                <id>1_mon</id>
+                <id>2_mon</id>
             </time>
         </event>
         <event>
@@ -627,14 +669,14 @@
                     <resourceType>studyGroup</resourceType>
                 </resource>
                 <resource>
-                    <id>102</id>
+                    <id>103</id>
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
             <time>
-                <day>monday</day>
-                <id>2_mon</id>
+                <day>tuesday</day>
+                <id>1_tue</id>
             </time>
         </event>
         <event>
@@ -659,7 +701,7 @@
             </resources>
             <time>
                 <day>tuesday</day>
-                <id>1_tue</id>
+                <id>2_tue</id>
             </time>
         </event>
         <event>
@@ -683,17 +725,137 @@
                 </resource>
             </resources>
             <time>
-                <day>tuesday</day>
-                <id>2_tue</id>
+                <day>wednesday</day>
+                <id>1_wed</id>
+            </time>
+        </event>
+        <event>
+            <duration>1</duration>
+            <id>ev11</id>
+            <resources>
+                <resource>
+                    <id>dpop</id>
+                    <name>Dan Pop</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>12A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>103</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+            <time>
+                <day>wednesday</day>
+                <id>2_wed</id>
             </time>
         </event>
     </events>
     <metadata>
         <contributor>Anca Ad</contributor>
-        <date>2017-03-11T18:30:42.311+02:00</date>
+        <date>2017-03-14T21:10:31.772+02:00</date>
         <description></description>
         <name>Example Timetable</name>
     </metadata>
+    <resourceConstraints>
+        <limitIdleTimeConstraint>
+            <appliesToResources>
+                <resource>
+                    <id>dpop</id>
+                    <name>Dan Pop</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>catnis</id>
+                    <name>Catalina Ilas</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>vhariuc</id>
+                    <name>Virgil Hariuc</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>asava</id>
+                    <name>Ana Savascu</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>doniciuc</id>
+                    <name>Daniel Oniciuc</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource>
+                    <id>9A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>9B</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>10A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>10B</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>11A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>12A</id>
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource>
+                    <id>101</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+                <resource>
+                    <id>102</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+                <resource>
+                    <id>103</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+                <resource>
+                    <id>104</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+                <resource>
+                    <id>201</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+                <resource>
+                    <id>202</id>
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </appliesToResources>
+            <id>limitIdleTimeConstraint</id>
+            <maximumIdleHours>1</maximumIdleHours>
+            <required>true</required>
+            <weight>1</weight>
+        </limitIdleTimeConstraint>
+    </resourceConstraints>
     <resourceTypes>
         <resourceType>teacher</resourceType>
         <resourceType>studyGroup</resourceType>
@@ -855,7 +1017,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>102</id>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -895,8 +1057,8 @@
                     <id>ev5</id>
                     <resources>
                         <resource>
-                            <id>vhariuc</id>
-                            <name>Virgil Hariuc</name>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
@@ -911,8 +1073,8 @@
                         </resource>
                     </resources>
                     <time>
-                        <day>monday</day>
-                        <id>1_mon</id>
+                        <day>tuesday</day>
+                        <id>1_tue</id>
                     </time>
                 </event>
                 <event>
@@ -925,7 +1087,7 @@
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
-                            <id>11A</id>
+                            <id>12A</id>
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
@@ -962,7 +1124,7 @@
                     </resources>
                     <time>
                         <day>monday</day>
-                        <id>1_mon</id>
+                        <id>2_mon</id>
                     </time>
                 </event>
                 <event>
@@ -980,14 +1142,14 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>102</id>
+                            <id>103</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                     <time>
-                        <day>monday</day>
-                        <id>2_mon</id>
+                        <day>tuesday</day>
+                        <id>1_tue</id>
                     </time>
                 </event>
                 <event>
@@ -1012,7 +1174,7 @@
                     </resources>
                     <time>
                         <day>tuesday</day>
-                        <id>1_tue</id>
+                        <id>2_tue</id>
                     </time>
                 </event>
                 <event>
@@ -1036,8 +1198,33 @@
                         </resource>
                     </resources>
                     <time>
-                        <day>tuesday</day>
-                        <id>2_tue</id>
+                        <day>wednesday</day>
+                        <id>1_wed</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev11</id>
+                    <resources>
+                        <resource>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>wednesday</day>
+                        <id>2_wed</id>
                     </time>
                 </event>
             </events>

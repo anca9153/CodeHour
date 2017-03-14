@@ -1,7 +1,8 @@
 package model.constraint;
 
-import model.event.Event;
+import model.FitForConstraint;
 import model.event.Events;
+import model.resource.Resources;
 
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -10,20 +11,22 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlTransient
 public abstract class Constraint {
-    private String id;
-    private boolean required;
-    private int weight;
-    private Events appliesTo;
+    protected String id;
+    protected boolean required;
+    protected int weight;
+    protected Events appliesToEvents;
+    protected Resources appliesToResources;
 
     public Constraint(){
 
     }
 
-    public Constraint(String id, boolean required, int weight, Events appliesTo) {
+    public Constraint(String id, boolean required, int weight, Events appliesToEvents, Resources appliesToResources) {
         this.id = id;
         this.required = required;
         this.weight = weight;
-        this.appliesTo = appliesTo;
+        this.appliesToEvents = appliesToEvents;
+        this.appliesToResources = appliesToResources;
     }
 
     public String getId() {
@@ -42,12 +45,12 @@ public abstract class Constraint {
         this.required = required;
     }
 
-    public Events getAppliesTo() {
-        return appliesTo;
+    public Events getAppliesToEvents() {
+        return appliesToEvents;
     }
 
-    public void setAppliesTo(Events appliesTo) {
-        this.appliesTo = appliesTo;
+    public void setAppliesToEvents(Events appliesToEvents) {
+        this.appliesToEvents = appliesToEvents;
     }
 
     public int getWeight() {
@@ -58,5 +61,13 @@ public abstract class Constraint {
         this.weight = weight;
     }
 
-    public abstract int validate(Constraint constraint, Event event);
+    public Resources getAppliesToResources() {
+        return appliesToResources;
+    }
+
+    public void setAppliesToResources(Resources appliesToResources) {
+        this.appliesToResources = appliesToResources;
+    }
+
+    public abstract int validate(FitForConstraint value);
 }
