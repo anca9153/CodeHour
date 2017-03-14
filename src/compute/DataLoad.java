@@ -35,7 +35,7 @@ public class DataLoad {
         Timetable timetable = new Timetable();
         try{
             //Loading timetable
-            File file = new File(loadPath + "timetable.xml");
+            File file = new File(getLoadPath() + "timetable.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
@@ -57,7 +57,7 @@ public class DataLoad {
 
     public static void loadSolvedTimetableToXML(Timetable timetable){
         try {
-            File timetableFile = new File(loadPath + "solvedTimetable.xml");
+            File timetableFile = new File(getLoadPath() + "solvedTimetable.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -116,15 +116,14 @@ public class DataLoad {
         List<Event> eventList = Arrays.asList(
                 new Event("ev1", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(5), resourceList.get(11)))),
                 new Event("ev2", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(5), resourceList.get(11)))),
-                new Event("ev3", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(6), resourceList.get(13)))),
+                new Event("ev3", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(6), resourceList.get(12)))),
                 new Event("ev4", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(7), resourceList.get(13)))),
-                new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(8), resourceList.get(14)))),
-                new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(10), resourceList.get(15)))),
+                new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(8), resourceList.get(14)))),
+                new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(9), resourceList.get(15)))),
                 new Event("ev7", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(10), resourceList.get(16)))),
                 new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(6), resourceList.get(13)))),
                 new Event("ev9", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13)))),
-                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13)))),
-                new Event("ev11", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(10), resourceList.get(13))))
+                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(10), resourceList.get(13))))
         );
 
         Events events = new Events(eventList);
@@ -147,7 +146,7 @@ public class DataLoad {
         Timetable timetable = new Timetable("exampleTimetable", metadata, times, resourceTypes, resources, events, eventConstraints, resourceConstraints);
 
         try {
-            File timetableFile = new File(loadPath + "timetable.xml");
+            File timetableFile = new File(getLoadPath() + "timetable2.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -158,5 +157,13 @@ public class DataLoad {
         }
 
         return timetable;
+    }
+
+    public static String getLoadPath() {
+        return loadPath;
+    }
+
+    public static void setLoadPath(String loadPath) {
+        DataLoad.loadPath = loadPath;
     }
 }
