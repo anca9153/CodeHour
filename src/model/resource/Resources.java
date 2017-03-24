@@ -2,6 +2,7 @@ package model.resource;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "resources")
-public class Resources {
+public class Resources implements Serializable{
     private List<Resource> resources;
 
     public Resources(){

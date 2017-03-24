@@ -6,9 +6,11 @@ import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
+import model.solution.Report;
 import model.solution.Solution;
 import model.solution.Solutions;
 import model.time.Time;
+import utilities.DeepCloner;
 
 import java.util.*;
 
@@ -19,14 +21,25 @@ public class GradingAlgorithm implements Algorithm {
     private Timetable timetable;
     private Map<String, Integer> grades = new HashMap<>();
     private List<Event> conflictingEvents = new ArrayList<>();
+    private Solution solution;
 
     @Override
     public Timetable solve(Timetable timetable) {
         this.timetable = timetable;
 
+        List<Event> clonedList = new ArrayList<>();
+
+        for(Event e: timetable.getEvents().getEvents()){
+            clonedList.add((Event)DeepCloner.deepClone(e));
+        }
+
+        Events clonedEvents = new Events(clonedList);
+
+        solution = new Solution("First Solution", clonedEvents, null);
+
         //To do list with the events that have not been assigned a Time yet or share resources with other events
         List<Event> toDoList = new ArrayList<>();
-        for (Event e : timetable.getEvents().getEvents()){
+        for (Event e : solution.getEvents().getEvents()){
             int inf = computeInfeasibility(e);
             if (inf > 0){
                 toDoList.add(e);
@@ -36,13 +49,13 @@ public class GradingAlgorithm implements Algorithm {
         }
 
         //Initialize grades for each event
-        for(Event e : timetable.getEvents().getEvents()){
+        for(Event e : solution.getEvents().getEvents()){
             grades.put(e.getId(), 0);
         }
 
         solveToDoList(toDoList);
 
-        Solution solution = new Solution("First Solution", new Events(timetable.getEvents().getEvents()), null);
+        Report report = new Report();
         Solutions solutions = new Solutions();
         solutions.setSolutions(Arrays.asList(solution));
         timetable.setSolutions(solutions);
@@ -53,7 +66,7 @@ public class GradingAlgorithm implements Algorithm {
 
     private void solveToDoList(List<Event> toDoList){
         System.out.println("Events in iteration no " + iteration++);
-        for(Event e: timetable.getEvents().getEvents()){
+        for(Event e: solution.getEvents().getEvents()){
             System.out.println(e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
         }
         for(Event e: conflictingEvents){
@@ -76,7 +89,7 @@ public class GradingAlgorithm implements Algorithm {
             e.setTime(bestTime);
             if(bestCostValue>0){
                 conflictingEvents.add(e);
-                timetable.getEvents().getEvents().remove(e);
+                solution.getEvents().getEvents().remove(e);
             }
             toDoList.remove(e);
             if(bestCostValue == 0){
@@ -104,7 +117,7 @@ public class GradingAlgorithm implements Algorithm {
 
     private int getConflictingEventsCost(Time time, Event event){
         int cost = 0;
-        for(Event e : timetable.getEvents().getEvents()){
+        for(Event e : solution.getEvents().getEvents()){
             if(e.getTime()!=null && time.equals(e.getTime())){
                 for(Resource r : event.getResources().getResources()){
                     for(Resource re : e.getResources().getResources()){
@@ -123,7 +136,7 @@ public class GradingAlgorithm implements Algorithm {
 
     private List<Event> unscheduleConflictingEvents(Event event){
         List<Event> conflictingEvents = new ArrayList<>();
-        for(Event e: timetable.getEvents().getEvents()){
+        for(Event e: solution.getEvents().getEvents()){
             if(!e.getId().matches(event.getId()) && event.getTime().equals(e.getTime())){
                 for(Resource r : event.getResources().getResources()){
                     for(Resource re : e.getResources().getResources()){

@@ -1,116 +1,48 @@
 package main;
 
 import compute.Algorithm;
-import compute.DataLoad;
+import compute.DataLoader;
 import compute.algorithms.GradingAlgorithm;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import model.Timetable;
-import model.constraint.types.AssignTimeConstraint;
-import model.constraint.types.LimitIdleTimesConstraint;
-import model.event.Event;
-import model.event.Events;
-import model.resource.Resource;
-import model.resource.Resources;
-import model.time.Time;
-import model.time.Times;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import view.StageLoader;
+import view.panes.CreatePane;
+import view.panes.DisplayPane;
+import view.panes.HomePane;
 
 public class Main extends Application {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Timetable timetable = DataLoad.loadDataToXML();
-        Timetable timetable = DataLoad.loadDataFromXML();
+        String location = new String("timetable.xml");
+
+//        Timetable timetable = DataLoader.loadDataToXML(location);
+        Timetable timetable = DataLoader.loadDataFromXML(location);
 
         Algorithm algorithm = new GradingAlgorithm();
-        DataLoad.loadSolvedTimetableToXML(algorithm.solve(timetable));
+        DataLoader.loadSolvedTimetableToXML(algorithm.solve(timetable), location);
 
-        launch(args);
+//        launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        BorderPane root = new BorderPane();
+        HomePane home = new HomePane();
+        DisplayPane display = new DisplayPane();
+        CreatePane create = new CreatePane();
 
-        File loadFolder = new File(DataLoad.getLoadPath());
-        List<File> timetablesToDisplay = new ArrayList<>();
+        Scene homeScene = new Scene(home, 800, 550);
+        Scene displayScene = new Scene(display, 800, 550);
+        Scene createScene = new Scene(create, 800, 550);
 
-        for (final File fileEntry : loadFolder.listFiles()) {
-            if (!fileEntry.isDirectory() && fileEntry.getName().startsWith("timetable")){
-                timetablesToDisplay.add(fileEntry);
-            }
-        }
+        StageLoader loader = new StageLoader(primaryStage, homeScene, displayScene, createScene);
 
-        BorderPane displayTimetable = new BorderPane();
+        home.setLoader(loader);
 
-        Button mainPageButton = new Button("Main Page");
-        mainPageButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Scene scene = new Scene(root, 800, 550);
-
-                primaryStage.setTitle("CodeHour");
-                primaryStage.setScene(scene);
-                primaryStage.show();
-            }
-        });
-
-        displayTimetable.setTop(mainPageButton);
-
-
-        Text leftTitle = new Text("Orare disponibile");
-        VBox timetableList = new VBox();
-
-        for(File fileEntry: timetablesToDisplay){
-            Button fileButton= new Button(fileEntry.getName());
-            fileButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override public void handle(ActionEvent e) {
-                    Scene scene = new Scene(displayTimetable, 800, 550);
-
-                    primaryStage.setTitle("CodeHour");
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
-                }
-            });
-            timetableList.getChildren().add(fileButton);
-        }
-
-        GridPane leftPane = new GridPane();
-        leftPane.setHgap(10);
-        leftPane.setVgap(10);
-        leftPane.setPadding(new Insets(30, 30, 30, 30));
-        leftPane.add(leftTitle, 1, 1);
-        leftPane.add(timetableList, 1, 2);
-
-        root.setLeft(leftPane);
-
-        GridPane rightPane = new GridPane();
-        rightPane.setHgap(10);
-        rightPane.setVgap(10);
-        rightPane.setPadding(new Insets(30, 30, 30, 30));
-        Button createButton = new Button("Creează orar");
-        rightPane.add(createButton, 1, 1);
-
-        root.setRight(rightPane);
-
-        Scene scene = new Scene(root, 800, 550);
-
-        primaryStage.setTitle("CodeHour");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        loader.loadHome();
     }
 
 }

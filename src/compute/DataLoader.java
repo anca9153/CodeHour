@@ -28,14 +28,14 @@ import java.util.List;
 /**
  * Created by Anca on 1/18/2017.
  */
-public class DataLoad {
+public class DataLoader {
     private static String loadPath = new String("D:\\Dropbox\\Licenta\\CodeHour (github)\\CodeHour\\CodeHourXMLs\\");
 
-    public static Timetable loadDataFromXML(){
+    public static Timetable loadDataFromXML(String location){
         Timetable timetable = new Timetable();
         try{
             //Loading timetable
-            File file = new File(getLoadPath() + "timetable.xml");
+            File file = new File(getLoadPath() + location);
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
@@ -48,6 +48,7 @@ public class DataLoad {
 //                    System.out.println(r.getId()+" "+ r.getName()+" "+r.getResourceType());
 //                }
 //            }
+//
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -55,9 +56,9 @@ public class DataLoad {
         return timetable;
     }
 
-    public static void loadSolvedTimetableToXML(Timetable timetable){
+    public static void loadSolvedTimetableToXML(Timetable timetable, String location){
         try {
-            File timetableFile = new File(getLoadPath() + "solvedTimetable.xml");
+            File timetableFile = new File(getLoadPath() + location);
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -68,7 +69,7 @@ public class DataLoad {
         }
     }
 
-    public static Timetable loadDataToXML() {
+    public static Timetable loadDataToXML(String location) {
         Metadata metadata = new Metadata("Example Timetable", "Anca Ad", new Date(), "");
 
         List<String> weekdays = Arrays.asList("monday", "tuesday", "wednesday","thursday", "friday");
@@ -146,7 +147,7 @@ public class DataLoad {
         Timetable timetable = new Timetable("exampleTimetable", metadata, times, resourceTypes, resources, events, eventConstraints, resourceConstraints);
 
         try {
-            File timetableFile = new File(getLoadPath() + "timetable2.xml");
+            File timetableFile = new File(getLoadPath() + location);
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -164,6 +165,6 @@ public class DataLoad {
     }
 
     public static void setLoadPath(String loadPath) {
-        DataLoad.loadPath = loadPath;
+        DataLoader.loadPath = loadPath;
     }
 }

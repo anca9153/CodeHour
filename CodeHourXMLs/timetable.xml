@@ -60,7 +60,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>103</id>
+                            <id>102</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -92,8 +92,8 @@
                     <id>ev5</id>
                     <resources>
                         <resource>
-                            <id>dpop</id>
-                            <name>Dan Pop</name>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
@@ -118,7 +118,7 @@
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
-                            <id>12A</id>
+                            <id>11A</id>
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
@@ -199,27 +199,6 @@
                         <resource>
                             <id>vhariuc</id>
                             <name>Virgil Hariuc</name>
-                            <resourceType>teacher</resourceType>
-                        </resource>
-                        <resource>
-                            <id>12A</id>
-                            <name></name>
-                            <resourceType>studyGroup</resourceType>
-                        </resource>
-                        <resource>
-                            <id>103</id>
-                            <name></name>
-                            <resourceType>classroom</resourceType>
-                        </resource>
-                    </resources>
-                </event>
-                <event>
-                    <duration>1</duration>
-                    <id>ev11</id>
-                    <resources>
-                        <resource>
-                            <id>dpop</id>
-                            <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
@@ -298,7 +277,7 @@
                             <resourceType>studyGroup</resourceType>
                         </resource>
                         <resource>
-                            <id>103</id>
+                            <id>102</id>
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
@@ -330,8 +309,8 @@
                     <id>ev5</id>
                     <resources>
                         <resource>
-                            <id>dpop</id>
-                            <name>Dan Pop</name>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
@@ -356,7 +335,7 @@
                             <resourceType>teacher</resourceType>
                         </resource>
                         <resource>
-                            <id>12A</id>
+                            <id>11A</id>
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
@@ -451,27 +430,6 @@
                         </resource>
                     </resources>
                 </event>
-                <event>
-                    <duration>1</duration>
-                    <id>ev11</id>
-                    <resources>
-                        <resource>
-                            <id>dpop</id>
-                            <name>Dan Pop</name>
-                            <resourceType>teacher</resourceType>
-                        </resource>
-                        <resource>
-                            <id>12A</id>
-                            <name></name>
-                            <resourceType>studyGroup</resourceType>
-                        </resource>
-                        <resource>
-                            <id>103</id>
-                            <name></name>
-                            <resourceType>classroom</resourceType>
-                        </resource>
-                    </resources>
-                </event>
             </appliesToEvents>
             <id>assignTimeConstraint</id>
             <required>true</required>
@@ -536,7 +494,7 @@
                     <resourceType>studyGroup</resourceType>
                 </resource>
                 <resource>
-                    <id>103</id>
+                    <id>102</id>
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
@@ -568,8 +526,8 @@
             <id>ev5</id>
             <resources>
                 <resource>
-                    <id>dpop</id>
-                    <name>Dan Pop</name>
+                    <id>vhariuc</id>
+                    <name>Virgil Hariuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
                 <resource>
@@ -594,7 +552,7 @@
                     <resourceType>teacher</resourceType>
                 </resource>
                 <resource>
-                    <id>12A</id>
+                    <id>11A</id>
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
@@ -689,31 +647,10 @@
                 </resource>
             </resources>
         </event>
-        <event>
-            <duration>1</duration>
-            <id>ev11</id>
-            <resources>
-                <resource>
-                    <id>dpop</id>
-                    <name>Dan Pop</name>
-                    <resourceType>teacher</resourceType>
-                </resource>
-                <resource>
-                    <id>12A</id>
-                    <name></name>
-                    <resourceType>studyGroup</resourceType>
-                </resource>
-                <resource>
-                    <id>103</id>
-                    <name></name>
-                    <resourceType>classroom</resourceType>
-                </resource>
-            </resources>
-        </event>
     </events>
     <metadata>
         <contributor>Anca Ad</contributor>
-        <date>2017-03-14T21:10:31.772+02:00</date>
+        <date>2017-03-24T15:50:20.299+02:00</date>
         <description></description>
         <name>Example Timetable</name>
     </metadata>
@@ -904,6 +841,263 @@
             <resourceType>classroom</resourceType>
         </resource>
     </resources>
+    <solutions>
+        <solution>
+            <description>First Solution</description>
+            <events>
+                <event>
+                    <duration>1</duration>
+                    <id>ev1</id>
+                    <resources>
+                        <resource>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>9A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>101</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>1_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev2</id>
+                    <resources>
+                        <resource>
+                            <id>dpop</id>
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>9A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>101</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>2_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev3</id>
+                    <resources>
+                        <resource>
+                            <id>catnis</id>
+                            <name>Catalina Ilas</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>9B</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>102</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>1_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev4</id>
+                    <resources>
+                        <resource>
+                            <id>catnis</id>
+                            <name>Catalina Ilas</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>10A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>2_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev5</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>10B</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>104</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>1_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev6</id>
+                    <resources>
+                        <resource>
+                            <id>asava</id>
+                            <name>Ana Savascu</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>11A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>201</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>1_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev7</id>
+                    <resources>
+                        <resource>
+                            <id>doniciuc</id>
+                            <name>Daniel Oniciuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>202</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>monday</day>
+                        <id>1_mon</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev8</id>
+                    <resources>
+                        <resource>
+                            <id>doniciuc</id>
+                            <name>Daniel Oniciuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>9B</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>tuesday</day>
+                        <id>1_tue</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev9</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>tuesday</day>
+                        <id>2_tue</id>
+                    </time>
+                </event>
+                <event>
+                    <duration>1</duration>
+                    <id>ev10</id>
+                    <resources>
+                        <resource>
+                            <id>vhariuc</id>
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource>
+                            <id>12A</id>
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource>
+                            <id>103</id>
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time>
+                        <day>wednesday</day>
+                        <id>1_wed</id>
+                    </time>
+                </event>
+            </events>
+        </solution>
+    </solutions>
     <Times>
         <time>
             <day>monday</day>

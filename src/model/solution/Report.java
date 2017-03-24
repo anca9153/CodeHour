@@ -1,5 +1,6 @@
 package model.solution;
 
+import model.solution.OutLaws.ConstraintViolatingEvents;
 import model.solution.OutLaws.ConstraintViolatingResources;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,25 +12,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "report")
 public class Report {
     private int infeasibilityValue;
-    private int objectiveValue;
     private ConstraintViolatingResources cvrs;
+    private ConstraintViolatingEvents cves;
 
     public Report(){
 
     }
 
-    public Report(int infeasibilityValue, int objectiveValue, ConstraintViolatingResources cvrs) {
+    public Report(int infeasibilityValue, ConstraintViolatingResources cvrs) {
         this.setInfeasibilityValue(infeasibilityValue);
-        this.objectiveValue = objectiveValue;
         this.cvrs = cvrs;
-    }
-
-    public int getObjectiveValue() {
-        return objectiveValue;
-    }
-
-    public void setObjectiveValue(int objectiveValue) {
-        this.objectiveValue = objectiveValue;
     }
 
     public ConstraintViolatingResources getCvrs() {
@@ -48,4 +40,14 @@ public class Report {
     public void setInfeasibilityValue(int infeasibilityValue) {
         this.infeasibilityValue = infeasibilityValue;
     }
+
+    public ConstraintViolatingEvents getCves() {
+        return cves;
+    }
+
+    @XmlElement(name = "constraintViolatingEvents")
+    public void setCves(ConstraintViolatingEvents cves) {
+        this.cves = cves;
+    }
+
 }

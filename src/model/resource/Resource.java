@@ -3,12 +3,13 @@ package model.resource;
 import model.FitForConstraint;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "resource")
-public class Resource extends FitForConstraint{
+public class Resource extends FitForConstraint implements Serializable{
     private String id;
     private String name;
     private String resourceType;

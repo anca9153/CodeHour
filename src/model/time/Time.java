@@ -1,13 +1,14 @@
 package model.time;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "time")
-public class Time {
+public class Time implements Serializable{
     private String id;
     private String day;
 

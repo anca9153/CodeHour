@@ -5,12 +5,13 @@ import model.resource.Resources;
 import model.time.Time;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by Anca on 1/17/2017.
  */
 @XmlRootElement(name = "event")
-public class Event extends FitForConstraint{
+public class Event extends FitForConstraint implements Serializable{
     private String id;
     private int duration;
     private Time time;

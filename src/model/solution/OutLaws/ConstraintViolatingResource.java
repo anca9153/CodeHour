@@ -23,28 +23,4 @@ public class ConstraintViolatingResource {
         this.constraint = constraint;
         this.cost = cost;
     }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public Constraint getConstraint() {
-        return constraint;
-    }
-
-    public void setConstraint(Constraint constraint) {
-        this.constraint = constraint;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 }
