@@ -2,6 +2,7 @@ package model.resource;
 
 import model.FitForConstraint;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -28,6 +29,7 @@ public class Resource extends FitForConstraint implements Serializable{
         return id;
     }
 
+    @XmlAttribute
     public void setId(String id) {
         this.id = id;
     }

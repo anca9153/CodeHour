@@ -4,6 +4,7 @@ import model.FitForConstraint;
 import model.resource.Resources;
 import model.time.Time;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -32,6 +33,7 @@ public class Event extends FitForConstraint implements Serializable{
         return id;
     }
 
+    @XmlAttribute
     public void setId(String id) {
         this.id = id;
     }

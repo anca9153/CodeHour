@@ -2,6 +2,7 @@ package model.solution;
 
 import model.event.Events;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -9,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "solution")
 public class Solution {
+    private String id;
     private String description;
     private Events events;
     private Report report;
@@ -17,7 +19,8 @@ public class Solution {
 
     }
 
-    public Solution(String description, Events events, Report report) {
+    public Solution(String id, String description, Events events, Report report) {
+        this.id = id;
         this.description = description;
         this.events = events;
         this.report = report;
@@ -45,5 +48,14 @@ public class Solution {
 
     public void setReport(Report report) {
         this.report = report;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @XmlAttribute
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -56,7 +56,8 @@ public class LimitIdleTimesConstraint extends Constraint {
             Collections.sort(resourceTimes, new Comparator<Time>() {
                 public int compare(Time one, Time other) {
                     if(one.getDay().matches(other.getDay())){
-                        return one.getId().compareTo(other.getId());
+                        int difference = Math.abs(one.getId()-other.getId());
+                        return difference;
                     }
                     return one.getDay().compareTo(other.getDay());
                 }
@@ -78,7 +79,7 @@ public class LimitIdleTimesConstraint extends Constraint {
                         int t1_index = -1;
 
                         for(int j=0; j<times.getTimes().size()-1; j++){
-                            if(times.getTimes().get(j).getId().matches(t1.getId())){
+                            if(times.getTimes().get(j).getId() == t1.getId()){
                                 t1_index = j;
                             }
 
@@ -88,7 +89,7 @@ public class LimitIdleTimesConstraint extends Constraint {
 
                                 //Claculating the hours distance between times
                                 int hoursBetween = 0;
-                                while(j<times.getTimes().size() && !times.getTimes().get(j).getId().matches(t2.getId())){
+                                while(j<times.getTimes().size() && !(times.getTimes().get(j).getId() == t2.getId())){
                                    hoursBetween++;
                                    j++;
                                 }

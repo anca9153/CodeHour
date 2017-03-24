@@ -1,5 +1,6 @@
 package model.time;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Comparator;
@@ -9,24 +10,35 @@ import java.util.Comparator;
  */
 @XmlRootElement(name = "time")
 public class Time implements Serializable{
-    private String id;
+    private int id;
+    private String name;
     private String day;
 
     public Time(){
 
     }
 
-    public Time(String id, String day) {
+    public Time(int id, String name, String day) {
         this.id = id;
+        this.name = name;
         this.day = day;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    @XmlAttribute
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDay() {
@@ -35,15 +47,5 @@ public class Time implements Serializable{
 
     public void setDay(String day) {
         this.day = day;
-    }
-
-    @Override
-    public boolean equals(Object other){
-        if(other == null) return false;
-        if(other == this) return true;
-
-        Time t = (Time) other;
-        if(t.getId().matches(this.id)) return true;
-        return false;
     }
 }

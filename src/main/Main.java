@@ -1,15 +1,15 @@
 package main;
 
 import compute.Algorithm;
-import compute.DataLoader;
 import compute.algorithms.GradingAlgorithm;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Timetable;
+import utilities.DataLoader;
+import utilities.PropertiesLoader;
 import view.StageLoader;
 import view.panes.CreatePane;
-import view.panes.DisplayPane;
 import view.panes.HomePane;
 
 public class Main extends Application {
@@ -17,28 +17,26 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String location = new String("timetable.xml");
+//        String location = new String("timetable.xml");
 
 //        Timetable timetable = DataLoader.loadDataToXML(location);
-        Timetable timetable = DataLoader.loadDataFromXML(location);
+//        Timetable timetable = DataLoader.loadDataFromXML(location);
 
-        Algorithm algorithm = new GradingAlgorithm();
-        DataLoader.loadSolvedTimetableToXML(algorithm.solve(timetable), location);
+//        Algorithm algorithm = new GradingAlgorithm();
+//        DataLoader.loadSolvedTimetableToXML(algorithm.solve(timetable), location);
 
-//        launch(args);
+        launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
         HomePane home = new HomePane();
-        DisplayPane display = new DisplayPane();
         CreatePane create = new CreatePane();
 
         Scene homeScene = new Scene(home, 800, 550);
-        Scene displayScene = new Scene(display, 800, 550);
         Scene createScene = new Scene(create, 800, 550);
 
-        StageLoader loader = new StageLoader(primaryStage, homeScene, displayScene, createScene);
+        StageLoader loader = new StageLoader(primaryStage, homeScene, createScene);
 
         home.setLoader(loader);
 

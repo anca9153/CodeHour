@@ -1,6 +1,6 @@
 package view.panes;
 
-import compute.DataLoader;
+import utilities.DataLoader;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,8 +10,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import utilities.PropertiesLoader;
 import view.StageLoader;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class HomePane extends MainPane {
     private StageLoader loader;
 
     public HomePane(){
-        addToolbar(false);
+        this.setTop(addToolbar(false));
 
         Pane left = getAvailableTimetables();
         Pane right = getCreateTimetable();
@@ -43,13 +43,13 @@ public class HomePane extends MainPane {
     }
 
     private Pane getAvailableTimetables(){
-        File loadFolder = new File(DataLoader.getLoadPath());
+        File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
 
         List<File> timetablesToDisplay = new ArrayList<>();
         ObservableList<String> buttonList = FXCollections.observableArrayList();
 
         for (final File fileEntry : loadFolder.listFiles()) {
-            if (!fileEntry.isDirectory() && fileEntry.getName().startsWith("timetable")){
+            if (!fileEntry.isDirectory()){
                 timetablesToDisplay.add(fileEntry);
                 buttonList.add(fileEntry.getName());
             }
@@ -61,8 +61,7 @@ public class HomePane extends MainPane {
         listView.getSelectionModel().selectedItemProperty().addListener(
                 (ObservableValue<? extends String> ov, String old_val,
                  String new_val) -> {
-                    StageLoader.loadDisplay(timetablesToDisplay.get(buttonList.indexOf(new_val)));
-
+                    StageLoader.loadDisplay(timetablesToDisplay,timetablesToDisplay.get(buttonList.indexOf(new_val)));
                 });
 
         VBox timetableList = new VBox();

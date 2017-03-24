@@ -4,6 +4,7 @@ import model.FitForConstraint;
 import model.event.Events;
 import model.resource.Resources;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -33,6 +34,7 @@ public abstract class Constraint {
         return id;
     }
 
+    @XmlAttribute
     public void setId(String id) {
         this.id = id;
     }

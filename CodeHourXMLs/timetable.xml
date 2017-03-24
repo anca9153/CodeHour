@@ -1,647 +1,525 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <timetable id="exampleTimetable">
     <eventConstraints>
-        <assignResourceConstraint>
+        <assignResourceConstraint id="assignResourceConstraint">
             <appliesToEvents>
-                <event>
+                <event id="ev1">
                     <duration>1</duration>
-                    <id>ev1</id>
                     <resources>
-                        <resource>
-                            <id>dpop</id>
+                        <resource id="dpop">
                             <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9A</id>
+                        <resource id="9A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>101</id>
+                        <resource id="101">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev2">
                     <duration>1</duration>
-                    <id>ev2</id>
                     <resources>
-                        <resource>
-                            <id>dpop</id>
+                        <resource id="dpop">
                             <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9A</id>
+                        <resource id="9A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>101</id>
+                        <resource id="101">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev3">
                     <duration>1</duration>
-                    <id>ev3</id>
                     <resources>
-                        <resource>
-                            <id>catnis</id>
+                        <resource id="catnis">
                             <name>Catalina Ilas</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9B</id>
+                        <resource id="9B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>102</id>
+                        <resource id="102">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev4">
                     <duration>1</duration>
-                    <id>ev4</id>
                     <resources>
-                        <resource>
-                            <id>catnis</id>
+                        <resource id="catnis">
                             <name>Catalina Ilas</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>10A</id>
+                        <resource id="10A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev5">
                     <duration>1</duration>
-                    <id>ev5</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>10B</id>
+                        <resource id="10B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>104</id>
+                        <resource id="104">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev6">
                     <duration>1</duration>
-                    <id>ev6</id>
                     <resources>
-                        <resource>
-                            <id>asava</id>
+                        <resource id="asava">
                             <name>Ana Savascu</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>11A</id>
+                        <resource id="11A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>201</id>
+                        <resource id="201">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev7">
                     <duration>1</duration>
-                    <id>ev7</id>
                     <resources>
-                        <resource>
-                            <id>doniciuc</id>
+                        <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>202</id>
+                        <resource id="202">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev8">
                     <duration>1</duration>
-                    <id>ev8</id>
                     <resources>
-                        <resource>
-                            <id>doniciuc</id>
+                        <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9B</id>
+                        <resource id="9B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev9">
                     <duration>1</duration>
-                    <id>ev9</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev10">
                     <duration>1</duration>
-                    <id>ev10</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
             </appliesToEvents>
-            <id>assignResourceConstraint</id>
             <required>true</required>
             <weight>1</weight>
         </assignResourceConstraint>
-        <assignTimeConstraint>
+        <assignTimeConstraint id="assignTimeConstraint">
             <appliesToEvents>
-                <event>
+                <event id="ev1">
                     <duration>1</duration>
-                    <id>ev1</id>
                     <resources>
-                        <resource>
-                            <id>dpop</id>
+                        <resource id="dpop">
                             <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9A</id>
+                        <resource id="9A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>101</id>
+                        <resource id="101">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev2">
                     <duration>1</duration>
-                    <id>ev2</id>
                     <resources>
-                        <resource>
-                            <id>dpop</id>
+                        <resource id="dpop">
                             <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9A</id>
+                        <resource id="9A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>101</id>
+                        <resource id="101">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev3">
                     <duration>1</duration>
-                    <id>ev3</id>
                     <resources>
-                        <resource>
-                            <id>catnis</id>
+                        <resource id="catnis">
                             <name>Catalina Ilas</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9B</id>
+                        <resource id="9B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>102</id>
+                        <resource id="102">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev4">
                     <duration>1</duration>
-                    <id>ev4</id>
                     <resources>
-                        <resource>
-                            <id>catnis</id>
+                        <resource id="catnis">
                             <name>Catalina Ilas</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>10A</id>
+                        <resource id="10A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev5">
                     <duration>1</duration>
-                    <id>ev5</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>10B</id>
+                        <resource id="10B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>104</id>
+                        <resource id="104">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev6">
                     <duration>1</duration>
-                    <id>ev6</id>
                     <resources>
-                        <resource>
-                            <id>asava</id>
+                        <resource id="asava">
                             <name>Ana Savascu</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>11A</id>
+                        <resource id="11A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>201</id>
+                        <resource id="201">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev7">
                     <duration>1</duration>
-                    <id>ev7</id>
                     <resources>
-                        <resource>
-                            <id>doniciuc</id>
+                        <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>202</id>
+                        <resource id="202">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev8">
                     <duration>1</duration>
-                    <id>ev8</id>
                     <resources>
-                        <resource>
-                            <id>doniciuc</id>
+                        <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9B</id>
+                        <resource id="9B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev9">
                     <duration>1</duration>
-                    <id>ev9</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
-                <event>
+                <event id="ev10">
                     <duration>1</duration>
-                    <id>ev10</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
                 </event>
             </appliesToEvents>
-            <id>assignTimeConstraint</id>
             <required>true</required>
             <weight>1</weight>
         </assignTimeConstraint>
     </eventConstraints>
     <events>
-        <event>
+        <event id="ev1">
             <duration>1</duration>
-            <id>ev1</id>
             <resources>
-                <resource>
-                    <id>dpop</id>
+                <resource id="dpop">
                     <name>Dan Pop</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>9A</id>
+                <resource id="9A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>101</id>
+                <resource id="101">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev2">
             <duration>1</duration>
-            <id>ev2</id>
             <resources>
-                <resource>
-                    <id>dpop</id>
+                <resource id="dpop">
                     <name>Dan Pop</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>9A</id>
+                <resource id="9A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>101</id>
+                <resource id="101">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev3">
             <duration>1</duration>
-            <id>ev3</id>
             <resources>
-                <resource>
-                    <id>catnis</id>
+                <resource id="catnis">
                     <name>Catalina Ilas</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>9B</id>
+                <resource id="9B">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>102</id>
+                <resource id="102">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev4">
             <duration>1</duration>
-            <id>ev4</id>
             <resources>
-                <resource>
-                    <id>catnis</id>
+                <resource id="catnis">
                     <name>Catalina Ilas</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>10A</id>
+                <resource id="10A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>103</id>
+                <resource id="103">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev5">
             <duration>1</duration>
-            <id>ev5</id>
             <resources>
-                <resource>
-                    <id>vhariuc</id>
+                <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>10B</id>
+                <resource id="10B">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>104</id>
+                <resource id="104">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev6">
             <duration>1</duration>
-            <id>ev6</id>
             <resources>
-                <resource>
-                    <id>asava</id>
+                <resource id="asava">
                     <name>Ana Savascu</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>11A</id>
+                <resource id="11A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>201</id>
+                <resource id="201">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev7">
             <duration>1</duration>
-            <id>ev7</id>
             <resources>
-                <resource>
-                    <id>doniciuc</id>
+                <resource id="doniciuc">
                     <name>Daniel Oniciuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>12A</id>
+                <resource id="12A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>202</id>
+                <resource id="202">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev8">
             <duration>1</duration>
-            <id>ev8</id>
             <resources>
-                <resource>
-                    <id>doniciuc</id>
+                <resource id="doniciuc">
                     <name>Daniel Oniciuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>9B</id>
+                <resource id="9B">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>103</id>
+                <resource id="103">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev9">
             <duration>1</duration>
-            <id>ev9</id>
             <resources>
-                <resource>
-                    <id>vhariuc</id>
+                <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>12A</id>
+                <resource id="12A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>103</id>
+                <resource id="103">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </resources>
         </event>
-        <event>
+        <event id="ev10">
             <duration>1</duration>
-            <id>ev10</id>
             <resources>
-                <resource>
-                    <id>vhariuc</id>
+                <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>12A</id>
+                <resource id="12A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>103</id>
+                <resource id="103">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
@@ -650,100 +528,82 @@
     </events>
     <metadata>
         <contributor>Anca Ad</contributor>
-        <date>2017-03-24T15:50:20.299+02:00</date>
+        <date>2017-03-24T19:29:50.545+02:00</date>
         <description></description>
         <name>Example Timetable</name>
     </metadata>
     <resourceConstraints>
-        <limitIdleTimeConstraint>
+        <limitIdleTimeConstraint id="limitIdleTimeConstraint">
             <appliesToResources>
-                <resource>
-                    <id>dpop</id>
+                <resource id="dpop">
                     <name>Dan Pop</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>catnis</id>
+                <resource id="catnis">
                     <name>Catalina Ilas</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>vhariuc</id>
+                <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>asava</id>
+                <resource id="asava">
                     <name>Ana Savascu</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>doniciuc</id>
+                <resource id="doniciuc">
                     <name>Daniel Oniciuc</name>
                     <resourceType>teacher</resourceType>
                 </resource>
-                <resource>
-                    <id>9A</id>
+                <resource id="9A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>9B</id>
+                <resource id="9B">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>10A</id>
+                <resource id="10A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>10B</id>
+                <resource id="10B">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>11A</id>
+                <resource id="11A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>12A</id>
+                <resource id="12A">
                     <name></name>
                     <resourceType>studyGroup</resourceType>
                 </resource>
-                <resource>
-                    <id>101</id>
+                <resource id="101">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
-                <resource>
-                    <id>102</id>
+                <resource id="102">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
-                <resource>
-                    <id>103</id>
+                <resource id="103">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
-                <resource>
-                    <id>104</id>
+                <resource id="104">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
-                <resource>
-                    <id>201</id>
+                <resource id="201">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
-                <resource>
-                    <id>202</id>
+                <resource id="202">
                     <name></name>
                     <resourceType>classroom</resourceType>
                 </resource>
             </appliesToResources>
-            <id>limitIdleTimeConstraint</id>
             <maximumIdleHours>1</maximumIdleHours>
             <required>true</required>
             <weight>1</weight>
@@ -755,389 +615,332 @@
         <resourceType>classroom</resourceType>
     </resourceTypes>
     <resources>
-        <resource>
-            <id>dpop</id>
+        <resource id="dpop">
             <name>Dan Pop</name>
             <resourceType>teacher</resourceType>
         </resource>
-        <resource>
-            <id>catnis</id>
+        <resource id="catnis">
             <name>Catalina Ilas</name>
             <resourceType>teacher</resourceType>
         </resource>
-        <resource>
-            <id>vhariuc</id>
+        <resource id="vhariuc">
             <name>Virgil Hariuc</name>
             <resourceType>teacher</resourceType>
         </resource>
-        <resource>
-            <id>asava</id>
+        <resource id="asava">
             <name>Ana Savascu</name>
             <resourceType>teacher</resourceType>
         </resource>
-        <resource>
-            <id>doniciuc</id>
+        <resource id="doniciuc">
             <name>Daniel Oniciuc</name>
             <resourceType>teacher</resourceType>
         </resource>
-        <resource>
-            <id>9A</id>
+        <resource id="9A">
             <name></name>
             <resourceType>studyGroup</resourceType>
         </resource>
-        <resource>
-            <id>9B</id>
+        <resource id="9B">
             <name></name>
             <resourceType>studyGroup</resourceType>
         </resource>
-        <resource>
-            <id>10A</id>
+        <resource id="10A">
             <name></name>
             <resourceType>studyGroup</resourceType>
         </resource>
-        <resource>
-            <id>10B</id>
+        <resource id="10B">
             <name></name>
             <resourceType>studyGroup</resourceType>
         </resource>
-        <resource>
-            <id>11A</id>
+        <resource id="11A">
             <name></name>
             <resourceType>studyGroup</resourceType>
         </resource>
-        <resource>
-            <id>12A</id>
+        <resource id="12A">
             <name></name>
             <resourceType>studyGroup</resourceType>
         </resource>
-        <resource>
-            <id>101</id>
+        <resource id="101">
             <name></name>
             <resourceType>classroom</resourceType>
         </resource>
-        <resource>
-            <id>102</id>
+        <resource id="102">
             <name></name>
             <resourceType>classroom</resourceType>
         </resource>
-        <resource>
-            <id>103</id>
+        <resource id="103">
             <name></name>
             <resourceType>classroom</resourceType>
         </resource>
-        <resource>
-            <id>104</id>
+        <resource id="104">
             <name></name>
             <resourceType>classroom</resourceType>
         </resource>
-        <resource>
-            <id>201</id>
+        <resource id="201">
             <name></name>
             <resourceType>classroom</resourceType>
         </resource>
-        <resource>
-            <id>202</id>
+        <resource id="202">
             <name></name>
             <resourceType>classroom</resourceType>
         </resource>
     </resources>
     <solutions>
-        <solution>
+        <solution id="sol1">
             <description>First Solution</description>
             <events>
-                <event>
+                <event id="ev1">
                     <duration>1</duration>
-                    <id>ev1</id>
                     <resources>
-                        <resource>
-                            <id>dpop</id>
+                        <resource id="dpop">
                             <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9A</id>
+                        <resource id="9A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>101</id>
+                        <resource id="101">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="1">
                         <day>monday</day>
-                        <id>1_mon</id>
+                        <name>1_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev2">
                     <duration>1</duration>
-                    <id>ev2</id>
                     <resources>
-                        <resource>
-                            <id>dpop</id>
+                        <resource id="dpop">
                             <name>Dan Pop</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9A</id>
+                        <resource id="9A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>101</id>
+                        <resource id="101">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="2">
                         <day>monday</day>
-                        <id>2_mon</id>
+                        <name>2_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev3">
                     <duration>1</duration>
-                    <id>ev3</id>
                     <resources>
-                        <resource>
-                            <id>catnis</id>
+                        <resource id="catnis">
                             <name>Catalina Ilas</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9B</id>
+                        <resource id="9B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>102</id>
+                        <resource id="102">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="1">
                         <day>monday</day>
-                        <id>1_mon</id>
+                        <name>1_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev4">
                     <duration>1</duration>
-                    <id>ev4</id>
                     <resources>
-                        <resource>
-                            <id>catnis</id>
+                        <resource id="catnis">
                             <name>Catalina Ilas</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>10A</id>
+                        <resource id="10A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="2">
                         <day>monday</day>
-                        <id>2_mon</id>
+                        <name>2_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev5">
                     <duration>1</duration>
-                    <id>ev5</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>10B</id>
+                        <resource id="10B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>104</id>
+                        <resource id="104">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="1">
                         <day>monday</day>
-                        <id>1_mon</id>
+                        <name>1_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev6">
                     <duration>1</duration>
-                    <id>ev6</id>
                     <resources>
-                        <resource>
-                            <id>asava</id>
+                        <resource id="asava">
                             <name>Ana Savascu</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>11A</id>
+                        <resource id="11A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>201</id>
+                        <resource id="201">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="1">
                         <day>monday</day>
-                        <id>1_mon</id>
+                        <name>1_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev7">
                     <duration>1</duration>
-                    <id>ev7</id>
                     <resources>
-                        <resource>
-                            <id>doniciuc</id>
+                        <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>202</id>
+                        <resource id="202">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="1">
                         <day>monday</day>
-                        <id>1_mon</id>
+                        <name>1_mon</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev8">
                     <duration>1</duration>
-                    <id>ev8</id>
                     <resources>
-                        <resource>
-                            <id>doniciuc</id>
+                        <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>9B</id>
+                        <resource id="9B">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="3">
                         <day>tuesday</day>
-                        <id>1_tue</id>
+                        <name>1_tue</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev9">
                     <duration>1</duration>
-                    <id>ev9</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="4">
                         <day>tuesday</day>
-                        <id>2_tue</id>
+                        <name>2_tue</name>
                     </time>
                 </event>
-                <event>
+                <event id="ev10">
                     <duration>1</duration>
-                    <id>ev10</id>
                     <resources>
-                        <resource>
-                            <id>vhariuc</id>
+                        <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource>
-                            <id>12A</id>
+                        <resource id="12A">
                             <name></name>
                             <resourceType>studyGroup</resourceType>
                         </resource>
-                        <resource>
-                            <id>103</id>
+                        <resource id="103">
                             <name></name>
                             <resourceType>classroom</resourceType>
                         </resource>
                     </resources>
-                    <time>
+                    <time id="5">
                         <day>wednesday</day>
-                        <id>1_wed</id>
+                        <name>1_wed</name>
                     </time>
                 </event>
             </events>
         </solution>
     </solutions>
     <Times>
-        <time>
+        <time id="1">
             <day>monday</day>
-            <id>1_mon</id>
+            <name>1_mon</name>
         </time>
-        <time>
+        <time id="2">
             <day>monday</day>
-            <id>2_mon</id>
+            <name>2_mon</name>
         </time>
-        <time>
+        <time id="3">
             <day>tuesday</day>
-            <id>1_tue</id>
+            <name>1_tue</name>
         </time>
-        <time>
+        <time id="4">
             <day>tuesday</day>
-            <id>2_tue</id>
+            <name>2_tue</name>
         </time>
-        <time>
+        <time id="5">
             <day>wednesday</day>
-            <id>1_wed</id>
+            <name>1_wed</name>
         </time>
-        <time>
+        <time id="6">
             <day>wednesday</day>
-            <id>2_wed</id>
+            <name>2_wed</name>
         </time>
-        <time>
+        <time id="7">
             <day>thursday</day>
-            <id>1_thu</id>
+            <name>1_thu</name>
         </time>
-        <time>
+        <time id="8">
             <day>thursday</day>
-            <id>2_thu</id>
+            <name>2_thu</name>
         </time>
-        <time>
+        <time id="9">
             <day>friday</day>
-            <id>1_fri</id>
+            <name>1_fri</name>
         </time>
-        <time>
+        <time id="10">
             <day>friday</day>
-            <id>2_fri</id>
+            <name>2_fri</name>
         </time>
     </Times>
 </timetable>

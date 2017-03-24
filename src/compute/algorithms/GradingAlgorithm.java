@@ -35,7 +35,7 @@ public class GradingAlgorithm implements Algorithm {
 
         Events clonedEvents = new Events(clonedList);
 
-        solution = new Solution("First Solution", clonedEvents, null);
+        solution = new Solution("sol1","First Solution", clonedEvents, null);
 
         //To do list with the events that have not been assigned a Time yet or share resources with other events
         List<Event> toDoList = new ArrayList<>();
@@ -44,7 +44,6 @@ public class GradingAlgorithm implements Algorithm {
             if (inf > 0){
                 toDoList.add(e);
                 e.setTime(null);
-//                grades.put(e.getId(), inf);
             }
         }
 
@@ -118,7 +117,7 @@ public class GradingAlgorithm implements Algorithm {
     private int getConflictingEventsCost(Time time, Event event){
         int cost = 0;
         for(Event e : solution.getEvents().getEvents()){
-            if(e.getTime()!=null && time.equals(e.getTime())){
+            if(e.getTime()!=null && time.getId() == e.getTime().getId()){
                 for(Resource r : event.getResources().getResources()){
                     for(Resource re : e.getResources().getResources()){
                         if(r.equals(re)) {

@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import view.panes.DisplayPane;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by Anca on 3/16/2017.
@@ -12,13 +13,11 @@ import java.io.File;
 public class StageLoader {
     private static Stage primaryStage;
     private static Scene home;
-    private static Scene display;
     private static Scene create;
 
-    public StageLoader(Stage primaryStage, Scene home, Scene display, Scene create){
+    public StageLoader(Stage primaryStage, Scene home, Scene create){
         this.primaryStage = primaryStage;
         this.home = home;
-        this.display = display;
         this.create = create;
     }
 
@@ -32,10 +31,9 @@ public class StageLoader {
         load(home);
     }
 
-    public static void loadDisplay(File file){
-        DisplayPane displayPane = new DisplayPane();
-        displayPane.setFile(file);
-        display.setRoot(displayPane);
+    public static void loadDisplay(List<File> fileList, File file){
+        DisplayPane displayPane = new DisplayPane(fileList, file);
+        Scene display = new Scene(displayPane, 800, 550);
         load(display);
     }
 
