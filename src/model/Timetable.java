@@ -74,7 +74,7 @@ public class Timetable {
         return times;
     }
 
-    @XmlElement(name = "Times")
+    @XmlElement(name = "times")
     public void setTimes(Times times) {
         this.times = times;
     }

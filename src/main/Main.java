@@ -17,7 +17,7 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        String location = new String("timetable.xml");
+        String location = new String("timetable4.xml");
 
 //        Timetable timetable = DataLoader.loadDataToXML(location);
 //        Timetable timetable = DataLoader.loadDataFromXML(location);

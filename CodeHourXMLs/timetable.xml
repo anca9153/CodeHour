@@ -901,46 +901,56 @@
             </events>
         </solution>
     </solutions>
-    <Times>
+    <times>
         <time id="1">
             <day>monday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_mon</name>
         </time>
         <time id="2">
             <day>monday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_mon</name>
         </time>
         <time id="3">
             <day>tuesday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_tue</name>
         </time>
         <time id="4">
             <day>tuesday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_tue</name>
         </time>
         <time id="5">
             <day>wednesday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_wed</name>
         </time>
         <time id="6">
             <day>wednesday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_wed</name>
         </time>
         <time id="7">
             <day>thursday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_thu</name>
         </time>
         <time id="8">
             <day>thursday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_thu</name>
         </time>
         <time id="9">
             <day>friday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_fri</name>
         </time>
         <time id="10">
             <day>friday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_fri</name>
         </time>
-    </Times>
+    </times>
 </timetable>

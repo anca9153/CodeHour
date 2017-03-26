@@ -76,8 +76,12 @@ public class DataLoader {
 
         int i = 1;
         for(int day = 0; day<5; day++) {
-            for (int hour = 0; hour < 5; hour++) {
-                Time time = new Time(i++, new StringBuilder().append(String.valueOf(hour+1)).append("_").append(weekdays.get(day).substring(0, 3)).toString(), weekdays.get(day));
+            for (int hour = 0; hour < 3; hour++) {
+                StringBuilder sb = new StringBuilder(String.valueOf(hour+8));
+                sb.append(":00 - ");
+                sb.append(String.valueOf(hour+8));
+                sb.append(":50");
+                Time time = new Time(i++, new StringBuilder().append(String.valueOf(hour+1)).append("_").append(weekdays.get(day).substring(0, 3)).toString(), weekdays.get(day), sb.toString());
                 timeList.add(time);
             }
         }
@@ -125,26 +129,26 @@ public class DataLoader {
         Resources resources = new Resources(resourceList);
 
         List<Event> eventList = Arrays.asList(
-                new Event("ev1", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(8), resourceList.get(16)))),
-                new Event("ev2", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(8), resourceList.get(16)))),
-                new Event("ev3", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(9), resourceList.get(17)))),
-                new Event("ev4", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(9), resourceList.get(17)))),
-                new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(10), resourceList.get(18)))),
-                new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(15), resourceList.get(19)))),
-                new Event("ev7", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(14), resourceList.get(20)))),
-                new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(13), resourceList.get(21)))),
-                new Event("ev9", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(13), resourceList.get(21)))),
-                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(14), resourceList.get(20)))),
-                new Event("ev11", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(12), resourceList.get(22)))),
-                new Event("ev12", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(12), resourceList.get(22)))),
-                new Event("ev13", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(11), resourceList.get(23)))),
-                new Event("ev14", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(12), resourceList.get(22)))),
-                new Event("ev15", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(11), resourceList.get(23)))),
-                new Event("ev16", 1, null, new Resources(Arrays.asList(resourceList.get(5), resourceList.get(10), resourceList.get(18)))),
-                new Event("ev17", 1, null, new Resources(Arrays.asList(resourceList.get(6), resourceList.get(15), resourceList.get(19)))),
-                new Event("ev18", 1, null, new Resources(Arrays.asList(resourceList.get(7), resourceList.get(15), resourceList.get(19)))),
-                new Event("ev19", 1, null, new Resources(Arrays.asList(resourceList.get(7), resourceList.get(10), resourceList.get(18)))),
-                new Event("ev20", 1, null, new Resources(Arrays.asList(resourceList.get(7), resourceList.get(9), resourceList.get(17))))
+                new Event("ev1", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(8), resourceList.get(16))), "Mate"),
+                new Event("ev2", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(8), resourceList.get(16))), "Mate"),
+                new Event("ev3", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(9), resourceList.get(17))), "Mate"),
+                new Event("ev4", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(9), resourceList.get(17))), "Mate"),
+                new Event("ev5", 1, null, new Resources(Arrays.asList(resourceList.get(0), resourceList.get(10), resourceList.get(18))), "Mate"),
+                new Event("ev6", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(15), resourceList.get(19))), "Info"),
+                new Event("ev7", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(14), resourceList.get(20))), "Info"),
+                new Event("ev8", 1, null, new Resources(Arrays.asList(resourceList.get(1), resourceList.get(13), resourceList.get(21))), "Info"),
+                new Event("ev9", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(13), resourceList.get(21))), "Info"),
+                new Event("ev10", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(14), resourceList.get(20))), "Info"),
+                new Event("ev11", 1, null, new Resources(Arrays.asList(resourceList.get(2), resourceList.get(12), resourceList.get(22))), "Info"),
+                new Event("ev12", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(12), resourceList.get(22))), "Eng"),
+                new Event("ev13", 1, null, new Resources(Arrays.asList(resourceList.get(3), resourceList.get(11), resourceList.get(23))), "Eng"),
+                new Event("ev14", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(12), resourceList.get(22))), "Lb. Rom"),
+                new Event("ev15", 1, null, new Resources(Arrays.asList(resourceList.get(4), resourceList.get(11), resourceList.get(23))), "Lb. Rom"),
+                new Event("ev16", 1, null, new Resources(Arrays.asList(resourceList.get(5), resourceList.get(10), resourceList.get(18))), "Sport"),
+                new Event("ev17", 1, null, new Resources(Arrays.asList(resourceList.get(6), resourceList.get(15), resourceList.get(19))), "Arte"),
+                new Event("ev18", 1, null, new Resources(Arrays.asList(resourceList.get(7), resourceList.get(15), resourceList.get(19))), "Arte"),
+                new Event("ev19", 1, null, new Resources(Arrays.asList(resourceList.get(7), resourceList.get(10), resourceList.get(18))), "Arte"),
+                new Event("ev20", 1, null, new Resources(Arrays.asList(resourceList.get(7), resourceList.get(9), resourceList.get(17))), "Arte")
         );
 
         Events events = new Events(eventList);

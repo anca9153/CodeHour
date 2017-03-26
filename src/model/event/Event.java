@@ -17,16 +17,18 @@ public class Event extends FitForConstraint implements Serializable{
     private int duration;
     private Time time;
     private Resources resources;
+    private String description;
 
     public Event(){
 
     }
 
-    public Event(String id, int duration, Time time, Resources resources) {
+    public Event(String id, int duration, Time time, Resources resources, String description) {
         this.id = id;
         this.duration = duration;
         this.time = time;
         this.resources = resources;
+        this.description = description;
     }
 
     public String getId() {
@@ -62,4 +64,11 @@ public class Event extends FitForConstraint implements Serializable{
         this.resources = resources;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
