@@ -33,7 +33,7 @@ public class StageLoader {
 
     public static void loadDisplay(List<File> fileList, File file){
         DisplayPane displayPane = new DisplayPane(fileList, file);
-        Scene display = new Scene(displayPane, 800, 550);
+        Scene display = new Scene(displayPane, 900, 550);
         load(display);
     }
 

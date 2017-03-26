@@ -33,8 +33,8 @@ public class Main extends Application {
         HomePane home = new HomePane();
         CreatePane create = new CreatePane();
 
-        Scene homeScene = new Scene(home, 800, 550);
-        Scene createScene = new Scene(create, 800, 550);
+        Scene homeScene = new Scene(home, 900, 550);
+        Scene createScene = new Scene(create, 900, 550);
 
         StageLoader loader = new StageLoader(primaryStage, homeScene, createScene);
 
