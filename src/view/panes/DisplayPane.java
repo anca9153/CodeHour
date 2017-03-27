@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import model.Timetable;
@@ -48,16 +49,20 @@ public class DisplayPane extends MainPane {
     }
 
     private void addToolbar(Map<String, Timetable> idTimetableMap){
-        Text timetable = new Text("Orar");
-        timetable.getStyleClass().add("timetableText");
+        Label timetable = new Label("Orar");
+        timetable.getStyleClass().add("timetableLabel");
 
         ObservableList<String> timetableList = FXCollections.observableArrayList();
         timetableList.addAll(idTimetableMap.keySet());
 
         ComboBox timetables = new ComboBox(timetableList);
+        timetables.getStyleClass().add("timetablesCombo");
+
+        HBox t = new HBox(timetable, timetables);
+        t.getStyleClass().add("otherTimetables");
 
         HBox leftBox = new HBox();
-        leftBox.getChildren().addAll(getHomeButton(), timetable, timetables);
+        leftBox.getChildren().addAll(getHomeButton(), t);
 
         ToolBar tb = new ToolBar();
         tb.getItems().add(leftBox);
@@ -68,9 +73,6 @@ public class DisplayPane extends MainPane {
 
 
     private void addToToolbar(List<File> fileList){
-        //Adding all the timetables available
-
-
         //Adding all the solution names available for the file received
         Solutions solutions = timetable.getSolutions();
 

@@ -53,13 +53,11 @@
 .codeText{
     -fx-fill: #363636;
     -fx-font: 20pt "Verdana";
-    -fx-padding: 13px;
 }
 
 .hourText{
     -fx-fill: #363636;
     -fx-font: 20pt "Verdana";
-    -fx-padding: 13px;
     -fx-font-weight: bold;
 }
 

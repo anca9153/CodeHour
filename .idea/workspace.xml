@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33c9a952-d24d-4ca9-bd29-437e07da97c7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styles/displayStyle.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/styles/homeStyle.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CodeHourXMLs/timetable2.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/StageLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/StageLoader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$2.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$3.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/HomePane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/HomePane.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHourXMLs/timetable.xml" afterPath="$PROJECT_DIR$/CodeHourXMLs/timetable.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHourXMLs/timetable3.xml" afterPath="$PROJECT_DIR$/CodeHourXMLs/timetable3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHourXMLs/timetable4.xml" afterPath="$PROJECT_DIR$/CodeHourXMLs/timetable4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Main.java" afterPath="$PROJECT_DIR$/src/main/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/StageLoader.java" afterPath="$PROJECT_DIR$/src/view/StageLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/styles/displayStyle.css" afterPath="$PROJECT_DIR$/out/production/CodeHour/styles/displayStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/displayStyle.css" afterPath="$PROJECT_DIR$/src/styles/displayStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/homeStyle.css" afterPath="$PROJECT_DIR$/src/styles/homeStyle.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" afterPath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/HomePane.java" afterPath="$PROJECT_DIR$/src/view/panes/HomePane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/MainPane.java" afterPath="$PROJECT_DIR$/src/view/panes/MainPane.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +28,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+            <state relative-caret-position="168">
+              <caret line="35" column="61" lean-forward="true" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,8 +40,8 @@
       <file leaf-file-name="homeStyle.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styles/homeStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="23" selection-end-column="25" />
+            <state relative-caret-position="221">
+              <caret line="28" column="35" lean-forward="true" selection-start-line="28" selection-start-column="35" selection-end-line="30" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -63,8 +50,8 @@
       <file leaf-file-name="DisplayPane.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="52" />
+            <state relative-caret-position="126">
+              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,21 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainPane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/panes/MainPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="31" column="47" lean-forward="false" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="displayStyle.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/styles/displayStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="272">
+              <caret line="58" column="114" lean-forward="false" selection-start-line="58" selection-start-column="114" selection-end-line="58" selection-end-column="114" />
               <folding />
             </state>
           </provider>
@@ -112,6 +89,9 @@
       <find>scene</find>
       <find>pref</find>
       <find>border</find>
+      <find>right</find>
+      <find>left</find>
+      <find>pos</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -125,7 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/model/Time.java" />
         <option value="$PROJECT_DIR$/src/model/Constraint.java" />
         <option value="$PROJECT_DIR$/src/model/Metadata.java" />
         <option value="$PROJECT_DIR$/src/model/resource/ResourceTypes.java" />
@@ -173,8 +152,9 @@
         <option value="$PROJECT_DIR$/src/view/panes/HomePane.java" />
         <option value="$PROJECT_DIR$/src/view/StageLoader.java" />
         <option value="$PROJECT_DIR$/src/view/panes/MainPane.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
+        <option value="$PROJECT_DIR$/src/styles/homeStyle.css" />
+        <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
         <option value="$PROJECT_DIR$/src/styles/displayStyle.css" />
       </list>
     </option>
@@ -264,42 +244,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeHour" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeHour" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeHour" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeHour" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -559,7 +503,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -571,7 +515,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38354036" sideWeight="0.511713" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23291926" sideWeight="0.48828697" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23291926" sideWeight="0.48828697" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -910,14 +854,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/HomePane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="79" column="8" lean-forward="true" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/StageLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -928,26 +864,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/panes/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" column="47" lean-forward="false" selection-start-line="31" selection-start-column="47" selection-end-line="31" selection-end-column="47" />
+        <state relative-caret-position="238">
+          <caret line="29" column="38" lean-forward="true" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
+    <entry file="file://$PROJECT_DIR$/src/view/panes/HomePane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="52" />
+        <state relative-caret-position="222">
+          <caret line="135" column="5" lean-forward="true" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="35" column="61" lean-forward="true" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="44" column="1" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
+        <state relative-caret-position="126">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -956,16 +900,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/homeStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="23" selection-end-column="25" />
+        <state relative-caret-position="221">
+          <caret line="28" column="35" lean-forward="true" selection-start-line="28" selection-start-column="35" selection-end-line="30" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/displayStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        <state relative-caret-position="272">
+          <caret line="58" column="114" lean-forward="false" selection-start-line="58" selection-start-column="114" selection-end-line="58" selection-end-column="114" />
           <folding />
         </state>
       </provider>
