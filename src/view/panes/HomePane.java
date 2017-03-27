@@ -1,5 +1,14 @@
 package view.panes;
 
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+import model.Timetable;
 import utilities.DataLoader;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -7,8 +16,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import utilities.PropertiesLoader;
@@ -16,7 +23,9 @@ import view.StageLoader;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Anca on 3/16/2017.
@@ -25,77 +34,142 @@ public class HomePane extends MainPane {
     private StageLoader loader;
 
     public HomePane(){
-        this.setTop(addToolbar(false));
+//        this.setTop(addToolbar(false));
 
         Pane left = getAvailableTimetables();
         Pane right = getCreateTimetable();
 
-        HBox box = new HBox();
+        GridPane gridPane = new GridPane();
 
-        HBox.setHgrow(left, Priority.ALWAYS);
-        HBox.setHgrow(right, Priority.ALWAYS);
+        GridPane.setHgrow(left, Priority.ALWAYS);
+        GridPane.setHgrow(right, Priority.ALWAYS);
 
-        box.getChildren().addAll(left, right);
-        box.setMinWidth(400);
-        box.setMinHeight(350);
+        gridPane.add(left, 0,0);
+        gridPane.add(right, 1,0);
+        gridPane.setMinWidth(400);
+        gridPane.setMinHeight(350);
 
-        this.setCenter(box);
+        ColumnConstraints c1 = new ColumnConstraints();
+        c1.setPercentWidth(100.0/2);
+        ColumnConstraints c2 = new ColumnConstraints();
+        c2.setPercentWidth(100.0/2);
+        gridPane.getColumnConstraints().addAll(c1, c2);
+
+        RowConstraints r1 = new RowConstraints();
+        r1.setPercentHeight(100.0);
+        gridPane.getRowConstraints().add(r1);
+
+        this.setCenter(gridPane);
     }
 
     private Pane getAvailableTimetables(){
         File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
 
         List<File> timetablesToDisplay = new ArrayList<>();
-        ObservableList<String> buttonList = FXCollections.observableArrayList();
 
+        //Reading the XMLs from the given directory
         for (final File fileEntry : loadFolder.listFiles()) {
             if (!fileEntry.isDirectory()){
                 timetablesToDisplay.add(fileEntry);
-                buttonList.add(fileEntry.getName());
             }
         }
 
         ListView<String> listView = new ListView<>();
-        listView.setItems(buttonList);
-        listView.setPrefSize(150, 200);
+        listView.setPrefSize(150, 195);
+
+        Map<String, Timetable> idTimetableMap = new HashMap<>();
+        Map<String, File> idFileMap = new HashMap<>();
+
+        Timetable t;
+        for(File file: timetablesToDisplay) {
+            if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
+                t = DataLoader.loadDataFromXML(file.getName());
+            } else {
+                t = DataLoader.loadDataFromXMLWithPath(file.getAbsolutePath());
+            }
+            idTimetableMap.put(t.getId(), t);
+            idFileMap.put(t.getId(), file);
+
+            listView.getItems().add(t.getId());
+        }
+
         listView.getSelectionModel().selectedItemProperty().addListener(
-                (ObservableValue<? extends String> ov, String old_val,
-                 String new_val) -> {
-                    StageLoader.loadDisplay(timetablesToDisplay,timetablesToDisplay.get(buttonList.indexOf(new_val)));
-                });
+        (ObservableValue<? extends String> ov, String old_val,
+         String new_val) -> {
+            File f = idFileMap.get(new_val);
+            Timetable tt = idTimetableMap.get(new_val);
+            StageLoader.loadDisplay(idTimetableMap, f, tt);
+        });
 
-        VBox timetableList = new VBox();
-        timetableList.getChildren().add(listView);
+        listView.setCellFactory(i -> new ListCell<String>() {
+            @Override
+            protected void updateItem (String item,boolean empty){
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(item);
+                    if(idTimetableMap.get(item).getSolutions() == null){
+                        Label l = new Label("NEFINALIZAT");
+                        setGraphic(l);
+                    }
+                }
+            }
+        });
 
-        GridPane pane = new GridPane();
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setPadding(new Insets(10, 10, 10, 10));
-        pane.add(new Text("Orare disponibile"), 0, 0);
-        pane.add(timetableList, 0, 1);
+        listView.setMaxSize(300, 200);
+        listView.setFixedCellSize(42);
 
-        pane.setAlignment(Pos.CENTER);
+        VBox vBox = new VBox();
+        Label label = new Label("Orare disponibile");
+        label.setPadding(new Insets(0, 30, 30, 30));
 
-        return pane;
+        vBox.getChildren().add(label);
+        vBox.getChildren().add(listView);
+
+        //Styling
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(10, 20, 20, 20));
+        vBox.getStyleClass().add("leftBox");
+
+        return vBox;
     }
 
     private Pane getCreateTimetable(){
-        Button create = new Button("Creeaza orar");
+        Button create = new Button("ADAUGĂ ORAR");
         create.setOnAction((ActionEvent event) ->
             StageLoader.loadCreate()
         );
+        create.getStyleClass().add("createButton");
 
         GridPane pane = new GridPane();
         pane.setHgap(10);
         pane.setVgap(10);
         pane.setPadding(new Insets(10, 10, 10, 10));
-        pane.add(new Text("Orar nou"), 0, 0);
+
+        //Adding the name and the buttons
+        Text text1 = new Text("Code");
+        text1.getStyleClass().add("codeText");
+        Text text2 = new Text("Hour");
+        text2.getStyleClass().add("hourText");
+
+        HBox nameBox = new HBox();
+        nameBox.getChildren().addAll(text1, text2);
+        nameBox.getStyleClass().add("nameBox");
+
+        Button settings = new Button("SETĂRI");
+        settings.getStyleClass().add("settingsButton");
+
+        pane.add(nameBox, 0, 0);
         pane.add(create, 0, 1);
+        pane.add(settings, 0, 2);
+
+        for(int i=0;i<2; i++){
+            pane.add(new Text(), 0, i+3);
+        }
 
         pane.setAlignment(Pos.CENTER);
-//        pane.setBorder(new Border(new BorderStroke(Color.BLACK,
-//                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
+        pane.getStyleClass().add("rightPane");
         return pane;
     }
 

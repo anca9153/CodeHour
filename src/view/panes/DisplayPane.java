@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -39,19 +40,32 @@ public class DisplayPane extends MainPane {
 
     }
 
-    public DisplayPane(List<File> fileList, File file){
+    public DisplayPane(Map<String, Timetable> idTimetableMap, File file, Timetable timetable){
+        this.timetable = timetable;
         this.file = file;
 
-        //Loading the timetable chosen in the HomePane by the location of the XML document it is placed in
-        if(PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent()+"\\"))){
-            timetable = DataLoader.loadDataFromXML(file.getName());
-        }
-        else{
-            timetable = DataLoader.loadDataFromXMLWithPath(file.getAbsolutePath());
-        }
-
-        addToToolbar(fileList);
+        addToolbar(idTimetableMap);
     }
+
+    private void addToolbar(Map<String, Timetable> idTimetableMap){
+        Text timetable = new Text("Orar");
+        timetable.getStyleClass().add("timetableText");
+
+        ObservableList<String> timetableList = FXCollections.observableArrayList();
+        timetableList.addAll(idTimetableMap.keySet());
+
+        ComboBox timetables = new ComboBox(timetableList);
+
+        HBox leftBox = new HBox();
+        leftBox.getChildren().addAll(getHomeButton(), timetable, timetables);
+
+        ToolBar tb = new ToolBar();
+        tb.getItems().add(leftBox);
+        tb.getStyleClass().add("toolBar");
+
+        this.setTop(tb);
+    }
+
 
     private void addToToolbar(List<File> fileList){
         //Adding all the timetables available
@@ -87,7 +101,7 @@ public class DisplayPane extends MainPane {
 
             ToolBar toolBar = new ToolBar();
             toolBar.getItems().add(leftSection);
-            toolBar.getItems().addAll(addToolbar(true).getItems());
+//            toolBar.getItems().addAll(addToolbar(true).getItems());
             this.setTop(toolBar);
         }
         else{

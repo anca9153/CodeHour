@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<timetable id="exampleTimetable">
+<timetable id="MoreData Copy">
     <eventConstraints>
         <assignResourceConstraint id="assignResourceConstraint">
             <appliesToEvents>
                 <event id="ev1">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -21,6 +22,7 @@
                     </resources>
                 </event>
                 <event id="ev2">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -38,6 +40,7 @@
                     </resources>
                 </event>
                 <event id="ev3">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -55,6 +58,7 @@
                     </resources>
                 </event>
                 <event id="ev4">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -72,6 +76,7 @@
                     </resources>
                 </event>
                 <event id="ev5">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -89,6 +94,7 @@
                     </resources>
                 </event>
                 <event id="ev6">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -106,6 +112,7 @@
                     </resources>
                 </event>
                 <event id="ev7">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -123,6 +130,7 @@
                     </resources>
                 </event>
                 <event id="ev8">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -140,6 +148,7 @@
                     </resources>
                 </event>
                 <event id="ev9">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -157,6 +166,7 @@
                     </resources>
                 </event>
                 <event id="ev10">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -174,6 +184,7 @@
                     </resources>
                 </event>
                 <event id="ev11">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -191,6 +202,7 @@
                     </resources>
                 </event>
                 <event id="ev12">
+                    <description>Eng</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="asava">
@@ -208,6 +220,7 @@
                     </resources>
                 </event>
                 <event id="ev13">
+                    <description>Eng</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="asava">
@@ -225,6 +238,7 @@
                     </resources>
                 </event>
                 <event id="ev14">
+                    <description>Lb. Rom</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
@@ -242,6 +256,7 @@
                     </resources>
                 </event>
                 <event id="ev15">
+                    <description>Lb. Rom</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
@@ -259,6 +274,7 @@
                     </resources>
                 </event>
                 <event id="ev16">
+                    <description>Sport</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="anac">
@@ -276,6 +292,7 @@
                     </resources>
                 </event>
                 <event id="ev17">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="stm">
@@ -293,6 +310,7 @@
                     </resources>
                 </event>
                 <event id="ev18">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -310,6 +328,7 @@
                     </resources>
                 </event>
                 <event id="ev19">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -327,6 +346,7 @@
                     </resources>
                 </event>
                 <event id="ev20">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -350,6 +370,7 @@
         <assignTimeConstraint id="assignTimeConstraint">
             <appliesToEvents>
                 <event id="ev1">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -367,6 +388,7 @@
                     </resources>
                 </event>
                 <event id="ev2">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -384,6 +406,7 @@
                     </resources>
                 </event>
                 <event id="ev3">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -401,6 +424,7 @@
                     </resources>
                 </event>
                 <event id="ev4">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -418,6 +442,7 @@
                     </resources>
                 </event>
                 <event id="ev5">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -435,6 +460,7 @@
                     </resources>
                 </event>
                 <event id="ev6">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -452,6 +478,7 @@
                     </resources>
                 </event>
                 <event id="ev7">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -469,6 +496,7 @@
                     </resources>
                 </event>
                 <event id="ev8">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -486,6 +514,7 @@
                     </resources>
                 </event>
                 <event id="ev9">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -503,6 +532,7 @@
                     </resources>
                 </event>
                 <event id="ev10">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -520,6 +550,7 @@
                     </resources>
                 </event>
                 <event id="ev11">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -537,6 +568,7 @@
                     </resources>
                 </event>
                 <event id="ev12">
+                    <description>Eng</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="asava">
@@ -554,6 +586,7 @@
                     </resources>
                 </event>
                 <event id="ev13">
+                    <description>Eng</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="asava">
@@ -571,6 +604,7 @@
                     </resources>
                 </event>
                 <event id="ev14">
+                    <description>Lb. Rom</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
@@ -588,6 +622,7 @@
                     </resources>
                 </event>
                 <event id="ev15">
+                    <description>Lb. Rom</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
@@ -605,6 +640,7 @@
                     </resources>
                 </event>
                 <event id="ev16">
+                    <description>Sport</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="anac">
@@ -622,6 +658,7 @@
                     </resources>
                 </event>
                 <event id="ev17">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="stm">
@@ -639,6 +676,7 @@
                     </resources>
                 </event>
                 <event id="ev18">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -656,6 +694,7 @@
                     </resources>
                 </event>
                 <event id="ev19">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -673,6 +712,7 @@
                     </resources>
                 </event>
                 <event id="ev20">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -696,6 +736,7 @@
     </eventConstraints>
     <events>
         <event id="ev1">
+            <description>Mate</description>
             <duration>1</duration>
             <resources>
                 <resource id="dpop">
@@ -713,6 +754,7 @@
             </resources>
         </event>
         <event id="ev2">
+            <description>Mate</description>
             <duration>1</duration>
             <resources>
                 <resource id="dpop">
@@ -730,6 +772,7 @@
             </resources>
         </event>
         <event id="ev3">
+            <description>Mate</description>
             <duration>1</duration>
             <resources>
                 <resource id="dpop">
@@ -747,6 +790,7 @@
             </resources>
         </event>
         <event id="ev4">
+            <description>Mate</description>
             <duration>1</duration>
             <resources>
                 <resource id="dpop">
@@ -764,6 +808,7 @@
             </resources>
         </event>
         <event id="ev5">
+            <description>Mate</description>
             <duration>1</duration>
             <resources>
                 <resource id="dpop">
@@ -781,6 +826,7 @@
             </resources>
         </event>
         <event id="ev6">
+            <description>Info</description>
             <duration>1</duration>
             <resources>
                 <resource id="catnis">
@@ -798,6 +844,7 @@
             </resources>
         </event>
         <event id="ev7">
+            <description>Info</description>
             <duration>1</duration>
             <resources>
                 <resource id="catnis">
@@ -815,6 +862,7 @@
             </resources>
         </event>
         <event id="ev8">
+            <description>Info</description>
             <duration>1</duration>
             <resources>
                 <resource id="catnis">
@@ -832,6 +880,7 @@
             </resources>
         </event>
         <event id="ev9">
+            <description>Info</description>
             <duration>1</duration>
             <resources>
                 <resource id="vhariuc">
@@ -849,6 +898,7 @@
             </resources>
         </event>
         <event id="ev10">
+            <description>Info</description>
             <duration>1</duration>
             <resources>
                 <resource id="vhariuc">
@@ -866,6 +916,7 @@
             </resources>
         </event>
         <event id="ev11">
+            <description>Info</description>
             <duration>1</duration>
             <resources>
                 <resource id="vhariuc">
@@ -883,6 +934,7 @@
             </resources>
         </event>
         <event id="ev12">
+            <description>Eng</description>
             <duration>1</duration>
             <resources>
                 <resource id="asava">
@@ -900,6 +952,7 @@
             </resources>
         </event>
         <event id="ev13">
+            <description>Eng</description>
             <duration>1</duration>
             <resources>
                 <resource id="asava">
@@ -917,6 +970,7 @@
             </resources>
         </event>
         <event id="ev14">
+            <description>Lb. Rom</description>
             <duration>1</duration>
             <resources>
                 <resource id="doniciuc">
@@ -934,6 +988,7 @@
             </resources>
         </event>
         <event id="ev15">
+            <description>Lb. Rom</description>
             <duration>1</duration>
             <resources>
                 <resource id="doniciuc">
@@ -951,6 +1006,7 @@
             </resources>
         </event>
         <event id="ev16">
+            <description>Sport</description>
             <duration>1</duration>
             <resources>
                 <resource id="anac">
@@ -968,6 +1024,7 @@
             </resources>
         </event>
         <event id="ev17">
+            <description>Arte</description>
             <duration>1</duration>
             <resources>
                 <resource id="stm">
@@ -985,6 +1042,7 @@
             </resources>
         </event>
         <event id="ev18">
+            <description>Arte</description>
             <duration>1</duration>
             <resources>
                 <resource id="cris">
@@ -1002,6 +1060,7 @@
             </resources>
         </event>
         <event id="ev19">
+            <description>Arte</description>
             <duration>1</duration>
             <resources>
                 <resource id="cris">
@@ -1019,6 +1078,7 @@
             </resources>
         </event>
         <event id="ev20">
+            <description>Arte</description>
             <duration>1</duration>
             <resources>
                 <resource id="cris">
@@ -1038,7 +1098,7 @@
     </events>
     <metadata>
         <contributor>Anca Ad</contributor>
-        <date>2017-03-24T19:41:47.070+02:00</date>
+        <date>2017-03-26T17:50:21.296+03:00</date>
         <description></description>
         <name>Example Timetable</name>
     </metadata>
@@ -1287,6 +1347,7 @@
             <description>First Solution</description>
             <events>
                 <event id="ev1">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -1304,10 +1365,12 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
                 <event id="ev2">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -1325,10 +1388,12 @@
                     </resources>
                     <time id="2">
                         <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
                         <name>2_mon</name>
                     </time>
                 </event>
                 <event id="ev3">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -1346,10 +1411,12 @@
                     </resources>
                     <time id="3">
                         <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
                         <name>3_mon</name>
                     </time>
                 </event>
                 <event id="ev4">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -1366,11 +1433,13 @@
                         </resource>
                     </resources>
                     <time id="4">
-                        <day>monday</day>
-                        <name>4_mon</name>
+                        <day>tuesday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_tue</name>
                     </time>
                 </event>
                 <event id="ev5">
+                    <description>Mate</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="dpop">
@@ -1387,11 +1456,13 @@
                         </resource>
                     </resources>
                     <time id="5">
-                        <day>monday</day>
-                        <name>5_mon</name>
+                        <day>tuesday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_tue</name>
                     </time>
                 </event>
                 <event id="ev6">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -1409,10 +1480,12 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
                 <event id="ev7">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -1430,10 +1503,12 @@
                     </resources>
                     <time id="2">
                         <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
                         <name>2_mon</name>
                     </time>
                 </event>
                 <event id="ev8">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="catnis">
@@ -1451,10 +1526,12 @@
                     </resources>
                     <time id="3">
                         <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
                         <name>3_mon</name>
                     </time>
                 </event>
                 <event id="ev9">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -1472,10 +1549,12 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
                 <event id="ev10">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -1493,10 +1572,12 @@
                     </resources>
                     <time id="3">
                         <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
                         <name>3_mon</name>
                     </time>
                 </event>
                 <event id="ev11">
+                    <description>Info</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
@@ -1514,10 +1595,12 @@
                     </resources>
                     <time id="2">
                         <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
                         <name>2_mon</name>
                     </time>
                 </event>
                 <event id="ev12">
+                    <description>Eng</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="asava">
@@ -1535,10 +1618,12 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
                 <event id="ev13">
+                    <description>Eng</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="asava">
@@ -1556,10 +1641,12 @@
                     </resources>
                     <time id="2">
                         <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
                         <name>2_mon</name>
                     </time>
                 </event>
                 <event id="ev14">
+                    <description>Lb. Rom</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
@@ -1577,10 +1664,12 @@
                     </resources>
                     <time id="3">
                         <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
                         <name>3_mon</name>
                     </time>
                 </event>
                 <event id="ev15">
+                    <description>Lb. Rom</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
@@ -1598,10 +1687,12 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
                 <event id="ev16">
+                    <description>Sport</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="anac">
@@ -1619,10 +1710,12 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
                 <event id="ev17">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="stm">
@@ -1640,10 +1733,12 @@
                     </resources>
                     <time id="2">
                         <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
                         <name>2_mon</name>
                     </time>
                 </event>
                 <event id="ev18">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -1661,10 +1756,12 @@
                     </resources>
                     <time id="3">
                         <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
                         <name>3_mon</name>
                     </time>
                 </event>
                 <event id="ev19">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -1682,10 +1779,12 @@
                     </resources>
                     <time id="2">
                         <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
                         <name>2_mon</name>
                     </time>
                 </event>
                 <event id="ev20">
+                    <description>Arte</description>
                     <duration>1</duration>
                     <resources>
                         <resource id="cris">
@@ -1703,6 +1802,7 @@
                     </resources>
                     <time id="1">
                         <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
                         <name>1_mon</name>
                     </time>
                 </event>
@@ -1710,130 +1810,80 @@
         </solution>
     </solutions>
     <times>
-      <time id="1">
-          <day>monday</day>
-          <hourInterval>8:00 - 8:50</hourInterval>
-          <name>1_mon</name>
-      </time>
-      <time id="2">
-          <day>monday</day>
-          <hourInterval>9:00 - 9:50</hourInterval>
-          <name>2_mon</name>
-      </time>
-      <time id="3">
-          <day>monday</day>
-          <hourInterval>10:00 - 10:50</hourInterval>
-          <name>3_mon</name>
-      </time>
-      <time id="4">
-          <day>monday</day>
-          <hourInterval>11:00 - 11:50</hourInterval>
-          <name>4_mon</name>
-      </time>
-      <time id="5">
-          <day>monday</day>
-          <hourInterval>12:00 - 12:50</hourInterval>
-          <name>5_mon</name>
-      </time>
-      <time id="6">
-          <day>tuesday</day>
-          <hourInterval>8:00 - 8:50</hourInterval>
-          <name>1_tue</name>
-      </time>
-      <time id="7">
-          <day>tuesday</day>
-          <hourInterval>9:00 - 9:50</hourInterval>
-          <name>2_tue</name>
-      </time>
-      <time id="8">
-          <day>tuesday</day>
-          <hourInterval>10:00 - 10:50</hourInterval>
-          <name>3_tue</name>
-      </time>
-      <time id="9">
-          <day>tuesday</day>
-          <hourInterval>11:00 - 11:50</hourInterval>
-          <name>4_tue</name>
-      </time>
-      <time id="10">
-          <day>tuesday</day>
-          <hourInterval>12:00 - 12:50</hourInterval>
-          <name>5_tue</name>
-      </time>
-      <time id="11">
-          <day>wednesday</day>
-          <hourInterval>8:00 - 8:50</hourInterval>
-          <name>1_wed</name>
-      </time>
-      <time id="12">
-          <day>wednesday</day>
-          <hourInterval>9:00 - 9:50</hourInterval>
-          <name>2_wed</name>
-      </time>
-      <time id="13">
-          <day>wednesday</day>
-          <hourInterval>10:00 - 10:50</hourInterval>
-          <name>3_wed</name>
-      </time>
-      <time id="14">
-          <day>wednesday</day>
-          <hourInterval>11:00 - 11:50</hourInterval>
-          <name>4_wed</name>
-      </time>
-      <time id="15">
-          <day>wednesday</day>
-          <hourInterval>12:00 - 12:50</hourInterval>
-          <name>5_wed</name>
-      </time>
-      <time id="16">
-          <day>thursday</day>
-          <hourInterval>8:00 - 8:50</hourInterval>
-          <name>1_thu</name>
-      </time>
-      <time id="17">
-          <day>thursday</day>
-          <hourInterval>9:00 - 9:50</hourInterval>
-          <name>2_thu</name>
-      </time>
-      <time id="18">
-          <day>thursday</day>
-          <hourInterval>10:00 - 10:50</hourInterval>
-          <name>3_thu</name>
-      </time>
-      <time id="19">
-          <day>thursday</day>
-          <hourInterval>11:00 - 11:50</hourInterval>
-          <name>4_thu</name>
-      </time>
-      <time id="20">
-          <day>thursday</day>
-          <hourInterval>12:00 - 12:50</hourInterval>
-          <name>5_thu</name>
-      </time>
-      <time id="21">
-          <day>friday</day>
-          <hourInterval>8:00 - 8:50</hourInterval>
-          <name>1_fri</name>
-      </time>
-      <time id="22">
-          <day>friday</day>
-          <hourInterval>9:00 - 9:50</hourInterval>
-          <name>2_fri</name>
-      </time>
-      <time id="23">
-          <day>friday</day>
-          <hourInterval>10:00 - 10:50</hourInterval>
-          <name>3_fri</name>
-      </time>
-      <time id="24">
-          <day>friday</day>
-          <hourInterval>11:00 - 11:50</hourInterval>
-          <name>4_fri</name>
-      </time>
-      <time id="25">
-          <day>friday</day>
-          <hourInterval>12:00 - 12:50</hourInterval>
-          <name>5_fri</name>
-      </time>
+        <time id="1">
+            <day>monday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
+            <name>1_mon</name>
+        </time>
+        <time id="2">
+            <day>monday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
+            <name>2_mon</name>
+        </time>
+        <time id="3">
+            <day>monday</day>
+            <hourInterval>10:00 - 10:50</hourInterval>
+            <name>3_mon</name>
+        </time>
+        <time id="4">
+            <day>tuesday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
+            <name>1_tue</name>
+        </time>
+        <time id="5">
+            <day>tuesday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
+            <name>2_tue</name>
+        </time>
+        <time id="6">
+            <day>tuesday</day>
+            <hourInterval>10:00 - 10:50</hourInterval>
+            <name>3_tue</name>
+        </time>
+        <time id="7">
+            <day>wednesday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
+            <name>1_wed</name>
+        </time>
+        <time id="8">
+            <day>wednesday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
+            <name>2_wed</name>
+        </time>
+        <time id="9">
+            <day>wednesday</day>
+            <hourInterval>10:00 - 10:50</hourInterval>
+            <name>3_wed</name>
+        </time>
+        <time id="10">
+            <day>thursday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
+            <name>1_thu</name>
+        </time>
+        <time id="11">
+            <day>thursday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
+            <name>2_thu</name>
+        </time>
+        <time id="12">
+            <day>thursday</day>
+            <hourInterval>10:00 - 10:50</hourInterval>
+            <name>3_thu</name>
+        </time>
+        <time id="13">
+            <day>friday</day>
+            <hourInterval>8:00 - 8:50</hourInterval>
+            <name>1_fri</name>
+        </time>
+        <time id="14">
+            <day>friday</day>
+            <hourInterval>9:00 - 9:50</hourInterval>
+            <name>2_fri</name>
+        </time>
+        <time id="15">
+            <day>friday</day>
+            <hourInterval>10:00 - 10:50</hourInterval>
+            <name>3_fri</name>
+        </time>
     </times>
 </timetable>
