@@ -45,6 +45,7 @@
     -fx-border-color: #dfdfdf;
     -fx-border-width: 1 1 1 1;
     -fx-text-fill: #363636;
+    -fx-cursor: hand;
 }
 
 .combo-box-popup .list-view {
@@ -54,6 +55,7 @@
     -fx-border-color: #dfdfdf;
     -fx-border-width: 1 1 1 1;
     -fx-text-fill: #363636;
+    -fx-cursor: hand;
 }
 
 .combo-box-popup .list-view .list-cell:filled:hover, .combo-box-popup .list-view .list-cell:filled:selected:hover {
@@ -66,6 +68,52 @@
     -fx-text-fill: #363636;
 }
 
-.otherTimetables{
-    -fx-padding: 8;
+.rightBoxToolbar {
+    -fx-padding: 0 18 0 8;
+}
+
+.languagesBox {
+     -fx-pref-width: 68px;
+}
+
+.settingsButton{
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
+    -fx-font: 9pt "Verdana";
+    -fx-padding: 10 20 12 30;
+    -fx-border-insets: 5 5 5 15;
+    -fx-background-insets: 5 5 5 15;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.settingsButton:hover{
+    -fx-background-color: #5fdfc6;
+}
+
+.leftScreen{
+    -fx-pref-width: 200;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #363636;
+}
+
+.solutionOptionVBox{
+    -fx-padding:25;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 1;
+}
+
+.optionVBox{
+    -fx-padding:13 16 13 16;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 1;
+}
+
+.leftLabel{
+    -fx-font: 10pt "Verdana";
+    -fx-padding: 0 0 13 0;
+}
+
+.chooseLeft{
+     -fx-pref-width: 166px;
 }

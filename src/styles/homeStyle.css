@@ -14,6 +14,7 @@
     -fx-background-color: #F3F3F3;
     -fx-padding: 0;
     -fx-margin: 0;
+    -fx-cursor: hand;
 }
 
 .list-view .list-cell{
@@ -73,14 +74,26 @@
     -fx-font-weight: bold;
     -fx-background-radius: 0;
     -fx-pref-width: 200px;
+    -fx-border-color: #cc4133;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: hand;
+}
+
+.createButton:hover{
+    -fx-background-color: #f85241;
 }
 
 .settingsButton{
     -fx-background-color: #53cdb5;
     -fx-font: 9pt "Verdana";
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #d1fff6;
     -fx-padding: 13px;
     -fx-font-weight: bold;
     -fx-background-radius: 0;
     -fx-pref-width: 200px;
+    -fx-cursor: hand;
+}
+
+.settingsButton:hover{
+    -fx-text-fill: #ffffff;
 }

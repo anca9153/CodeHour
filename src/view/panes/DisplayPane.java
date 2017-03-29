@@ -19,9 +19,7 @@ import model.resource.Resource;
 import model.solution.Solution;
 import model.solution.Solutions;
 import model.time.Time;
-import utilities.DataLoader;
 import javafx.scene.control.ToolBar;
-import utilities.PropertiesLoader;
 import java.io.File;
 import java.util.*;
 
@@ -31,6 +29,7 @@ import java.util.*;
 public class DisplayPane extends MainPane {
     private File file;
     private Timetable timetable;
+    private List<VBox> optionsList = new ArrayList<>();
 
     //Maps with key = the resource name and value = an ArrayList with all the events linked to the key resource
     private Map<String, List<Event>> studyGroupEvents = new HashMap<>();
@@ -49,69 +48,89 @@ public class DisplayPane extends MainPane {
     }
 
     private void addToolbar(Map<String, Timetable> idTimetableMap){
-        Label timetable = new Label("Orar");
-        timetable.getStyleClass().add("timetableLabel");
+        Label timetableLabel = new Label("Orar");
+        timetableLabel.getStyleClass().add("timetableLabel");
 
         ObservableList<String> timetableList = FXCollections.observableArrayList();
         timetableList.addAll(idTimetableMap.keySet());
 
         ComboBox timetables = new ComboBox(timetableList);
         timetables.getStyleClass().add("timetablesCombo");
+        timetables.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String oldValue, String newValue) {
+                Solutions solutions = idTimetableMap.get(newValue).getSolutions();
 
-        HBox t = new HBox(timetable, timetables);
+                Map<String, Solution> idSolutionMap = new HashMap<>();
+
+                for (Solution s : solutions.getSolutions()) {
+                    idSolutionMap.put(s.getId(), s);
+                }
+
+                addLeftPaneSolutions(idSolutionMap);
+            }
+        });
+        timetables.getSelectionModel().select(timetable.getId());
+
+        HBox t = new HBox(timetableLabel, timetables);
         t.getStyleClass().add("otherTimetables");
+        t.setAlignment( Pos.CENTER);
 
+        //Adding the left part of the toolBox
         HBox leftBox = new HBox();
         leftBox.getChildren().addAll(getHomeButton(), t);
 
+        Label language = new Label("Limbă");
+        language.getStyleClass().add("timetableLabel");
+
+        ComboBox languages = new ComboBox(FXCollections.observableArrayList("RO", "ENG"));
+        languages.getStyleClass().add("languagesBox");
+        languages.getSelectionModel().select("RO");
+
+        Button settings = new Button("Setări");
+        settings.getStyleClass().add("settingsButton");
+
+        //Adding the right part of the toolBox
+        HBox rightBox = new HBox(language, languages, settings);
+        rightBox.getStyleClass().add("rightBoxToolbar");
+        HBox.setHgrow( rightBox, Priority.ALWAYS );
+        rightBox.setAlignment( Pos.CENTER_RIGHT );
+
         ToolBar tb = new ToolBar();
-        tb.getItems().add(leftBox);
+        tb.getItems().addAll(leftBox, rightBox);
         tb.getStyleClass().add("toolBar");
 
         this.setTop(tb);
     }
 
-
-    private void addToToolbar(List<File> fileList){
+    private void addLeftPaneSolutions(Map<String, Solution> idSolutionMap) {
         //Adding all the solution names available for the file received
-        Solutions solutions = timetable.getSolutions();
+        ObservableList<String> solutionList = FXCollections.observableArrayList(idSolutionMap.keySet());
+        ComboBox cbSolutions = new ComboBox(solutionList);
 
-        ObservableList<String> solutionList = FXCollections.observableArrayList();
-        if(solutions!=null && solutions.getSolutions()!=null) {
-            for (Solution s : solutions.getSolutions()) {
-                solutionList.add(s.getId());
+        cbSolutions.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String oldValue, String newValue) {
+                addLeftPaneButtons(idSolutionMap.get(newValue));
             }
+        });
 
-            ComboBox cb = new ComboBox(solutionList);
+        cbSolutions.getSelectionModel().selectFirst();
+        cbSolutions.getStyleClass().add("chooseLeft");
 
-            cb.valueProperty().addListener(new ChangeListener<String>() {
-                @Override public void changed(ObservableValue ov, String oldValue, String newValue) {
-                    addLeftPane(newValue);
-                }
-            });
+        Label sLabel = new Label("Soluție");
+        sLabel.getStyleClass().add("leftLabel");
 
-            cb.getSelectionModel().selectFirst();
+        VBox smallVBox = new VBox(sLabel, cbSolutions);
+        smallVBox.getStyleClass().add("optionVBox");
 
-            HBox leftSection = new HBox();
-//            Text orarText = new Text("Orar");
-            Text solText = new Text("Soluție");
-            leftSection.getChildren().addAll(solText, cb);
-            HBox.setHgrow(leftSection, Priority.ALWAYS);
-            leftSection.setAlignment(Pos.CENTER_LEFT);
+        VBox vBox = new VBox(smallVBox);
+        vBox.getChildren().addAll(optionsList);
+        vBox.getStyleClass().add("leftScreen");
 
-            leftSection.setSpacing(8);
-
-            ToolBar toolBar = new ToolBar();
-            toolBar.getItems().add(leftSection);
-//            toolBar.getItems().addAll(addToolbar(true).getItems());
-            this.setTop(toolBar);
-        }
-        else{
-            this.setCenter(new Text("This document has no solution yet."));
-        }
+        this.setLeft(vBox);
     }
 
-    private void addLeftPane(String solutionName){
+    private void addLeftPaneButtons(Solution sol){
         //The resources for which the timetable can be displayed
         //List of studyGroups (clase)
         ObservableList<String> cList = FXCollections.observableArrayList();
@@ -137,7 +156,7 @@ public class DisplayPane extends MainPane {
         //Finding the solution object that has been selected from toolbar
         Solution solution = new Solution();
         for(Solution s: timetable.getSolutions().getSolutions()){
-            if(s.getId().equals(solutionName)){
+            if(s.getId().equals(sol.getId())){
                 solution = s;
                 break;
             }
@@ -150,17 +169,14 @@ public class DisplayPane extends MainPane {
         initializeEventsMap(classroomEvents, solution, "classroom");
 
         //Adding the separate comboBoxes to choose from to the VBox to be included in the left pane
-        VBox vBox = addComboBoxToChooseFrom(new VBox(), new Text("Clase"), cList, "studyGroup", studyGroupEvents);
-        vBox = addComboBoxToChooseFrom(vBox, new Text("Profesori"), pList, "teacher", teacherEvents);
-        vBox = addComboBoxToChooseFrom(vBox, new Text("Săli de clasă"), sList, "classroom", classroomEvents);
-        vBox = addComboBoxToChooseFrom(vBox, new Text("Orare generale"), gList, "general", null);
+        optionsList.add(getOption(new Label("Clase"), cList, "studyGroup", studyGroupEvents,"Selectează clasa"));
+        optionsList.add(getOption(new Label("Profesori"), pList, "teacher", teacherEvents,"Selectează profesorul"));
+        optionsList.add(getOption(new Label("Săli de clasă"), sList, "classroom", classroomEvents,"Selectează sala"));
+        optionsList.add(getOption(new Label("Orare generale"), gList, "general", null,"Selectează orar"));
 
-        //Styling
-        VBox.setVgrow(vBox, Priority.ALWAYS);
-        vBox.setSpacing(8);
-        vBox.setPadding(new Insets(10, 10, 10, 10));
-
-        this.setLeft(vBox);
+//        VBox.setVgrow(leftVBox , Priority.ALWAYS);
+//        leftVBox .setSpacing(8);
+//        leftVBox .setPadding(new Insets(10, 10, 10, 10));
     }
 
     private void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType){
@@ -178,8 +194,9 @@ public class DisplayPane extends MainPane {
         }
     }
 
-    private VBox addComboBoxToChooseFrom(VBox vBox, Text text, ObservableList<String> list, String resourceType, Map<String, List<Event>> map){
+    private VBox getOption(Label label, ObservableList<String> list, String resourceType, Map<String, List<Event>> map, String placeholder){
         ComboBox cbList = new ComboBox(list);
+
         cbList.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String oldValue, String newValue) {
                 //Displaying the table for the selected resource
@@ -192,7 +209,13 @@ public class DisplayPane extends MainPane {
             }
         });
 
-        vBox.getChildren().addAll(text, cbList);
+        cbList.setPromptText(placeholder);
+
+        label.getStyleClass().add("leftLabel");
+        cbList.getStyleClass().add("chooseLeft");
+
+        VBox vBox = new VBox(label, cbList);
+        vBox.getStyleClass().add("optionVBox");
         return vBox;
     }
 
