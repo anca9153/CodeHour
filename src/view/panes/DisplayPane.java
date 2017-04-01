@@ -8,9 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import model.Timetable;
@@ -19,7 +17,8 @@ import model.resource.Resource;
 import model.solution.Solution;
 import model.solution.Solutions;
 import model.time.Time;
-import javafx.scene.control.ToolBar;
+import view.StageLoader;
+
 import java.io.File;
 import java.util.*;
 
@@ -47,7 +46,21 @@ public class DisplayPane extends MainPane {
         addToolbar(idTimetableMap);
     }
 
-    private void addToolbar(Map<String, Timetable> idTimetableMap){
+   private void addToolbar(Map<String, Timetable> idTimetableMap){
+        //Adding the left part of the toolBox
+        HBox leftBox = new HBox();
+        leftBox.getChildren().addAll(createHomeButton(), createOtherTimetablesBox(idTimetableMap));
+
+        HBox rightBox = createRightToolBox();
+
+        ToolBar tb = new ToolBar();
+        tb.getItems().addAll(leftBox, rightBox);
+        tb.getStyleClass().add("toolBar");
+
+        this.setTop(tb);
+    }
+
+    private HBox createOtherTimetablesBox(Map<String, Timetable> idTimetableMap){
         Label timetableLabel = new Label("Orar");
         timetableLabel.getStyleClass().add("timetableLabel");
 
@@ -66,43 +79,19 @@ public class DisplayPane extends MainPane {
                     idSolutionMap.put(s.getId(), s);
                 }
 
-                addLeftPaneSolutions(idSolutionMap);
+                addLeftPaneSolutions(solutions.getSolutions().get(0), idSolutionMap);
             }
         });
         timetables.getSelectionModel().select(timetable.getId());
 
         HBox t = new HBox(timetableLabel, timetables);
         t.getStyleClass().add("otherTimetables");
-        t.setAlignment( Pos.CENTER);
+        t.setAlignment( Pos.CENTER_LEFT);
 
-        //Adding the left part of the toolBox
-        HBox leftBox = new HBox();
-        leftBox.getChildren().addAll(getHomeButton(), t);
-
-        Label language = new Label("Limbă");
-        language.getStyleClass().add("timetableLabel");
-
-        ComboBox languages = new ComboBox(FXCollections.observableArrayList("RO", "ENG"));
-        languages.getStyleClass().add("languagesBox");
-        languages.getSelectionModel().select("RO");
-
-        Button settings = new Button("Setări");
-        settings.getStyleClass().add("settingsButton");
-
-        //Adding the right part of the toolBox
-        HBox rightBox = new HBox(language, languages, settings);
-        rightBox.getStyleClass().add("rightBoxToolbar");
-        HBox.setHgrow( rightBox, Priority.ALWAYS );
-        rightBox.setAlignment( Pos.CENTER_RIGHT );
-
-        ToolBar tb = new ToolBar();
-        tb.getItems().addAll(leftBox, rightBox);
-        tb.getStyleClass().add("toolBar");
-
-        this.setTop(tb);
+        return t;
     }
 
-    private void addLeftPaneSolutions(Map<String, Solution> idSolutionMap) {
+    private void addLeftPaneSolutions(Solution sol, Map<String, Solution> idSolutionMap) {
         //Adding all the solution names available for the file received
         ObservableList<String> solutionList = FXCollections.observableArrayList(idSolutionMap.keySet());
         ComboBox cbSolutions = new ComboBox(solutionList);
@@ -114,20 +103,91 @@ public class DisplayPane extends MainPane {
             }
         });
 
-        cbSolutions.getSelectionModel().selectFirst();
+        cbSolutions.getSelectionModel().select(sol.getId());
         cbSolutions.getStyleClass().add("chooseLeft");
 
         Label sLabel = new Label("Soluție");
         sLabel.getStyleClass().add("leftLabel");
 
-        VBox smallVBox = new VBox(sLabel, cbSolutions);
+        Label details = new Label("Detalii");
+        details.getStyleClass().add("detailsLabel");
+
+        HBox detailsBox = new HBox(details);
+        HBox.setHgrow(detailsBox, Priority.ALWAYS );
+        detailsBox.setAlignment(Pos.CENTER_RIGHT );
+        detailsBox.getStyleClass().add("detailsBox");
+
+        Label scoreLabel = new Label("Scor");
+        scoreLabel.getStyleClass().add("scoreLabel");
+
+        int solutionScore = sol.getReport() != null? sol.getReport().getInfeasibilityValue() : 88;
+
+        Label scoreNumber = new Label(String.valueOf(solutionScore));
+        scoreNumber.getStyleClass().add("scoreNumber");
+
+        HBox rightScoreBox = new HBox(scoreNumber);
+        HBox.setHgrow(rightScoreBox, Priority.ALWAYS );
+        rightScoreBox.setAlignment(Pos.CENTER_RIGHT );
+
+        HBox scoreBox = new HBox(scoreLabel, rightScoreBox);
+        scoreBox.getStyleClass().add("scoreBox");
+
+        VBox smallVBox = new VBox(new HBox(sLabel, detailsBox), cbSolutions, scoreBox);
         smallVBox.getStyleClass().add("optionVBox");
 
         VBox vBox = new VBox(smallVBox);
         vBox.getChildren().addAll(optionsList);
+        vBox.getChildren().add(createGeneralOptionBox());
         vBox.getStyleClass().add("leftScreen");
 
+        optionsList.clear();
+
         this.setLeft(vBox);
+    }
+
+    private VBox createGeneralOptionBox(){
+        Label generalLabel = new Label("Orare generale");
+        generalLabel.getStyleClass().add("leftLabel");
+
+        ListView<String> listView = new ListView<>();
+//        listView.setPrefSize(150, 195);
+
+        final ObservableList items = FXCollections.observableArrayList("Clase", "Profesori", "Săli de clasă");
+        listView.getItems().addAll(items);
+
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                (ObservableValue<? extends String> ov, String old_val,
+                 String new_val) -> {
+                    //Getting the resource type
+                    String resourceType = null;
+                    Map<String, List<Event>> map = new HashMap<>();
+                    switch (new_val){
+                        case "Clase":
+                            resourceType = "studyGroup";
+                            map = studyGroupEvents;
+                            break;
+                        case "Profesori":
+                            resourceType = "teacher";
+                            map = teacherEvents;
+                            break;
+                        case "Săli de clasă":
+                            resourceType = "classroom";
+                            map = classroomEvents;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //Displaying the table for the selected resource
+                    addRightPaneGeneralCase(map, resourceType);
+                });
+
+        listView.getStyleClass().add("generalListView");
+
+        VBox vBox  = new VBox(generalLabel, listView);
+        vBox.getStyleClass().add("generalVBox");
+
+        return vBox;
     }
 
     private void addLeftPaneButtons(Solution sol){
@@ -138,8 +198,6 @@ public class DisplayPane extends MainPane {
         ObservableList<String> pList = FXCollections.observableArrayList();
         //List of classRooms (sali de clasa)
         ObservableList<String> sList = FXCollections.observableArrayList();
-        //List of general items
-        ObservableList<String> gList = FXCollections.observableArrayList(Arrays.asList("Clase", "Profesori", "Săli de clasă"));
 
         for(Resource r: timetable.getResources().getResources()){
             if(r.getResourceType().equals("studyGroup")){
@@ -172,11 +230,6 @@ public class DisplayPane extends MainPane {
         optionsList.add(getOption(new Label("Clase"), cList, "studyGroup", studyGroupEvents,"Selectează clasa"));
         optionsList.add(getOption(new Label("Profesori"), pList, "teacher", teacherEvents,"Selectează profesorul"));
         optionsList.add(getOption(new Label("Săli de clasă"), sList, "classroom", classroomEvents,"Selectează sala"));
-        optionsList.add(getOption(new Label("Orare generale"), gList, "general", null,"Selectează orar"));
-
-//        VBox.setVgrow(leftVBox , Priority.ALWAYS);
-//        leftVBox .setSpacing(8);
-//        leftVBox .setPadding(new Insets(10, 10, 10, 10));
     }
 
     private void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType){
@@ -200,12 +253,7 @@ public class DisplayPane extends MainPane {
         cbList.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String oldValue, String newValue) {
                 //Displaying the table for the selected resource
-                if(resourceType.equals("general")){
-                    chooseGeneralCaseResources(newValue);
-                }
-                else {
-                    addRightPane(newValue, resourceType, map.get(newValue));
-                }
+                addRightPane(newValue, resourceType, map.get(newValue));
             }
         });
 
@@ -330,22 +378,6 @@ public class DisplayPane extends MainPane {
             }
         }
         return sb.toString();
-    }
-
-    private void chooseGeneralCaseResources(String resource){
-        switch (resource){
-            case "Clase":
-                addRightPaneGeneralCase(studyGroupEvents, "studyGroup");
-                break;
-            case "Profesori":
-                addRightPaneGeneralCase(teacherEvents, "teacher");
-                break;
-            case "Săli de clasă":
-                addRightPaneGeneralCase(classroomEvents, "classroom");
-                break;
-            default:
-                break;
-        }
     }
 
     public void addRightPaneGeneralCase(Map<String, List<Event>> map, String resourceType){

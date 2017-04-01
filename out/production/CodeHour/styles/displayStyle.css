@@ -3,7 +3,7 @@
     -fx-padding: 0px;
     -fx-margin: 0px;
     -fx-border-color: #dfdfdf;
-    -fx-border-width:1px;
+    -fx-border-width: 1 0 1 0;
 }
 
 .codeText{
@@ -28,14 +28,17 @@
     -fx-padding: 0px;
     -fx-background-radius: 0;
     -fx-margin: 0;
+    -fx-border-insets: 0px;
+    -fx-background-insets: 0px;
     -fx-border-color: #dfdfdf;
     -fx-border-width:0 1 0 0;
+    -fx-cursor: hand;
 }
 
 .timetableLabel{
     -fx-text-fill: #363636;
-    -fx-font: 9pt "Verdana";
-    -fx-padding: 5 10 5 10;
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 5 10 5 20;
 }
 
 .combo-box-base {
@@ -46,6 +49,7 @@
     -fx-border-width: 1 1 1 1;
     -fx-text-fill: #363636;
     -fx-cursor: hand;
+    -fx-padding:0;
 }
 
 .combo-box-popup .list-view {
@@ -69,22 +73,26 @@
 }
 
 .rightBoxToolbar {
-    -fx-padding: 0 18 0 8;
+    -fx-padding: 6 18 7 8;
 }
 
 .languagesBox {
-     -fx-pref-width: 68px;
+     -fx-max-width: 68px;
+     -fx-max-height: 20px;
+}
+
+.settingsBox{
+    -fx-padding: 0 0 0 15;
 }
 
 .settingsButton{
     -fx-background-color: #53cdb5;
     -fx-text-fill: #ffffff;
-    -fx-font: 9pt "Verdana";
-    -fx-padding: 10 20 12 30;
-    -fx-border-insets: 5 5 5 15;
-    -fx-background-insets: 5 5 5 15;
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 6 10 6 10;
     -fx-background-radius: 0;
     -fx-cursor: hand;
+    -fx-font-weight: bold;
 }
 
 .settingsButton:hover{
@@ -92,28 +100,89 @@
 }
 
 .leftScreen{
-    -fx-pref-width: 200;
+    -fx-pref-width: 190;
     -fx-background-color: #ffffff;
     -fx-text-fill: #363636;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 0 1 0;
 }
 
 .solutionOptionVBox{
     -fx-padding:25;
     -fx-border-color: #dfdfdf;
-    -fx-border-width: 1;
+    -fx-border-width: 0 0 1 0;
+}
+
+.detailsBox{
+    -fx-padding: 0 0 13 0;
+}
+
+.detailsLabel{
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 0;
+    -fx-cursor: hand;
+    -fx-text-fill: #a3a3a3;
+    -fx-border-color: #9a9898;
+    -fx-border-width: 0 0 1 0;
 }
 
 .optionVBox{
     -fx-padding:13 16 13 16;
     -fx-border-color: #dfdfdf;
-    -fx-border-width: 1;
+    -fx-border-width: 0 0 1 0;
 }
 
 .leftLabel{
     -fx-font: 10pt "Verdana";
-    -fx-padding: 0 0 13 0;
+    -fx-padding: 0 0 10 0;
 }
 
 .chooseLeft{
      -fx-pref-width: 166px;
+}
+
+.scoreBox{
+    -fx-padding: 5 0 0 0;
+}
+
+.scoreLabel{
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 0;
+    -fx-text-fill: #9a9898;
+}
+
+.scoreNumber{
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 3 10 3 10;
+}
+
+.generalVBox{
+    -fx-padding:13 0 13 16;
+}
+
+.generalListView{
+    -fx-background-insets: 0;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: #ffffff;
+    -fx-padding: 0;
+    -fx-margin: 0;
+    -fx-cursor: hand;
+    -fx-pref-height: 132;
+}
+
+.generalListView .list-cell{
+    -fx-text-fill: #363636;
+    -fx-font: 10pt "Verdana";
+    -fx-background-color: #F3F3F3;
+    -fx-background-insets: 2.5;
+    -fx-padding: 13;
+    -fx-cursor: hand;
+}
+
+.generalListView .list-cell:filled:hover{
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
 }

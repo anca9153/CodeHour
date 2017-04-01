@@ -1,10 +1,11 @@
 package view.panes;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import view.StageLoader;
@@ -14,7 +15,7 @@ import view.StageLoader;
  */
 public abstract class MainPane extends BorderPane {
 
-    protected Button getHomeButton() {
+    protected Button createHomeButton() {
         Text text1 = new Text("Code");
         text1.getStyleClass().add("codeText");
         Text text2 = new Text("Hour");
@@ -34,24 +35,39 @@ public abstract class MainPane extends BorderPane {
         return home;
     }
 
-    protected Button getSettingsButton(){
-        Button settings = new Button("Setari");
+    protected HBox createRightToolBox(){
+        Label language = new Label("Limbă");
+        language.getStyleClass().add("timetableLabel");
+
+        ComboBox languages = new ComboBox(FXCollections.observableArrayList("RO", "ENG"));
+        languages.getStyleClass().add("languagesBox");
+        languages.getSelectionModel().select("RO");
+
+        HBox settingsBox = new HBox(createSettingsButton());
+        settingsBox.getStyleClass().add("settingsBox");
+
+        //Adding the right part of the toolBox
+        HBox rightBox = new HBox(language, languages, settingsBox);
+        rightBox.getStyleClass().add("rightBoxToolbar");
+        HBox.setHgrow(rightBox, Priority.ALWAYS );
+        rightBox.setAlignment( Pos.CENTER_RIGHT );
+
+        return rightBox;
+    }
+
+    protected Button createSettingsButton(){
+        ImageView imageView = new ImageView(new Image("\\icons\\settingsIcon.png"));
+        imageView.setFitHeight(10);
+        imageView.setFitWidth(10);
+        imageView.setPreserveRatio(true);
+
+        Button settings = new Button("Setări", imageView);
+        settings.getStyleClass().add("settingsButton");
+        settings.setContentDisplay(ContentDisplay.LEFT);
         settings.setOnAction((ActionEvent event) ->
-            StageLoader.loadHome()
+                StageLoader.loadHome()
         );
 
-//        HBox rightSection = new HBox();
-//        rightSection.getChildren().add(settings);
-//        HBox.setHgrow( rightSection, Priority.ALWAYS );
-//        rightSection.setAlignment( Pos.CENTER_RIGHT );
-//
-//        final int spacing = 8;
-//        toolBar.setPadding( new Insets( 5, spacing, 5, spacing ) );
-//        rightSection.setSpacing( spacing );
-//
-//        toolBar.getItems().addAll(leftSection,rightSection);
-//
-//        return toolBar;
         return settings;
     }
 

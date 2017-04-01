@@ -1808,6 +1808,471 @@
                 </event>
             </events>
         </solution>
+        <solution id="sol2">
+            <description>Second Solution</description>
+            <events>
+                <event id="ev1">
+                    <description>Mate</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="dpop">
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="9A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="101">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+                <event id="ev2">
+                    <description>Mate</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="dpop">
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="9A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="101">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_mon</name>
+                    </time>
+                </event>
+                <event id="ev3">
+                    <description>Mate</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="dpop">
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="9B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="102">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="3">
+                        <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
+                        <name>3_mon</name>
+                    </time>
+                </event>
+                <event id="ev4">
+                    <description>Mate</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="dpop">
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="9B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="102">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="4">
+                        <day>monday</day>
+                        <hourInterval>11:00 - 11:50</hourInterval>
+                        <name>4_mon</name>
+                    </time>
+                </event>
+                <event id="ev5">
+                    <description>Mate</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="dpop">
+                            <name>Dan Pop</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="10A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="103">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="5">
+                        <day>monday</day>
+                        <hourInterval>12:00 - 12:50</hourInterval>
+                        <name>5_mon</name>
+                    </time>
+                </event>
+                <event id="ev6">
+                    <description>Info</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="catnis">
+                            <name>Catalina Ilas</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="12B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="104">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+                <event id="ev7">
+                    <description>Info</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="catnis">
+                            <name>Catalina Ilas</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="12A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="105">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_mon</name>
+                    </time>
+                </event>
+                <event id="ev8">
+                    <description>Info</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="catnis">
+                            <name>Catalina Ilas</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="11B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="201">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="3">
+                        <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
+                        <name>3_mon</name>
+                    </time>
+                </event>
+                <event id="ev9">
+                    <description>Info</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="vhariuc">
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="11B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="201">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+                <event id="ev10">
+                    <description>Info</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="vhariuc">
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="12A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="105">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="3">
+                        <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
+                        <name>3_mon</name>
+                    </time>
+                </event>
+                <event id="ev11">
+                    <description>Info</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="vhariuc">
+                            <name>Virgil Hariuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="11A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="202">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_mon</name>
+                    </time>
+                </event>
+                <event id="ev12">
+                    <description>Eng</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="asava">
+                            <name>Ana Savascu</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="11A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="202">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+                <event id="ev13">
+                    <description>Eng</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="asava">
+                            <name>Ana Savascu</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="10B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="203">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_mon</name>
+                    </time>
+                </event>
+                <event id="ev14">
+                    <description>Lb. Rom</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="doniciuc">
+                            <name>Daniel Oniciuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="11A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="202">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="3">
+                        <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
+                        <name>3_mon</name>
+                    </time>
+                </event>
+                <event id="ev15">
+                    <description>Lb. Rom</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="doniciuc">
+                            <name>Daniel Oniciuc</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="10B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="203">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+                <event id="ev16">
+                    <description>Sport</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="anac">
+                            <name>Ana Crin</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="10A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="103">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+                <event id="ev17">
+                    <description>Arte</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="stm">
+                            <name>Maria Stejar</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="12B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="104">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_mon</name>
+                    </time>
+                </event>
+                <event id="ev18">
+                    <description>Arte</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="cris">
+                            <name>Cristian Sava</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="12B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="104">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="3">
+                        <day>monday</day>
+                        <hourInterval>10:00 - 10:50</hourInterval>
+                        <name>3_mon</name>
+                    </time>
+                </event>
+                <event id="ev19">
+                    <description>Arte</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="cris">
+                            <name>Cristian Sava</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="10A">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="103">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>monday</day>
+                        <hourInterval>9:00 - 9:50</hourInterval>
+                        <name>2_mon</name>
+                    </time>
+                </event>
+                <event id="ev20">
+                    <description>Arte</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="cris">
+                            <name>Cristian Sava</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="9B">
+                            <name></name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                        <resource id="102">
+                            <name></name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>8:00 - 8:50</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </events>
+        </solution>
     </solutions>
     <times>
         <time id="1">
