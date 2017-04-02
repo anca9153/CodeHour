@@ -131,6 +131,13 @@
     -fx-border-color: #dfdfdf;
     -fx-border-width: 0 0 1 0;
 }
+.optionVBox.selectedVBox{
+    -fx-background-color: #53cdb5;
+}
+
+.optionVBox.selectedVBox .leftLabel{
+        -fx-text-fill: #ffffff;
+}
 
 .leftLabel{
     -fx-font: 10pt "Verdana";
@@ -177,7 +184,7 @@
     -fx-text-fill: #363636;
     -fx-font: 10pt "Verdana";
     -fx-background-color: #F3F3F3;
-    -fx-background-insets: 2.5;
+    -fx-background-insets: 2.5 0 2.5 2.5;
     -fx-padding: 13;
     -fx-cursor: hand;
 }
@@ -185,4 +192,17 @@
 .generalListView .list-cell:filled:hover{
     -fx-background-color: #53cdb5;
     -fx-text-fill: #ffffff;
+}
+
+.generalListView .list-cell:filled:selected{
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
+}
+
+.rightTable{
+    -fx-padding: 10;
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+    -fx-padding: 0;
+    -fx-margin: 0;
 }

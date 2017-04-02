@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import model.Timetable;
@@ -17,8 +18,6 @@ import model.resource.Resource;
 import model.solution.Solution;
 import model.solution.Solutions;
 import model.time.Time;
-import view.StageLoader;
-
 import java.io.File;
 import java.util.*;
 
@@ -28,12 +27,15 @@ import java.util.*;
 public class DisplayPane extends MainPane {
     private File file;
     private Timetable timetable;
-    private List<VBox> optionsList = new ArrayList<>();
+    private ObservableList<VBox> optionsList = FXCollections.observableArrayList();
 
     //Maps with key = the resource name and value = an ArrayList with all the events linked to the key resource
     private Map<String, List<Event>> studyGroupEvents = new HashMap<>();
     private Map<String, List<Event>> teacherEvents = new HashMap<>();
     private Map<String, List<Event>> classroomEvents = new HashMap<>();
+
+    VBox v1, v2, v3;
+    ListView<String> listView;
 
     public DisplayPane(){
 
@@ -149,37 +151,41 @@ public class DisplayPane extends MainPane {
         Label generalLabel = new Label("Orare generale");
         generalLabel.getStyleClass().add("leftLabel");
 
-        ListView<String> listView = new ListView<>();
+        listView = new ListView<>();
 //        listView.setPrefSize(150, 195);
 
         final ObservableList items = FXCollections.observableArrayList("Clase", "Profesori", "Săli de clasă");
         listView.getItems().addAll(items);
 
         listView.getSelectionModel().selectedItemProperty().addListener(
-                (ObservableValue<? extends String> ov, String old_val,
-                 String new_val) -> {
+                (ObservableValue<? extends String> ov, String oldVal,
+                 String newVal) -> {
                     //Getting the resource type
                     String resourceType = null;
                     Map<String, List<Event>> map = new HashMap<>();
-                    switch (new_val){
-                        case "Clase":
-                            resourceType = "studyGroup";
-                            map = studyGroupEvents;
-                            break;
-                        case "Profesori":
-                            resourceType = "teacher";
-                            map = teacherEvents;
-                            break;
-                        case "Săli de clasă":
-                            resourceType = "classroom";
-                            map = classroomEvents;
-                            break;
-                        default:
-                            break;
-                    }
 
-                    //Displaying the table for the selected resource
-                    addRightPaneGeneralCase(map, resourceType);
+                    if(newVal!=null) {
+                        switch (newVal) {
+                            case "Clase":
+                                resourceType = "studyGroup";
+                                map = studyGroupEvents;
+                                break;
+                            case "Profesori":
+                                resourceType = "teacher";
+                                map = teacherEvents;
+                                break;
+                            case "Săli de clasă":
+                                resourceType = "classroom";
+                                map = classroomEvents;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        //Displaying the table for the selected resource
+                        addRightPaneGeneralCase(map, resourceType);
+                        unselectItems(new ListView<>(), v1, v2, v3);
+                    }
                 });
 
         listView.getStyleClass().add("generalListView");
@@ -227,9 +233,10 @@ public class DisplayPane extends MainPane {
         initializeEventsMap(classroomEvents, solution, "classroom");
 
         //Adding the separate comboBoxes to choose from to the VBox to be included in the left pane
-        optionsList.add(getOption(new Label("Clase"), cList, "studyGroup", studyGroupEvents,"Selectează clasa"));
-        optionsList.add(getOption(new Label("Profesori"), pList, "teacher", teacherEvents,"Selectează profesorul"));
-        optionsList.add(getOption(new Label("Săli de clasă"), sList, "classroom", classroomEvents,"Selectează sala"));
+        v1 = getOption(new Label("Clase"), cList, "studyGroup", studyGroupEvents,"Selectează clasa");
+        v2 = getOption(new Label("Profesori"), pList, "teacher", teacherEvents,"Selectează profesorul");
+        v3 = getOption(new Label("Săli de clasă"), sList, "classroom", classroomEvents,"Selectează sala");
+        optionsList.addAll(v1, v2, v3);
     }
 
     private void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType){
@@ -264,7 +271,62 @@ public class DisplayPane extends MainPane {
 
         VBox vBox = new VBox(label, cbList);
         vBox.getStyleClass().add("optionVBox");
+        vBox.setId(resourceType);
+        vBox.addEventFilter(MouseEvent.MOUSE_CLICKED, new javafx.event.EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    vBox.getStyleClass().add("selectedVBox");
+
+                    if(vBox.getId().equals(v1.getId())){
+                        unselectItems(listView, v2, v3);
+                    }
+                    else{
+                        if(vBox.getId().equals(v2.getId())){
+                            unselectItems(listView, v1, v3);
+                        }
+                        else{
+                            if(vBox.getId().equals(v3.getId())) {
+                                unselectItems(listView, v1, v2);
+                            }
+                        }
+                    }
+
+                }
+        });
+
+        cbList.addEventFilter(MouseEvent.MOUSE_CLICKED, new javafx.event.EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(vBox.getId().equals(v1.getId())){
+                    unselectItems(listView, v2, v3);
+                }
+                else{
+                    if(vBox.getId().equals(v2.getId())){
+                        unselectItems(listView, v1, v3);
+                    }
+                    else{
+                        if(vBox.getId().equals(v3.getId())) {
+                            unselectItems(listView, v1, v2);
+                        }
+                    }
+                }
+
+            }
+        });
+
         return vBox;
+    }
+
+    private void unselectItems(ListView<String> listView, VBox... elements){
+        if(listView.getSelectionModel().getSelectedItems().size() > 0) {
+            listView.getSelectionModel().clearSelection();
+        }
+
+        for(VBox v: elements){
+            if(v.getStyleClass().contains("selectedVBox")) {
+                v.getStyleClass().remove("selectedVBox");
+            }
+        }
     }
 
     private void addRightPane(String resource, String resourceType, List<Event> eventList){
@@ -277,7 +339,7 @@ public class DisplayPane extends MainPane {
         eventList = sortEventListByTime(eventList);
 
         //List with the days displayed on the first row of the timetable
-        List<String> days = new ArrayList<>(Arrays.asList("monday","tuesday","wednesday","thursday","friday"));
+        List<String> days = new ArrayList<>(Arrays.asList("monday", "tuesday", "wednesday", "thursday", "friday"));
 
         Map<String, Integer> timetableDays = new HashMap<>();
         int dayCounter = 0;
@@ -323,21 +385,12 @@ public class DisplayPane extends MainPane {
         }
 
         //Styling
-        pane.setVgap(5);
-        pane.setHgap(5);
-        pane.setPadding(new Insets(10,10,10,10));
+        pane.getStyleClass().add("rightTable");
 
         ColumnConstraints firstColumnSize = new ColumnConstraints();
         firstColumnSize.setMinWidth(70);
         firstColumnSize.setHalignment(HPos.CENTER);
         pane.getColumnConstraints().add(firstColumnSize);
-
-        ColumnConstraints columnSize = new ColumnConstraints();
-        columnSize.setPercentWidth(100.0/days.size());
-        columnSize.setHalignment(HPos.CENTER);
-        for(i = 1; i <= days.size(); i++){
-            pane.getColumnConstraints().add(columnSize);
-        }
 
         RowConstraints rowSize = new RowConstraints();
         rowSize.setPrefHeight(50.0);
@@ -349,7 +402,11 @@ public class DisplayPane extends MainPane {
         pane.setGridLinesVisible(true);
         vBox.getChildren().add(pane);
 
-        this.setCenter(vBox);
+        ScrollPane scrollPane = new ScrollPane(vBox);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        this.setCenter(scrollPane);
     }
 
     private List<Event> sortEventListByTime(List<Event> eventList){
