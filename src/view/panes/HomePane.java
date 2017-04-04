@@ -77,7 +77,9 @@ public class HomePane extends MainPane {
         ListView<String> listView = new ListView<>();
         listView.setPrefSize(150, 195);
 
-        Map<String, Timetable> idTimetableMap = new HashMap<>();
+//        Map<String, Timetable> idTimetableMap = new HashMap<>();
+        Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();
+        Map<String, Timetable> idTimetableNoSolutionMap = new HashMap<>();
         Map<String, File> idFileMap = new HashMap<>();
 
         Timetable t;
@@ -87,19 +89,17 @@ public class HomePane extends MainPane {
             } else {
                 t = DataLoader.loadDataFromXMLWithPath(file.getAbsolutePath());
             }
-            idTimetableMap.put(t.getId(), t);
+            if(t.getSolutions() == null){
+                idTimetableNoSolutionMap.put(t.getId(), t);
+            }
+            else{
+                idTimetableWithSolutionMap.put(t.getId(), t);
+            }
+//            idTimetableMap.put(t.getId(), t);
             idFileMap.put(t.getId(), file);
 
             listView.getItems().add(t.getId());
         }
-
-        listView.getSelectionModel().selectedItemProperty().addListener(
-        (ObservableValue<? extends String> ov, String old_val,
-         String new_val) -> {
-            File f = idFileMap.get(new_val);
-            Timetable tt = idTimetableMap.get(new_val);
-            StageLoader.loadDisplay(idTimetableMap, f, tt);
-        });
 
         listView.setCellFactory(i -> new ListCell<String>() {
             @Override
@@ -109,11 +109,25 @@ public class HomePane extends MainPane {
                     setText(null);
                 } else {
                     setText(item);
-                    if(idTimetableMap.get(item).getSolutions() == null){
+                    if(idTimetableNoSolutionMap.get(item) != null){
                         Label l = new Label("NEFINALIZAT");
                         setGraphic(l);
                     }
                 }
+            }
+        });
+
+        listView.getSelectionModel().selectedItemProperty().addListener(
+        (ObservableValue<? extends String> ov, String old_val,
+         String new_val) -> {
+            File f = idFileMap.get(new_val);
+            Timetable tt = idTimetableNoSolutionMap.get(new_val);
+            if(tt == null){
+                tt = idTimetableWithSolutionMap.get(new_val);
+                StageLoader.loadDisplay(idTimetableWithSolutionMap, f, tt);
+            }
+            else{
+                StageLoader.loadDisplay(idTimetableNoSolutionMap, f, tt);
             }
         });
 

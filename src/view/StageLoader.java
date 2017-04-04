@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Scene;
+import javafx.scene.control.PopupControl;
 import javafx.stage.Stage;
 import model.Timetable;
 import view.panes.DisplayPane;
@@ -48,4 +49,5 @@ public class StageLoader {
     public static void loadCreate(){
         load(create);
     }
+
 }

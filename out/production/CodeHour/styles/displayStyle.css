@@ -126,6 +126,15 @@
     -fx-border-width: 0 0 1 0;
 }
 
+.popup {
+    -fx-font-size: 10px;
+}
+
+.popup .text {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
 .optionVBox{
     -fx-padding:13 16 13 16;
     -fx-border-color: #dfdfdf;
@@ -199,10 +208,17 @@
     -fx-text-fill: #ffffff;
 }
 
+.timetableVBox{
+}
+
 .rightTable{
-    -fx-padding: 10;
+    -fx-padding: 30;
     -fx-hgap: 5;
     -fx-vgap: 5;
-    -fx-padding: 0;
     -fx-margin: 0;
+}
+
+.scrollPaneTimetable{
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
 }
