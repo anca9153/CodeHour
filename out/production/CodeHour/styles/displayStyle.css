@@ -210,10 +210,10 @@
 }
 
 .timetableVBox{
+    -fx-padding: 20 50 20 50;
 }
 
 .rightTable{
-    -fx-padding: 30;
     -fx-hgap: 5;
     -fx-vgap: 5;
     -fx-margin: 0;
@@ -222,4 +222,19 @@
 .scrollPaneTimetable{
     -fx-fit-to-height: true;
     -fx-fit-to-width: true;
+}
+
+.resourceText{
+    -fx-fill: #363636;
+    -fx-font: 25pt "Verdana";
+}
+
+.resourceTypeText{
+    -fx-text-fill: #A6A6A6;
+    -fx-font: 13pt "Verdana";
+    -fx-padding: 0 0 2 5;
+}
+
+.titleNameBox{
+    -fx-padding: 0 0 5 0;
 }

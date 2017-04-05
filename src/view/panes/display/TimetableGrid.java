@@ -2,7 +2,9 @@ package view.panes.display;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -20,7 +22,16 @@ public class TimetableGrid {
 
     public ScrollPane addRightPane(Timetable timetable, String resource, String resourceType, List<Event> eventList){
         //The timetable for a selected resource, displayed on the right side
-        VBox vBox = new VBox(new Text(resource));
+        Text text1 = new Text(resource);
+        text1.getStyleClass().add("resourceText");
+        Label text2 = new Label(resourceType);
+        text2.getStyleClass().add("resourceTypeText");
+
+        HBox nameBox = new HBox();
+        nameBox.getChildren().addAll(text1, text2);
+        nameBox.getStyleClass().add("titleNameBox");
+        nameBox.setAlignment(Pos.BOTTOM_LEFT);
+        VBox vBox = new VBox(nameBox);
 
         GridPane pane = new GridPane();
 
@@ -107,6 +118,7 @@ public class TimetableGrid {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.getStyleClass().add("scrollPaneTimetable");
+        scrollPane.getStyleClass().add("edge-to-edge");
 
         return scrollPane;
     }
@@ -207,7 +219,9 @@ public class TimetableGrid {
     }
 
     private ScrollPane addScrollPaneToTable(GridPane pane, String resourceType, int rowsNumber){
-        VBox vBox = new VBox(new Text(resourceType));
+        //Adding the title label for the right table on displayPane
+        Label label = new Label(resourceType);
+        VBox vBox = new VBox(label);
 
         pane.getStyleClass().add("rightTable");
 
@@ -243,6 +257,7 @@ public class TimetableGrid {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.getStyleClass().add("scrollPaneTimetable");
+        scrollPane.getStyleClass().add("edge-to-edge");
 
         return scrollPane;
     }
