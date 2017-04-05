@@ -43,7 +43,7 @@ public class DisplayPane extends MainPane {
     public DisplayPane(Map<String, Timetable> idTimetableMap, File file, Timetable timetable){
         this.timetable = timetable;
         this.file = file;
-        this.timetableGrid = new TimetableGrid(timetable);
+        this.timetableGrid = new TimetableGrid();
 
         addToolbar(idTimetableMap);
     }
@@ -73,7 +73,13 @@ public class DisplayPane extends MainPane {
         timetables.getStyleClass().add("timetablesCombo");
         timetables.valueProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue ov, String oldValue, String newValue) {
-                Solutions solutions = idTimetableMap.get(newValue).getSolutions();
+                timetable = idTimetableMap.get(newValue);
+
+                studyGroupEvents.clear();
+                teacherEvents.clear();
+                classroomEvents.clear();
+
+                Solutions solutions = timetable.getSolutions();
 
                 Map<String, Solution> idSolutionMap = new HashMap<>();
 
@@ -88,7 +94,7 @@ public class DisplayPane extends MainPane {
 
         HBox t = new HBox(timetableLabel, timetables);
         t.getStyleClass().add("otherTimetables");
-        t.setAlignment( Pos.CENTER_LEFT);
+        t.setAlignment(Pos.CENTER_LEFT);
 
         return t;
     }
@@ -206,11 +212,14 @@ public class DisplayPane extends MainPane {
     }
 
     private void addRightPaneGeneralCase(Map<String, List<Event>> map, String resourceType){
-        GridPane gp = timetableGrid.addRightPaneGeneralCase(map, resourceType);
+        ScrollPane sp = timetableGrid.addRightPaneGeneralCase(timetable, map, resourceType);
+        setCenterTable(sp);
+    }
 
-        centerGrid.add(gp, 1, 0);
-        GridPane.setHgrow(gp, Priority.ALWAYS);
-        GridPane.setVgrow(gp, Priority.ALWAYS);
+    private void setCenterTable(ScrollPane sp){
+        centerGrid.add(sp, 1, 0);
+        GridPane.setVgrow(sp, Priority.ALWAYS);
+        GridPane.setHgrow(sp, Priority.ALWAYS);
 
         this.setCenter(centerGrid);
     }
@@ -259,13 +268,16 @@ public class DisplayPane extends MainPane {
     }
 
     private void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType){
+        for(Resource r: timetable.getResources().getResources()){
+            if(r.getResourceType().equals(resourceType)){
+                map.put(r.getId(), new ArrayList<>());
+            }
+        }
+
         for(Event e: solution.getEvents().getEvents()){
             for(Resource r : e.getResources().getResources()){
                 if(r.getResourceType().equals(resourceType)) {
                     List<Event> subPart = map.get(r.getId());
-                    if (subPart == null) {
-                        subPart = new ArrayList<>();
-                    }
                     subPart.add(e);
                     map.put(r.getId(), subPart);
                 }
@@ -341,13 +353,8 @@ public class DisplayPane extends MainPane {
     }
 
     private void addRightPane(String resource, String resourceType, List<Event> eventList){
-        ScrollPane sp = timetableGrid.addRightPane(resource, resourceType, eventList);
-
-        centerGrid.add(sp, 1, 0);
-        GridPane.setHgrow(sp, Priority.ALWAYS);
-        GridPane.setVgrow(sp, Priority.ALWAYS);
-
-        this.setCenter(centerGrid);
+        ScrollPane sp = timetableGrid.addRightPane(timetable, resource, resourceType, eventList);
+        setCenterTable(sp);
     }
 
     private void unselectItems(ListView<String> listView, VBox... elements){

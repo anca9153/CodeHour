@@ -1343,7 +1343,7 @@
         </resource>
     </resources>
     <solutions>
-        <solution id="sol1">
+        <solution id="SolTimetable3">
             <description>First Solution</description>
             <events>
                 <event id="ev1">

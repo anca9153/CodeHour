@@ -101,6 +101,7 @@
 
 .leftScreen{
     -fx-pref-width: 190;
+    -fx-min-width: 190;
     -fx-background-color: #ffffff;
     -fx-text-fill: #363636;
     -fx-border-color: #dfdfdf;

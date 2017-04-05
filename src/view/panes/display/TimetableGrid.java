@@ -17,13 +17,8 @@ import java.util.*;
  * Created by Anca on 4/3/2017.
  */
 public class TimetableGrid {
-    private Timetable timetable;
 
-    public TimetableGrid(Timetable timetable){
-        this.timetable = timetable;
-    }
-
-    public ScrollPane addRightPane(String resource, String resourceType, List<Event> eventList){
+    public ScrollPane addRightPane(Timetable timetable, String resource, String resourceType, List<Event> eventList){
         //The timetable for a selected resource, displayed on the right side
         VBox vBox = new VBox(new Text(resource));
 
@@ -72,7 +67,7 @@ public class TimetableGrid {
         //Adding the hour interval for the timetable
         int row = 1;
         for(Time t: timetable.getTimes().getTimes()){
-            if(maxTime.getDay().equals(t.getDay()) && t.getId()<=maxTime.getId()) {
+            if(maxTime.getDay().equals(t.getDay())){
                 pane.add(new Text(t.getHourInterval()), 0, row++);
             }
         }
@@ -97,7 +92,7 @@ public class TimetableGrid {
         pane.getRowConstraints().add(firstRowSize);
 
         RowConstraints rowSize = new RowConstraints();
-        rowSize.setPrefHeight(50.0);
+        rowSize.setPrefHeight(60.0);
         rowSize.setValignment(VPos.CENTER);
         for(i = 0; i < row-1; i++){
             pane.getRowConstraints().add(rowSize);
@@ -116,9 +111,7 @@ public class TimetableGrid {
         return scrollPane;
     }
 
-    public GridPane addRightPaneGeneralCase(Map<String, List<Event>> map, String resourceType){
-        VBox vBox = new VBox(new Text(resourceType));
-
+    public ScrollPane addRightPaneGeneralCase(Timetable timetable, Map<String, List<Event>> map, String resourceType){
         GridPane pane = new GridPane();
 
         //List with the days displayed on the first row of the timetable
@@ -170,8 +163,9 @@ public class TimetableGrid {
             day = days.get(0);
             GridPane dayPane = new GridPane();
             int col = 0;
-            for(Event e: resourceEvents){
-                if(!day.equals(e.getTime().getDay())){
+
+            for (Event e : resourceEvents) {
+                if (!day.equals(e.getTime().getDay())) {
                     day = e.getTime().getDay();
 
                     //Styling
@@ -183,9 +177,9 @@ public class TimetableGrid {
                 }
 
                 String hourLabel = getHourLabel(e, resourceType, true);
-                int windowCounter = Integer.valueOf(e.getTime().getName().split("_")[0])-1;
+                int windowCounter = Integer.valueOf(e.getTime().getName().split("_")[0]) - 1;
 
-                dayPane.add(new Text(hourLabel), windowCounter,0);
+                dayPane.add(new Text(hourLabel), windowCounter, 0);
             }
 
             //Styling
@@ -194,7 +188,13 @@ public class TimetableGrid {
             pane.add(dayPane, ++col, line);
 
             int dayIndex = days.indexOf(day);
-            while(dayIndex != days.size() - 1){
+            int emptyDaysCounter =  days.size() - 1;
+
+            if(resourceEvents.size() == 0) {
+                col--;
+                emptyDaysCounter++;
+            }
+            while(dayIndex != emptyDaysCounter){
                 GridPane empty = createEmptyDayCell(maxCounter);
                 pane.add(empty, ++col, line);
                 dayIndex++;
@@ -202,29 +202,50 @@ public class TimetableGrid {
             line++;
         }
 
-        //Styling
-        pane.setVgap(5);
-        pane.setHgap(5);
-        pane.setPadding(new Insets(10,10,10,10));
 
+        return addScrollPaneToTable(pane, resourceType, list.size());
+    }
+
+    private ScrollPane addScrollPaneToTable(GridPane pane, String resourceType, int rowsNumber){
+        VBox vBox = new VBox(new Text(resourceType));
+
+        pane.getStyleClass().add("rightTable");
 
         ColumnConstraints firstColumnSize = new ColumnConstraints();
-        firstColumnSize.setMinWidth(30);
+        firstColumnSize.setPercentWidth(10);
         firstColumnSize.setHalignment(HPos.CENTER);
         pane.getColumnConstraints().add(firstColumnSize);
+        for(int j=0; j<5;j++) {
+            ColumnConstraints col = new ColumnConstraints();
+            col.setPercentWidth(18.0);
+            col.setHalignment(HPos.CENTER);
+            pane.getColumnConstraints().add(col);
+        }
 
-        ColumnConstraints columnSize = new ColumnConstraints();
-        columnSize.setPercentWidth(100.0/days.size());
-        columnSize.setHalignment(HPos.CENTER);
-        for(i = 1; i <= days.size(); i++){
-            pane.getColumnConstraints().add(columnSize);
+        RowConstraints firstRowSize = new RowConstraints();
+        firstRowSize.setPrefHeight(20.0);
+        firstRowSize.setValignment(VPos.CENTER);
+        pane.getRowConstraints().add(firstRowSize);
+
+        RowConstraints rowSize = new RowConstraints();
+        rowSize.setPrefHeight(60.0);
+        rowSize.setValignment(VPos.CENTER);
+        for(int i = 0; i < rowsNumber; i++){
+            pane.getRowConstraints().add(rowSize);
         }
 
         pane.setGridLinesVisible(true);
+        vBox.getChildren().add(pane);
+        vBox.getStyleClass().add("timetableVBox");
+        vBox.setFillWidth(true);
 
-        return pane;
+        ScrollPane scrollPane = new ScrollPane(vBox);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.getStyleClass().add("scrollPaneTimetable");
+
+        return scrollPane;
     }
-
 
     private String getHourLabel(Event e, String resourceType, boolean onlyId){
         StringBuilder sb = new StringBuilder(e.getDescription());
