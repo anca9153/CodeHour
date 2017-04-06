@@ -214,9 +214,10 @@
 }
 
 .rightTable{
-    -fx-hgap: 5;
-    -fx-vgap: 5;
+    -fx-hgap: 0;
+    -fx-vgap: 0;
     -fx-margin: 0;
+    -fx-background-color: #ffffff;
 }
 
 .scrollPaneTimetable{
@@ -237,4 +238,38 @@
 
 .titleNameBox{
     -fx-padding: 0 0 5 0;
+}
+
+.tableHeadCell{
+    -fx-background-color: #454545;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 0.3;
+}
+
+.tableHeadLabel{
+    -fx-text-fill: #ffffff;
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 0;
+    -fx-margin:0;
+}
+
+.tableContentCell{
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 0.3;
+}
+
+.tableHourLabel{
+    -fx-font: 8pt "Verdana";
+    -fx-text-fill: #363636;
+}
+
+.tableContentLabel{
+    -fx-font: 8pt "Verdana";
+    -fx-text-fill: #363636;
+}
+
+.cellBoldWriting{
+    -fx-font: 10pt "Verdana";
+    -fx-text-fill: #363636;
+    -fx-font-weight: bold;
 }

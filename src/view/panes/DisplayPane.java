@@ -27,11 +27,15 @@ public class DisplayPane extends MainPane {
     private ObservableList<VBox> optionsList = FXCollections.observableArrayList();
     private TimetableGrid timetableGrid;
     private GridPane centerGrid = new GridPane();
+    private ScrollPane rightScrollPane;
+    private ComboBox solutionsComboBox;
 
     //Maps with key = the resource name and value = an ArrayList with all the events linked to the key resource
     private Map<String, List<Event>> studyGroupEvents = new HashMap<>();
     private Map<String, List<Event>> teacherEvents = new HashMap<>();
     private Map<String, List<Event>> classroomEvents = new HashMap<>();
+
+    private Map<String, String> teacherIdName = new HashMap<>();
 
     VBox v1, v2, v3;
     ListView<String> listView;
@@ -79,6 +83,8 @@ public class DisplayPane extends MainPane {
                 teacherEvents.clear();
                 classroomEvents.clear();
 
+                optionsList.clear();
+
                 Solutions solutions = timetable.getSolutions();
 
                 Map<String, Solution> idSolutionMap = new HashMap<>();
@@ -88,6 +94,7 @@ public class DisplayPane extends MainPane {
                 }
 
                 addLeftPaneSolutions(solutions.getSolutions().get(0), idSolutionMap);
+                clearRightPane();
             }
         });
         timetables.getSelectionModel().select(timetable.getId());
@@ -102,63 +109,31 @@ public class DisplayPane extends MainPane {
     private void addLeftPaneSolutions(Solution sol, Map<String, Solution> idSolutionMap) {
         //Adding all the solution names available for the file received
         ObservableList<String> solutionList = FXCollections.observableArrayList(idSolutionMap.keySet());
-        ComboBox cbSolutions = new ComboBox(solutionList);
+        solutionsComboBox = new ComboBox(solutionList);
+        solutionsComboBox.getStyleClass().add("chooseLeft");
 
-        Label details = new Label();
-        cbSolutions.valueProperty().addListener(new ChangeListener<String>() {
+        solutionsComboBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String oldValue, String newValue) {
-                addLeftPaneButtons(idSolutionMap.get(newValue));
-                details.setText("Detalii");
-                details.addEventFilter(MouseEvent.MOUSE_CLICKED, new javafx.event.EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
+                studyGroupEvents.clear();
+                teacherEvents.clear();
+                classroomEvents.clear();
 
-                    }
-                });
-                details.getStyleClass().add("detailsLabel");
+                optionsList.clear();
+
+                addLeftPaneButtons(idSolutionMap.get(newValue));
+
+                unselectItems(listView, v1, v2, v3);
+                clearRightPane();
             }
         });
 
-        cbSolutions.getSelectionModel().select(sol.getId());
-        cbSolutions.getStyleClass().add("chooseLeft");
+        solutionsComboBox.getSelectionModel().select(sol.getId());
+    }
 
-        Label sLabel = new Label("Soluție");
-        sLabel.getStyleClass().add("leftLabel");
-
-        HBox detailsBox = new HBox(details);
-        HBox.setHgrow(detailsBox, Priority.ALWAYS );
-        detailsBox.setAlignment(Pos.CENTER_RIGHT );
-        detailsBox.getStyleClass().add("detailsBox");
-
-        Label scoreLabel = new Label("Scor");
-        scoreLabel.getStyleClass().add("scoreLabel");
-
-        int solutionScore = sol.getReport() != null? sol.getReport().getInfeasibilityValue() : 88;
-
-        Label scoreNumber = new Label(String.valueOf(solutionScore));
-        scoreNumber.getStyleClass().add("scoreNumber");
-
-        HBox rightScoreBox = new HBox(scoreNumber);
-        HBox.setHgrow(rightScoreBox, Priority.ALWAYS );
-        rightScoreBox.setAlignment(Pos.CENTER_RIGHT );
-
-        HBox scoreBox = new HBox(scoreLabel, rightScoreBox);
-        scoreBox.getStyleClass().add("scoreBox");
-
-        VBox smallVBox = new VBox(new HBox(sLabel, detailsBox), cbSolutions, scoreBox);
-        smallVBox.getStyleClass().add("optionVBox");
-
-        VBox vBox = new VBox(smallVBox);
-        vBox.getChildren().addAll(optionsList);
-        vBox.getChildren().add(createGeneralOptionBox());
-        vBox.getStyleClass().add("leftScreen");
-
-        optionsList.clear();
-
-        centerGrid.add(vBox, 0, 0);
-        GridPane.setVgrow(vBox, Priority.ALWAYS);
-
+    private void clearRightPane(){
+        removeRightScrollPane();
+        centerGrid.add(new VBox(), 1, 0);
         this.setCenter(centerGrid);
     }
 
@@ -212,14 +187,19 @@ public class DisplayPane extends MainPane {
     }
 
     private void addRightPaneGeneralCase(Map<String, List<Event>> map, String resourceType){
-        ScrollPane sp = timetableGrid.addRightPaneGeneralCase(timetable, map, resourceType);
-        setCenterTable(sp);
+        removeRightScrollPane();
+        rightScrollPane = timetableGrid.addRightPaneGeneralCase(timetable, map, resourceType);
+        setCenterTable();
     }
 
-    private void setCenterTable(ScrollPane sp){
-        centerGrid.add(sp, 1, 0);
-        GridPane.setVgrow(sp, Priority.ALWAYS);
-        GridPane.setHgrow(sp, Priority.ALWAYS);
+    private void removeRightScrollPane(){
+        centerGrid.getChildren().remove(rightScrollPane);
+    }
+
+    private void setCenterTable(){
+        centerGrid.add(rightScrollPane, 1, 0);
+        GridPane.setVgrow(rightScrollPane, Priority.ALWAYS);
+        GridPane.setHgrow(rightScrollPane, Priority.ALWAYS);
 
         this.setCenter(centerGrid);
     }
@@ -238,7 +218,7 @@ public class DisplayPane extends MainPane {
                 cList.add(r.getId());
             }
             if(r.getResourceType().equals("teacher")){
-                pList.add(r.getId());
+                pList.add(r.getName());
             }
             if(r.getResourceType().equals("classroom")){
                 sList.add(r.getId());
@@ -264,22 +244,104 @@ public class DisplayPane extends MainPane {
         v1 = getOption(new Label("Clase"), cList, "studyGroup", studyGroupEvents,"Selectează clasa");
         v2 = getOption(new Label("Profesori"), pList, "teacher", teacherEvents,"Selectează profesorul");
         v3 = getOption(new Label("Săli de clasă"), sList, "classroom", classroomEvents,"Selectează sala");
+        optionsList.clear();
         optionsList.addAll(v1, v2, v3);
+
+        addLeftButtons(sol);
+    }
+
+    private void addLeftButtons(Solution sol){
+        Label sLabel = new Label("Soluție");
+        sLabel.getStyleClass().add("leftLabel");
+
+        Label details = new Label();
+        details.setText("Detalii");
+        details.addEventFilter(MouseEvent.MOUSE_CLICKED, new javafx.event.EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+            }
+        });
+        details.getStyleClass().add("detailsLabel");
+
+        HBox detailsBox = new HBox(details);
+        HBox.setHgrow(detailsBox, Priority.ALWAYS );
+        detailsBox.setAlignment(Pos.CENTER_RIGHT );
+        detailsBox.getStyleClass().add("detailsBox");
+
+        Label scoreLabel = new Label("Scor");
+        scoreLabel.getStyleClass().add("scoreLabel");
+
+        int solutionScore = sol.getReport() != null? sol.getReport().getInfeasibilityValue() : 88;
+
+        Label scoreNumber = new Label(String.valueOf(solutionScore));
+        scoreNumber.getStyleClass().add("scoreNumber");
+
+        HBox rightScoreBox = new HBox(scoreNumber);
+        HBox.setHgrow(rightScoreBox, Priority.ALWAYS );
+        rightScoreBox.setAlignment(Pos.CENTER_RIGHT );
+
+        HBox scoreBox = new HBox(scoreLabel, rightScoreBox);
+        scoreBox.getStyleClass().add("scoreBox");
+
+        VBox smallVBox = new VBox(new HBox(sLabel, detailsBox), solutionsComboBox, scoreBox);
+        smallVBox.getStyleClass().add("optionVBox");
+
+        VBox vBox = new VBox(smallVBox);
+        vBox.getChildren().addAll(optionsList);
+        vBox.getChildren().add(createGeneralOptionBox());
+        vBox.getStyleClass().add("leftScreen");
+
+        optionsList.clear();
+
+        centerGrid.add(vBox, 0, 0);
+        GridPane.setVgrow(vBox, Priority.ALWAYS);
+
+        this.setCenter(centerGrid);
     }
 
     private void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType){
         for(Resource r: timetable.getResources().getResources()){
             if(r.getResourceType().equals(resourceType)){
-                map.put(r.getId(), new ArrayList<>());
+                if(resourceType.equals("teacher")){
+                    //If there are twi teachers with the same name we add their id's
+                    if(map.get(r.getName()) != null){
+                        map.remove(r.getName());
+                        map.put(r.getName()+" "+r.getId(), new ArrayList<>());
+
+                        for(Resource teacher: timetable.getResources().getResources()){
+                            if(teacher.getResourceType().equals("teacher") && teacher.getName().equals(r.getName()) && !teacher.getId().equals(r.getId())){
+                                //We found the other teacher with the same name as the current one
+                                map.put(teacher.getName()+" "+r.getId(), new ArrayList<>());
+                            }
+                        }
+
+                    }
+                    else {
+                        map.put(r.getName(), new ArrayList<>());
+                    }
+                }
+                else {
+                    map.put(r.getId(), new ArrayList<>());
+                }
             }
         }
 
         for(Event e: solution.getEvents().getEvents()){
             for(Resource r : e.getResources().getResources()){
                 if(r.getResourceType().equals(resourceType)) {
-                    List<Event> subPart = map.get(r.getId());
-                    subPart.add(e);
-                    map.put(r.getId(), subPart);
+                    List<Event> subPart;
+                    if(resourceType.equals("teacher")){
+                        String id = map.get(r.getName()) != null? r.getName() : new String(r.getName()+" "+r.getId());
+                        subPart = map.get(id);
+                        subPart.add(e);
+                        map.put(id, subPart);
+                    }
+                    else {
+                        subPart = map.get(r.getId());
+                        subPart.add(e);
+                        map.put(r.getId(), subPart);
+                    }
                 }
             }
         }
@@ -311,7 +373,6 @@ public class DisplayPane extends MainPane {
                     if(!vBox.getStyleClass().contains("selectedVBox")) {
                         vBox.getStyleClass().add("selectedVBox");
                     }
-
                     if(vBox.getId().equals(v1.getId())){
                         unselectItems(listView, v2, v3);
                     }
@@ -353,25 +414,27 @@ public class DisplayPane extends MainPane {
     }
 
     private void addRightPane(String resource, String resourceType, List<Event> eventList){
-        ScrollPane sp = timetableGrid.addRightPane(timetable, resource, resourceType, eventList);
-        setCenterTable(sp);
+        removeRightScrollPane();
+        rightScrollPane = timetableGrid.addRightPane(timetable, resource, resourceType, eventList);
+        setCenterTable();
     }
 
     private void unselectItems(ListView<String> listView, VBox... elements){
-        if(listView.getSelectionModel().getSelectedItems().size() > 0) {
+        if(listView != null && listView.getSelectionModel().getSelectedItems().size() > 0) {
             listView.getSelectionModel().clearSelection();
         }
-
         for(VBox v: elements){
-            if(v.getStyleClass().contains("selectedVBox")) {
-                v.getStyleClass().remove("selectedVBox");
-            }
+            if(v!=null) {
+                if (v.getStyleClass().contains("selectedVBox")) {
+                    v.getStyleClass().remove("selectedVBox");
+                }
 
-            for(Node n: v.getChildren()){
-                if(n.getClass().getName().contains("ComboBox")){
-                    ComboBox cb = (ComboBox) n;
-                    if(cb.getSelectionModel().getSelectedItem()!=null){
-                        cb.getSelectionModel().clearSelection();
+                for (Node n : v.getChildren()) {
+                    if (n.getClass().getName().contains("ComboBox")) {
+                        ComboBox cb = (ComboBox) n;
+                        if (cb.getSelectionModel().getSelectedItem() != null) {
+                            cb.getSelectionModel().clearSelection();
+                        }
                     }
                 }
             }
