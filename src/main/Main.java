@@ -34,6 +34,7 @@ public class Main extends Application {
         Scene homeScene = new Scene(home, width, height);
         homeScene.getStylesheets().add("styles/homeStyle.css");
         Scene createScene = new Scene(create, width, height);
+        createScene.getStylesheets().add("styles/createStyle.css");
 
         StageLoader loader = new StageLoader(primaryStage, homeScene, createScene, width, height);
 
