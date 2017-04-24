@@ -222,3 +222,111 @@
 .scrollPaneTimetable{
     -fx-fit-to-width: true;
 }
+
+.resourceText{
+    -fx-fill: #363636;
+    -fx-font: 25pt "Verdana";
+}
+.rightVBox{
+    -fx-padding: 50;
+}
+
+.rightFlowPane{
+    -fx-padding: 20 0 0 0;
+}
+
+.fieldRightLabel{
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 5 5 5 0;
+    -fx-text-fill: #53cdb5;
+    -fx-font-weight: bold;
+}
+
+.fieldRightTextField{
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 0;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 1;
+    -fx-pref-width: 220;
+}
+.rightSaveHBox{
+    -fx-padding: 5 0 0 0;
+}
+
+.rightSaveButton{
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-margin: 0;
+    -fx-border-insets: 0px;
+    -fx-background-insets: 0px;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 0 0 1 0;
+}
+
+.rightSaveButton:hover{
+    -fx-background-color: #5fdfc6;
+}
+
+.redStar{
+    -fx-text-fill: #E84C3D;
+}
+
+.explanatory1{
+    -fx-text-fill: A6A6A6;
+    -fx-font-weight: normal;
+}
+
+.explanatory{
+    -fx-padding: 40 0 0 0;
+}
+
+.normalFont{
+    -fx-font-weight: normal;
+}
+
+.addRedMargin{
+    -fx-border-color: #E84C3D;
+}
+
+.combo-box-base {
+    -fx-pref-width: 150px;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0 0 0 0;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 1 1 1 1;
+    -fx-text-fill: #363636;
+    -fx-cursor: hand;
+    -fx-padding:0;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: white, white;
+    -fx-background-insets: 0, 1;
+    -fx-effect: none;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 1 1 1 1;
+    -fx-text-fill: #363636;
+    -fx-cursor: hand;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover, .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected{
+    -fx-background-color: white, white;
+    -fx-text-fill: #363636;
+}
+
+.resourceTypeText{
+    -fx-text-fill: #A6A6A6;
+    -fx-font: 15pt "Verdana";
+    -fx-padding: 0 0 6 8;
+}
+

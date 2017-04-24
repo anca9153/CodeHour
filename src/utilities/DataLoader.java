@@ -52,12 +52,11 @@ public class DataLoader {
     }
 
     public static void loadSolvedTimetableToXML(Timetable timetable, String fileName){
-        loadSolvedTimetableToXMLWithPath(timetable, new String(PropertiesLoader.loadXMLLocationFolder() + fileName));
+        loadSolvedTimetableToXMLWithPath(timetable, new File(new String(PropertiesLoader.loadXMLLocationFolder() + fileName)));
     }
 
-    public static void loadSolvedTimetableToXMLWithPath(Timetable timetable, String location){
+    public static void loadSolvedTimetableToXMLWithPath(Timetable timetable, File timetableFile){
         try {
-            File timetableFile = new File(location);
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

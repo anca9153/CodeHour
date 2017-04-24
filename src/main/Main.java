@@ -26,17 +26,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         HomePane home = new HomePane();
-        CreatePane create = new CreatePane();
 
         int width = 1050;
         int height = 600;
 
         Scene homeScene = new Scene(home, width, height);
         homeScene.getStylesheets().add("styles/homeStyle.css");
-        Scene createScene = new Scene(create, width, height);
-        createScene.getStylesheets().add("styles/createStyle.css");
 
-        StageLoader loader = new StageLoader(primaryStage, homeScene, createScene, width, height);
+        StageLoader loader = new StageLoader(primaryStage, homeScene, width, height);
 
         home.setLoader(loader);
 

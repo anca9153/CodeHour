@@ -2,31 +2,39 @@ package view.panes;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import model.Metadata;
+import model.Timetable;
+import view.panes.create.InsertGeneralSettings;
+import view.panes.create.InsertTime;
+import java.io.File;
+import java.util.*;
 
 /**
  * Created by Anca on 3/16/2017.
  */
 public class CreatePane extends MainPane {
 
-    private GridPane centerGrid = new GridPane();
+    private Stage primaryStage;
+    private Timetable timetable;
     private ObservableList<ListView> listViewList = FXCollections.observableArrayList();
+    public static File savingFile;
 
-    public CreatePane(){
+    public CreatePane(Stage primaryStage, Timetable timetable){
+        this.primaryStage = primaryStage;
+        this.timetable = timetable;
+
         addToolbar();
         clearSelections(" ");
         addLeftOptions();
+
+        timetable.setMetadata(new Metadata());
+
+        timetable.getMetadata().setDate(new Date());
     }
 
     private void addToolbar(){
@@ -54,7 +62,7 @@ public class CreatePane extends MainPane {
     }
 
     private void addLeftOptions(){
-        VBox vBoxDetails = createLeftOption("Detalii orar", "Setări generale");
+        VBox vBoxDetails = createLeftOption("Detalii orar", "Metadata");
         VBox vBoxTimes = createLeftOption("Intervale orare", "Adaugă intervale");
         VBox vBoxResources = createLeftOption("Resurse", "Clase", "Profesori", "Săli de clasă");
         VBox vBoxEvents = createLeftOption("Eveniment", "Adaugă evenimente");
@@ -65,15 +73,10 @@ public class CreatePane extends MainPane {
 
         ScrollPane scrollPane = new ScrollPane(vBox);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.getStyleClass().add("scrollPaneTimetable");
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.getStyleClass().add("edge-to-edge");
 
-
-        centerGrid.add(scrollPane, 0, 0);
-        GridPane.setVgrow(vBox, Priority.ALWAYS);
-
-        this.setCenter(centerGrid);
+        this.setLeft(scrollPane);
     }
 
     private VBox createLeftOption(String labelString, String... buttonStringList){
@@ -92,7 +95,7 @@ public class CreatePane extends MainPane {
                  String new_val) -> {
                     if(new_val != null) {
                         clearSelections(labelString);
-                        addRightCreatePane();
+                        addRightCreatePane(new_val);
                     }
                 });
 
@@ -113,11 +116,20 @@ public class CreatePane extends MainPane {
                 l.getSelectionModel().clearSelection();
             }
         }
-        System.out.println();
     }
 
-    private void addRightCreatePane(){
-
+    private void addRightCreatePane(String rightPaneName){
+        switch(rightPaneName){
+            case "Metadata":
+                InsertGeneralSettings rightPane1 = new InsertGeneralSettings(timetable, primaryStage);
+                this.setCenter(rightPane1.addRightPane());
+                break;
+            case "Adaugă intervale":
+                InsertTime rightPane2 = new InsertTime(timetable, primaryStage);
+                this.setCenter(rightPane2.addRightPane());
+            default:
+                break;
+        }
     }
 
 }
