@@ -31,14 +31,13 @@ import java.util.List;
 public class DataLoader {
 
     public static Timetable loadDataFromXML(String fileName){
-     return loadDataFromXMLWithPath(PropertiesLoader.loadXMLLocationFolder() + fileName);
+     return loadDataFromXMLWithPath(new File(PropertiesLoader.loadXMLLocationFolder() + fileName));
     }
 
-    public static Timetable loadDataFromXMLWithPath(String location){
+    public static Timetable loadDataFromXMLWithPath(File file){
         Timetable timetable = new Timetable();
         try{
             //Loading timetable
-            File file = new File(location);
             JAXBContext jaxbContext = JAXBContext.newInstance(Timetable.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 

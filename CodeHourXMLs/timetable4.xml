@@ -1095,6 +1095,15 @@
                 </resource>
             </resources>
         </event>
+        <event id="ev21">
+            <description>asd</description>
+            <duration>2</duration>
+            <time id="2">
+                <day>monday</day>
+                <hourInterval>9:00 - 9:50</hourInterval>
+                <name>2_mon</name>
+            </time>
+        </event>
     </events>
     <metadata>
         <contributor>Anca Ad</contributor>

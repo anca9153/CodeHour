@@ -1,5 +1,8 @@
 package model.time;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -9,52 +12,52 @@ import java.io.Serializable;
  */
 @XmlRootElement(name = "time")
 public class Time implements Serializable{
-    private int id;
-    private String name;
-    private String day;
-    private String hourInterval;
+    private SimpleIntegerProperty id = new SimpleIntegerProperty();
+    private SimpleStringProperty name = new SimpleStringProperty();
+    private SimpleStringProperty day = new SimpleStringProperty();
+    private SimpleStringProperty hourInterval = new SimpleStringProperty();
 
     public Time(){
 
     }
 
     public Time(int id, String name, String day, String hourInterval) {
-        this.id = id;
-        this.name = name;
-        this.day = day;
-        this.setHourInterval(hourInterval);
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.day = new SimpleStringProperty(day);
+        this.hourInterval = new SimpleStringProperty(hourInterval);
     }
 
     public int getId() {
-        return id;
+        return id.getValue();
     }
 
     @XmlAttribute
     public void setId(int id) {
-        this.id = id;
+        this.id = new SimpleIntegerProperty(id);
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
     }
 
     public String getDay() {
-        return day;
+        return day.getValue();
     }
 
     public void setDay(String day) {
-        this.day = day;
+        this.day = new SimpleStringProperty(day);
     }
 
     public String getHourInterval() {
-        return hourInterval;
+        return hourInterval.getValue();
     }
 
     public void setHourInterval(String hourInterval) {
-        this.hourInterval = hourInterval;
+        this.hourInterval = new SimpleStringProperty(hourInterval);
     }
 }

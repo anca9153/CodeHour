@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlTransient
 public abstract class Constraint {
     protected String id;
-    protected boolean required;
+    protected Boolean required;
     protected int weight;
     protected Events appliesToEvents;
     protected Resources appliesToResources;

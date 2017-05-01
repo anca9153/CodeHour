@@ -1,18 +1,9 @@
 package view.panes;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import model.Timetable;
 import utilities.DataLoader;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,7 +11,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import utilities.PropertiesLoader;
 import view.StageLoader;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,8 +24,6 @@ public class HomePane extends MainPane {
     private StageLoader loader;
 
     public HomePane(){
-//        this.setTop(addToolbar(false));
-
         Pane left = getAvailableTimetables();
         Pane right = getCreateTimetable();
 
@@ -77,7 +65,6 @@ public class HomePane extends MainPane {
         ListView<String> listView = new ListView<>();
         listView.setPrefSize(150, 195);
 
-//        Map<String, Timetable> idTimetableMap = new HashMap<>();
         Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();
         Map<String, Timetable> idTimetableNoSolutionMap = new HashMap<>();
         Map<String, File> idFileMap = new HashMap<>();
@@ -87,7 +74,7 @@ public class HomePane extends MainPane {
             if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
                 t = DataLoader.loadDataFromXML(file.getName());
             } else {
-                t = DataLoader.loadDataFromXMLWithPath(file.getAbsolutePath());
+                t = DataLoader.loadDataFromXMLWithPath(file);
             }
             if(t.getSolutions() == null){
                 idTimetableNoSolutionMap.put(t.getId(), t);
@@ -95,7 +82,7 @@ public class HomePane extends MainPane {
             else{
                 idTimetableWithSolutionMap.put(t.getId(), t);
             }
-//            idTimetableMap.put(t.getId(), t);
+
             idFileMap.put(t.getId(), file);
 
             listView.getItems().add(t.getId());

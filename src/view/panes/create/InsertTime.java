@@ -1,31 +1,19 @@
 package view.panes.create;
 
-import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.util.Pair;
-import model.Timetable;
 import model.time.Time;
 import model.time.Times;
-import utilities.DataLoader;
 import view.panes.CreatePane;
-
-import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,30 +21,28 @@ import java.util.List;
 /**
  * Created by Anca on 4/24/2017.
  */
-public class InsertTime extends InsertPane{
-    private Timetable timetable;
-    private Stage primaryStage;
-    private HBox saveButtonHB;
+public class InsertTime extends InsertPaneWithTable{
     private Time currentTime = new Time();
+    private VBox finalVBox;
 
-    public InsertTime(Timetable timetable, Stage primaryStage){
-        this.timetable = timetable;
+    public InsertTime(Stage primaryStage){
         this.primaryStage = primaryStage;
 
-        Times times = new Times();
-        times.setTimes(new ArrayList<>());
-        timetable.setTimes(times);
+        if(CreatePane.timetable.getTimes() == null) {
+            Times times = new Times();
+            times.setTimes(new ArrayList<>());
+            CreatePane.timetable.setTimes(times);
+        }
+
+        if(CreatePane.timetable.getTimes().getTimes() == null) {
+            CreatePane.timetable.getTimes().setTimes(new ArrayList<>());
+        }
     }
 
-    public VBox addRightPane(){
-        Label title = new Label("Adaugă intervale orare");
-        title.getStyleClass().add("resourceText");
-
-        ObservableList<VBox> vbList = FXCollections.observableArrayList();
-
+    private ArrayList<Pair<String, Boolean>> getTextFieldValues(){
         ArrayList<Pair<String, Boolean>> textFieldValues = new ArrayList<>();
 
-        textFieldValues.add(new Pair("Adaugă ziua intervalului", Boolean.TRUE));
+        textFieldValues.add(new Pair("Alege ziua intervalului", Boolean.TRUE));
         textFieldValues.add(new Pair("8:00 - 9:00", Boolean.TRUE));
 
         if(currentTime.getDay()!=null){
@@ -69,27 +55,26 @@ public class InsertTime extends InsertPane{
             textFieldValues.add(1, new Pair(currentTime.getHourInterval(), Boolean.FALSE));
         }
 
+        return textFieldValues;
+    }
+
+    public VBox addRightPane(){
+        ArrayList<Pair<String, Boolean>> textFieldValues = getTextFieldValues();
+
         ObservableList<String> days = FXCollections.observableArrayList("monday", "tuesday", "wednesday","thursday", "friday", "saturday", "sunday");
 
+        ObservableList<VBox> vbList = FXCollections.observableArrayList();
+
         HBox dayLabel = makeLabel("ZIUA", true);
-        ComboBox<String> dayCB = new ComboBox<String>(days);
+        ComboBox<String> dayCB = new ComboBox<>(days);
+        dayCB.getStyleClass().add("specialComboBox");
         vbList.add(new VBox(dayLabel, dayCB));
 
         HBox hourIntervalLabel = makeLabel("INTERVALUL ORAR", true);
         TextField hourIntervalTextField = makeTextField(textFieldValues.get(1));
         vbList.add(new VBox(hourIntervalLabel, hourIntervalTextField));
 
-        FlowPane fp = new FlowPane();
-
-        for(VBox vb : vbList){
-            vb.getStyleClass().add("fieldRight");
-            fp.getChildren().add(vb);
-        }
-
-        fp.setHgap(40);
-        fp.setVgap(20);
-
-        fp.getStyleClass().add("rightFlowPane");
+        FlowPane fp = getFlowPane(vbList);
 
         Button saveButton = new Button("SALVEAZĂ");
         saveButton.getStyleClass().add("rightSaveButton");
@@ -124,11 +109,11 @@ public class InsertTime extends InsertPane{
             }
 
             if(!empty) {
-                currentTime.setId(timetable.getTimes().getTimes().size()+1);
+                currentTime.setId(CreatePane.timetable.getTimes().getTimes().size()+1);
 
                 int dayNo = 1;
 
-                for(Time t : timetable.getTimes().getTimes()){
+                for(Time t : CreatePane.timetable.getTimes().getTimes()){
                     if(t.getDay().equals(currentTime.getDay())){
                         dayNo++;
                     }
@@ -141,83 +126,79 @@ public class InsertTime extends InsertPane{
                     }
                 }
 
-                timetable.getTimes().getTimes().add(currentTime);
+                CreatePane.timetable.getTimes().getTimes().add(currentTime);
                 currentTime = new Time();
 
-                if (CreatePane.savingFile == null) {
-                    FileChooser fileChooser = new FileChooser();
+                saveIntoFile();
+            }
 
-                    //Set extension filter
-                    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
-                    fileChooser.getExtensionFilters().add(extFilter);
-
-                    //Show save file dialog
-                    CreatePane.savingFile = fileChooser.showSaveDialog(primaryStage);
-                }
-
-                if (CreatePane.savingFile != null) {
-                    DataLoader.loadSolvedTimetableToXMLWithPath(timetable, CreatePane.savingFile);
-
-                    Label confSave = new Label("Datele au fost salvate. ");
-                    confSave.getStyleClass().addAll("fieldRightLabel","explanatory1");
-                    confSave.setId("confSave");
-
-                    for(Node n: saveButtonHB.getChildren()){
-                        if(n.getId()!=null && n.getId().equals("confSave")){
-                            saveButtonHB.getChildren().remove(n);
-                            break;
-                        }
-                    }
-
-                    if(saveButtonHB.getChildren().size() < 2) {
-                        saveButtonHB.getChildren().add(0, confSave);
-                        PauseTransition visiblePause = new PauseTransition(
-                                Duration.seconds(5)
-                        );
-                        visiblePause.setOnFinished(
-                                e -> confSave.setVisible(false)
-                        );
-                        visiblePause.play();
-                    }
-                }
+            //Adding the table with the existing times
+            if(CreatePane.timetable.getTimes().getTimes().size()>0) {
+               dealWithTable(finalVBox);
             }
 
         } );
 
-        saveButton.setAlignment(Pos.CENTER_RIGHT);
+        addSaveButtonIntoHBox(saveButton);
 
-        Label expl1 = new Label("Câmpurile marcate cu ");
-        expl1.getStyleClass().addAll("fieldRightLabel","explanatory1");
-        Label star = new Label("*");
-        star.getStyleClass().addAll("fieldRightLabel","redStar");
-        Label expl2 = new Label(" sunt necesare.");
-        expl2.getStyleClass().addAll("fieldRightLabel","explanatory1");
-        HBox explanatory = new HBox(expl1, star, expl2);
-        explanatory.getStyleClass().addAll("fieldRightLabel", "explanatory");
-
-        saveButtonHB = new HBox();
-        saveButtonHB.getChildren().add(saveButton);
-        saveButtonHB.getStyleClass().add("rightSaveHBox");
-        saveButtonHB.setAlignment(Pos.CENTER_RIGHT);
-
-        HBox nameBox = new HBox();
+        finalVBox = new VBox(getTitleLabel("Adaugă interval orar"), fp, createExplanatory(), saveButtonHB);
+        finalVBox.getStyleClass().add("rightVBox");
 
         //Adding the table with the existing times
-        if(timetable.getTimes().getTimes().size()>0) {
-            Label existingLabel = new Label("Intervale orare");
-            existingLabel.getStyleClass().add("resourceText");
-            Label listLabel = new Label("Listă");
-            listLabel.getStyleClass().add("resourceTypeText");
-
-            nameBox.getChildren().addAll(existingLabel, listLabel);
-            nameBox.getStyleClass().add("titleNameBox");
-            nameBox.setAlignment(Pos.BOTTOM_LEFT);
+        if(CreatePane.timetable.getTimes()!= null && CreatePane.timetable.getTimes().getTimes() != null && CreatePane.timetable.getTimes().getTimes().size()>0) {
+            addTable(finalVBox);
         }
 
-        VBox vb = new VBox(title, fp, explanatory, saveButtonHB, nameBox);
-        vb.getStyleClass().add("rightVBox");
+        return finalVBox;
+    }
+
+    protected VBox createTable(){
+        Label existingLabel = new Label("Intervale orare");
+        existingLabel.getStyleClass().add("resourceText");
+        Label listLabel = new Label("Listă");
+        listLabel.getStyleClass().add("resourceTypeText");
+
+        HBox nameBox = new HBox();
+        nameBox.getStyleClass().add("tableTitle");
+
+        nameBox.getChildren().addAll(existingLabel, listLabel);
+        nameBox.getStyleClass().add("titleNameBox");
+        nameBox.setAlignment(Pos.BOTTOM_LEFT);
+
+        //Creating the table for the already saved times
+        table = new TableView();
+        TableColumn idColumn = new TableColumn("Id");
+        idColumn.setCellValueFactory(new PropertyValueFactory<Time, Integer>("id"));
+        idColumn.setMaxWidth(50);
+        idColumn.setPrefWidth(50);
+        idColumn.setMinWidth(50);
+        idColumn.getStyleClass().add("firstColumn");
+
+        TableColumn nameColumn = new TableColumn("Nume");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Time, String>("name"));
+
+        TableColumn dayColumn = new TableColumn("Zi");
+        dayColumn.setCellValueFactory(new PropertyValueFactory<Time, String>("day"));
+
+        TableColumn hourIntervalColumn = new TableColumn("Interval");
+        hourIntervalColumn.setCellValueFactory(new PropertyValueFactory<Time, String>("hourInterval"));
+
+        table.getColumns().addAll(idColumn, nameColumn, dayColumn, hourIntervalColumn);
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        updateTableData();
+
+        table.setFixedCellSize(35);
+        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
+
+        VBox vb = new VBox(nameBox, table);
+        vb.setId("table");
 
         return vb;
     }
 
+    protected void updateTableData(){
+        ObservableList<Time> data = FXCollections.observableArrayList(CreatePane.timetable.getTimes().getTimes());
+        table.setItems(data);
+    }
 }
