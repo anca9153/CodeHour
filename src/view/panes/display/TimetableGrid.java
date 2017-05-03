@@ -338,10 +338,10 @@ public class TimetableGrid {
         }
 
 
-        return addScrollPaneToTable(pane, resourceType, list.size());
+        return addScrollPaneToTable(pane, resourceType, list.size(), maxCounter);
     }
 
-    private ScrollPane addScrollPaneToTable(GridPane pane, String resourceType, int rowsNumber){
+    private ScrollPane addScrollPaneToTable(GridPane pane, String resourceType, int rowsNumber, int maxCounter){
         //Adding the title label for the right table on displayPane
         String labelString = new String();
         switch (resourceType){
@@ -365,13 +365,18 @@ public class TimetableGrid {
         pane.getStyleClass().add("rightTable");
 
         ColumnConstraints firstColumnSize = new ColumnConstraints();
-        firstColumnSize.setPercentWidth(10);
+//        firstColumnSize.setPercentWidth(10);
+        firstColumnSize.setPrefWidth(80);
+        firstColumnSize.setMinWidth(80);
         firstColumnSize.setHalignment(HPos.CENTER);
         pane.getColumnConstraints().add(firstColumnSize);
+        ColumnConstraints col = new ColumnConstraints();
+//            col.setPercentWidth(18.0);
+        col.setHalignment(HPos.CENTER);
+//            col.setMinWidth(70);
+        col.setPrefWidth(50 * maxCounter);
+        col.setMinWidth(50 * maxCounter);
         for(int j=0; j<5;j++) {
-            ColumnConstraints col = new ColumnConstraints();
-            col.setPercentWidth(18.0);
-            col.setHalignment(HPos.CENTER);
             pane.getColumnConstraints().add(col);
         }
 

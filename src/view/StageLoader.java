@@ -46,8 +46,6 @@ public class StageLoader {
     }
 
     private static void load(Scene scene){
-        System.out.println(sizes.get(0)+" "+ sizes.get(1));
-
         primaryStage.setTitle("CodeHour");
         primaryStage.setScene(scene);
         primaryStage.setWidth(sizes.get(0));
