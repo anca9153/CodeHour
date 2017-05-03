@@ -85,7 +85,6 @@ public class TimetableGrid {
         //Finding max number of rows to show
         for(Event e: eventList) {
             int row = Integer.valueOf(e.getTime().getName().split("_")[0]);
-
             if (row > maxRow) {
                 maxRow = row;
                 maxTime = e.getTime();
@@ -100,7 +99,7 @@ public class TimetableGrid {
         int row = 1;
 
         for(Time t: timetable.getTimes().getTimes()){
-            if(maxTime.getDay().equals(t.getDay())){
+            if(maxTime!=null && maxTime.getDay().equals(t.getDay())){
                 lh = new Label(t.getHourInterval());
                 StackPane hourCellPane = new StackPane(lh);
                 hourCellPane.getStyleClass().add("tableContentCell");

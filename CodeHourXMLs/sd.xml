@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<timetable id="Small test">
+    <eventConstraints>
+        <assignTimeConstraint id="assignTimeConstraint_1">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>true</required>
+            <weight>4</weight>
+        </assignTimeConstraint>
+        <assignResourceConstraint id="assignResourceConstraint_1">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>false</required>
+            <weight>5</weight>
+        </assignResourceConstraint>
+        <assignResourceConstraint id="assignResourceConstraint_2">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>false</required>
+            <weight>5</weight>
+        </assignResourceConstraint>
+        <assignResourceConstraint id="assignResourceConstraint_3">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>false</required>
+            <weight>5</weight>
+        </assignResourceConstraint>
+        <assignResourceConstraint id="assignResourceConstraint_4">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>false</required>
+            <weight>5</weight>
+        </assignResourceConstraint>
+        <assignTimeConstraint id="assignTimeConstraint_2">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>false</required>
+            <weight>5</weight>
+        </assignTimeConstraint>
+        <assignTimeConstraint id="assignTimeConstraint_3">
+            <appliesToEvents>
+                <event id="ev_1">
+                    <description>csz</description>
+                    <duration>2</duration>
+                    <resources>
+                        <resource id="sdvf">
+                            <name>dzxf</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>monday</day>
+                        <hourInterval>esrdf</hourInterval>
+                        <name>1_mon</name>
+                    </time>
+                </event>
+            </appliesToEvents>
+            <required>false</required>
+            <weight>5</weight>
+        </assignTimeConstraint>
+    </eventConstraints>
+    <events>
+        <event id="ev_1">
+            <description>asd</description>
+            <duration>1</duration>
+            <resources>
+                <resource id="SZ">
+                    <name>Z</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+            </resources>
+        </event>
+    </events>
+    <metadata>
+        <contributor>test author</contributor>
+        <date>2017-05-01T21:02:05.856+03:00</date>
+        <description>A description</description>
+        <name>testing name</name>
+    </metadata>
+    <resources>
+        <resource id="asd">
+            <name>S</name>
+            <resourceType>studyGroup</resourceType>
+        </resource>
+        <resource id="SZ">
+            <name>Z</name>
+            <resourceType>teacher</resourceType>
+        </resource>
+        <resource id="AS">
+            <name>A</name>
+            <resourceType>classroom</resourceType>
+        </resource>
+        <resource id="AS">
+            <name>A</name>
+            <resourceType>classroom</resourceType>
+        </resource>
+        <resource id="AS">
+            <name>A</name>
+            <resourceType>classroom</resourceType>
+        </resource>
+        <resource id="AS">
+            <name>A</name>
+            <resourceType>classroom</resourceType>
+        </resource>
+        <resource id="AS">
+            <name>A</name>
+            <resourceType>classroom</resourceType>
+        </resource>
+    </resources>
+    <solutions>
+        <solution id="sol1">
+            <description>First Solution</description>
+            <events>
+                <event id="ev_1">
+                    <description>asd</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="SZ">
+                            <name>Z</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>tuesday</day>
+                        <hourInterval>rcbf</hourInterval>
+                        <name>1_tue</name>
+                    </time>
+                </event>
+            </events>
+        </solution>
+    </solutions>
+    <times>
+        <time id="1">
+            <day>tuesday</day>
+            <hourInterval>rcbf</hourInterval>
+            <name>1_tue</name>
+        </time>
+        <time id="2">
+            <day>tuesday</day>
+            <hourInterval>rcbf</hourInterval>
+            <name>2_tue</name>
+        </time>
+        <time id="3">
+            <day>tuesday</day>
+            <hourInterval>rcbf</hourInterval>
+            <name>3_tue</name>
+        </time>
+        <time id="4">
+            <day>monday</day>
+            <hourInterval>tgh</hourInterval>
+            <name>1_mon</name>
+        </time>
+    </times>
+</timetable>

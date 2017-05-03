@@ -6,10 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Pair;
 import model.time.Time;
 import model.time.Times;
@@ -127,9 +130,13 @@ public class InsertTime extends InsertPaneWithTable{
                 }
 
                 CreatePane.timetable.getTimes().getTimes().add(currentTime);
-                currentTime = new Time();
+                if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
+                    currentTime = new Time();
+                }
+                else {
+                    CreatePane.timetable.getTimes().getTimes().remove(currentTime);
+                }
 
-                saveIntoFile();
             }
 
             //Adding the table with the existing times
@@ -183,7 +190,76 @@ public class InsertTime extends InsertPaneWithTable{
         TableColumn hourIntervalColumn = new TableColumn("Interval");
         hourIntervalColumn.setCellValueFactory(new PropertyValueFactory<Time, String>("hourInterval"));
 
-        table.getColumns().addAll(idColumn, nameColumn, dayColumn, hourIntervalColumn);
+        TableColumn deleteColumn = new TableColumn();
+        Callback<TableColumn<Time, String>, TableCell<Time, String>> cellFactory =
+                new Callback<TableColumn<Time, String>, TableCell<Time, String>>()
+                {
+                    @Override
+                    public TableCell call( final TableColumn<Time, String> param )
+                    {
+                        final TableCell<Time, String> cell = new TableCell<Time, String>()
+                        {
+                            final Button remove = new Button();
+
+                            @Override
+                            public void updateItem(String item, boolean empty)
+                            {
+                                super.updateItem(item, empty);
+                                if (empty)
+                                {
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else
+                                {
+                                    remove.setOnAction((ActionEvent event) ->
+                                    {
+                                        Time time = getTableView().getItems().get(getIndex());
+
+                                        int indexOfTime = CreatePane.timetable.getTimes().getTimes().indexOf(time);
+                                        CreatePane.timetable.getTimes().getTimes().remove(time);
+
+                                        //Resetting the ids
+                                        if(CreatePane.timetable.getTimes().getTimes().size()>1) {
+                                            for (Time t : CreatePane.timetable.getTimes().getTimes().subList(indexOfTime, CreatePane.timetable.getTimes().getTimes().size())) {
+                                                t.setId(t.getId() - 1);
+                                            }
+                                        }
+                                        else{
+                                            if(CreatePane.timetable.getTimes().getTimes().size() == 1) {
+                                                CreatePane.timetable.getTimes().getTimes().get(0).setId(1);
+                                            }
+                                        }
+
+                                        updateTableData();
+                                        saveIntoFile();
+                                    } );
+
+                                    ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                                    imageView2.setFitHeight(10);
+                                    imageView2.setFitWidth(10);
+                                    imageView2.setPreserveRatio(true);
+
+                                    remove.setGraphic(imageView2);
+                                    remove.getStyleClass().add("removeEventResource");
+                                    remove.setMinSize(30, 40);
+
+                                    setGraphic(remove);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+
+        deleteColumn.setCellFactory(cellFactory);
+        deleteColumn.setMaxWidth(30);
+        deleteColumn.setPrefWidth(30);
+        deleteColumn.setMinWidth(30);
+        deleteColumn.getStyleClass().add("lastColumn");
+
+        table.getColumns().addAll(idColumn, nameColumn, dayColumn, hourIntervalColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         updateTableData();
@@ -200,5 +276,6 @@ public class InsertTime extends InsertPaneWithTable{
     protected void updateTableData(){
         ObservableList<Time> data = FXCollections.observableArrayList(CreatePane.timetable.getTimes().getTimes());
         table.setItems(data);
+        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
     }
 }

@@ -304,7 +304,7 @@ public class DisplayPane extends MainPane {
         for(Resource r: timetable.getResources().getResources()){
             if(r.getResourceType().equals(resourceType)){
                 if(resourceType.equals("teacher")){
-                    //If there are twi teachers with the same name we add their id's
+                    //If there are two teachers with the same name we add their id's
                     if(map.get(r.getName()) != null){
                         map.remove(r.getName());
                         map.put(r.getName()+" "+r.getId(), new ArrayList<>());

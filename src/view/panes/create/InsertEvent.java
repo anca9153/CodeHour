@@ -109,7 +109,7 @@ public class InsertEvent extends InsertPaneWithTable {
 
         //Resources that are added in the timetable object
         ObservableList<String> resourceIds = FXCollections.observableArrayList();
-        if(CreatePane.timetable.getResources()!=null) {
+        if(CreatePane.timetable.getResources()!=null && CreatePane.timetable.getResources().getResources() != null) {
             for (Resource r : CreatePane.timetable.getResources().getResources()) {
                 if(r.getResourceType().equals("teacher")){
                     resourceIds.add(r.getName());
@@ -160,10 +160,13 @@ public class InsertEvent extends InsertPaneWithTable {
                 HBox hb = createEventResourceLabel(resourceCB.getValue());
 
                 Button remove = new Button();
-                remove.setGraphic(imageView);
+                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                imageView2.setFitHeight(6);
+                imageView2.setFitWidth(6);
+                imageView2.setPreserveRatio(true);
+
+                remove.setGraphic(imageView2);
                 remove.getStyleClass().add("removeEventResource");
-                imageView.setFitHeight(6);
-                imageView.setFitWidth(6);
                 remove.setMaxSize(10, 10);
 
                 remove.setOnAction((ActionEvent e) ->{
@@ -247,12 +250,15 @@ public class InsertEvent extends InsertPaneWithTable {
             }
 
             if(!empty) {
-                currentEvent.setId("ev"+(int)(CreatePane.timetable.getEvents().getEvents().size()+1));
+                currentEvent.setId("ev_"+(int)(CreatePane.timetable.getEvents().getEvents().size()+1));
 
                 CreatePane.timetable.getEvents().getEvents().add(currentEvent);
-                currentEvent = new Event();
-
-                saveIntoFile();
+                if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
+                    currentEvent = new Event();
+                }
+                else{
+                    CreatePane.timetable.getEvents().getEvents().remove(currentEvent);
+                }
             }
 
             //Adding the table with the existing events
@@ -278,9 +284,6 @@ public class InsertEvent extends InsertPaneWithTable {
     private HBox createEventResourceLabel(String text){
         Label label = new Label(text.toUpperCase());
         label.getStyleClass().add("resourceLabelForEvent");
-
-        ImageView imageView = new ImageView(new Image("\\icons\\deleteIcon.png"));
-        imageView.setPreserveRatio(true);
 
         HBox hb = new HBox(label);
         hb.setPadding(new Insets(3, 5, 10, 0));
@@ -377,7 +380,79 @@ public class InsertEvent extends InsertPaneWithTable {
 
         });
 
-        table.getColumns().addAll(idColumn, descriptionColumn, hoursColumn, resorucesColumn);
+        TableColumn deleteColumn = new TableColumn();
+        Callback<TableColumn<Event, String>, TableCell<Event, String>> cellFactory =
+                new Callback<TableColumn<Event, String>, TableCell<Event, String>>()
+                {
+                    @Override
+                    public TableCell call( final TableColumn<Event, String> param )
+                    {
+                        final TableCell<Event, String> cell = new TableCell<Event, String>()
+                        {
+                            final Button remove = new Button();
+
+                            @Override
+                            public void updateItem(String item, boolean empty)
+                            {
+                                super.updateItem(item, empty);
+                                if (empty)
+                                {
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else
+                                {
+                                    remove.setOnAction((ActionEvent event) ->
+                                    {
+                                        Event ev = getTableView().getItems().get(getIndex());
+
+                                        int indexOfEv = CreatePane.timetable.getEvents().getEvents().indexOf(ev);
+                                        CreatePane.timetable.getEvents().getEvents().remove(ev);
+
+                                        //Resetting the ids
+                                        if(CreatePane.timetable.getEvents().getEvents().size()>1) {
+                                            for (Event e : CreatePane.timetable.getEvents().getEvents().subList(indexOfEv, CreatePane.timetable.getEvents().getEvents().size())) {
+                                                String[] splitted = e.getId().split("_");
+                                                e.setId(splitted[0]+"_"+(Integer.valueOf(splitted[1])-1));
+                                            }
+                                        }
+                                        else{
+                                            if(CreatePane.timetable.getEvents().getEvents().size() == 1) {
+                                                Event e = CreatePane.timetable.getEvents().getEvents().get(0);
+                                                String[] splitted = e.getId().split("_");
+                                                CreatePane.timetable.getEvents().getEvents().get(0).setId(splitted[0]+"_1");
+                                            }
+                                        }
+
+                                        updateTableData();
+                                        saveIntoFile();
+                                    } );
+
+                                    ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                                    imageView2.setFitHeight(10);
+                                    imageView2.setFitWidth(10);
+                                    imageView2.setPreserveRatio(true);
+
+                                    remove.setGraphic(imageView2);
+                                    remove.getStyleClass().add("removeEventResource");
+                                    remove.setMinSize(30, 40);
+
+                                    setGraphic(remove);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+
+        deleteColumn.setCellFactory(cellFactory);
+        deleteColumn.setMaxWidth(30);
+        deleteColumn.setPrefWidth(30);
+        deleteColumn.setMinWidth(30);
+        deleteColumn.getStyleClass().add("lastColumn");
+
+        table.getColumns().addAll(idColumn, descriptionColumn, hoursColumn, resorucesColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         updateTableData();
@@ -394,6 +469,7 @@ public class InsertEvent extends InsertPaneWithTable {
     protected void updateTableData(){
         ObservableList<Event> data = FXCollections.observableArrayList(CreatePane.timetable.getEvents().getEvents());
         table.setItems(data);
+        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
     }
 
 }

@@ -113,7 +113,7 @@ public abstract class InsertPane {
         }
     }
 
-    protected void saveIntoFile(){
+    protected boolean saveIntoFile(){
         if (CreatePane.savingFile == null) {
             FileChooser fileChooser = new FileChooser();
 
@@ -149,6 +149,10 @@ public abstract class InsertPane {
                 );
                 visiblePause.play();
             }
+            return true;
+        }
+        else{
+            return false;
         }
     }
 

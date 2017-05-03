@@ -22,6 +22,7 @@ import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
 import model.event.Event;
 import model.event.Events;
+import model.time.Time;
 import view.panes.CreatePane;
 import java.util.*;
 
@@ -123,10 +124,13 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 HBox hb = createConstraintEventLabel(eventsCB.getValue());
 
                 Button remove = new Button();
-                remove.setGraphic(imageView);
+                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                imageView2.setFitHeight(6);
+                imageView2.setFitWidth(6);
+                imageView2.setPreserveRatio(true);
+
+                remove.setGraphic(imageView2);
                 remove.getStyleClass().add("removeEventResource");
-                imageView.setFitHeight(6);
-                imageView.setFitWidth(6);
                 remove.setMaxSize(10, 10);
 
                 remove.setOnAction((ActionEvent e) ->{
@@ -179,7 +183,20 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 empty = true;
             }
             else {
-                currentConstraint.setWeight(Integer.valueOf(weightTextField.getText()));
+                boolean isNumber = true;
+                for (char c : weightTextField.getText().toCharArray()) {
+                    if (!Character.isDigit(c)) {
+                        isNumber = false;
+                    }
+                }
+
+                if(isNumber) {
+                    currentConstraint.setWeight(Integer.valueOf(weightTextField.getText()));
+                }
+                else{
+                    showErrorMessage(weightLabel, "Introduceți un număr.", weightTextField);
+                    empty = true;
+                }
             }
 
             if(eventsFP.getChildren().size() < 1){
@@ -195,7 +212,15 @@ public class InsertEventConstraint extends InsertPaneWithTable {
             }
 
             if(!empty) {
-                currentConstraint.setId(resourceType+(CreatePane.timetable.getEventConstraints().getConstraints().size()+1));
+                //Findinn out how many constraints of the current type there are in the timetable
+                int constrNo = 0;
+                for(Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()){
+                    if(c.getId().startsWith(resourceType)){
+                        constrNo ++;
+                    }
+                }
+
+                currentConstraint.setId(resourceType + "_" + (constrNo + 1));
                 if(descriptionCheckBox.isSelected()){
                     currentConstraint.setRequired(true);
                 }
@@ -204,16 +229,20 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 }
 
                 CreatePane.timetable.getEventConstraints().getConstraints().add(currentConstraint);
-                if(currentConstraint instanceof AssignResourceConstraint) {
-                    currentConstraint = new AssignResourceConstraint();
-                }
-                else{
-                    if(currentConstraint instanceof AssignTimeConstraint) {
-                        currentConstraint = new AssignTimeConstraint();
+
+                if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
+                    if(currentConstraint instanceof AssignResourceConstraint) {
+                        currentConstraint = new AssignResourceConstraint();
+                    }
+                    else{
+                        if(currentConstraint instanceof AssignTimeConstraint) {
+                            currentConstraint = new AssignTimeConstraint();
+                        }
                     }
                 }
-
-                saveIntoFile();
+                else{
+                    CreatePane.timetable.getEventConstraints().getConstraints().remove(currentConstraint);
+                }
             }
 
             //Adding the table with the existing constraints
@@ -240,9 +269,6 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         Label label = new Label(text.toUpperCase());
         label.getStyleClass().add("resourceLabelForEvent");
 
-        ImageView imageView = new ImageView(new Image("\\icons\\deleteIcon.png"));
-        imageView.setPreserveRatio(true);
-
         HBox hb = new HBox(label);
         hb.setPadding(new Insets(3, 5, 10, 0));
         hb.setId(text);
@@ -267,9 +293,9 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         table = new TableView();
         TableColumn idColumn = new TableColumn("Id");
         idColumn.setCellValueFactory(new PropertyValueFactory<Constraint, String>("id"));
-        idColumn.setMaxWidth(100);
-        idColumn.setPrefWidth(100);
-        idColumn.setMinWidth(100);
+        idColumn.setMaxWidth(200);
+        idColumn.setPrefWidth(200);
+        idColumn.setMinWidth(200);
         idColumn.getStyleClass().add("firstColumn");
 
         TableColumn descriptionColumn = new TableColumn("Necesar");
@@ -277,6 +303,12 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         descriptionColumn.setMaxWidth(100);
         descriptionColumn.setPrefWidth(100);
         descriptionColumn.setMinWidth(100);
+
+        TableColumn weightColumn = new TableColumn("Greutate");
+        weightColumn.setCellValueFactory(new PropertyValueFactory<Constraint, Integer>("weight"));
+        weightColumn.setMaxWidth(100);
+        weightColumn.setPrefWidth(100);
+        weightColumn.setMinWidth(100);
 
         TableColumn eventsColumn = new TableColumn("Evenimente");
         eventsColumn.setCellValueFactory(new PropertyValueFactory<Constraint, Events>("appliesToEvents"));
@@ -311,7 +343,79 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
         });
 
-        table.getColumns().addAll(idColumn, descriptionColumn, eventsColumn);
+        TableColumn deleteColumn = new TableColumn();
+        Callback<TableColumn<Constraint, String>, TableCell<Constraint, String>> cellFactory =
+                new Callback<TableColumn<Constraint, String>, TableCell<Constraint, String>>()
+                {
+                    @Override
+                    public TableCell call( final TableColumn<Constraint, String> param )
+                    {
+                        final TableCell<Constraint, String> cell = new TableCell<Constraint, String>()
+                        {
+                            final Button remove = new Button();
+
+                            @Override
+                            public void updateItem(String item, boolean empty)
+                            {
+                                super.updateItem(item, empty);
+                                if (empty)
+                                {
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else
+                                {
+                                    remove.setOnAction((ActionEvent event) ->
+                                    {
+                                        Constraint constraint = getTableView().getItems().get(getIndex());
+
+                                        int indexOfConstraint = CreatePane.timetable.getEventConstraints().getConstraints().indexOf(constraint);
+                                        CreatePane.timetable.getEventConstraints().getConstraints().remove(constraint);
+
+                                        //Resetting the ids
+                                        if(CreatePane.timetable.getEventConstraints().getConstraints().size()>1) {
+                                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints().subList(indexOfConstraint, CreatePane.timetable.getEventConstraints().getConstraints().size())) {
+                                                String[] splitted = c.getId().split("_");
+                                                c.setId(splitted[0]+"_"+(Integer.valueOf(splitted[1])-1));
+                                            }
+                                        }
+                                        else{
+                                            if(CreatePane.timetable.getEventConstraints().getConstraints().size() == 1) {
+                                                Constraint c = CreatePane.timetable.getEventConstraints().getConstraints().get(0);
+                                                String[] splitted = c.getId().split("_");
+                                                CreatePane.timetable.getEventConstraints().getConstraints().get(0).setId(splitted[0]+"_1");
+                                            }
+                                        }
+
+                                        updateTableData();
+                                        saveIntoFile();
+                                    } );
+
+                                    ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                                    imageView2.setFitHeight(10);
+                                    imageView2.setFitWidth(10);
+                                    imageView2.setPreserveRatio(true);
+
+                                    remove.setGraphic(imageView2);
+                                    remove.getStyleClass().add("removeEventResource");
+                                    remove.setMinSize(30, 40);
+
+                                    setGraphic(remove);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+
+        deleteColumn.setCellFactory(cellFactory);
+        deleteColumn.setMaxWidth(30);
+        deleteColumn.setPrefWidth(30);
+        deleteColumn.setMinWidth(30);
+        deleteColumn.getStyleClass().add("lastColumn");
+
+        table.getColumns().addAll(idColumn, descriptionColumn, weightColumn, eventsColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         updateTableData();
@@ -345,6 +449,8 @@ public class InsertEventConstraint extends InsertPaneWithTable {
             }
         }
 
+        table.getItems().clear();
         table.setItems(data);
+        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
     }
 }

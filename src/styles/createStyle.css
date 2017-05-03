@@ -346,7 +346,7 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color: #454545;
+    -fx-background-color: #dfdfdf;
 }
 
 .table-view .column-header-background .label{
@@ -359,6 +359,8 @@
 
 .table-view .column-header {
     -fx-background-color: #454545;
+    -fx-border-color: #dfdfdf;
+    -fx-border-width: 0.3 0.15 0.3 0.15;
 }
 
 .table-view .column-header .cell{
@@ -371,10 +373,16 @@
 }
 
 .table-row-cell{
-    -fx-border-color: #dfdfdf;
-    -fx-border-width: 0.3;
+    /*-fx-border-color: #00FF00;*/ /*#dfdfdf*/
+    /*-fx-border-width: 1; 0.3*/
     -fx-background-color: white;
     -fx-table-cell-border-color: #dfdfdf;
+}
+
+.table-row-cell .cell{
+    -fx-border-width: 0.3;
+    -fx-border-color: #dfdfdf;
+    -fx-padding: 0 10 0 10;
 }
 
 .table-row-cell:selected{
@@ -388,11 +396,20 @@
 
 .table-view .table-column{
     -fx-alignment: CENTER_LEFT;
+    /*-fx-padding: 0 10 0 10;*/
+}
+
+.table-view .column-header .cell{
     -fx-padding: 0 10 0 10;
 }
 
 .table-view .firstColumn{
     -fx-alignment: CENTER;
+}
+
+.table-view .lastColumn{
+    -fx-alignment: CENTER;
+    -fx-padding: 0;
 }
 
 .addButton{
@@ -427,4 +444,27 @@
 
 .removeEventResource:hover{
     -fx-background-color: #f85241;
+}
+
+.createButton{
+    -fx-background-color: #E84C3D;
+    -fx-font: 8pt "Verdana";
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-pref-width: 150px;
+    -fx-border-color: #cc4133;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: hand;
+}
+
+.createButton:hover{
+    -fx-background-color: #f85241;
+}
+
+
+.addBorderGenerate{
+    -fx-border-color: #dfdfdf;
+    -fx-border-width:  1;
 }

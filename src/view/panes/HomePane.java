@@ -110,11 +110,13 @@ public class HomePane extends MainPane {
             File f = idFileMap.get(new_val);
             Timetable tt = idTimetableNoSolutionMap.get(new_val);
             if(tt == null){
+                //oening display pane
                 tt = idTimetableWithSolutionMap.get(new_val);
                 StageLoader.loadDisplay(idTimetableWithSolutionMap, f, tt);
             }
             else{
-                StageLoader.loadDisplay(idTimetableNoSolutionMap, f, tt);
+                //Opening create pane
+                StageLoader.loadCreate(tt, f);
             }
         });
 
@@ -138,8 +140,9 @@ public class HomePane extends MainPane {
 
     private Pane getCreateTimetable(){
         Button create = new Button("ADAUGĂ ORAR");
-        create.setOnAction((ActionEvent event) ->
-            StageLoader.loadCreate()
+        create.setOnAction((ActionEvent event) -> {
+                    StageLoader.loadCreate(new Timetable(), null);
+                }
         );
         create.getStyleClass().add("createButton");
 

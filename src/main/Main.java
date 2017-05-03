@@ -27,8 +27,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         HomePane home = new HomePane();
 
-        int width = 1050;
-        int height = 600;
+        int width = 1366;
+        int height = 768;
 
         Scene homeScene = new Scene(home, width, height);
         homeScene.getStylesheets().add("styles/homeStyle.css");

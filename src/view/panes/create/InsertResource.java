@@ -1,23 +1,21 @@
 package view.panes.create;
 
-import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import javafx.util.Callback;
 import javafx.util.Pair;
 import model.resource.Resource;
 import model.resource.Resources;
-import utilities.DataLoader;
 import view.panes.CreatePane;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +43,10 @@ public class InsertResource extends InsertPaneWithTable {
             Resources resources = new Resources();
             resources.setResources(new ArrayList<>());
             CreatePane.timetable.setResources(resources);
+        }
+
+        if(CreatePane.timetable.getResources().getResources() == null){
+            CreatePane.timetable.getResources().setResources(new ArrayList<>());
         }
     }
 
@@ -110,11 +112,16 @@ public class InsertResource extends InsertPaneWithTable {
                 if(!nameTextField.getText().isEmpty()) {
                     currentResource.setName(nameTextField.getText());
                 }
+                currentResource.setResourceType(resourceType);
 
                 CreatePane.timetable.getResources().getResources().add(currentResource);
-                currentResource = new Resource();
+                if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
+                    currentResource = new Resource();
+                }
+                else{
+                    CreatePane.timetable.getResources().getResources().remove(currentResource);
+                }
 
-                saveIntoFile();
             }
 
             //Adding the table with the existing resources
@@ -130,7 +137,7 @@ public class InsertResource extends InsertPaneWithTable {
         finalVBox.getStyleClass().add("rightVBox");
 
         //Adding the table with the existing resources
-        if(CreatePane.timetable.getResources()!= null && CreatePane.timetable.getResources().getResources().size()>0) {
+        if(CreatePane.timetable.getResources()!= null && CreatePane.timetable.getResources().getResources() != null && CreatePane.timetable.getResources().getResources().size()>0) {
             for(Resource r: CreatePane.timetable.getResources().getResources()){
                 if(r.getResourceType().equals(resourceType)){
                     addTable(finalVBox);
@@ -167,7 +174,62 @@ public class InsertResource extends InsertPaneWithTable {
         TableColumn nameColumn = new TableColumn("Nume");
         nameColumn.setCellValueFactory(new PropertyValueFactory<Resource, String>("name"));
 
-        table.getColumns().addAll(idColumn, nameColumn);
+        TableColumn deleteColumn = new TableColumn();
+        Callback<TableColumn<Resource, String>, TableCell<Resource, String>> cellFactory =
+                new Callback<TableColumn<Resource, String>, TableCell<Resource, String>>()
+                {
+                    @Override
+                    public TableCell call( final TableColumn<Resource, String> param )
+                    {
+                        final TableCell<Resource, String> cell = new TableCell<Resource, String>()
+                        {
+                            final Button remove = new Button();
+
+                            @Override
+                            public void updateItem(String item, boolean empty)
+                            {
+                                super.updateItem(item, empty);
+                                if (empty)
+                                {
+                                    setGraphic(null);
+                                    setText(null);
+                                }
+                                else
+                                {
+                                    remove.setOnAction((ActionEvent event) ->
+                                    {
+                                        Resource resource = getTableView().getItems().get(getIndex());
+                                        CreatePane.timetable.getResources().getResources().remove(resource);
+
+                                        updateTableData();
+                                        saveIntoFile();
+                                    } );
+
+                                    ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                                    imageView2.setFitHeight(10);
+                                    imageView2.setFitWidth(10);
+                                    imageView2.setPreserveRatio(true);
+
+                                    remove.setGraphic(imageView2);
+                                    remove.getStyleClass().add("removeEventResource");
+                                    remove.setMinSize(30, 40);
+
+                                    setGraphic(remove);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+
+        deleteColumn.setCellFactory(cellFactory);
+        deleteColumn.setMaxWidth(30);
+        deleteColumn.setPrefWidth(30);
+        deleteColumn.setMinWidth(30);
+        deleteColumn.getStyleClass().add("lastColumn");
+
+        table.getColumns().addAll(idColumn, nameColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         updateTableData();
@@ -191,5 +253,6 @@ public class InsertResource extends InsertPaneWithTable {
         }
 
         table.setItems(data);
+        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
     }
 }

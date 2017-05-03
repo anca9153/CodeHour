@@ -1,5 +1,7 @@
 package view.panes;
 
+import compute.Algorithm;
+import compute.algorithms.GradingAlgorithm;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -19,8 +22,9 @@ import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
 import model.resource.ResourceTypes;
 import utilities.DataLoader;
+import utilities.PropertiesLoader;
+import view.StageLoader;
 import view.panes.create.*;
-
 import java.io.File;
 import java.util.*;
 
@@ -36,6 +40,7 @@ public class CreatePane extends MainPane {
     private File loadedFile;
     private HBox leftToolbar;
     private String currentOption = new String();
+    private VBox generateVBox;
 
     public CreatePane(Stage primaryStage, Timetable timetable){
         this.primaryStage = primaryStage;
@@ -196,7 +201,112 @@ public class CreatePane extends MainPane {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.getStyleClass().add("edge-to-edge");
 
-        this.setLeft(scrollPane);
+        final Label error = new Label("");
+        error.getStyleClass().addAll("fieldRightLabel", "redStar", "normalFont");
+        error.setTextFill(Color.WHITE);
+        Button generate = new Button("GENEREAZĂ ORAR");
+
+        generateVBox = new VBox(generate, error);
+        generateVBox.getStyleClass().addAll("leftScreen", "addBorderGenerate");
+        generateVBox.setMaxHeight(120);
+        generateVBox.setMinHeight(120);
+        generateVBox.setPrefHeight(120);
+        generateVBox.setAlignment(Pos.CENTER);
+
+        generate.setOnAction((ActionEvent event) ->
+        {
+            if (savingFile != null) {
+                if (timetable.getEvents() != null && timetable.getEvents().getEvents() != null && timetable.getEvents().getEvents().size() > 0) {
+                    Algorithm algorithm = new GradingAlgorithm();
+                    Timetable solvedTimetable = algorithm.solve(timetable);
+
+                    //Saving into the files
+                    DataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, savingFile);
+
+                    if(!savingFile.getPath().equals(PropertiesLoader.loadXMLLocationFolder())){
+                        File f = new File(new String(PropertiesLoader.loadXMLLocationFolder() + savingFile.getName()));
+                        DataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, f);
+                        savingFile = f;
+                    }
+
+                    //Preparing for loading the display pane
+                    File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
+
+                    List<File> timetablesToDisplay = new ArrayList<>();
+
+                    //Reading the XMLs from the given directory
+                    for (final File fileEntry : loadFolder.listFiles()) {
+                        if (!fileEntry.isDirectory()){
+                            timetablesToDisplay.add(fileEntry);
+                        }
+                    }
+
+                    Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();
+                    Timetable t;
+                    for(File file: timetablesToDisplay) {
+                        if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
+                            t = DataLoader.loadDataFromXML(file.getName());
+                        } else {
+                            t = DataLoader.loadDataFromXMLWithPath(file);
+                        }
+                        if(t.getSolutions() != null){
+                            idTimetableWithSolutionMap.put(t.getId(), t);
+                        }
+
+                    }
+
+                    //Opening display pane
+                    StageLoader.loadDisplay(idTimetableWithSolutionMap, savingFile, timetable);
+
+                } else {
+                    error.setText("Evenimentele sunt necesare!");
+
+                    if (generateVBox.getChildren().size() < 2) {
+                        generateVBox.getChildren().add(0, error);
+                    } else {
+                        error.setVisible(true);
+                    }
+
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(5)
+                    );
+                    visiblePause.setOnFinished(
+                            e -> error.setVisible(false)
+                    );
+                    visiblePause.play();
+                }
+            }
+            else {
+                //Show window to choose file
+                error.setText("Nu este încărcat un orar!");
+
+                if(generateVBox.getChildren().size()<2) {
+                    generateVBox.getChildren().add(0, error);
+                }
+                else{
+                    error.setVisible(true);
+                }
+
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(5)
+                );
+                visiblePause.setOnFinished(
+                        e -> error.setVisible(false)
+                );
+                visiblePause.play();
+            }
+
+            //The timetable has been generated
+            //Now loading the display pane
+
+
+        });
+
+        generate.getStyleClass().addAll("createButton");
+
+        VBox leftVBox = new VBox(scrollPane, generateVBox);
+
+        this.setLeft(leftVBox);
     }
 
     private VBox createLeftOption(String labelString, String... buttonStringList){

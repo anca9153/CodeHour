@@ -124,10 +124,13 @@ public class InsertResourceConstraint extends InsertPaneWithTable {
                 HBox hb = createConstraintEventLabel(eventsCB.getValue());
 
                 Button remove = new Button();
-                remove.setGraphic(imageView);
+                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                imageView2.setFitHeight(6);
+                imageView2.setFitWidth(6);
+                imageView2.setPreserveRatio(true);
+
+                remove.setGraphic(imageView2);
                 remove.getStyleClass().add("removeEventResource");
-                imageView.setFitHeight(6);
-                imageView.setFitWidth(6);
                 remove.setMaxSize(10, 10);
 
                 remove.setOnAction((ActionEvent e) ->{
@@ -204,17 +207,17 @@ public class InsertResourceConstraint extends InsertPaneWithTable {
                     currentConstraint.setRequired(false);
                 }
 
-                CreatePane.timetable.getEventConstraints().getConstraints().add(currentConstraint);
-                if(currentConstraint instanceof AssignResourceConstraint) {
-                    currentConstraint = new AssignResourceConstraint();
-                }
-                else{
-                    if(currentConstraint instanceof AssignTimeConstraint) {
-                        currentConstraint = new AssignTimeConstraint();
+                if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
+                    CreatePane.timetable.getEventConstraints().getConstraints().add(currentConstraint);
+                    if(currentConstraint instanceof AssignResourceConstraint) {
+                        currentConstraint = new AssignResourceConstraint();
+                    }
+                    else{
+                        if(currentConstraint instanceof AssignTimeConstraint) {
+                            currentConstraint = new AssignTimeConstraint();
+                        }
                     }
                 }
-
-                saveIntoFile();
             }
 
             //Adding the table with the existing constraints
@@ -240,9 +243,6 @@ public class InsertResourceConstraint extends InsertPaneWithTable {
     private HBox createConstraintEventLabel(String text){
         Label label = new Label(text.toUpperCase());
         label.getStyleClass().add("resourceLabelForEvent");
-
-        ImageView imageView = new ImageView(new Image("\\icons\\deleteIcon.png"));
-        imageView.setPreserveRatio(true);
 
         HBox hb = new HBox(label);
         hb.setPadding(new Insets(3, 5, 10, 0));

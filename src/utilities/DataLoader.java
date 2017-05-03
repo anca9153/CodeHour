@@ -14,7 +14,6 @@ import model.resource.ResourceTypes;
 import model.resource.Resources;
 import model.time.Time;
 import model.time.Times;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

@@ -100,12 +100,18 @@ public class GradingAlgorithm implements Algorithm {
 
     private int computeInfeasibility(Event e){
         int infeasibility = 0;
-        for(Constraint c : timetable.getEventConstraints().getConstraints()){
-            infeasibility += c.validate(e);
+
+        if(timetable.getEventConstraints() != null && timetable.getEventConstraints().getConstraints() != null) {
+            for (Constraint c : timetable.getEventConstraints().getConstraints()) {
+                infeasibility += c.validate(e);
+            }
         }
-        for(Constraint c: timetable.getResourceConstraints().getConstraints()){
-            for(Resource r: e.getResources().getResources()){
-                infeasibility += c.validate(r);
+
+        if(timetable.getResourceConstraints() != null && timetable.getResourceConstraints().getConstraints() != null) {
+            for (Constraint c : timetable.getResourceConstraints().getConstraints()) {
+                for (Resource r : e.getResources().getResources()) {
+                    infeasibility += c.validate(r);
+                }
             }
         }
         Time t = e.getTime();
