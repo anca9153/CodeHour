@@ -160,6 +160,40 @@
                 </resource>
             </resources>
         </event>
+        <event id="ev_2">
+            <description>rom</description>
+            <duration>1</duration>
+            <resources>
+                <resource id="AS">
+                    <name>A</name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+        </event>
+        <event id="ev_3">
+            <description>eng</description>
+            <duration>1</duration>
+            <resources>
+                <resource id="asd">
+                    <name>S</name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+            </resources>
+        </event>
+        <event id="ev_4">
+            <description>fr</description>
+            <duration>1</duration>
+            <resources>
+                <resource id="SZ">
+                    <name>Z</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource id="asd">
+                    <name>S</name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+            </resources>
+        </event>
     </events>
     <metadata>
         <contributor>test author</contributor>
@@ -216,6 +250,55 @@
                         <name>1_tue</name>
                     </time>
                 </event>
+                <event id="ev_2">
+                    <description>rom</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="AS">
+                            <name>A</name>
+                            <resourceType>classroom</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>tuesday</day>
+                        <hourInterval>rcbf</hourInterval>
+                        <name>1_tue</name>
+                    </time>
+                </event>
+                <event id="ev_3">
+                    <description>eng</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="asd">
+                            <name>S</name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="1">
+                        <day>tuesday</day>
+                        <hourInterval>rcbf</hourInterval>
+                        <name>1_tue</name>
+                    </time>
+                </event>
+                <event id="ev_4">
+                    <description>fr</description>
+                    <duration>1</duration>
+                    <resources>
+                        <resource id="SZ">
+                            <name>Z</name>
+                            <resourceType>teacher</resourceType>
+                        </resource>
+                        <resource id="asd">
+                            <name>S</name>
+                            <resourceType>studyGroup</resourceType>
+                        </resource>
+                    </resources>
+                    <time id="2">
+                        <day>tuesday</day>
+                        <hourInterval>rcbf</hourInterval>
+                        <name>2_tue</name>
+                    </time>
+                </event>
             </events>
         </solution>
     </solutions>
@@ -231,14 +314,14 @@
             <name>2_tue</name>
         </time>
         <time id="3">
-            <day>tuesday</day>
-            <hourInterval>rcbf</hourInterval>
-            <name>3_tue</name>
-        </time>
-        <time id="4">
             <day>monday</day>
             <hourInterval>tgh</hourInterval>
             <name>1_mon</name>
+        </time>
+        <time id="4">
+            <day>friday</day>
+            <hourInterval>dfcg</hourInterval>
+            <name>1_fri</name>
         </time>
     </times>
 </timetable>

@@ -318,9 +318,23 @@
     -fx-background-color: white, white;
     -fx-text-fill: #363636;
 }
+
+.specialComboBox:focused{
+    -fx-padding: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0;
+    -fx-margin: 0px;
+}
+
 .specialComboBox {
     -fx-background-color: #FFFFFF;
 }
+
+.combo-box .arrow-button{
+    -fx-background-color: transparent;
+}
+
 .resourceTypeText{
     -fx-text-fill: #A6A6A6;
     -fx-font: 15pt "Verdana";
@@ -440,6 +454,7 @@
     -fx-margin: 0px;
     -fx-background-radius: 0;
     -fx-cursor: hand;
+    -fx-text-fill: #ffffff;
 }
 
 .removeEventResource:hover{

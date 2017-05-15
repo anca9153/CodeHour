@@ -28,6 +28,10 @@ public class InsertTime extends InsertPaneWithTable{
     private Time currentTime = new Time();
     private VBox finalVBox;
 
+    private ComboBox<String> dayCB;
+    private ComboBox<Integer> timeUnitsCB;
+    private TextField hourIntervalTextField;
+
     public InsertTime(Stage primaryStage){
         this.primaryStage = primaryStage;
 
@@ -47,6 +51,7 @@ public class InsertTime extends InsertPaneWithTable{
 
         textFieldValues.add(new Pair("Alege ziua intervalului", Boolean.TRUE));
         textFieldValues.add(new Pair("8:00 - 9:00", Boolean.TRUE));
+        textFieldValues.add(new Pair("1", Boolean.TRUE));
 
         if(currentTime.getDay()!=null){
             textFieldValues.remove(0);
@@ -56,6 +61,11 @@ public class InsertTime extends InsertPaneWithTable{
         if(currentTime.getHourInterval()!=null){
             textFieldValues.remove(1);
             textFieldValues.add(1, new Pair(currentTime.getHourInterval(), Boolean.FALSE));
+        }
+
+        if(currentTime.getNumberOfTimeUnits() > 0){
+            textFieldValues.remove(2);
+            textFieldValues.add(2, new Pair(currentTime.getNumberOfTimeUnits(), Boolean.FALSE));
         }
 
         return textFieldValues;
@@ -69,13 +79,25 @@ public class InsertTime extends InsertPaneWithTable{
         ObservableList<VBox> vbList = FXCollections.observableArrayList();
 
         HBox dayLabel = makeLabel("ZIUA", true);
-        ComboBox<String> dayCB = new ComboBox<>(days);
+        dayCB = new ComboBox<>(days);
         dayCB.getStyleClass().add("specialComboBox");
+        dayCB.setPromptText(textFieldValues.get(0).getKey());
         vbList.add(new VBox(dayLabel, dayCB));
 
         HBox hourIntervalLabel = makeLabel("INTERVALUL ORAR", true);
-        TextField hourIntervalTextField = makeTextField(textFieldValues.get(1));
+        hourIntervalTextField = makeTextField(textFieldValues.get(1));
         vbList.add(new VBox(hourIntervalLabel, hourIntervalTextField));
+
+        ObservableList<Integer> numbers = FXCollections.observableArrayList();
+        for(int i=1; i<300; i++){
+            numbers.add(i);
+        }
+
+        HBox timeUnitsLabel = makeLabel("UNITĂȚI DE TIMP", true);
+        timeUnitsCB = new ComboBox<>(numbers);
+        timeUnitsCB.getStyleClass().add("specialComboBox");
+        timeUnitsCB.setPromptText(textFieldValues.get(2).getKey());
+        vbList.add(new VBox(timeUnitsLabel, timeUnitsCB));
 
         FlowPane fp = getFlowPane(vbList);
 
@@ -111,27 +133,53 @@ public class InsertTime extends InsertPaneWithTable{
                 currentTime.setHourInterval(hourIntervalTextField.getText());
             }
 
+            if(timeUnitsCB.getValue() == null){
+                showErrorMessage(timeUnitsLabel, "Numărul este necesar", timeUnitsCB);
+                empty = true;
+            }
+            else{
+                currentTime.setNumberOfTimeUnits(timeUnitsCB.getValue());
+            }
+
             if(!empty) {
-                currentTime.setId(CreatePane.timetable.getTimes().getTimes().size()+1);
-
-                int dayNo = 1;
-
-                for(Time t : CreatePane.timetable.getTimes().getTimes()){
-                    if(t.getDay().equals(currentTime.getDay())){
-                        dayNo++;
-                    }
-                }
-
-                for(String s: days){
-                    if(currentTime.getDay().equals(s)){
-                        currentTime.setName(dayNo + "_" + s.substring(0,3));
+                //Checking if the current resource is an existing one and replacing it in the timetable
+                int index = 0;
+                boolean exists = false;
+                for(Time r:CreatePane.timetable.getTimes().getTimes()){
+                    if(r.getId() == currentTime.getId()){
+                        CreatePane.timetable.getTimes().getTimes().remove(r);
+                        CreatePane.timetable.getTimes().getTimes().add(index, currentTime);
+                        exists = true;
                         break;
                     }
+                    index++;
                 }
 
-                CreatePane.timetable.getTimes().getTimes().add(currentTime);
+                if(!exists){
+                    currentTime.setId(CreatePane.timetable.getTimes().getTimes().size()+1);
+
+                    int dayNo = 1;
+
+                    for(Time t : CreatePane.timetable.getTimes().getTimes()){
+                        if(t.getDay().equals(currentTime.getDay())){
+                            dayNo++;
+                        }
+                    }
+
+                    for(String s: days){
+                        if(currentTime.getDay().equals(s)){
+                            currentTime.setName(dayNo + "_" + s.substring(0,3));
+                            break;
+                        }
+                    }
+                    CreatePane.timetable.getTimes().getTimes().add(currentTime);
+                    updateTableData();
+                }
+
                 if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
                     currentTime = new Time();
+                    table.getSelectionModel().clearSelection();
+                    clearAllFields();
                 }
                 else {
                     CreatePane.timetable.getTimes().getTimes().remove(currentTime);
@@ -157,6 +205,12 @@ public class InsertTime extends InsertPaneWithTable{
         }
 
         return finalVBox;
+    }
+
+    private void clearAllFields(){
+        dayCB.setValue(null);
+        timeUnitsCB.setValue(null);
+        hourIntervalTextField.clear();
     }
 
     protected VBox createTable(){
@@ -189,6 +243,9 @@ public class InsertTime extends InsertPaneWithTable{
 
         TableColumn hourIntervalColumn = new TableColumn("Interval");
         hourIntervalColumn.setCellValueFactory(new PropertyValueFactory<Time, String>("hourInterval"));
+
+        TableColumn timeUnitColumn = new TableColumn("Unități de timp");
+        timeUnitColumn.setCellValueFactory(new PropertyValueFactory<Time, Integer>("numberOfTimeUnits"));
 
         TableColumn deleteColumn = new TableColumn();
         Callback<TableColumn<Time, String>, TableCell<Time, String>> cellFactory =
@@ -259,8 +316,38 @@ public class InsertTime extends InsertPaneWithTable{
         deleteColumn.setMinWidth(30);
         deleteColumn.getStyleClass().add("lastColumn");
 
-        table.getColumns().addAll(idColumn, nameColumn, dayColumn, hourIntervalColumn, deleteColumn);
+        table.getColumns().addAll(idColumn, nameColumn, dayColumn, hourIntervalColumn, timeUnitColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        table.setEditable(true);
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                Time e = (Time)newValue;
+                currentTime = e;
+
+                if(e.getDay()!=null) {
+                    dayCB.setValue(e.getDay());
+                }
+                else{
+                    dayCB.setValue("Alege ziua intervalului");
+                }
+
+                if(e.getHourInterval()!=null){
+                    hourIntervalTextField.setText(e.getHourInterval());
+                }
+                else{
+                    hourIntervalTextField.setText("8:00 - 9:00");
+                }
+
+                if(e.getNumberOfTimeUnits()>0){
+                    timeUnitsCB.setValue(e.getNumberOfTimeUnits());
+                }
+                else{
+                    timeUnitsCB.setValue(1);
+                }
+
+            }
+        });
 
         updateTableData();
 
@@ -275,7 +362,14 @@ public class InsertTime extends InsertPaneWithTable{
 
     protected void updateTableData(){
         ObservableList<Time> data = FXCollections.observableArrayList(CreatePane.timetable.getTimes().getTimes());
-        table.setItems(data);
-        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
+
+        if(table == null){
+            table = new TableView();
+        }
+
+        if(!data.isEmpty()) {
+            table.setItems(data);
+            table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
     }
 }

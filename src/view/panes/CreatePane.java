@@ -83,7 +83,7 @@ public class CreatePane extends MainPane {
                         savingFile = loadedFile;
                         timetable = DataLoader.loadDataFromXMLWithPath(loadedFile);
 
-                        Label confLoad = new Label(" Orarul a fost încrcat.");
+                        Label confLoad = new Label(" Orarul a fost încărcat.");
                         confLoad.getStyleClass().addAll("fieldRightLabel", "explanatory1");
                         confLoad.setId("confLoad");
 

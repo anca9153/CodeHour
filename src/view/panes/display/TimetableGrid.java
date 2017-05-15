@@ -1,24 +1,27 @@
 package view.panes.display;
 
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import model.Timetable;
 import model.event.Event;
 import model.resource.Resource;
 import model.time.Time;
-
 import java.util.*;
 
 /**
  * Created by Anca on 4/3/2017.
  */
 public class TimetableGrid {
+    private StackPane cellPane;
+    private Event draggedEvent = new Event();
 
     public ScrollPane addRightPane(Timetable timetable, String resource, String resourceType, List<Event> eventList){
         //The timetable for a selected resource, displayed on the right side
@@ -234,7 +237,7 @@ public class TimetableGrid {
         }
         Label l = new Label(cornerString);
         l.getStyleClass().add("tableHeadLabel");
-        StackPane cellPane = new StackPane(l);
+        cellPane = new StackPane(l);
         cellPane.getStyleClass().add("tableHeadCell");
         StackPane.setAlignment(l,Pos.CENTER);
         pane.add(cellPane, 0,0);
@@ -307,6 +310,56 @@ public class TimetableGrid {
                 cellPane = new StackPane(hourLabel);
                 cellPane.getStyleClass().add("tableContentCell");
                 StackPane.setAlignment(hourLabel,Pos.CENTER);
+
+                cellPane.setOnDragDetected(new EventHandler<MouseEvent>(){
+                    public void handle(MouseEvent event){
+                        Dragboard db = hourLabel.startDragAndDrop(TransferMode.MOVE);
+                        ClipboardContent content = new ClipboardContent();
+                        content.putString(resourceType);
+                        db.setContent(content);
+                        System.out.println("Drag detected");
+                        draggedEvent = e;
+                        event.consume();
+                    }
+                });
+
+                cellPane.setOnDragOver(new EventHandler <DragEvent>() {
+                    public void handle(DragEvent event) {
+                        event.acceptTransferModes(TransferMode.ANY);
+                        System.out.println("Drag Over Detected");
+                        event.consume();
+                    }
+                });
+
+                cellPane.setOnDragDropped(new EventHandler <DragEvent>() {
+                    public void handle(DragEvent event) {
+                        event.acceptTransferModes(TransferMode.ANY);
+                        Dragboard db = event.getDragboard();
+
+                        event.setDropCompleted(false);
+                        if(db.hasString()) {
+                            String resourceType = db.getString();
+
+                            System.out.println("Drag dropped "+cellPane.getChildren().size());
+                            VBox oldCell = (VBox)cellPane.getChildren().get(0);
+                            cellPane.getChildren().clear();
+                            cellPane.getChildren().add(getHourLabel(draggedEvent, resourceType, true));
+                            event.setDropCompleted(true);
+                        }
+
+                        event.consume();
+                    }
+                });
+
+//                image.setOnDragDone(new EventHandler <DragEvent>() {
+//                    public void handle(DragEvent event){
+//                        if (event.getTransferMode() == TransferMode.MOVE){
+//                            image.setImage(null);
+//                        }
+//                        System.out.println("Drag Complete!");
+//                        event.consume();
+//                    }
+//                });
 
                 int windowCounter = Integer.valueOf(e.getTime().getName().split("_")[0]) - 1;
 

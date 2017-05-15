@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -12,14 +13,14 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import model.Metadata;
 import view.panes.CreatePane;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * Created by Anca on 4/24/2017.
  */
 public class InsertGeneralSettings extends InsertPane {
+    private Map<String, Integer> numberMap;
 
     public InsertGeneralSettings(Stage primaryStage){
         this.primaryStage = primaryStage;
@@ -31,6 +32,7 @@ public class InsertGeneralSettings extends InsertPane {
         textFieldValues.add(new Pair("Adaugă numele orarului", Boolean.TRUE));
         textFieldValues.add(new Pair("Adaugă autorul", Boolean.TRUE));
         textFieldValues.add(new Pair("Adaugă descrierea", Boolean.TRUE));
+        textFieldValues.add(new Pair("Adaugă durata unui curs", Boolean.TRUE));
 
         if(CreatePane.timetable.getMetadata() != null){
             if(CreatePane.timetable.getMetadata().getName()!=null){
@@ -47,12 +49,38 @@ public class InsertGeneralSettings extends InsertPane {
                 textFieldValues.remove(2);
                 textFieldValues.add(2, new Pair(CreatePane.timetable.getMetadata().getDescription(), Boolean.FALSE));
             }
+
+            if(CreatePane.timetable.getBasicTimeUnitInMinutes() > 0){
+                textFieldValues.remove(3);
+                int x = CreatePane.timetable.getBasicTimeUnitInMinutes();
+                for(String s: numberMap.keySet()){
+                    if(numberMap.get(s) == x){
+                        textFieldValues.add(3, new Pair(s, Boolean.FALSE));
+                        break;
+                    }
+                }
+            }
         }
 
         return textFieldValues;
     }
 
     public VBox addRightPane(){
+        numberMap = new HashMap<>();
+        ObservableList<String> numberOptions = FXCollections.observableArrayList();
+        for(int i=1;i<1440;i++){
+            String s;
+            if(i<60){
+                s = new String(i+" min");
+            }
+            else{
+                s = new String(i/60+" h "+i%60+" min");
+            }
+
+            numberOptions.add(s);
+            numberMap.put(s, i);
+        }
+
         ObservableList<VBox> vbList = FXCollections.observableArrayList();
 
         HBox idLabel = makeLabel("ID", true);
@@ -73,12 +101,18 @@ public class InsertGeneralSettings extends InsertPane {
         TextField descriptionTextField = makeTextField(textFieldValues.get(2));
         vbList.add(new VBox(descriptionLabel, descriptionTextField));
 
+        HBox timeIntervalLabel = makeLabel("DURATA UNEI UNITĂȚI DE TIMP", true);
+        ComboBox<String> timeIntervalCB = new ComboBox<>(numberOptions);
+        timeIntervalCB.getStyleClass().add("specialComboBox");
+        timeIntervalCB.setPromptText(textFieldValues.get(3).getKey());
+        vbList.add(new VBox(timeIntervalLabel, timeIntervalCB));
+
         FlowPane fp = getFlowPane(vbList);
 
         Button saveButton = new Button("SALVEAZĂ");
         saveButton.getStyleClass().add("rightSaveButton");
         saveButton.setOnAction((ActionEvent event) ->{
-            List<HBox> labels = new ArrayList<>(Arrays.asList(idLabel, nameLabel,  contributorLabel));
+            List<HBox> labels = new ArrayList<>(Arrays.asList(idLabel, nameLabel,  contributorLabel, timeIntervalLabel));
             List<TextField> textFields =  new ArrayList<>(Arrays.asList(idTextField, nameTextField, contributorTextField));
             clearErrors(labels, textFields);
 
@@ -113,6 +147,13 @@ public class InsertGeneralSettings extends InsertPane {
                 meta.setContributor(contributorTextField.getText());
             }
 
+            if(timeIntervalCB.getValue().isEmpty()){
+                showErrorMessage(timeIntervalLabel, "Durata este necesară", timeIntervalCB);
+                empty = true;
+            }
+            else{
+                CreatePane.timetable.setBasicTimeUnitInMinutes(numberMap.get(timeIntervalCB.getValue()));
+            }
 
             if(!descriptionTextField.getText().isEmpty()){
                 meta.setDescription(descriptionTextField.getText());

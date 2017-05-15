@@ -14,7 +14,6 @@ import java.io.Serializable;
 @XmlRootElement(name = "event")
 public class Event extends FitForConstraint implements Serializable{
     private String id;
-    private int duration;
     private Time time;
     private Resources resources;
     private String description;
@@ -23,9 +22,8 @@ public class Event extends FitForConstraint implements Serializable{
 
     }
 
-    public Event(String id, int duration, Time time, Resources resources, String description) {
+    public Event(String id, Time time, Resources resources, String description) {
         this.id = id;
-        this.duration = duration;
         this.time = time;
         this.resources = resources;
         this.description = description;
@@ -38,14 +36,6 @@ public class Event extends FitForConstraint implements Serializable{
     @XmlAttribute
     public void setId(String id) {
         this.id = id;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public Time getTime() {

@@ -18,7 +18,8 @@ public abstract class InsertPaneWithTable extends InsertPane {
             for(Node n: finalVBox.getChildren()){
                 if(n.getId()!=null && n.getId().equals("table")){
                     //If the table already exists we only update the data in it
-                    updateTableData();
+                    finalVBox.getChildren().remove(n);
+                    finalVBox.getChildren().add(createTable());
                     table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
                     tableExists = true;
                     break;

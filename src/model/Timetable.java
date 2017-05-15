@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "timetable")
 public class Timetable {
     private String id;
+    //Cat dureaza un curs, de ex.: 50 min, 60 min, 35 min
+    private int basicTimeUnitInMinutes;
     private Metadata metadata;
     private Times times;
     private ResourceTypes resourceTypes;
@@ -122,5 +124,13 @@ public class Timetable {
     @XmlElement(name = "resourceConstraints")
     public void setResourceConstraints(Constraints resourceConstraints) {
         this.resourceConstraints = resourceConstraints;
+    }
+
+    public int getBasicTimeUnitInMinutes() {
+        return basicTimeUnitInMinutes;
+    }
+
+    public void setBasicTimeUnitInMinutes(int basicTimeUnitInMinutes) {
+        this.basicTimeUnitInMinutes = basicTimeUnitInMinutes;
     }
 }

@@ -21,8 +21,12 @@ import model.event.Events;
 import model.resource.Resource;
 import model.resource.Resources;
 import model.time.Time;
+import utilities.PropertiesLoader;
 import view.panes.CreatePane;
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -31,6 +35,12 @@ import java.util.*;
 public class InsertEvent extends InsertPaneWithTable {
     private Event currentEvent = new Event();
     private VBox finalVBox;
+
+    private ComboBox<String> descriptionCB;
+    private ComboBox<String> timeCB;
+    private FlowPane resourcesFP;
+    private ObservableList<String> resourceIds;
+    private ComboBox<String> resourceCB;
 
     public InsertEvent(Stage primaryStage){
         this.primaryStage = primaryStage;
@@ -49,24 +59,18 @@ public class InsertEvent extends InsertPaneWithTable {
     private ArrayList<Pair<String, Boolean>> getTextFieldValues(){
         ArrayList<Pair<String, Boolean>> textFieldValues = new ArrayList<>();
 
-        textFieldValues.add(new Pair("Alege durata evenimentului", Boolean.TRUE));
         textFieldValues.add(new Pair("Alege intervalul orar", Boolean.TRUE));
         textFieldValues.add(new Pair("Alege resursa", Boolean.TRUE));
-        textFieldValues.add(new Pair("Adaugă descrierea", Boolean.TRUE));
-
-        if(currentEvent.getDuration()!=0){
-            textFieldValues.remove(0);
-            textFieldValues.add(0, new Pair(currentEvent.getDuration(), Boolean.FALSE));
-        }
+        textFieldValues.add(new Pair("Alege materia", Boolean.TRUE));
 
         if(currentEvent.getTime()!=null){
-            textFieldValues.remove(1);
-            textFieldValues.add(1, new Pair(currentEvent.getTime().getId(), Boolean.FALSE));
+            textFieldValues.remove(0);
+            textFieldValues.add(0, new Pair(currentEvent.getTime().getId(), Boolean.FALSE));
         }
 
         if(currentEvent.getDescription()!=null){
-            textFieldValues.remove(3);
-            textFieldValues.add(3, new Pair(currentEvent.getDescription(), Boolean.FALSE));
+            textFieldValues.remove(2);
+            textFieldValues.add(2, new Pair(currentEvent.getDescription(), Boolean.FALSE));
         }
 
         return textFieldValues;
@@ -75,23 +79,36 @@ public class InsertEvent extends InsertPaneWithTable {
     public VBox addRightPane(){
         ArrayList<Pair<String, Boolean>> textFieldValues = getTextFieldValues();
 
-        ObservableList<Integer> durations = FXCollections.observableArrayList();
-        for(int i = 1; i<24; i++){
-            durations.add(i);
-        }
-
         ObservableList<VBox> vbList = FXCollections.observableArrayList();
 
-        HBox descriptionLabel = makeLabel("DESCRIERE", true);
-        TextField descriptionTextField = makeTextField(textFieldValues.get(3));
-        vbList.add(new VBox(descriptionLabel, descriptionTextField));
+        ObservableList<String> subjects = FXCollections.observableArrayList();
 
-        HBox durationLabel = makeLabel("DURATA", true);
-        ComboBox<Integer> durationCB = new ComboBox<>(durations);
-        durationCB.getStyleClass().add("specialComboBox");
-        vbList.add(new VBox(durationLabel, durationCB));
+        //Reading the subjects list from file
+        String path = PropertiesLoader.loadSubjectsFilePath();
 
-               ObservableList<String> timeIds = FXCollections.observableArrayList();
+        try {
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                subjects.add(sCurrentLine);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        HBox descriptionLabel = makeLabel("MATERIE", true);
+        descriptionCB = new ComboBox<>(subjects);
+        descriptionCB.getStyleClass().add("specialComboBox");
+        descriptionCB.setPromptText(textFieldValues.get(2).getKey());
+        descriptionCB.setEditable(true);
+        vbList.add(new VBox(descriptionLabel, descriptionCB));
+
+        ObservableList<String> timeIds = FXCollections.observableArrayList();
         if(CreatePane.timetable.getTimes()!=null && CreatePane.timetable.getTimes().getTimes() != null) {
             for (Time t : CreatePane.timetable.getTimes().getTimes()) {
                 timeIds.add(t.getName());
@@ -99,8 +116,9 @@ public class InsertEvent extends InsertPaneWithTable {
         }
 
         HBox timeLabel = makeLabel("INTERVALUL ORAR", false);
-        ComboBox<String> timeCB = new ComboBox<>(timeIds);
+        timeCB = new ComboBox<>(timeIds);
         timeCB.getStyleClass().add("specialComboBox");
+        timeCB.setPromptText(String.valueOf(textFieldValues.get(0).getKey()));
         vbList.add(new VBox(timeLabel, timeCB));
 
         FlowPane fp = getFlowPane(vbList);
@@ -108,7 +126,7 @@ public class InsertEvent extends InsertPaneWithTable {
         Map<String, Resource> idResourceMap = new HashMap<>();
 
         //Resources that are added in the timetable object
-        ObservableList<String> resourceIds = FXCollections.observableArrayList();
+        resourceIds = FXCollections.observableArrayList();
         if(CreatePane.timetable.getResources()!=null && CreatePane.timetable.getResources().getResources() != null) {
             for (Resource r : CreatePane.timetable.getResources().getResources()) {
                 if(r.getResourceType().equals("teacher")){
@@ -122,29 +140,53 @@ public class InsertEvent extends InsertPaneWithTable {
             }
         }
 
+        resourceCB = new ComboBox<>(resourceIds);
+        resourceCB.getStyleClass().add("specialComboBox");
+        resourceCB.setPromptText(textFieldValues.get(1).getKey());
+
         //Resources linked to the current event
         //We also remove the resources that are already linked to the current event from the possible choices of resources
         ObservableList<HBox> eventResourceIdLabels = FXCollections.observableArrayList();
         if(currentEvent.getResources()!=null) {
             for (Resource r : currentEvent.getResources().getResources()) {
+                final HBox hb;
                 if(r.getResourceType().equals("teacher")){
-                    eventResourceIdLabels.add(createEventResourceLabel(r.getName()));
+                    hb = createEventResourceLabel(r.getName());
                     resourceIds.remove(r.getName());
                 }
                 else {
-                    eventResourceIdLabels.add(createEventResourceLabel(r.getId()));
+                    hb = createEventResourceLabel(r.getId());
                     resourceIds.remove(r.getId());
                 }
+
+                Button remove = new Button();
+                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                imageView2.setFitHeight(6);
+                imageView2.setFitWidth(6);
+                imageView2.setPreserveRatio(true);
+
+                remove.setGraphic(imageView2);
+                remove.getStyleClass().add("removeEventResource");
+                remove.setMaxSize(10, 10);
+
+                remove.setOnAction((ActionEvent e) ->{
+                    resourcesFP.getChildren().remove(hb);
+
+                    resourceIds.add(hb.getId());
+                    resourceCB.setItems(null);
+                    resourceCB.setItems(resourceIds);
+
+                });
+
+                hb.getChildren().add(remove);
+                eventResourceIdLabels.add(hb);
             }
         }
 
         HBox resourceLabel = makeLabel("LISTA RESURSE", true);
 
-        FlowPane resourcesFP = new FlowPane();
+        resourcesFP = new FlowPane();
         resourcesFP.getChildren().addAll(eventResourceIdLabels);
-
-        ComboBox<String> resourceCB = new ComboBox<>(resourceIds);
-        resourceCB.getStyleClass().add("specialComboBox");
 
         ImageView imageView = new ImageView(new Image("\\icons\\addIcon.png"));
         imageView.setFitHeight(12);
@@ -196,9 +238,9 @@ public class InsertEvent extends InsertPaneWithTable {
         saveButton.getStyleClass().add("rightSaveButton");
         saveButton.setOnAction((ActionEvent event) ->{
             //Clearing all errors
-            List<HBox> labels = new ArrayList<>(Arrays.asList( durationLabel, timeLabel, resourceLabel, descriptionLabel));
-            List<TextField> textFields =  new ArrayList<>(Arrays.asList(descriptionTextField));
-            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(durationCB, timeCB, resourceCB));
+            List<HBox> labels = new ArrayList<>(Arrays.asList( timeLabel, resourceLabel, descriptionLabel));
+            List<TextField> textFields =  new ArrayList<>();
+            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(timeCB, resourceCB, descriptionCB));
 
             clearErrors(labels, textFields);
 
@@ -213,14 +255,6 @@ public class InsertEvent extends InsertPaneWithTable {
 
             boolean empty = false;
 
-            if(durationCB.getValue() == null){
-                showErrorMessage(durationLabel, "Durata este necesară.", durationCB);
-                empty = true;
-            }
-            else {
-                currentEvent.setDuration(durationCB.getValue());
-            }
-
             if(timeCB.getValue() !=null){
                 for(Time t: CreatePane.timetable.getTimes().getTimes()){
                     if(t.getName().equals(timeCB.getValue())){
@@ -229,12 +263,12 @@ public class InsertEvent extends InsertPaneWithTable {
                 }
             }
 
-            if(descriptionTextField.getText().isEmpty()){
-                showErrorMessage(descriptionLabel, "Descrierea este necesară.", descriptionTextField);
+            if(descriptionCB.getValue()== null || descriptionCB.getValue().isEmpty()){
+                showErrorMessage(descriptionLabel, "Descrierea este necesară.", descriptionCB);
                 empty = true;
             }
             else {
-                currentEvent.setDescription(descriptionTextField.getText());
+                currentEvent.setDescription(descriptionCB.getValue());
             }
 
             if(resourcesFP.getChildren().size() < 1){
@@ -250,11 +284,29 @@ public class InsertEvent extends InsertPaneWithTable {
             }
 
             if(!empty) {
-                currentEvent.setId("ev_"+(int)(CreatePane.timetable.getEvents().getEvents().size()+1));
+                //Checking if the current event is an existing one and replacing it in the timetable
+                int index = 0;
+                boolean exists = false;
+                for(Event e:CreatePane.timetable.getEvents().getEvents()){
+                    if(e.getId().equals(currentEvent.getId())){
+                        CreatePane.timetable.getEvents().getEvents().remove(e);
+                        CreatePane.timetable.getEvents().getEvents().add(index, currentEvent);
+                        exists = true;
+                        break;
+                    }
+                    index++;
+                }
 
-                CreatePane.timetable.getEvents().getEvents().add(currentEvent);
+                if(!exists){
+                    currentEvent.setId("ev_"+(int)(CreatePane.timetable.getEvents().getEvents().size()+1));
+                    CreatePane.timetable.getEvents().getEvents().add(currentEvent);
+                    updateTableData();
+                }
+
                 if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
                     currentEvent = new Event();
+                    table.getSelectionModel().clearSelection();
+                    clearAllFields();
                 }
                 else{
                     CreatePane.timetable.getEvents().getEvents().remove(currentEvent);
@@ -279,6 +331,14 @@ public class InsertEvent extends InsertPaneWithTable {
         }
 
         return finalVBox;
+    }
+
+    private void clearAllFields(){
+        descriptionCB.setValue(null);
+        timeCB.setValue(null);
+        resourceCB.setValue(null);
+        resourceIds.clear();
+        resourcesFP.getChildren().clear();
     }
 
     private HBox createEventResourceLabel(String text){
@@ -314,11 +374,8 @@ public class InsertEvent extends InsertPaneWithTable {
         idColumn.setMinWidth(70);
         idColumn.getStyleClass().add("firstColumn");
 
-        TableColumn descriptionColumn = new TableColumn("Description");
+        TableColumn descriptionColumn = new TableColumn("Materie");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Event, Integer>("description"));
-        descriptionColumn.setMaxWidth(100);
-        descriptionColumn.setPrefWidth(100);
-        descriptionColumn.setMinWidth(100);
 
         TableColumn hoursColumn = new TableColumn("Interval");
         hoursColumn.setCellValueFactory(new PropertyValueFactory<Event, Time>("time"));
@@ -455,6 +512,62 @@ public class InsertEvent extends InsertPaneWithTable {
         table.getColumns().addAll(idColumn, descriptionColumn, hoursColumn, resorucesColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        table.setEditable(true);
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                Event e = (Event)newValue;
+                currentEvent = e;
+                descriptionCB.setValue(e.getDescription());
+
+                if(e.getTime()!=null) {
+                    timeCB.setValue(String.valueOf(e.getTime().getId()));
+                }
+                else{
+                    timeCB.setValue("Alege intervalul orar");
+                }
+
+                ObservableList<HBox> eventResourceIdLabels = FXCollections.observableArrayList();
+                if(currentEvent.getResources()!=null) {
+                    for (Resource r : currentEvent.getResources().getResources()) {
+                        final HBox hb;
+                        if(r.getResourceType().equals("teacher")){
+                            hb = createEventResourceLabel(r.getName());
+                            resourceIds.remove(r.getName());
+                        }
+                        else {
+                            hb = createEventResourceLabel(r.getId());
+                            resourceIds.remove(r.getId());
+                        }
+
+                        Button remove = new Button();
+                        ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                        imageView2.setFitHeight(6);
+                        imageView2.setFitWidth(6);
+                        imageView2.setPreserveRatio(true);
+
+                        remove.setGraphic(imageView2);
+                        remove.getStyleClass().add("removeEventResource");
+                        remove.setMaxSize(10, 10);
+
+                        remove.setOnAction((ActionEvent ev) ->{
+                            resourcesFP.getChildren().remove(hb);
+
+                            resourceIds.add(hb.getId());
+                            resourceCB.setItems(null);
+                            resourceCB.setItems(resourceIds);
+
+                        });
+
+                        hb.getChildren().add(remove);
+                        eventResourceIdLabels.add(hb);
+                    }
+                }
+
+                resourcesFP.getChildren().clear();
+                resourcesFP.getChildren().addAll(eventResourceIdLabels);
+            }
+        });
+
         updateTableData();
 
         table.setFixedCellSize(35);
@@ -468,8 +581,15 @@ public class InsertEvent extends InsertPaneWithTable {
 
     protected void updateTableData(){
         ObservableList<Event> data = FXCollections.observableArrayList(CreatePane.timetable.getEvents().getEvents());
-        table.setItems(data);
-        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
+
+        if(table == null){
+            table = new TableView();
+        }
+
+        if(!data.isEmpty()) {
+            table.setItems(data);
+            table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
     }
 
 }

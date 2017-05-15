@@ -16,6 +16,7 @@ public class Time implements Serializable{
     private SimpleStringProperty name = new SimpleStringProperty();
     private SimpleStringProperty day = new SimpleStringProperty();
     private SimpleStringProperty hourInterval = new SimpleStringProperty();
+    private SimpleIntegerProperty numberOfTimeUnits = new SimpleIntegerProperty();
 
     public Time(){
 
@@ -59,5 +60,13 @@ public class Time implements Serializable{
 
     public void setHourInterval(String hourInterval) {
         this.hourInterval = new SimpleStringProperty(hourInterval);
+    }
+
+    public int getNumberOfTimeUnits() {
+        return numberOfTimeUnits.getValue();
+    }
+
+    public void setNumberOfTimeUnits(int numberOfTimeUnits) {
+        this.numberOfTimeUnits = new SimpleIntegerProperty(numberOfTimeUnits);
     }
 }

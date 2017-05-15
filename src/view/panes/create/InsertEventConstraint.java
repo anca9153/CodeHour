@@ -22,6 +22,7 @@ import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
 import model.event.Event;
 import model.event.Events;
+import model.resource.Resource;
 import model.time.Time;
 import view.panes.CreatePane;
 import java.util.*;
@@ -34,6 +35,12 @@ public class InsertEventConstraint extends InsertPaneWithTable {
     private VBox finalVBox;
     private String resourceType;
     private String optionName;
+
+    private ComboBox<String> weightCB;
+    private CheckBox descriptionCheckBox;
+    private FlowPane eventsFP;
+    private ComboBox<String> eventsCB;
+    private ObservableList<String> eventIds;
 
     public InsertEventConstraint(Stage primaryStage, String resourceType, Constraint c, String optionName){
         this.currentConstraint = c;
@@ -71,12 +78,16 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
         ObservableList<VBox> vbList = FXCollections.observableArrayList();
 
+        ObservableList<String> weights = FXCollections.observableArrayList("Mică (1)", "Medie (2)", "Mare (3)");
+
         HBox weightLabel = makeLabel("GREUTATE", true);
-        TextField weightTextField = makeTextField(textFieldValues.get(0));
-        vbList.add(new VBox(weightLabel, weightTextField));
+        weightCB = new ComboBox<>(weights);
+        weightCB.getStyleClass().add("specialComboBox");
+        weightCB.setPromptText(String.valueOf(textFieldValues.get(0).getKey()));
+        vbList.add(new VBox(weightLabel, weightCB));
 
         HBox descriptionLabel = makeLabel("CONSTRÂNGERE NECESARĂ", false);
-        CheckBox descriptionCheckBox = new CheckBox();
+        descriptionCheckBox = new CheckBox();
         vbList.add(new VBox(descriptionLabel, descriptionCheckBox));
 
         FlowPane fp = getFlowPane(vbList);
@@ -84,7 +95,7 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         Map<String, Event> idEventMap = new HashMap<>();
 
         //Events that are added in the timetable object
-        ObservableList<String> eventIds = FXCollections.observableArrayList();
+        eventIds = FXCollections.observableArrayList();
         if(CreatePane.timetable.getEvents()!=null && CreatePane.timetable.getEvents().getEvents() != null) {
             for (Event r : CreatePane.timetable.getEvents().getEvents()) {
                 eventIds.add(r.getId());
@@ -104,10 +115,10 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
         HBox eventsLabel = makeLabel("LISTA EVENIMENTE", true);
 
-        FlowPane eventsFP = new FlowPane();
+        eventsFP = new FlowPane();
         eventsFP.getChildren().addAll(constraintEventIdLabels);
 
-        ComboBox<String> eventsCB = new ComboBox<>(eventIds);
+        eventsCB = new ComboBox<>(eventIds);
         eventsCB.getStyleClass().add("specialComboBox");
 
         ImageView imageView = new ImageView(new Image("\\icons\\addIcon.png"));
@@ -161,11 +172,10 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         saveButton.setOnAction((ActionEvent event) ->{
             //Clearing all errors
             List<HBox> labels = new ArrayList<>(Arrays.asList(weightLabel, eventsLabel));
-            List<TextField> textFields =  new ArrayList<>(Arrays.asList(weightTextField));
-            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(eventsCB));
+            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(eventsCB, weightCB));
 
             //Clearing all previous errors
-            clearErrors(labels, textFields);
+            clearErrors(labels, new ArrayList<>());
 
             for(ComboBox cb: comboBoxes) {
                 for (String s : cb.getStyleClass()) {
@@ -178,25 +188,28 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
             boolean empty = false;
 
-            if(weightTextField.getText().isEmpty()){
-                showErrorMessage(weightLabel, "Greutatea este necesară.", weightTextField);
+            if(weightCB.getValue() == null){
+                showErrorMessage(weightLabel, "Greutatea este necesară.", weightCB);
                 empty = true;
             }
             else {
-                boolean isNumber = true;
-                for (char c : weightTextField.getText().toCharArray()) {
-                    if (!Character.isDigit(c)) {
-                        isNumber = false;
-                    }
+                int chosenValue = 0;
+                System.out.println(weightCB.getValue());
+                switch (weightCB.getValue()){
+                    case "Mică (1)":
+                        chosenValue = 1;
+                        break;
+                    case "Medie (2)":
+                        chosenValue = 2;
+                        break;
+                    case "Mare (3)":
+                        chosenValue = 3;
+                        break;
+                    default:
+                        break;
                 }
 
-                if(isNumber) {
-                    currentConstraint.setWeight(Integer.valueOf(weightTextField.getText()));
-                }
-                else{
-                    showErrorMessage(weightLabel, "Introduceți un număr.", weightTextField);
-                    empty = true;
-                }
+                currentConstraint.setWeight(chosenValue);
             }
 
             if(eventsFP.getChildren().size() < 1){
@@ -211,32 +224,52 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 currentConstraint.setAppliesToEvents(new Events(eventList));
             }
 
+            if(descriptionCheckBox.isSelected()){
+                currentConstraint.setRequired(true);
+            }
+            else{
+                currentConstraint.setRequired(false);
+            }
+
             if(!empty) {
-                //Findinn out how many constraints of the current type there are in the timetable
-                int constrNo = 0;
-                for(Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()){
-                    if(c.getId().startsWith(resourceType)){
-                        constrNo ++;
+                //Checking if the current event is an existing one and replacing it in the timetable
+                int index = 0;
+                boolean exists = false;
+                for(Constraint e:CreatePane.timetable.getEventConstraints().getConstraints()){
+                    if(e.getId().equals(currentConstraint.getId())){
+                        CreatePane.timetable.getEventConstraints().getConstraints().remove(e);
+                        CreatePane.timetable.getEventConstraints().getConstraints().add(index, currentConstraint);
+                        exists = true;
+                        break;
                     }
+                    index++;
                 }
 
-                currentConstraint.setId(resourceType + "_" + (constrNo + 1));
-                if(descriptionCheckBox.isSelected()){
-                    currentConstraint.setRequired(true);
-                }
-                else{
-                    currentConstraint.setRequired(false);
-                }
+                if(!exists){
+                    //Finding out how many constraints of the current type there are in the timetable
+                    int constrNo = 0;
+                    for(Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()){
+                        if(c.getId().startsWith(resourceType)){
+                            constrNo ++;
+                        }
+                    }
 
-                CreatePane.timetable.getEventConstraints().getConstraints().add(currentConstraint);
+                    currentConstraint.setId(resourceType + "_" + (constrNo + 1));
+                    CreatePane.timetable.getEventConstraints().getConstraints().add(currentConstraint);
+                    updateTableData();
+                }
 
                 if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
                     if(currentConstraint instanceof AssignResourceConstraint) {
                         currentConstraint = new AssignResourceConstraint();
+                        table.getSelectionModel().clearSelection();
+                        clearAllFields();
                     }
                     else{
                         if(currentConstraint instanceof AssignTimeConstraint) {
                             currentConstraint = new AssignTimeConstraint();
+                            table.getSelectionModel().clearSelection();
+                            clearAllFields();
                         }
                     }
                 }
@@ -263,6 +296,14 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         }
 
         return finalVBox;
+    }
+
+    private void clearAllFields(){
+        weightCB.setValue(null);
+        eventsCB.setValue(null);
+        eventIds.clear();
+        eventsFP.getChildren().clear();
+        descriptionCheckBox.setSelected(false);
     }
 
     private HBox createConstraintEventLabel(String text){
@@ -418,6 +459,67 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         table.getColumns().addAll(idColumn, descriptionColumn, weightColumn, eventsColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        table.setEditable(true);
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                Constraint e = (Constraint) newValue;
+                currentConstraint = e;
+
+                String weightString = null;
+                switch (e.getWeight()){
+                    case (1):
+                        weightString = "Mică (1)";
+                        break;
+                    case (2):
+                        weightString = "Medie (2)";
+                        break;
+                    case (3):
+                        weightString = "Mare (3)";
+                        break;
+                    default:
+                        break;
+                }
+
+                weightCB.setValue(weightString);
+
+                descriptionCheckBox.setSelected(e.getRequired());
+
+                ObservableList<HBox> constraintEventIdLabels = FXCollections.observableArrayList();
+                if(currentConstraint.getAppliesToEvents().getEvents()!=null) {
+                    for (Event r : currentConstraint.getAppliesToEvents().getEvents()) {
+                        final HBox hb;
+                        hb = createConstraintEventLabel(r.getId());
+                        eventIds.remove(r.getId());
+
+                        Button remove = new Button();
+                        ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                        imageView2.setFitHeight(6);
+                        imageView2.setFitWidth(6);
+                        imageView2.setPreserveRatio(true);
+
+                        remove.setGraphic(imageView2);
+                        remove.getStyleClass().add("removeEventResource");
+                        remove.setMaxSize(10, 10);
+
+                        remove.setOnAction((ActionEvent ev) ->{
+                            eventsFP.getChildren().remove(hb);
+
+                            eventIds.add(hb.getId());
+                            eventsCB.setItems(null);
+                            eventsCB.setItems(eventIds);
+
+                        });
+
+                        hb.getChildren().add(remove);
+                        constraintEventIdLabels.add(hb);
+                    }
+                }
+
+                eventsFP.getChildren().clear();
+                eventsFP.getChildren().addAll(constraintEventIdLabels);
+            }
+        });
+
         updateTableData();
 
         table.setFixedCellSize(35);
@@ -447,6 +549,10 @@ public class InsertEventConstraint extends InsertPaneWithTable {
             if(c.getId().startsWith(constraintType)){
                 data.add(c);
             }
+        }
+
+        if(table == null){
+            table = new TableView();
         }
 
         table.getItems().clear();

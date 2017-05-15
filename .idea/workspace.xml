@@ -2,12 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33c9a952-d24d-4ca9-bd29-437e07da97c7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/StageLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/StageLoader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/view/panes/display/TransportCell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/model/event/Event.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/model/event/Event.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/model/time/Time.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/model/time/Time.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/DataLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/DataLoader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/PropertiesLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/PropertiesLoader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/CreatePane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/CreatePane.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$1$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$1$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$2$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$2$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$2.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$3$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$3$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$3.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEvent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEventConstraint.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertEventConstraint.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertGeneralSettings.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertGeneralSettings.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertResource$1$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertResource$1$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertResource$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertResource$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertResource.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertResource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertTime$1$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertTime$1$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertTime$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertTime$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertTime.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/create/InsertTime.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/displayStyle.css" afterPath="$PROJECT_DIR$/src/styles/displayStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/StageLoader.java" afterPath="$PROJECT_DIR$/src/view/StageLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHourXMLs/sd.xml" afterPath="$PROJECT_DIR$/CodeHourXMLs/sd.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.properties" afterPath="$PROJECT_DIR$/config.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/styles/createStyle.css" afterPath="$PROJECT_DIR$/out/production/CodeHour/styles/createStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Timetable.java" afterPath="$PROJECT_DIR$/src/model/Timetable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/event/Event.java" afterPath="$PROJECT_DIR$/src/model/event/Event.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/time/Time.java" afterPath="$PROJECT_DIR$/src/model/time/Time.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/createStyle.css" afterPath="$PROJECT_DIR$/src/styles/createStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/DataLoader.java" afterPath="$PROJECT_DIR$/src/utilities/DataLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/PropertiesLoader.java" afterPath="$PROJECT_DIR$/src/utilities/PropertiesLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/CreatePane.java" afterPath="$PROJECT_DIR$/src/view/panes/CreatePane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/create/InsertEvent.java" afterPath="$PROJECT_DIR$/src/view/panes/create/InsertEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java" afterPath="$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/create/InsertGeneralSettings.java" afterPath="$PROJECT_DIR$/src/view/panes/create/InsertGeneralSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/create/InsertPaneWithTable.java" afterPath="$PROJECT_DIR$/src/view/panes/create/InsertPaneWithTable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/create/InsertResource.java" afterPath="$PROJECT_DIR$/src/view/panes/create/InsertResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/create/InsertTime.java" afterPath="$PROJECT_DIR$/src/view/panes/create/InsertTime.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java" afterPath="$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,21 +61,67 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimetableGrid.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
+      <file leaf-file-name="InsertEventConstraint.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-326">
-              <caret line="364" column="44" lean-forward="false" selection-start-line="364" selection-start-column="34" selection-end-line="364" selection-end-column="44" />
+            <state relative-caret-position="298">
+              <caret line="275" column="21" lean-forward="true" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayStyle.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InsertEvent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="306" column="47" lean-forward="true" selection-start-line="306" selection-start-column="47" selection-end-line="307" selection-end-column="63" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Time.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/time/Time.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransportCell.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/panes/display/TransportCell.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#299#300#0" expanded="true" />
+                <element signature="e#341#342#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="displayStyle.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/styles/displayStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="223" column="28" lean-forward="false" selection-start-line="223" selection-start-column="28" selection-end-line="223" selection-end-column="28" />
+            <state relative-caret-position="234">
+              <caret line="66" column="27" lean-forward="true" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createStyle.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/styles/createStyle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="321" column="16" lean-forward="false" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -59,20 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>margin</find>
-      <find>text-fill</find>
-      <find>red</find>
-      <find>1</find>
-      <find>pref-</find>
-      <find>firstC</find>
-      <find>assign</find>
-      <find>addI</find>
-      <find>fieldRightLabel</find>
-      <find>imag</find>
-      <find>image</find>
-      <find>saveInto</find>
-      <find>saveint</find>
-      <find>saveintofile</find>
       <find>entere</find>
       <find>first</find>
       <find>saveinto</find>
@@ -80,15 +146,29 @@
       <find>#00FF00</find>
       <find>setce</find>
       <find>createButton</find>
-      <find>create</find>
       <find>leftScreen</find>
       <find>save</find>
       <find>GridPane</find>
       <find>SYs</find>
       <find>width</find>
-      <find>sys</find>
       <find>rightTable</find>
       <find>timetableVBox</find>
+      <find>tableContentCell</find>
+      <find>dayColumn</find>
+      <find>special</find>
+      <find>margin</find>
+      <find>bor</find>
+      <find>removeEventResource</find>
+      <find>resourceIds</find>
+      <find>sy</find>
+      <find>ncr</find>
+      <find>table</find>
+      <find>table</find>
+      <find>dele</find>
+      <find>sys</find>
+      <find>specialComboBox</find>
+      <find>create</find>
+      <find>createevent</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,7 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/view/CreatePane.java" />
         <option value="$PROJECT_DIR$/src/view/HomePane.java" />
         <option value="$PROJECT_DIR$/src/view/MainPane.java" />
         <option value="$PROJECT_DIR$/src/compute/DataLoad.java" />
@@ -114,13 +193,10 @@
         <option value="$PROJECT_DIR$/src/model/solution/OutLaws/ConstraintViolatingEvents.java" />
         <option value="$PROJECT_DIR$/src/model/solution/Report.java" />
         <option value="$PROJECT_DIR$/src/compute/DataLoader.java" />
-        <option value="$PROJECT_DIR$/src/utilities/PropertiesLoader.java" />
         <option value="$PROJECT_DIR$/config.properties" />
         <option value="$PROJECT_DIR$/src/model/solution/Solution.java" />
         <option value="$PROJECT_DIR$/src/model/resource/Resource.java" />
         <option value="$PROJECT_DIR$/src/model/constraint/types/LimitIdleTimesConstraint.java" />
-        <option value="$PROJECT_DIR$/src/model/Timetable.java" />
-        <option value="$PROJECT_DIR$/src/model/event/Event.java" />
         <option value="$PROJECT_DIR$/homeStyle.css" />
         <option value="$PROJECT_DIR$/src/homeStyle.css" />
         <option value="$PROJECT_DIR$/src/view/panes/MainPane.java" />
@@ -130,29 +206,33 @@
         <option value="$PROJECT_DIR$/src/view/stages/PopupStage.java" />
         <option value="$PROJECT_DIR$/src/view/panes/DetailsPopup.java" />
         <option value="$PROJECT_DIR$/src/styles/homeStyle.css" />
-        <option value="$PROJECT_DIR$/src/model/time/Time.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertStudyGroups.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertTeachers.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/create/InsertPaneWithTable.java" />
         <option value="$PROJECT_DIR$/src/model/constraint/Constraint.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertConstraint.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertResourceConstraint.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/create/InsertEvent.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/create/InsertTime.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/create/InsertResource.java" />
-        <option value="$PROJECT_DIR$/src/styles/createStyle.css" />
         <option value="$PROJECT_DIR$/src/compute/algorithms/GradingAlgorithm.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/create/InsertGeneralSettings.java" />
-        <option value="$PROJECT_DIR$/src/utilities/DataLoader.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertPane.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/CreatePane.java" />
         <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
         <option value="$PROJECT_DIR$/src/view/panes/HomePane.java" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/view/StageLoader.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/display/TransportCell.java" />
         <option value="$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java" />
+        <option value="$PROJECT_DIR$/src/model/Timetable.java" />
+        <option value="$PROJECT_DIR$/src/model/time/Time.java" />
+        <option value="$PROJECT_DIR$/src/model/event/Event.java" />
+        <option value="$PROJECT_DIR$/src/utilities/DataLoader.java" />
+        <option value="$PROJECT_DIR$/src/utilities/PropertiesLoader.java" />
         <option value="$PROJECT_DIR$/src/styles/displayStyle.css" />
+        <option value="$PROJECT_DIR$/src/styles/createStyle.css" />
+        <option value="$PROJECT_DIR$/src/view/panes/CreatePane.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/create/InsertGeneralSettings.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/create/InsertPaneWithTable.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/create/InsertResource.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/create/InsertTime.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/create/InsertEvent.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java" />
       </list>
     </option>
   </component>
@@ -177,6 +257,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -353,6 +434,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="event" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeHour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeHour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="constraint" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -461,9 +564,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -732,13 +834,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2826087" sideWeight="0.51756954" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2158385" sideWeight="0.48243046" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19720496" sideWeight="0.48243046" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763976" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22767204" sideWeight="0.4916067" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2635432" sideWeight="0.4916067" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -778,27 +880,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/model/solution/OutLaws/ConstraintViolatingEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="39" lean-forward="true" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/FitForConstraint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/solution/Report.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="43" lean-forward="true" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/solution/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -841,13 +922,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Metadata.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -860,30 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/PropertiesLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="46" column="37" lean-forward="false" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/time/Time.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="17" column="73" lean-forward="false" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
-          <folding>
-            <element signature="e#1080#1081#0" expanded="true" />
-            <element signature="e#1135#1136#0" expanded="true" />
-            <element signature="e#1244#1245#0" expanded="true" />
-            <element signature="e#1302#1303#0" expanded="true" />
-            <element signature="e#1332#1333#0" expanded="true" />
-            <element signature="e#1369#1370#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -891,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -899,23 +948,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertStudyGroups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertStudyGroups.java" />
     <entry file="file://$PROJECT_DIR$/src/model/event/Events.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -923,7 +963,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -935,26 +974,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/constraint/Constraints.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Timetable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -995,15 +1018,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPaneWithTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,27 +1026,7 @@
         <state relative-caret-position="126">
           <caret line="209" column="99" lean-forward="false" selection-start-line="209" selection-start-column="99" selection-end-line="209" selection-end-column="99" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3019">
-          <caret line="214" column="97" lean-forward="false" selection-start-line="214" selection-start-column="97" selection-end-line="214" selection-end-column="97" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="111" column="114" lean-forward="false" selection-start-line="111" selection-start-column="114" selection-end-line="111" selection-end-column="114" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1041,7 +1035,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="33">
           <caret line="65" column="27" lean-forward="true" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1053,67 +1046,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/createStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="452" column="19" lean-forward="false" selection-start-line="452" selection-start-column="19" selection-end-line="452" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/compute/algorithms/GradingAlgorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
           <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/DataLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="32" column="98" lean-forward="false" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertGeneralSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="71" column="62" lean-forward="true" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="128" column="78" lean-forward="true" selection-start-line="128" selection-start-column="78" selection-end-line="128" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="38" column="32" lean-forward="false" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1146,34 +1083,186 @@
         <state relative-caret-position="169">
           <caret line="40" column="21" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="21" />
           <folding>
-            <element signature="e#1904#1905#0" expanded="true" />
-            <element signature="e#1930#1931#0" expanded="true" />
+            <element signature="e#1904#1905#0" expanded="false" />
+            <element signature="e#1930#1931#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertTime.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumClipboard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="263" column="0" lean-forward="true" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
+        <state relative-caret-position="1025">
+          <caret line="641" column="0" lean-forward="false" selection-start-line="641" selection-start-column="0" selection-end-line="641" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TransportCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#299#300#0" expanded="true" />
+            <element signature="e#341#342#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Timetable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="22" column="18" lean-forward="false" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+          <folding>
+            <element signature="e#3277#3278#0" expanded="true" />
+            <element signature="e#3322#3323#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/DataLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1009">
+          <caret line="147" column="34" lean-forward="false" selection-start-line="147" selection-start-column="34" selection-end-line="147" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
+    <entry file="file://$PROJECT_DIR$/src/utilities/PropertiesLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-326">
-          <caret line="364" column="44" lean-forward="false" selection-start-line="364" selection-start-column="34" selection-end-line="364" selection-end-column="44" />
+        <state relative-caret-position="382">
+          <caret line="71" column="46" lean-forward="false" selection-start-line="71" selection-start-column="46" selection-end-line="71" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/displayStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="223" column="28" lean-forward="false" selection-start-line="223" selection-start-column="28" selection-end-line="223" selection-end-column="28" />
+        <state relative-caret-position="234">
+          <caret line="66" column="27" lean-forward="true" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="128" column="78" lean-forward="true" selection-start-line="128" selection-start-column="78" selection-end-line="128" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="353" column="34" lean-forward="false" selection-start-line="353" selection-start-column="34" selection-end-line="353" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="85" column="71" lean-forward="false" selection-start-line="85" selection-start-column="71" selection-end-line="85" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPaneWithTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="21" column="52" lean-forward="false" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/time/Time.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertGeneralSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="56" column="45" lean-forward="false" selection-start-line="56" selection-start-column="45" selection-end-line="56" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="177" column="0" lean-forward="true" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/createStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="321" column="16" lean-forward="false" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="212" column="38" lean-forward="true" selection-start-line="212" selection-start-column="38" selection-end-line="212" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="306" column="47" lean-forward="true" selection-start-line="306" selection-start-column="47" selection-end-line="307" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertEventConstraint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="275" column="21" lean-forward="true" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
           <folding />
         </state>
       </provider>

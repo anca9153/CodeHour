@@ -33,6 +33,9 @@ public class InsertResource extends InsertPaneWithTable {
     private String resourceSingularString;
     private String resourcePluralString;
 
+    private TextField idTextField;
+    private TextField nameTextField;
+
     public InsertResource(Stage primaryStage, String resourceType, String resourceSingularString, String resourcePluralString){
         this.primaryStage = primaryStage;
         this.resourceType = resourceType;
@@ -77,7 +80,7 @@ public class InsertResource extends InsertPaneWithTable {
         ObservableList<VBox> vbList = FXCollections.observableArrayList();
 
         HBox idLabel = makeLabel("ID", true);
-        TextField idTextField = makeTextField(textFieldValues.get(0));
+        idTextField = makeTextField(textFieldValues.get(0));
         vbList.add(new VBox(idLabel, idTextField));
 
         boolean req = false;
@@ -85,7 +88,7 @@ public class InsertResource extends InsertPaneWithTable {
             req = true;
         }
         HBox nameLabel = makeLabel("NUME", req);
-        TextField nameTextField = makeTextField(textFieldValues.get(1));
+        nameTextField = makeTextField(textFieldValues.get(1));
         vbList.add(new VBox(nameLabel, nameTextField));
 
         FlowPane fp = getFlowPane(vbList);
@@ -114,9 +117,28 @@ public class InsertResource extends InsertPaneWithTable {
                 }
                 currentResource.setResourceType(resourceType);
 
-                CreatePane.timetable.getResources().getResources().add(currentResource);
+                //Checking if the current resource is an existing one and replacing it in the timetable
+                int index = 0;
+                boolean exists = false;
+                for(Resource r:CreatePane.timetable.getResources().getResources()){
+                    if(r.getId().equals(currentResource.getId())){
+                        CreatePane.timetable.getResources().getResources().remove(r);
+                        CreatePane.timetable.getResources().getResources().add(index, currentResource);
+                        exists = true;
+                        break;
+                    }
+                    index++;
+                }
+
+                if(!exists){
+                    CreatePane.timetable.getResources().getResources().add(currentResource);
+                    updateTableData();
+                }
+
                 if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
                     currentResource = new Resource();
+                    table.getSelectionModel().clearSelection();
+                    clearAllFields();
                 }
                 else{
                     CreatePane.timetable.getResources().getResources().remove(currentResource);
@@ -147,6 +169,11 @@ public class InsertResource extends InsertPaneWithTable {
         }
 
         return finalVBox;
+    }
+
+    private void clearAllFields(){
+        idTextField.clear();
+        nameTextField.clear();
     }
 
     protected VBox createTable(){
@@ -232,6 +259,24 @@ public class InsertResource extends InsertPaneWithTable {
         table.getColumns().addAll(idColumn, nameColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        table.setEditable(true);
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                Resource r = (Resource)newValue;
+                currentResource = r;
+                idTextField.setText(r.getId());
+                nameTextField.setText(r.getName());
+
+                if(r.getName()==null) {
+                    nameTextField.setText("Adaugă nume " + resourceSingularString);
+                }
+
+                if(r.getId() == null){
+                    idTextField.setText("Adaugă id " + resourceSingularString);
+                }
+            }
+        });
+
         updateTableData();
 
         table.setFixedCellSize(35);
@@ -252,7 +297,13 @@ public class InsertResource extends InsertPaneWithTable {
             }
         }
 
-        table.setItems(data);
-        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
+        if(table == null){
+            table = new TableView();
+        }
+
+        if(!data.isEmpty() && table != null) {
+            table.setItems(data);
+            table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
     }
 }
