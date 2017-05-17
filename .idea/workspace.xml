@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33c9a952-d24d-4ca9-bd29-437e07da97c7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$6.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$7.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/StageLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/StageLoader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$2.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$3.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/display/TimetableGrid.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHourXMLs/test.xml" afterPath="$PROJECT_DIR$/CodeHourXMLs/test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" afterPath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java" afterPath="$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CodeHourXMLs/b.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CodeHourXMLs/b_nou.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CodeHourXMLs/sd.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/CreatePane.java" afterPath="$PROJECT_DIR$/src/view/panes/CreatePane.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimetableGrid.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TimetableGrid.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="524" column="45" lean-forward="true" selection-start-line="524" selection-start-column="45" selection-end-line="524" selection-end-column="45" />
+            <state relative-caret-position="281">
+              <caret line="531" column="0" lean-forward="true" selection-start-line="531" selection-start-column="0" selection-end-line="531" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,43 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreatePane.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CreatePane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="310" column="27" lean-forward="false" selection-start-line="310" selection-start-column="27" selection-end-line="310" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InsertPane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="139" column="52" lean-forward="true" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StageLoader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/StageLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="40" column="44" lean-forward="true" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DisplayPane.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="188" column="86" lean-forward="true" selection-start-line="188" selection-start-column="86" selection-end-line="188" selection-end-column="86" />
+            <state relative-caret-position="161">
+              <caret line="394" column="22" lean-forward="false" selection-start-line="394" selection-start-column="22" selection-end-line="394" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -99,7 +58,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>table</find>
       <find>dele</find>
       <find>sys</find>
       <find>specialComboBox</find>
@@ -109,7 +67,6 @@
       <find>timetableVBox</find>
       <find>not sch</find>
       <find>id</find>
-      <find>genera</find>
       <find>Sys</find>
       <find>resourceCB</find>
       <find>timeUnitsCB</find>
@@ -122,12 +79,14 @@
       <find>FileChooser file</find>
       <find>FileChooser</find>
       <find>FileChooser fil</find>
-      <find>generate</find>
       <find>1</find>
       <find>2</find>
       <find>bleGrid.addRightPaneG</find>
-      <find>saveinto</find>
       <find>static</find>
+      <find>generate</find>
+      <find>addBorderGenerate</find>
+      <find>genera</find>
+      <find>saveinto</find>
       <find>classroom</find>
     </findStrings>
   </component>
@@ -189,10 +148,10 @@
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertPane.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertResource.java" />
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertEvent.java" />
-        <option value="$PROJECT_DIR$/src/view/panes/CreatePane.java" />
         <option value="$PROJECT_DIR$/src/view/StageLoader.java" />
         <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
         <option value="$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/CreatePane.java" />
       </list>
     </option>
   </component>
@@ -783,7 +742,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -795,7 +754,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2826087" sideWeight="0.51756954" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19565217" sideWeight="0.48243046" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19565217" sideWeight="0.48243046" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763976" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -826,7 +785,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/panes/CreatePane.java</url>
-          <line>357</line>
+          <line>343</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -1002,14 +961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/styles/createStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5457">
-          <caret line="321" column="16" lean-forward="false" selection-start-line="321" selection-start-column="1" selection-end-line="321" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/time/Time.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1166,18 +1117,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPane.java">
+    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="139" column="52" lean-forward="true" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
+        <state relative-caret-position="281">
+          <caret line="531" column="0" lean-forward="true" selection-start-line="531" selection-start-column="0" selection-end-line="531" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/styles/createStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="481" column="19" lean-forward="true" selection-start-line="481" selection-start-column="19" selection-end-line="481" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
+    <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
-          <caret line="310" column="27" lean-forward="false" selection-start-line="310" selection-start-column="27" selection-end-line="310" selection-end-column="27" />
+          <caret line="291" column="43" lean-forward="false" selection-start-line="291" selection-start-column="37" selection-end-line="291" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1192,21 +1153,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="188" column="86" lean-forward="true" selection-start-line="188" selection-start-column="86" selection-end-line="188" selection-end-column="86" />
+        <state relative-caret-position="196">
+          <caret line="139" column="52" lean-forward="true" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
+    <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="524" column="45" lean-forward="true" selection-start-line="524" selection-start-column="45" selection-end-line="524" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="161">
+          <caret line="394" column="22" lean-forward="false" selection-start-line="394" selection-start-column="22" selection-end-line="394" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

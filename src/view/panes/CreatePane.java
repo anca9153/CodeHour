@@ -196,7 +196,7 @@ public class CreatePane extends MainPane {
         VBox vBoxTimes = createLeftOption("Intervale orare", "Adaugă intervale");
         VBox vBoxResources = createLeftOption("Resurse", "Clase", "Profesori", "Săli de clasă");
         VBox vBoxEvents = createLeftOption("Eveniment", "Adaugă evenimente");
-        VBox vBoxConstraints = createLeftOption("Constrângeri", "Resurse alocate", "Interval alocat", "Limitare feresetre");
+        VBox vBoxConstraints = createLeftOption("Constrângeri", "Limitare feresetre");
 
         VBox vBox = new VBox(vBoxDetails, vBoxTimes, vBoxResources, vBoxEvents, vBoxConstraints);
         vBox.getStyleClass().add("leftScreen");
@@ -210,12 +210,14 @@ public class CreatePane extends MainPane {
         error.getStyleClass().addAll("fieldRightLabel", "redStar", "normalFont");
         error.setTextFill(Color.WHITE);
         Button generate = new Button("GENEREAZĂ ORAR");
+        Button addToSolution = new Button("ADAUGĂ ÎN ORAR");
 
-        generateVBox = new VBox(generate, error);
+        generateVBox = new VBox(generate, addToSolution, error);
+        generateVBox.setSpacing(10);
         generateVBox.getStyleClass().addAll("leftScreen", "addBorderGenerate");
-        generateVBox.setMaxHeight(120);
-        generateVBox.setMinHeight(120);
-        generateVBox.setPrefHeight(120);
+        generateVBox.setMaxHeight(150);
+        generateVBox.setMinHeight(150);
+        generateVBox.setPrefHeight(150);
         generateVBox.setAlignment(Pos.CENTER);
 
         generate.setOnAction((ActionEvent event) ->
@@ -310,23 +312,6 @@ public class CreatePane extends MainPane {
 
                 //Show save file dialog
                 CreatePane.savingFile = fileChooser.showSaveDialog(primaryStage);
-
-//                error.setText("Nu este ales un fisier de salvare!");
-//
-//                if(generateVBox.getChildren().size()<2) {
-//                    generateVBox.getChildren().add(0, error);
-//                }
-//                else{
-//                    error.setVisible(true);
-//                }
-//
-//                PauseTransition visiblePause = new PauseTransition(
-//                        Duration.seconds(5)
-//                );
-//                visiblePause.setOnFinished(
-//                        e -> error.setVisible(false)
-//                );
-//                visiblePause.play();
             }
 
             //The timetable has been generated
@@ -334,7 +319,8 @@ public class CreatePane extends MainPane {
 
         });
 
-        generate.getStyleClass().addAll("createButton");
+        generate.getStyleClass().add("createButton");
+        addToSolution.getStyleClass().add("createButton");
 
         VBox leftVBox = new VBox(scrollPane, generateVBox);
 
@@ -406,14 +392,6 @@ public class CreatePane extends MainPane {
             case "Adaugă evenimente":
                 InsertEvent rightPane6 = new InsertEvent(primaryStage);
                 this.setCenter(rightPane6.addRightPane());
-                break;
-            case "Resurse alocate":
-                InsertEventConstraint rightPane7 = new InsertEventConstraint(primaryStage, "assignResourceConstraint", new AssignResourceConstraint(), rightPaneName);
-                this.setCenter(rightPane7.addRightPane());
-                break;
-            case "Interval alocat":
-                InsertEventConstraint rightPane8 = new InsertEventConstraint(primaryStage, "assignTimeConstraint", new AssignTimeConstraint(), rightPaneName);
-                this.setCenter(rightPane8.addRightPane());
                 break;
             case "Limitare feresetre":
                 InsertResourceConstraint rightPane9 = new InsertResourceConstraint(primaryStage, "assignTimeConstraint", new AssignTimeConstraint(), rightPaneName);
