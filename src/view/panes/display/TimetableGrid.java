@@ -1,20 +1,21 @@
 package view.panes.display;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.*;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import model.Timetable;
 import model.event.Event;
 import model.resource.Resource;
 import model.time.Time;
+import utilities.DataLoader;
+import view.panes.DisplayPane;
+
+import java.io.File;
 import java.util.*;
 
 /**
@@ -22,7 +23,8 @@ import java.util.*;
  */
 public class TimetableGrid {
     private StackPane cellPane;
-    private Event draggedEvent = new Event();
+    private Event eventToIntechange1 = new Event();
+    private Event eventToIntechange2 = new Event();
 
     public ScrollPane addRightPane(Timetable timetable, String resource, String resourceType, List<Event> eventList){
         //The timetable for a selected resource, displayed on the right side
@@ -209,7 +211,7 @@ public class TimetableGrid {
         return scrollPane;
     }
 
-    public ScrollPane addRightPaneGeneralCase(Timetable timetable, Map<String, List<Event>> map, String resourceType){
+    public ScrollPane addRightPaneGeneralCase(DisplayPane displayPane, File file, Timetable timetable, Map<String, List<Event>> map, String resourceType){
         GridPane pane = new GridPane();
 
         //List with the days displayed on the first row of the timetable
@@ -310,60 +312,98 @@ public class TimetableGrid {
 
                 VBox hourLabel = getHourLabel(e, resourceType, true);
                 hourLabel.getStyleClass().add("tableContentLabel");
+
                 cellPane = new StackPane(hourLabel);
                 cellPane.getStyleClass().add("tableContentCell");
                 StackPane.setAlignment(hourLabel,Pos.CENTER);
 
-                cellPane.setOnDragDetected(new EventHandler<MouseEvent>(){
-                    public void handle(MouseEvent event){
-//                        Dragboard db = hourLabel.startDragAndDrop(TransferMode.MOVE);
-//                        ClipboardContent content = new ClipboardContent();
-//                        content.putString(resourceType);
-//                        db.setContent(content);
-                        draggedEvent = e;
-                        System.out.println("Drag detected "+ draggedEvent.getId());
-                        event.consume();
+                //Adding the contextual menu for the current cell
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem cut = new MenuItem("Cut");
+                MenuItem paste = new MenuItem("Place");
+                cut.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("Cut...");
+                        eventToIntechange1 = e;
                     }
                 });
 
-                cellPane.setOnDragOver(new EventHandler <DragEvent>() {
-                    public void handle(DragEvent event) {
-                        event.acceptTransferModes(TransferMode.ANY);
-                        System.out.println("Drag Over Detected");
-                        event.consume();
+                paste.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("Place...");
+                        eventToIntechange2 = e;
+
+                        //Interchanging the 2 events and redrawing the table
+                        Time t1 = eventToIntechange1.getTime();
+                        eventToIntechange1.setTime(eventToIntechange2.getTime());
+                        eventToIntechange2.setTime(t1);
+
+                        Resource ev1Resource = new Resource();
+                        Resource ev2Resource = new Resource();
+                        int indexR1 = 0;
+                        int indexR2 = 0;
+
+                        for(Resource r1: eventToIntechange1.getResources().getResources()){
+                            if(r1.getResourceType().equals(resourceType)){
+                               ev1Resource = r1;
+                               indexR1 = eventToIntechange1.getResources().getResources().indexOf(r1);
+                               break;
+                            }
+                        }
+
+                        for(Resource r2: eventToIntechange2.getResources().getResources()){
+                            if(r2.getResourceType().matches(resourceType)){
+                                ev2Resource = r2;
+                                indexR2 = eventToIntechange2.getResources().getResources().indexOf(r2);
+                                break;
+                            }
+                        }
+
+                        if(!ev1Resource.getId().equals(ev2Resource.getId())){
+                            eventToIntechange1.getResources().getResources().remove(indexR1);
+                            eventToIntechange1.getResources().getResources().add(ev2Resource);
+                            eventToIntechange2.getResources().getResources().remove(indexR2);
+                            eventToIntechange2.getResources().getResources().add(ev1Resource);
+                        }
+
+                        int foundEvents = 0;
+                        for(Event e:timetable.getSolutions().getSolutions().get(0).getEvents().getEvents()){
+                            if(e.getId().equals(eventToIntechange1)){
+                                e.setTime(eventToIntechange1.getTime());
+                                e.setDescription(eventToIntechange1.getDescription());
+                                e.setResources(eventToIntechange1.getResources());
+                                foundEvents++;
+                            }
+                            else {
+                                if (e.getId().equals(eventToIntechange2)) {
+                                    e.setTime(eventToIntechange2.getTime());
+                                    e.setDescription(eventToIntechange2.getDescription());
+                                    e.setResources(eventToIntechange2.getResources());
+                                    foundEvents++;
+                                }
+                            }
+                            if(foundEvents>1){
+                                break;
+                            }
+                        }
+
+                        DataLoader.loadSolvedTimetableToXMLWithPath(timetable, file);
+                        System.out.println("evenimentele: "+eventToIntechange1.getId()+" "+eventToIntechange2.getId());
+                        System.out.println("datele au fost salvate in fisierul "+file.getName());
+
+                        //Redrawing the current displayed table
+                        Map<String, List<Event>> resourceTypeEvents = new HashMap<>();
+                        displayPane.initializeEventsMap(resourceTypeEvents, timetable.getSolutions().getSolutions().get(0), resourceType, timetable);
+                        displayPane.addRightPaneGeneralCase(resourceTypeEvents, resourceType);
                     }
                 });
 
-                cellPane.setOnDragDropped(new EventHandler <DragEvent>() {
-                    public void handle(DragEvent event) {
-                        event.acceptTransferModes(TransferMode.ANY);
-//                        Dragboard db = event.getDragboard();
-//
-//                        event.setDropCompleted(false);
-//                        if(db.hasString()) {
-//                            String resourceType = db.getString();
-//
-//                            System.out.println("Drag dropped "+cellPane.getChildren().size());
-//                            VBox oldCell = (VBox)cellPane.getChildren().get(0);
-//                            cellPane.getChildren().clear();
-//                            cellPane.getChildren().add(getHourLabel(draggedEvent, resourceType, true));
-//                            event.setDropCompleted(true);
-//                        }
+                contextMenu.getItems().addAll(cut, paste);
 
-                        System.out.println("Drag dropped "+draggedEvent.getId());
-                        event.consume();
-                    }
-                });
-
-//                image.setOnDragDone(new EventHandler <DragEvent>() {
-//                    public void handle(DragEvent event){
-//                        if (event.getTransferMode() == TransferMode.MOVE){
-//                            image.setImage(null);
-//                        }
-//                        System.out.println("Drag Complete!");
-//                        event.consume();
-//                    }
-//                });
+                Label nameLabel = (Label)((VBox)cellPane.getChildren().get(0)).getChildren().get(0);
+                nameLabel.setContextMenu(contextMenu);
 
                 int windowCounter = Integer.valueOf(e.getTime().getName().split("_")[0]) - 1;
 
@@ -474,7 +514,7 @@ public class TimetableGrid {
         for(Resource r: e.getResources().getResources()){
             if(!r.getResourceType().equals(resourceType)) {
                 Label l;
-                if(!onlyId) {
+                if(!onlyId && r.getResourceType().equals("teacher")) {
                     if (r.getName()!=null && !r.getName().isEmpty()) {
                         l = new Label(resourceTypeText.get(r.getResourceType()) + r.getName());
                     } else {
@@ -497,6 +537,7 @@ public class TimetableGrid {
         }
 
         nameLabel.setTooltip(new Tooltip(e.getDescription()));
+
         VBox cellVBox = new VBox(nameLabel, detailsCell);
         cellVBox.setAlignment(Pos.CENTER);
 
@@ -523,49 +564,6 @@ public class TimetableGrid {
             Label l = new Label(" \n\n ");
             l.getStyleClass().add("tableContentLabel");
             StackPane cellPane = new StackPane(l);
-
-            cellPane.setOnDragDetected(new EventHandler<MouseEvent>(){
-                public void handle(MouseEvent event){
-//                        Dragboard db = hourLabel.startDragAndDrop(TransferMode.MOVE);
-//                        ClipboardContent content = new ClipboardContent();
-//                        content.putString(resourceType);
-//                        db.setContent(content);
-                    Event newEvent = new Event();
-                    newEvent.setId("newEvent");
-                    draggedEvent = newEvent;
-                    System.out.println("Drag detected "+ draggedEvent.getId());
-                    event.consume();
-                }
-            });
-
-            cellPane.setOnDragOver(new EventHandler <DragEvent>() {
-                public void handle(DragEvent event) {
-//                    event.acceptTransferModes(TransferMode.ANY);
-                    System.out.println("Drag Over Detected");
-                    event.consume();
-                }
-            });
-
-            cellPane.setOnDragDropped(new EventHandler <DragEvent>() {
-                public void handle(DragEvent event) {
-//                    event.acceptTransferModes(TransferMode.ANY);
-//                        Dragboard db = event.getDragboard();
-//
-//                        event.setDropCompleted(false);
-//                        if(db.hasString()) {
-//                            String resourceType = db.getString();
-//
-//                            System.out.println("Drag dropped "+cellPane.getChildren().size());
-//                            VBox oldCell = (VBox)cellPane.getChildren().get(0);
-//                            cellPane.getChildren().clear();
-//                            cellPane.getChildren().add(getHourLabel(draggedEvent, resourceType, true));
-//                            event.setDropCompleted(true);
-//                        }
-
-                    System.out.println("Drag dropped "+draggedEvent.getId());
-                    event.consume();
-                }
-            });
 
             cellPane.getStyleClass().add("tableContentCell");
             StackPane.setAlignment(l,Pos.CENTER);

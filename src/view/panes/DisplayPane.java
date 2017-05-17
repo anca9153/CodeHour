@@ -52,7 +52,7 @@ public class DisplayPane extends MainPane {
         addToolbar(idTimetableMap);
     }
 
-   private void addToolbar(Map<String, Timetable> idTimetableMap){
+    private void addToolbar(Map<String, Timetable> idTimetableMap){
         //Adding the left part of the toolBox
         HBox leftBox = new HBox();
         leftBox.getChildren().addAll(createHomeButton(), createOtherTimetablesBox(idTimetableMap));
@@ -186,9 +186,9 @@ public class DisplayPane extends MainPane {
         return vBox;
     }
 
-    private void addRightPaneGeneralCase(Map<String, List<Event>> map, String resourceType){
+    public void addRightPaneGeneralCase(Map<String, List<Event>> map, String resourceType){
         removeRightScrollPane();
-        rightScrollPane = timetableGrid.addRightPaneGeneralCase(timetable, map, resourceType);
+        rightScrollPane = timetableGrid.addRightPaneGeneralCase(this, file, timetable, map, resourceType);
         setCenterTable();
     }
 
@@ -236,9 +236,9 @@ public class DisplayPane extends MainPane {
 
         //Maps with key = the resource name and value = an ArrayList with all the events linked to the key resource
         //Initializing the maps with the corresponding values
-        initializeEventsMap(studyGroupEvents, solution, "studyGroup");
-        initializeEventsMap(teacherEvents, solution, "teacher");
-        initializeEventsMap(classroomEvents, solution, "classroom");
+        initializeEventsMap(studyGroupEvents, solution, "studyGroup", timetable);
+        initializeEventsMap(teacherEvents, solution, "teacher", timetable);
+        initializeEventsMap(classroomEvents, solution, "classroom", timetable);
 
         //Adding the separate comboBoxes to choose from to the VBox to be included in the left pane
         v1 = getOption(new Label("Clase"), cList, "studyGroup", studyGroupEvents,"Selectează clasa");
@@ -300,7 +300,7 @@ public class DisplayPane extends MainPane {
         this.setCenter(centerGrid);
     }
 
-    private void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType){
+    public static void initializeEventsMap(Map<String, List<Event>> map, Solution solution, String resourceType, Timetable timetable){
         for(Resource r: timetable.getResources().getResources()){
             if(r.getResourceType().equals(resourceType)){
                 if(resourceType.equals("teacher")){

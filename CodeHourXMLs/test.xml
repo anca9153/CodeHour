@@ -646,12 +646,12 @@
                             <name>Teodor Oniciuc</name>
                             <resourceType>teacher</resourceType>
                         </resource>
-                        <resource id="6A">
-                            <resourceType>studyGroup</resourceType>
-                        </resource>
                         <resource id="202">
                             <name>clasa</name>
                             <resourceType>classroom</resourceType>
+                        </resource>
+                        <resource id="6A">
+                            <resourceType>studyGroup</resourceType>
                         </resource>
                     </resources>
                     <time id="2">
