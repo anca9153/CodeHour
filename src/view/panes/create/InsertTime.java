@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
+import model.constraint.Constraint;
+import model.event.Event;
 import model.time.Time;
 import model.time.Times;
 import view.panes.CreatePane;
@@ -81,7 +83,7 @@ public class InsertTime extends InsertPaneWithTable{
         HBox dayLabel = makeLabel("ZIUA", true);
         dayCB = new ComboBox<>(days);
         dayCB.getStyleClass().add("specialComboBox");
-        dayCB.setPromptText(textFieldValues.get(0).getKey());
+        dayCB.setValue(textFieldValues.get(0).getKey());
         vbList.add(new VBox(dayLabel, dayCB));
 
         HBox hourIntervalLabel = makeLabel("INTERVALUL ORAR", true);
@@ -96,7 +98,7 @@ public class InsertTime extends InsertPaneWithTable{
         HBox timeUnitsLabel = makeLabel("UNITĂȚI DE TIMP", true);
         timeUnitsCB = new ComboBox<>(numbers);
         timeUnitsCB.getStyleClass().add("specialComboBox");
-        timeUnitsCB.setPromptText(textFieldValues.get(2).getKey());
+        timeUnitsCB.setValue(Integer.valueOf(textFieldValues.get(2).getKey()));
         vbList.add(new VBox(timeUnitsLabel, timeUnitsCB));
 
         FlowPane fp = getFlowPane(vbList);
@@ -105,7 +107,7 @@ public class InsertTime extends InsertPaneWithTable{
         saveButton.getStyleClass().add("rightSaveButton");
         saveButton.setOnAction((ActionEvent event) ->{
             //Clearing all errors
-            List<HBox> labels = new ArrayList<>(Arrays.asList(dayLabel, hourIntervalLabel));
+            List<HBox> labels = new ArrayList<>(Arrays.asList(dayLabel, hourIntervalLabel, timeUnitsLabel));
             List<TextField> textFields =  new ArrayList<>(Arrays.asList(hourIntervalTextField));
             clearErrors(labels, textFields);
             for(String s: dayCB.getStyleClass()){
@@ -149,6 +151,28 @@ public class InsertTime extends InsertPaneWithTable{
                     if(r.getId() == currentTime.getId()){
                         CreatePane.timetable.getTimes().getTimes().remove(r);
                         CreatePane.timetable.getTimes().getTimes().add(index, currentTime);
+
+                        //Changing all the instances of the changed object from the timetable
+                        if(CreatePane.timetable.getEvents()!=null && CreatePane.timetable.getEvents().getEvents()!=null) {
+                            for (Event e : CreatePane.timetable.getEvents().getEvents()) {
+                                if (e.getTime().getId() == currentTime.getId()) {
+                                    e.setTime(currentTime);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
+                                for (Event e : c.getAppliesToEvents().getEvents()) {
+                                    if (e.getTime().getId() == currentTime.getId()) {
+                                        e.setTime(currentTime);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
                         exists = true;
                         break;
                     }
@@ -208,8 +232,8 @@ public class InsertTime extends InsertPaneWithTable{
     }
 
     private void clearAllFields(){
-        dayCB.setValue(null);
-        timeUnitsCB.setValue(null);
+        dayCB.setValue("monday");
+        timeUnitsCB.setValue(1);
         hourIntervalTextField.clear();
     }
 
@@ -275,6 +299,27 @@ public class InsertTime extends InsertPaneWithTable{
 
                                         int indexOfTime = CreatePane.timetable.getTimes().getTimes().indexOf(time);
                                         CreatePane.timetable.getTimes().getTimes().remove(time);
+
+                                        //Changing all the instances of the removed object from the timetable
+                                        if(CreatePane.timetable.getEvents()!=null && CreatePane.timetable.getEvents().getEvents()!=null) {
+                                            for (Event e : CreatePane.timetable.getEvents().getEvents()) {
+                                                if (e.getTime().getId() == time.getId()) {
+                                                    e.setTime(null);
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
+                                                for (Event e : c.getAppliesToEvents().getEvents()) {
+                                                    if (e.getTime().getId() == time.getId()) {
+                                                        e.setTime(null);
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
 
                                         //Resetting the ids
                                         if(CreatePane.timetable.getTimes().getTimes().size()>1) {
@@ -370,6 +415,9 @@ public class InsertTime extends InsertPaneWithTable{
         if(!data.isEmpty()) {
             table.setItems(data);
             table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
+        else{
+            table.setItems(FXCollections.observableArrayList());
         }
     }
 }

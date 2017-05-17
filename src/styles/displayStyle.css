@@ -205,6 +205,8 @@
 }
 
 .generalListView .list-cell:filled:selected{
+    -fx-fit-to-width: true;
+    -fx-fit-to-width: true;
     -fx-background-color: #53cdb5;
     -fx-text-fill: #ffffff;
 }

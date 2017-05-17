@@ -7,6 +7,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -201,6 +202,7 @@ public class TimetableGrid {
         ScrollPane scrollPane = new ScrollPane(vBox);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setFitToWidth(true);
         scrollPane.getStyleClass().add("scrollPaneTimetable");
         scrollPane.getStyleClass().add("edge-to-edge");
 
@@ -235,6 +237,7 @@ public class TimetableGrid {
             default:
                 break;
         }
+
         Label l = new Label(cornerString);
         l.getStyleClass().add("tableHeadLabel");
         cellPane = new StackPane(l);
@@ -313,12 +316,12 @@ public class TimetableGrid {
 
                 cellPane.setOnDragDetected(new EventHandler<MouseEvent>(){
                     public void handle(MouseEvent event){
-                        Dragboard db = hourLabel.startDragAndDrop(TransferMode.MOVE);
-                        ClipboardContent content = new ClipboardContent();
-                        content.putString(resourceType);
-                        db.setContent(content);
-                        System.out.println("Drag detected");
+//                        Dragboard db = hourLabel.startDragAndDrop(TransferMode.MOVE);
+//                        ClipboardContent content = new ClipboardContent();
+//                        content.putString(resourceType);
+//                        db.setContent(content);
                         draggedEvent = e;
+                        System.out.println("Drag detected "+ draggedEvent.getId());
                         event.consume();
                     }
                 });
@@ -334,19 +337,20 @@ public class TimetableGrid {
                 cellPane.setOnDragDropped(new EventHandler <DragEvent>() {
                     public void handle(DragEvent event) {
                         event.acceptTransferModes(TransferMode.ANY);
-                        Dragboard db = event.getDragboard();
+//                        Dragboard db = event.getDragboard();
+//
+//                        event.setDropCompleted(false);
+//                        if(db.hasString()) {
+//                            String resourceType = db.getString();
+//
+//                            System.out.println("Drag dropped "+cellPane.getChildren().size());
+//                            VBox oldCell = (VBox)cellPane.getChildren().get(0);
+//                            cellPane.getChildren().clear();
+//                            cellPane.getChildren().add(getHourLabel(draggedEvent, resourceType, true));
+//                            event.setDropCompleted(true);
+//                        }
 
-                        event.setDropCompleted(false);
-                        if(db.hasString()) {
-                            String resourceType = db.getString();
-
-                            System.out.println("Drag dropped "+cellPane.getChildren().size());
-                            VBox oldCell = (VBox)cellPane.getChildren().get(0);
-                            cellPane.getChildren().clear();
-                            cellPane.getChildren().add(getHourLabel(draggedEvent, resourceType, true));
-                            event.setDropCompleted(true);
-                        }
-
+                        System.out.println("Drag dropped "+draggedEvent.getId());
                         event.consume();
                     }
                 });
@@ -471,7 +475,7 @@ public class TimetableGrid {
             if(!r.getResourceType().equals(resourceType)) {
                 Label l;
                 if(!onlyId) {
-                    if (!r.getName().isEmpty()) {
+                    if (r.getName()!=null && !r.getName().isEmpty()) {
                         l = new Label(resourceTypeText.get(r.getResourceType()) + r.getName());
                     } else {
                         l = new Label(resourceTypeText.get(r.getResourceType()) + r.getId());
@@ -487,10 +491,12 @@ public class TimetableGrid {
         detailsCell.setAlignment(Pos.CENTER);
 
         Label nameLabel = new Label(e.getDescription());
+
         if(!onlyId) {
             nameLabel.getStyleClass().add("cellBoldWriting");
         }
 
+        nameLabel.setTooltip(new Tooltip(e.getDescription()));
         VBox cellVBox = new VBox(nameLabel, detailsCell);
         cellVBox.setAlignment(Pos.CENTER);
 
@@ -517,6 +523,50 @@ public class TimetableGrid {
             Label l = new Label(" \n\n ");
             l.getStyleClass().add("tableContentLabel");
             StackPane cellPane = new StackPane(l);
+
+            cellPane.setOnDragDetected(new EventHandler<MouseEvent>(){
+                public void handle(MouseEvent event){
+//                        Dragboard db = hourLabel.startDragAndDrop(TransferMode.MOVE);
+//                        ClipboardContent content = new ClipboardContent();
+//                        content.putString(resourceType);
+//                        db.setContent(content);
+                    Event newEvent = new Event();
+                    newEvent.setId("newEvent");
+                    draggedEvent = newEvent;
+                    System.out.println("Drag detected "+ draggedEvent.getId());
+                    event.consume();
+                }
+            });
+
+            cellPane.setOnDragOver(new EventHandler <DragEvent>() {
+                public void handle(DragEvent event) {
+//                    event.acceptTransferModes(TransferMode.ANY);
+                    System.out.println("Drag Over Detected");
+                    event.consume();
+                }
+            });
+
+            cellPane.setOnDragDropped(new EventHandler <DragEvent>() {
+                public void handle(DragEvent event) {
+//                    event.acceptTransferModes(TransferMode.ANY);
+//                        Dragboard db = event.getDragboard();
+//
+//                        event.setDropCompleted(false);
+//                        if(db.hasString()) {
+//                            String resourceType = db.getString();
+//
+//                            System.out.println("Drag dropped "+cellPane.getChildren().size());
+//                            VBox oldCell = (VBox)cellPane.getChildren().get(0);
+//                            cellPane.getChildren().clear();
+//                            cellPane.getChildren().add(getHourLabel(draggedEvent, resourceType, true));
+//                            event.setDropCompleted(true);
+//                        }
+
+                    System.out.println("Drag dropped "+draggedEvent.getId());
+                    event.consume();
+                }
+            });
+
             cellPane.getStyleClass().add("tableContentCell");
             StackPane.setAlignment(l,Pos.CENTER);
             empty.add(cellPane, i, 0);

@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
+import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
@@ -291,6 +292,20 @@ public class InsertEvent extends InsertPaneWithTable {
                     if(e.getId().equals(currentEvent.getId())){
                         CreatePane.timetable.getEvents().getEvents().remove(e);
                         CreatePane.timetable.getEvents().getEvents().add(index, currentEvent);
+
+                        //Changing all the instances of the changed object from the timetable
+                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
+                                int eIndex = 0;
+                                for (Event ev : c.getAppliesToEvents().getEvents()) {
+                                    if (ev.getId().equals(currentEvent.getId())) {
+                                        c.getAppliesToEvents().getEvents().set(eIndex, currentEvent);
+                                    }
+                                    eIndex++;
+                                }
+                            }
+                        }
+
                         exists = true;
                         break;
                     }
@@ -335,9 +350,9 @@ public class InsertEvent extends InsertPaneWithTable {
 
     private void clearAllFields(){
         descriptionCB.setValue(null);
+        descriptionCB.setPromptText("Alege materia");
         timeCB.setValue(null);
-        resourceCB.setValue(null);
-        resourceIds.clear();
+        timeCB.setPromptText("Alege intervalul orar");
         resourcesFP.getChildren().clear();
     }
 
@@ -466,6 +481,19 @@ public class InsertEvent extends InsertPaneWithTable {
                                         int indexOfEv = CreatePane.timetable.getEvents().getEvents().indexOf(ev);
                                         CreatePane.timetable.getEvents().getEvents().remove(ev);
 
+                                        //Changing all the instances of the changed object from the timetable
+                                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
+                                                List<Event> toRemove = new ArrayList<>();
+                                                for (Event evn : c.getAppliesToEvents().getEvents()) {
+                                                    if (evn.getId().equals(ev.getId())) {
+                                                        toRemove.add(evn);
+                                                    }
+                                                }
+                                                c.getAppliesToEvents().getEvents().removeAll(toRemove);
+                                            }
+                                        }
+
                                         //Resetting the ids
                                         if(CreatePane.timetable.getEvents().getEvents().size()>1) {
                                             for (Event e : CreatePane.timetable.getEvents().getEvents().subList(indexOfEv, CreatePane.timetable.getEvents().getEvents().size())) {
@@ -589,6 +617,9 @@ public class InsertEvent extends InsertPaneWithTable {
         if(!data.isEmpty()) {
             table.setItems(data);
             table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
+        else{
+            table.setItems(FXCollections.observableArrayList());
         }
     }
 

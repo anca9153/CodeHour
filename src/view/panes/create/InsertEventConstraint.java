@@ -299,9 +299,8 @@ public class InsertEventConstraint extends InsertPaneWithTable {
     }
 
     private void clearAllFields(){
-        weightCB.setValue(null);
-        eventsCB.setValue(null);
-        eventIds.clear();
+        weightCB.setValue("1");
+        eventsCB.setValue("Adaugă eveniment");
         eventsFP.getChildren().clear();
         descriptionCheckBox.setSelected(false);
     }
@@ -556,7 +555,12 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         }
 
         table.getItems().clear();
-        table.setItems(data);
-        table.setPrefHeight((table.getFixedCellSize()+0.8) * (table.getItems().size()+1));
+        if(data!=null) {
+            table.setItems(data);
+            table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
+        else{
+            table.setItems(FXCollections.observableArrayList());
+        }
     }
 }

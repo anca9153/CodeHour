@@ -18,8 +18,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Metadata;
 import model.Timetable;
+import model.constraint.Constraint;
+import model.constraint.Constraints;
 import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
+import model.constraint.types.LimitIdleTimesConstraint;
 import model.resource.ResourceTypes;
 import utilities.DataLoader;
 import utilities.PropertiesLoader;
@@ -71,6 +74,7 @@ public class CreatePane extends MainPane {
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.get() == ButtonType.OK) {
                     FileChooser fileChooser = new FileChooser();
+                    fileChooser.setInitialDirectory(new File(PropertiesLoader.loadXMLLocationFolder()));
 
                     //Set extension filter
                     FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
@@ -80,7 +84,7 @@ public class CreatePane extends MainPane {
                     loadedFile = fileChooser.showOpenDialog(primaryStage);
 
                     if (loadedFile != null) {
-                        savingFile = loadedFile;
+                        savingFile = null;
                         timetable = DataLoader.loadDataFromXMLWithPath(loadedFile);
 
                         Label confLoad = new Label(" Orarul a fost încărcat.");
@@ -136,6 +140,7 @@ public class CreatePane extends MainPane {
 
                     Label confNew = new Label(" Orarul nou a fost creat.");
                     confNew.getStyleClass().addAll("fieldRightLabel", "explanatory1");
+                    confNew.setId("confNew");
                     confNew.setId("confNew");
 
                     for (Node n : leftToolbar.getChildren()) {
@@ -217,6 +222,24 @@ public class CreatePane extends MainPane {
         {
             if (savingFile != null) {
                 if (timetable.getEvents() != null && timetable.getEvents().getEvents() != null && timetable.getEvents().getEvents().size() > 0) {
+                    //Adding the base constraints
+                    List<Constraint> eventConstraintList = Arrays.asList(
+                            new AssignResourceConstraint("assignResourceConstraint", true, 1, timetable.getEvents(), null),
+                            new AssignTimeConstraint("assignTimeConstraint", true, 1, timetable.getEvents(), null)
+                    );
+
+                    Constraints eventConstraints = new Constraints(eventConstraintList);
+
+
+                    List<Constraint> resourceConstraintList = Arrays.asList(
+                            new LimitIdleTimesConstraint("limitIdleTimeConstraint", true, 1, 1, null, timetable.getResources())
+                    );
+
+                    Constraints resourceConstraints = new Constraints(resourceConstraintList);
+
+                    timetable.setEventConstraints(eventConstraints);
+                    timetable.setResourceConstraints(resourceConstraints);
+
                     Algorithm algorithm = new GradingAlgorithm();
                     Timetable solvedTimetable = algorithm.solve(timetable);
 
@@ -278,27 +301,36 @@ public class CreatePane extends MainPane {
             }
             else {
                 //Show window to choose file
-                error.setText("Nu este încărcat un orar!");
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setInitialDirectory(new File(PropertiesLoader.loadXMLLocationFolder()));
 
-                if(generateVBox.getChildren().size()<2) {
-                    generateVBox.getChildren().add(0, error);
-                }
-                else{
-                    error.setVisible(true);
-                }
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+                fileChooser.getExtensionFilters().add(extFilter);
 
-                PauseTransition visiblePause = new PauseTransition(
-                        Duration.seconds(5)
-                );
-                visiblePause.setOnFinished(
-                        e -> error.setVisible(false)
-                );
-                visiblePause.play();
+                //Show save file dialog
+                CreatePane.savingFile = fileChooser.showSaveDialog(primaryStage);
+
+//                error.setText("Nu este ales un fisier de salvare!");
+//
+//                if(generateVBox.getChildren().size()<2) {
+//                    generateVBox.getChildren().add(0, error);
+//                }
+//                else{
+//                    error.setVisible(true);
+//                }
+//
+//                PauseTransition visiblePause = new PauseTransition(
+//                        Duration.seconds(5)
+//                );
+//                visiblePause.setOnFinished(
+//                        e -> error.setVisible(false)
+//                );
+//                visiblePause.play();
             }
 
             //The timetable has been generated
             //Now loading the display pane
-
 
         });
 
@@ -321,13 +353,13 @@ public class CreatePane extends MainPane {
         final ObservableList items = FXCollections.observableArrayList(buttonStringList);
         listView.getItems().addAll(items);
         listView.getSelectionModel().selectedItemProperty().addListener(
-                (ObservableValue<? extends String> ov, String old_val,
-                 String new_val) -> {
+                (ObservableValue<? extends String> ov, String old_val, String new_val) -> {
                     if(new_val != null) {
                         clearSelections(labelString);
                         addRightCreatePane(new_val);
                     }
-                });
+                }
+        );
 
         listView.getStyleClass().add("generalListView");
         listView.setPrefHeight(44*buttonStringList.length);

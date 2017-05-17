@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
+import model.constraint.Constraint;
+import model.event.Event;
 import model.resource.Resource;
 import model.resource.Resources;
 import view.panes.CreatePane;
@@ -124,6 +126,46 @@ public class InsertResource extends InsertPaneWithTable {
                     if(r.getId().equals(currentResource.getId())){
                         CreatePane.timetable.getResources().getResources().remove(r);
                         CreatePane.timetable.getResources().getResources().add(index, currentResource);
+
+                        //Changing all the instances of the changed object from the timetable
+                        if(CreatePane.timetable.getEvents()!=null && CreatePane.timetable.getEvents()!=null){
+                            for (Event e : CreatePane.timetable.getEvents().getEvents()) {
+                                int rIndex = 0;
+                                for (Resource res : e.getResources().getResources()) {
+                                    if (res.getId().equals(currentResource.getId())) {
+                                        e.getResources().getResources().set(rIndex, currentResource);
+                                    }
+                                    rIndex++;
+                                }
+                            }
+                        }
+
+                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
+                                for (Event e : c.getAppliesToEvents().getEvents()) {
+                                    int rIndex = 0;
+                                    for (Resource res : e.getResources().getResources()) {
+                                        if (res.getId().equals(currentResource.getId())) {
+                                            e.getResources().getResources().set(rIndex, currentResource);
+                                        }
+                                        rIndex++;
+                                    }
+                                }
+                            }
+                        }
+
+                        if(CreatePane.timetable.getResourceConstraints()!=null && CreatePane.timetable.getResourceConstraints().getConstraints()!=null) {
+                            for (Constraint c : CreatePane.timetable.getResourceConstraints().getConstraints()) {
+                                int rIndex = 0;
+                                for (Resource res : c.getAppliesToResources().getResources()) {
+                                    if (res.getId().equals(currentResource.getId())) {
+                                        c.getAppliesToResources().getResources().set(rIndex, currentResource);
+                                    }
+                                    rIndex++;
+                                }
+                            }
+                        }
+
                         exists = true;
                         break;
                     }
@@ -174,6 +216,9 @@ public class InsertResource extends InsertPaneWithTable {
     private void clearAllFields(){
         idTextField.clear();
         nameTextField.clear();
+
+        idTextField.setPromptText("Adaugă id " + resourceSingularString);
+        nameTextField.setPromptText("Adaugă nume " + resourceSingularString);
     }
 
     protected VBox createTable(){
@@ -227,6 +272,45 @@ public class InsertResource extends InsertPaneWithTable {
                                     {
                                         Resource resource = getTableView().getItems().get(getIndex());
                                         CreatePane.timetable.getResources().getResources().remove(resource);
+
+                                        //Changing all the instances of the removed object from the timetable
+                                        if(CreatePane.timetable.getEvents()!=null && CreatePane.timetable.getEvents().getEvents()!=null) {
+                                            for (Event e : CreatePane.timetable.getEvents().getEvents()) {
+                                                List<Resource> toRemove = new ArrayList<>();
+                                                for (Resource res : e.getResources().getResources()) {
+                                                    if (res.getId().equals(resource.getId())) {
+                                                        toRemove.add(res);
+                                                    }
+                                                }
+                                                e.getResources().getResources().removeAll(toRemove);
+                                            }
+                                        }
+
+                                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                                            for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
+                                                for (Event e : c.getAppliesToEvents().getEvents()) {
+                                                    List<Resource> toRemove = new ArrayList<>();
+                                                    for (Resource res : e.getResources().getResources()) {
+                                                        if (res.getId().equals(resource.getId())) {
+                                                            toRemove.add(res);
+                                                        }
+                                                    }
+                                                    e.getResources().getResources().removeAll(toRemove);
+                                                }
+                                            }
+                                        }
+
+                                        if(CreatePane.timetable.getResourceConstraints()!=null && CreatePane.timetable.getResourceConstraints().getConstraints()!=null) {
+                                            for (Constraint c : CreatePane.timetable.getResourceConstraints().getConstraints()) {
+                                                List<Resource> toRemove = new ArrayList<>();
+                                                for (Resource r : c.getAppliesToResources().getResources()) {
+                                                    if (r.getId().equals(resource.getId())) {
+                                                        toRemove.add(r);
+                                                    }
+                                                }
+                                                c.getAppliesToResources().getResources().removeAll(toRemove);
+                                            }
+                                        }
 
                                         updateTableData();
                                         saveIntoFile();
@@ -301,9 +385,12 @@ public class InsertResource extends InsertPaneWithTable {
             table = new TableView();
         }
 
-        if(!data.isEmpty() && table != null) {
+        if(!data.isEmpty()) {
             table.setItems(data);
             table.setPrefHeight((table.getFixedCellSize() + 0.8) * (table.getItems().size() + 1));
+        }
+        else{
+            table.setItems(FXCollections.observableArrayList());
         }
     }
 }

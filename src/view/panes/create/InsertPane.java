@@ -16,7 +16,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import utilities.DataLoader;
+import utilities.PropertiesLoader;
 import view.panes.CreatePane;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -116,6 +119,7 @@ public abstract class InsertPane {
     protected boolean saveIntoFile(){
         if (CreatePane.savingFile == null) {
             FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File(PropertiesLoader.loadXMLLocationFolder()));
 
             //Set extension filter
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
@@ -125,6 +129,7 @@ public abstract class InsertPane {
             CreatePane.savingFile = fileChooser.showSaveDialog(primaryStage);
         }
 
+        // The saving file can still be null, one more check is needed
         if (CreatePane.savingFile != null) {
             DataLoader.loadSolvedTimetableToXMLWithPath(CreatePane.timetable, CreatePane.savingFile);
 
