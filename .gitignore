@@ -42,3 +42,6 @@ out/production/CodeHour/model/StudyGroup.class
 out/production/CodeHour/model/Subject.class
 out/production/CodeHour/model/Teacher.class
 out/production/CodeHour/model/Timetable.class
+out/
+.idea/
+out/
