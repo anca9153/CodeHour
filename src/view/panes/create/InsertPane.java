@@ -15,7 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import utilities.DataLoader;
+import utilities.XMLDataLoader;
 import utilities.PropertiesLoader;
 import view.panes.CreatePane;
 
@@ -131,7 +131,7 @@ public abstract class InsertPane {
 
         // The saving file can still be null, one more check is needed
         if (CreatePane.savingFile != null) {
-            DataLoader.loadSolvedTimetableToXMLWithPath(CreatePane.timetable, CreatePane.savingFile);
+            XMLDataLoader.loadSolvedTimetableToXMLWithPath(CreatePane.timetable, CreatePane.savingFile);
 
             Label confSave = new Label("Datele au fost salvate. ");
             confSave.getStyleClass().addAll("fieldRightLabel","explanatory1");

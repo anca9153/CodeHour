@@ -12,7 +12,7 @@ import model.Timetable;
 import model.event.Event;
 import model.resource.Resource;
 import model.time.Time;
-import utilities.DataLoader;
+import utilities.XMLDataLoader;
 import view.panes.DisplayPane;
 
 import java.io.File;
@@ -389,7 +389,7 @@ public class TimetableGrid {
                             }
                         }
 
-                        DataLoader.loadSolvedTimetableToXMLWithPath(timetable, file);
+                        XMLDataLoader.loadSolvedTimetableToXMLWithPath(timetable, file);
                         System.out.println("evenimentele: "+eventToIntechange1.getId()+" "+eventToIntechange2.getId());
                         System.out.println("datele au fost salvate in fisierul "+file.getName());
 

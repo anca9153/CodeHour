@@ -1,19 +1,24 @@
 package view.panes;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import model.Timetable;
 import model.event.Event;
 import model.resource.Resource;
 import model.solution.Solution;
 import model.solution.Solutions;
+import utilities.freemarker.FreeMarkerDataLoader;
 import view.panes.display.TimetableGrid;
 import java.io.File;
 import java.util.*;
@@ -34,8 +39,6 @@ public class DisplayPane extends MainPane {
     private Map<String, List<Event>> studyGroupEvents = new HashMap<>();
     private Map<String, List<Event>> teacherEvents = new HashMap<>();
     private Map<String, List<Event>> classroomEvents = new HashMap<>();
-
-    private Map<String, String> teacherIdName = new HashMap<>();
 
     VBox v1, v2, v3;
     ListView<String> listView;
@@ -256,12 +259,7 @@ public class DisplayPane extends MainPane {
 
         Label details = new Label();
         details.setText("Detalii");
-        details.addEventFilter(MouseEvent.MOUSE_CLICKED, new javafx.event.EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-
-            }
-        });
+        details.setTooltip(new Tooltip(sol.getDescription()));
         details.getStyleClass().add("detailsLabel");
 
         HBox detailsBox = new HBox(details);
@@ -287,9 +285,38 @@ public class DisplayPane extends MainPane {
         VBox smallVBox = new VBox(new HBox(sLabel, detailsBox), solutionsComboBox, scoreBox);
         smallVBox.getStyleClass().add("optionVBox");
 
+        final Label error = new Label("");
+        error.getStyleClass().addAll("fieldRightLabel", "redStar", "normalFont");
+
+        Button generateReport = new Button("GENEREAZĂ RAPORT");
+        generateReport.getStyleClass().add("createButton");
+
+        VBox generateVBox = new VBox(generateReport, error);
+        generateVBox.getStyleClass().addAll("addBorderGenerate");
+        generateVBox.setMaxHeight(100);
+        generateVBox.setMinHeight(100);
+        generateVBox.setPrefHeight(100);
+        generateVBox.setAlignment(Pos.CENTER);
+
+        generateReport.setOnAction((ActionEvent event) ->
+        {
+            FreeMarkerDataLoader.generateReports(timetable, sol, studyGroupEvents, teacherEvents, classroomEvents);
+            error.setText("Raport generat cu succes.");
+            error.setVisible(true);
+
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(5)
+            );
+            visiblePause.setOnFinished(
+                    e -> error.setVisible(false)
+            );
+            visiblePause.play();
+        });
+
         VBox vBox = new VBox(smallVBox);
         vBox.getChildren().addAll(optionsList);
         vBox.getChildren().add(createGeneralOptionBox());
+        vBox.getChildren().add(generateVBox);
         vBox.getStyleClass().add("leftScreen");
 
         optionsList.clear();

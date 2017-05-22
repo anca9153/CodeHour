@@ -2,11 +2,13 @@ package view.panes;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import view.StageLoader;
 
@@ -55,14 +57,25 @@ public abstract class MainPane extends BorderPane {
         return rightBox;
     }
 
-    protected Button createSettingsButton(){
+    protected MenuButton createSettingsButton(){
         ImageView imageView = new ImageView(new Image("\\icons\\settingsIcon.png"));
         imageView.setFitHeight(10);
         imageView.setFitWidth(10);
         imageView.setPreserveRatio(true);
 
-        Button settings = new Button("Setări", imageView);
-        settings.getStyleClass().add("settingsButton");
+        MenuItem menuItem1 = new MenuItem("Folderul principal");
+
+        menuItem1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Option 1 selected");
+            }
+        });
+
+        MenuButton settings = new MenuButton("Setări", imageView, menuItem1);
+
+//        Button settings = new Button("Setări", imageView);
+//        settings.getStyleClass().add("settingsButton");
         settings.setContentDisplay(ContentDisplay.LEFT);
         settings.setOnAction((ActionEvent event) ->
                 StageLoader.loadHome()

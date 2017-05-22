@@ -352,6 +352,22 @@
                 </resource>
             </resources>
         </event>
+        <event id="ev_8">
+            <description>﻿Matematică grupa speciala</description>
+            <resources>
+                <resource id="7B">
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource id="mz">
+                    <name>Mihai Zbughin</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource id="205">
+                    <name>clasa</name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+        </event>
     </events>
     <metadata>
         <contributor>G.B.</contributor>

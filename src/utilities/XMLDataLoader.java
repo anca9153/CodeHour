@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Anca on 1/18/2017.
  */
-public class DataLoader {
+public class XMLDataLoader {
 
     public static Timetable loadDataFromXML(String fileName){
      return loadDataFromXMLWithPath(new File(PropertiesLoader.loadXMLLocationFolder() + fileName));

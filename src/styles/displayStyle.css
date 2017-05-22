@@ -85,6 +85,44 @@
     -fx-padding: 0 0 0 15;
 }
 
+.menu-button{
+    -fx-background-color: #53cdb5;
+    -fx-padding: 2;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.menu-button .label{
+    -fx-text-fill: #ffffff;
+    -fx-font: 8pt "Verdana";
+    -fx-font-weight: bold;
+}
+.menu-button .arrow{
+    -fx-background-color: #ffffff;
+}
+
+.menu-item{
+    -fx-background-color: white, white;
+    -fx-background-insets: 0, 1;
+    -fx-effect: none;
+    -fx-cursor: hand;
+}
+
+.menu-item .label{
+    -fx-text-fill: #363636;
+    -fx-font: 8pt "Verdana";
+    -fx-font-weight: normal;
+}
+
+.menu-item:focused{
+    -fx-background-color: #53cdb5;
+}
+
+.menu-item:focused .label{
+    -fx-background-color: #53cdb5;
+    -fx-text-fill: #ffffff;
+}
+
 .settingsButton{
     -fx-background-color: #53cdb5;
     -fx-text-fill: #ffffff;
@@ -273,4 +311,40 @@
     -fx-font: 10pt "Verdana";
     -fx-text-fill: #363636;
     -fx-font-weight: bold;
+}
+.createButton{
+    -fx-background-color: #E84C3D;
+    -fx-font: 8pt "Verdana";
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-pref-width: 150px;
+    -fx-border-color: #cc4133;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: hand;
+}
+
+.createButton:hover{
+    -fx-background-color: #f85241;
+}
+
+.addBorderGenerate{
+    -fx-border-color: #dfdfdf;
+    -fx-border-width:  1 0 0 0;
+}
+
+.fieldRightLabel{
+    -fx-font: 8pt "Verdana";
+    -fx-padding: 5 5 5 0;
+    -fx-text-fill: #53cdb5;
+    -fx-font-weight: bold;
+}
+
+.redStar{
+    -fx-text-fill: #E84C3D;
+}
+
+.normalFont{
+    -fx-font-weight: normal;
 }

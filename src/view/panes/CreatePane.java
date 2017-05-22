@@ -24,7 +24,7 @@ import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
 import model.constraint.types.LimitIdleTimesConstraint;
 import model.resource.ResourceTypes;
-import utilities.DataLoader;
+import utilities.XMLDataLoader;
 import utilities.PropertiesLoader;
 import view.StageLoader;
 import view.panes.create.*;
@@ -85,7 +85,7 @@ public class CreatePane extends MainPane {
 
                     if (loadedFile != null) {
                         savingFile = null;
-                        timetable = DataLoader.loadDataFromXMLWithPath(loadedFile);
+                        timetable = XMLDataLoader.loadDataFromXMLWithPath(loadedFile);
 
                         Label confLoad = new Label(" Orarul a fost încărcat.");
                         confLoad.getStyleClass().addAll("fieldRightLabel", "explanatory1");
@@ -246,11 +246,11 @@ public class CreatePane extends MainPane {
                     Timetable solvedTimetable = algorithm.solve(timetable);
 
                     //Saving into the files
-                    DataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, savingFile);
+                    XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, savingFile);
 
                     if(!savingFile.getPath().equals(PropertiesLoader.loadXMLLocationFolder())){
                         File f = new File(new String(PropertiesLoader.loadXMLLocationFolder() + savingFile.getName()));
-                        DataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, f);
+                        XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, f);
                         savingFile = f;
                     }
 
@@ -270,9 +270,9 @@ public class CreatePane extends MainPane {
                     Timetable t;
                     for(File file: timetablesToDisplay) {
                         if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
-                            t = DataLoader.loadDataFromXML(file.getName());
+                            t = XMLDataLoader.loadDataFromXML(file.getName());
                         } else {
-                            t = DataLoader.loadDataFromXMLWithPath(file);
+                            t = XMLDataLoader.loadDataFromXMLWithPath(file);
                         }
                         if(t.getSolutions() != null){
                             idTimetableWithSolutionMap.put(t.getId(), t);

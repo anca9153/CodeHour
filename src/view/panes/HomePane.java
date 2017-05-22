@@ -2,7 +2,7 @@ package view.panes;
 
 import javafx.scene.control.*;
 import model.Timetable;
-import utilities.DataLoader;
+import utilities.XMLDataLoader;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -72,9 +72,9 @@ public class HomePane extends MainPane {
         Timetable t;
         for(File file: timetablesToDisplay) {
             if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
-                t = DataLoader.loadDataFromXML(file.getName());
+                t = XMLDataLoader.loadDataFromXML(file.getName());
             } else {
-                t = DataLoader.loadDataFromXMLWithPath(file);
+                t = XMLDataLoader.loadDataFromXMLWithPath(file);
             }
             if(t.getSolutions() == null){
                 idTimetableNoSolutionMap.put(t.getId(), t);
