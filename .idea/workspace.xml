@@ -2,22 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33c9a952-d24d-4ca9-bd29-437e07da97c7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$6.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/CreatePane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/CreatePane.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/model/time/Time.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/model/time/Time.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/FreeMarkerDataLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/FreeMarkerDataLoader.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$3.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$4.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$5.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/MainPane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/MainPane.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHour.iml" afterPath="$PROJECT_DIR$/CodeHour.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CodeHourXMLs/test.xml" afterPath="$PROJECT_DIR$/CodeHourXMLs/test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/styles/displayStyle.css" afterPath="$PROJECT_DIR$/out/production/CodeHour/styles/displayStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Main.java" afterPath="$PROJECT_DIR$/src/main/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/styles/displayStyle.css" afterPath="$PROJECT_DIR$/src/styles/displayStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/mainPage.ftl" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/mainPage.ftl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/time/Time.java" afterPath="$PROJECT_DIR$/src/model/time/Time.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java" afterPath="$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" afterPath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/MainPane.java" afterPath="$PROJECT_DIR$/src/view/panes/MainPane.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,44 +35,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mainPage.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl">
+      <file leaf-file-name="studyGroup.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+            <state relative-caret-position="736">
+              <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FreeMarkerDataLoader.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="teacher.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="872">
+              <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classroom.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="67" column="61" lean-forward="false" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainPage.ftl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FreeMarkerDataLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="21" selection-end-column="80" />
+            <state relative-caret-position="-612">
+              <caret line="74" column="56" lean-forward="false" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WinApplication.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PropertiesLoader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/PropertiesLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="77" column="46" lean-forward="false" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="46" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,7 +99,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>FileChoo</find>
       <find>FileChooser file</find>
       <find>FileChooser</find>
       <find>FileChooser fil</find>
@@ -117,9 +125,10 @@
       <find>Fre</find>
       <find>fre</find>
       <find>fieldRightLabel</find>
-      <find>normalFont</find>
       <find>generate</find>
       <find>redStar</find>
+      <find>sort</find>
+      <find>normalFont</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -133,10 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/model/event/Events.java" />
-        <option value="$PROJECT_DIR$/src/model/solution/OutLaws/ConstraintViolatingEvent.java" />
-        <option value="$PROJECT_DIR$/src/model/solution/OutLaws/ConstraintViolatingResource.java" />
-        <option value="$PROJECT_DIR$/src/model/solution/OutLaws/ConstraintViolatingEvents.java" />
         <option value="$PROJECT_DIR$/src/model/solution/Report.java" />
         <option value="$PROJECT_DIR$/src/compute/DataLoader.java" />
         <option value="$PROJECT_DIR$/config.properties" />
@@ -157,7 +162,6 @@
         <option value="$PROJECT_DIR$/src/view/panes/create/InsertResourceConstraint.java" />
         <option value="$PROJECT_DIR$/src/view/panes/display/TransportCell.java" />
         <option value="$PROJECT_DIR$/src/model/Timetable.java" />
-        <option value="$PROJECT_DIR$/src/model/time/Time.java" />
         <option value="$PROJECT_DIR$/src/model/event/Event.java" />
         <option value="$PROJECT_DIR$/src/utilities/DataLoader.java" />
         <option value="$PROJECT_DIR$/src/styles/createStyle.css" />
@@ -180,9 +184,14 @@
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/styles/homeStyle.css" />
         <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroups.ftl" />
-        <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
         <option value="$PROJECT_DIR$/src/styles/displayStyle.css" />
         <option value="$PROJECT_DIR$/src/utilities/PropertiesLoader.java" />
+        <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" />
+        <option value="$PROJECT_DIR$/src/model/time/Time.java" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" />
         <option value="$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java" />
       </list>
     </option>
@@ -268,6 +277,58 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="panes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeHour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeHour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="panes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="display" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeHour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeHour" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="panes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="create" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -423,6 +484,9 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Dropbox\Licenta\CodeHour (github)\CodeHour\src\utilities\freemarker\templates" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="main" />
     </key>
@@ -731,15 +795,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/view/stages/PopupStage.java" />
-    <entry file="file://$PROJECT_DIR$/src/view/panes/DetailsPopup.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/javafx-src.zip!/javafx/scene/layout/Priority.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Metadata.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -823,14 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/time/Time.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/panes/display/TransportCell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -847,14 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/compute/algorithms/GradingAlgorithm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertResourceConstraint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -867,14 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -927,16 +958,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertTime.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="306" column="68" lean-forward="true" selection-start-line="306" selection-start-column="68" selection-end-line="306" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/StageLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -960,16 +981,6 @@
         <state relative-caret-position="673">
           <caret line="168" column="33" lean-forward="false" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="538" column="25" lean-forward="false" selection-start-line="538" selection-start-column="21" selection-end-line="538" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1010,14 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/resource/Resource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/output.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1050,34 +1053,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="288" column="64" lean-forward="false" selection-start-line="288" selection-start-column="57" selection-end-line="288" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/styles/createStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="281" column="0" lean-forward="true" selection-start-line="281" selection-start-column="0" selection-end-line="285" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="209" column="78" lean-forward="false" selection-start-line="209" selection-start-column="68" selection-end-line="209" selection-end-column="78" />
           <folding />
         </state>
       </provider>
@@ -1098,14 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/PropertiesLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="77" column="46" lean-forward="false" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -1114,13 +1085,128 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java">
+    <entry file="file://$PROJECT_DIR$/src/utilities/PropertiesLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="21" selection-end-column="80" />
+        <state relative-caret-position="345">
+          <caret line="77" column="46" lean-forward="false" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/time/Time.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" column="59" lean-forward="false" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
+          <folding>
+            <element signature="e#1250#1251#0" expanded="true" />
+            <element signature="e#1298#1299#0" expanded="true" />
+            <element signature="e#1339#1340#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
+            <element signature="e#1442#1443#0" expanded="true" />
+            <element signature="e#1500#1501#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/resource/Resource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compute/algorithms/GradingAlgorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/DisplayPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5146">
+          <caret line="149" column="89" lean-forward="false" selection-start-line="149" selection-start-column="89" selection-end-line="149" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/display/TimetableGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="558" column="0" lean-forward="true" selection-start-line="558" selection-start-column="0" selection-end-line="558" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/CreatePane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="209" column="78" lean-forward="false" selection-start-line="209" selection-start-column="68" selection-end-line="209" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="78" column="147" lean-forward="true" selection-start-line="78" selection-start-column="72" selection-end-line="78" selection-end-column="147" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="872">
+          <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="67" column="61" lean-forward="false" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="74" column="56" lean-forward="false" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

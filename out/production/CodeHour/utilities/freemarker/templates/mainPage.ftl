@@ -9,7 +9,7 @@
 
 <ul>
     <#list studyGroups as studyGroup>
-        <li>${studyGroup}</li>
+        <li><a href=${studyGroupLinks[studyGroup?index]}>${studyGroup}</a></li>
     </#list>
 </ul>
 
@@ -17,7 +17,7 @@
 
 <ul>
     <#list teachers as teacher>
-        <li>${teacher}</li>
+        <li><a href=${teacherLinks[teacher?index]}>${teacher}</a></li>
     </#list>
 </ul>
 
@@ -25,7 +25,7 @@
 
 <ul>
     <#list classrooms as classroom>
-        <li>${classroom}</li>
+        <li><a href=${classroomLinks[classroom?index]}>${classroom}</a></li>
     </#list>
 </ul>
 

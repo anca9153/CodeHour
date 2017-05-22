@@ -12,61 +12,61 @@ import java.io.Serializable;
  */
 @XmlRootElement(name = "time")
 public class Time implements Serializable{
-    private SimpleIntegerProperty id = new SimpleIntegerProperty();
-    private SimpleStringProperty name = new SimpleStringProperty();
-    private SimpleStringProperty day = new SimpleStringProperty();
-    private SimpleStringProperty hourInterval = new SimpleStringProperty();
-    private SimpleIntegerProperty numberOfTimeUnits = new SimpleIntegerProperty();
+    private Integer id = 0;
+    private String name;
+    private String day;
+    private String hourInterval;
+    private Integer numberOfTimeUnits = 0;
 
     public Time(){
 
     }
 
     public Time(int id, String name, String day, String hourInterval) {
-        this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.day = new SimpleStringProperty(day);
-        this.hourInterval = new SimpleStringProperty(hourInterval);
+        this.id = id;
+        this.name = name;
+        this.day = day;
+        this.hourInterval = hourInterval;
     }
 
     public int getId() {
-        return id.getValue();
+        return id;
     }
 
     @XmlAttribute
     public void setId(int id) {
-        this.id = new SimpleIntegerProperty(id);
+        this.id = id;
     }
 
     public String getName() {
-        return name.getValue();
+        return name;
     }
 
     public void setName(String name) {
-        this.name = new SimpleStringProperty(name);
+        this.name = name;
     }
 
     public String getDay() {
-        return day.getValue();
+        return day;
     }
 
     public void setDay(String day) {
-        this.day = new SimpleStringProperty(day);
+        this.day = day;
     }
 
     public String getHourInterval() {
-        return hourInterval.getValue();
+        return hourInterval;
     }
 
     public void setHourInterval(String hourInterval) {
-        this.hourInterval = new SimpleStringProperty(hourInterval);
+        this.hourInterval = hourInterval;
     }
 
     public int getNumberOfTimeUnits() {
-        return numberOfTimeUnits.getValue();
+        return numberOfTimeUnits;
     }
 
     public void setNumberOfTimeUnits(int numberOfTimeUnits) {
-        this.numberOfTimeUnits = new SimpleIntegerProperty(numberOfTimeUnits);
+        this.numberOfTimeUnits = numberOfTimeUnits;
     }
 }

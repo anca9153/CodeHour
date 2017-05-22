@@ -300,7 +300,8 @@ public class DisplayPane extends MainPane {
 
         generateReport.setOnAction((ActionEvent event) ->
         {
-            FreeMarkerDataLoader.generateReports(timetable, sol, studyGroupEvents, teacherEvents, classroomEvents);
+            FreeMarkerDataLoader dataLoader = new FreeMarkerDataLoader(timetable, sol, studyGroupEvents, teacherEvents, classroomEvents);
+            dataLoader.generateReports();
             error.setText("Raport generat cu succes.");
             error.setVisible(true);
 
