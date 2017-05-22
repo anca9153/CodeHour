@@ -2,21 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33c9a952-d24d-4ca9-bd29-437e07da97c7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/model/time/Time.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/model/time/Time.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/generalClassrooms.ftl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/generalStudyGroups.ftl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/generalTeachers.ftl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/FreeMarkerDataLoader$1.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/FreeMarkerDataLoader$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/FreeMarkerDataLoader.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/FreeMarkerDataLoader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$3.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$4.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$5.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" afterPath="$PROJECT_DIR$/out/production/CodeHour/view/panes/DisplayPane.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/101.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/101.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/102.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/102.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/103.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/103.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/104.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/104.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/105.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/105.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/10A.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/10A.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/10B.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/10B.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/11A.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/11A.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/11B.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/11B.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/12A.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/12A.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/12B.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/12B.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/201.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/201.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/202.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/202.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/203.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/203.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/204.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/204.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/205.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/205.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/301.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/301.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/302.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/302.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/9A.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/9A.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/9B.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/9B.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/AnaCrin.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/AnaCrin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/AnaSavascu.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/AnaSavascu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/CatalinaIlas.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/CatalinaIlas.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/CristianSava.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/CristianSava.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/DanPop.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/DanPop.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/DanielOniciuc.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/DanielOniciuc.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/MariaStejar.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/MariaStejar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/VirgilHariuc.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/VirgilHariuc.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UserFiles/Reports/report_1/mainPage.html" afterPath="$PROJECT_DIR$/UserFiles/Reports/report_1/mainPage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/classroom.ftl" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/classroom.ftl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/mainPage.ftl" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/mainPage.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/time/Time.java" afterPath="$PROJECT_DIR$/src/model/time/Time.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/studyGroup.ftl" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/studyGroup.ftl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/teacher.ftl" afterPath="$PROJECT_DIR$/out/production/CodeHour/utilities/freemarker/templates/teacher.ftl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java" afterPath="$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" afterPath="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl" afterPath="$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,54 +64,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="studyGroup.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="teacher.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="872">
-              <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="classroom.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="67" column="61" lean-forward="false" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainPage.ftl" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FreeMarkerDataLoader.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FreeMarkerDataLoader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-612">
-              <caret line="74" column="56" lean-forward="false" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
+            <state relative-caret-position="144">
+              <caret line="194" column="80" lean-forward="false" selection-start-line="194" selection-start-column="80" selection-end-line="194" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generalClassrooms.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/generalClassrooms.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="89" column="37" lean-forward="false" selection-start-line="89" selection-start-column="37" selection-end-line="89" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generalTeachers.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/generalTeachers.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="680">
+              <caret line="85" column="17" lean-forward="false" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generalStudyGroups.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/generalStudyGroups.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1513">
+              <caret line="89" column="38" lean-forward="false" selection-start-line="89" selection-start-column="38" selection-end-line="89" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,9 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/model/solution/Report.java" />
-        <option value="$PROJECT_DIR$/src/compute/DataLoader.java" />
-        <option value="$PROJECT_DIR$/config.properties" />
         <option value="$PROJECT_DIR$/src/model/solution/Solution.java" />
         <option value="$PROJECT_DIR$/src/model/resource/Resource.java" />
         <option value="$PROJECT_DIR$/src/model/constraint/types/LimitIdleTimesConstraint.java" />
@@ -187,12 +203,15 @@
         <option value="$PROJECT_DIR$/src/styles/displayStyle.css" />
         <option value="$PROJECT_DIR$/src/utilities/PropertiesLoader.java" />
         <option value="$PROJECT_DIR$/src/view/panes/DisplayPane.java" />
-        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" />
         <option value="$PROJECT_DIR$/src/model/time/Time.java" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" />
         <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl" />
         <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl" />
-        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/generalStudyGroups.ftl" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/generalClassooms.ftl" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/generalTeachers.ftl" />
         <option value="$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java" />
+        <option value="$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl" />
       </list>
     </option>
   </component>
@@ -795,35 +814,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/model/Metadata.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/time/Times.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/resource/ResourceTypes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/resource/Resources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/panes/create/InsertStudyGroups.java" />
     <entry file="file://$PROJECT_DIR$/src/model/constraint/types/AssignResourceConstraint.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1168,45 +1158,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/teacher.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="872">
-          <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+        <state relative-caret-position="328">
+          <caret line="79" column="48" lean-forward="false" selection-start-line="79" selection-start-column="48" selection-end-line="79" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/classroom.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="67" column="61" lean-forward="false" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
+        <state relative-caret-position="124">
+          <caret line="76" column="24" lean-forward="true" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/src.zip!/java/lang/NumberFormatException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-612">
-          <caret line="74" column="56" lean-forward="false" selection-start-line="74" selection-start-column="56" selection-end-line="74" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="311">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/studyGroup.ftl">
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/generalTeachers.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+        <state relative-caret-position="680">
+          <caret line="85" column="17" lean-forward="false" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/generalStudyGroups.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1513">
+          <caret line="89" column="38" lean-forward="false" selection-start-line="89" selection-start-column="38" selection-end-line="89" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/generalClassrooms.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="89" column="37" lean-forward="false" selection-start-line="89" selection-start-column="37" selection-end-line="89" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/templates/mainPage.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+        <state relative-caret-position="379">
+          <caret line="58" column="38" lean-forward="false" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/freemarker/FreeMarkerDataLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="194" column="80" lean-forward="false" selection-start-line="194" selection-start-column="80" selection-end-line="194" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -6,6 +6,11 @@
     body
     {
         font-family: arial;
+        text-align: center;
+    }
+
+    table{
+        margin: 0 auto;
     }
 
     th,td
@@ -20,12 +25,20 @@
     {
         padding: 10px 10px;
     }
+    td.day{
+        text-align: center;
+        background-color: lightgrey;
+    }
 
     th
     {
         background: #666;
         color: white;
         padding: 10px 10px;
+        width: 25%;
+        font-size: 12px;
+        text-transform: uppercase;
+        outline: 1px solid #808080;
     }
 
     </style>
@@ -50,7 +63,7 @@
             <#assign currentTableDay = event.time.getDay()>
             <#assign dayIndex = dayIndex + 1>
             <tr>
-                <td>${tableRO[dayIndex]}</td>
+                <td colspan="4" class="day">${tableRO[dayIndex]}</td>
             </tr>
         </#if>
         <tr>

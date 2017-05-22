@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>${resourceId}</title>
+    <title>${generalId}</title>
     <title>Timetable</title>
     <style type="text/css">
     body
@@ -35,7 +35,7 @@
         background: #666;
         color: white;
         padding: 10px 10px;
-        width: 25%;
+        width: 20%;
         font-size: 12px;
         text-transform: uppercase;
         outline: 1px solid #808080;
@@ -45,7 +45,7 @@
 </head>
 <body>
 
-<h2>Sala ${resourceId}</h2>
+<h2>Orar general - ${generalId}</h2>
 
 <#assign tableRO = ["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]>
 <#assign currentTableDay = "none">
@@ -53,6 +53,7 @@
 
 <table>
     <tr>
+        <th>Sala</th>
         <th>Interval</th>
         <th>Disciplina</th>
         <th>Profesor</th>
@@ -63,10 +64,17 @@
             <#assign currentTableDay = event.time.getDay()>
             <#assign dayIndex = dayIndex + 1>
             <tr>
-                <td colspan="4" class="day">${tableRO[dayIndex]}</td>
+                <td colspan="5" class="day">${tableRO[dayIndex]}</td>
             </tr>
         </#if>
         <tr>
+            <td>
+                <#list event.resources.getResources() as resource>
+                <#if resource.resourceType == "classroom">
+                    ${resource.id}
+                </#if>
+            </#list>
+            </td>
             <td>${event.time.getHourInterval()}</td>
             <td>${event.description}</td>
             <td>
