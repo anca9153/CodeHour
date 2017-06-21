@@ -20,6 +20,8 @@ import view.panes.DisplayPane;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Anca on 4/3/2017.
@@ -290,7 +292,21 @@ public class TimetableGrid {
         //Sorting the map keys by their id
         Collection<String> unsorted = map.keySet();
         List<String> list = new ArrayList<>(unsorted);
-        Collections.sort(list);
+
+        Comparator<String> cmp = new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                Matcher matcher1 = Pattern.compile("\\d+").matcher(o1);
+                matcher1.find();
+                Integer i1 = Integer.valueOf(matcher1.group());
+
+                Matcher matcher2 = Pattern.compile("\\d+").matcher(o2);
+                matcher2.find();
+                Integer i2 = Integer.valueOf(matcher2.group());
+
+                return i1.compareTo(Integer.valueOf(i2));
+            }
+        };
+        Collections.sort(list, cmp);
 
         //Finding out how many hour intervals there can be in a day
         int maxCounter = 0;
@@ -438,6 +454,9 @@ public class TimetableGrid {
 
                 int windowCounter = Integer.valueOf(e.getTime().getName().split("_")[0]) - 1;
 
+                if(windowCounter != 0 && windowCounter % (maxCounter-1) == 0) {
+                    cellPane.getStyleClass().add("thickBorder3");
+                }
                 dayPane.add(cellPane, windowCounter, 0);
             }
 
@@ -602,6 +621,9 @@ public class TimetableGrid {
 
             cellPane.getStyleClass().add("tableContentCell");
             StackPane.setAlignment(l,Pos.CENTER);
+            if (i == maxCounter - 1) {
+                cellPane.getStyleClass().add("thickBorder");
+            }
             empty.add(cellPane, i, 0);
         }
 
