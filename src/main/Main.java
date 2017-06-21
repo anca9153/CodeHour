@@ -33,7 +33,7 @@ public class Main extends Application {
         Scene homeScene = new Scene(home, width, height);
         homeScene.getStylesheets().add("styles/homeStyle.css");
 
-        StageLoader loader = new StageLoader(primaryStage, homeScene, width, height);
+        StageLoader loader = new StageLoader(primaryStage, home, homeScene, width, height);
 
         home.setLoader(loader);
 

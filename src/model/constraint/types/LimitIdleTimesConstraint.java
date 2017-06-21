@@ -29,7 +29,7 @@ public class LimitIdleTimesConstraint extends Constraint {
 
     public LimitIdleTimesConstraint(String id, boolean required, int weight, int maximumIdleHours, Events appliesToEvents, Resources appliesToResources) {
         super(id, required, weight, appliesToEvents, appliesToResources);
-        this.setMaximumIdleHours(maximumIdleHours);
+        this.maximumIdleHours = maximumIdleHours;
     }
 
     @Override
@@ -37,15 +37,16 @@ public class LimitIdleTimesConstraint extends Constraint {
         //The resource to be checked
         Resource resource = (Resource) val;
 
-        //The times when the resource is scheduled
-        List<Time> resourceTimes = new ArrayList<>();
+        if(appliesToResources.getResources().contains(resource)) {
 
-        //The lists events and times must be set before the calling of this validate function
-        if(events != null && times != null){
+            //The times when the resource is scheduled
+            List<Time> resourceTimes = new ArrayList<>();
+
+            //The lists events and times must be set before the calling of this validate function
             //Searching the times when the resource is scheduled
-            for(Event e: events.getEvents()){
-                for(Resource r : e.getResources().getResources()){
-                    if(resource.equals(r) && e.getTime() != null){
+            for (Event e : events.getEvents()) {
+                for (Resource r : e.getResources().getResources()) {
+                    if (resource.equals(r) && e.getTime() != null) {
                         resourceTimes.add(e.getTime());
                         break;
                     }
@@ -55,8 +56,8 @@ public class LimitIdleTimesConstraint extends Constraint {
             //Sorting the times when the resource is scheduled
             Collections.sort(resourceTimes, new Comparator<Time>() {
                 public int compare(Time one, Time other) {
-                    if(one.getDay().matches(other.getDay())){
-                        int difference = Math.abs(one.getId()-other.getId());
+                    if (one.getDay().matches(other.getDay())) {
+                        int difference = Math.abs(one.getId() - other.getId());
                         return difference;
                     }
                     return one.getDay().compareTo(other.getDay());
@@ -65,37 +66,37 @@ public class LimitIdleTimesConstraint extends Constraint {
 
             int cost = 0;
 
-            if(resourceTimes.size()!=0) {
+            if (resourceTimes.size() != 0) {
                 if (resourceTimes.size() == 1) {
                     return 0;
                 }
 
-                for (int i =1; i<resourceTimes.size(); i++) {
-                    Time t1 = resourceTimes.get(i-1);
+                for (int i = 1; i < resourceTimes.size(); i++) {
+                    Time t1 = resourceTimes.get(i - 1);
                     Time t2 = resourceTimes.get(i);
 
                     //If the times have the same day they have maximumIdleHours between them
                     if (t1.getDay().matches(t2.getDay())) {
                         int t1_index = -1;
 
-                        for(int j=0; j<times.getTimes().size()-1; j++){
-                            if(times.getTimes().get(j).getId() == t1.getId()){
+                        for (int j = 0; j < times.getTimes().size() - 1; j++) {
+                            if (times.getTimes().get(j).getId() == t1.getId()) {
                                 t1_index = j;
                             }
 
                             //If the times compared t1 and t2 are not consecutive the cost is raised
-                            if(t1_index >= 0){
+                            if (t1_index >= 0) {
                                 j++;
 
                                 //Claculating the hours distance between times
                                 int hoursBetween = 0;
-                                while(j<times.getTimes().size() && !(times.getTimes().get(j).getId() == t2.getId())){
-                                   hoursBetween++;
-                                   j++;
+                                while (j < times.getTimes().size() && !(times.getTimes().get(j).getId() == t2.getId())) {
+                                    hoursBetween++;
+                                    j++;
                                 }
 
                                 //Adding to the cost
-                                if(hoursBetween > getMaximumIdleHours()){
+                                if (hoursBetween > getMaximumIdleHours()) {
                                     cost += this.getWeight() * (hoursBetween - getMaximumIdleHours());
                                 }
 
@@ -108,6 +109,7 @@ public class LimitIdleTimesConstraint extends Constraint {
                 return cost;
             }
         }
+
         return 0;
     }
 

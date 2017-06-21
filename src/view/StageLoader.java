@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 import model.Timetable;
 import view.panes.CreatePane;
 import view.panes.DisplayPane;
+import view.panes.HomePane;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +17,14 @@ import java.util.Map;
  */
 public class StageLoader {
     private static Stage primaryStage;
+    private static HomePane homeStage;
     private static Scene home;
     private static List<Double> sizes = new ArrayList<>();
 
-    public StageLoader(Stage primaryStage, Scene home, double width, double height){
+    public StageLoader(Stage primaryStage, HomePane homeStage, Scene homeScene, double width, double height){
         this.primaryStage = primaryStage;
-        this.home = home;
+        this.homeStage = homeStage;
+        this.home = homeScene;
         sizes.add(width);
         sizes.add(height);
     }
@@ -34,6 +38,8 @@ public class StageLoader {
     }
 
     public static void loadHome(){
+        homeStage.resetAvailableTimetablesListView();
+        home.setRoot(homeStage);
         load(home);
     }
 

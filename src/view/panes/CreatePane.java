@@ -23,6 +23,7 @@ import model.constraint.Constraints;
 import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
 import model.constraint.types.LimitIdleTimesConstraint;
+import model.constraint.types.LimitRepeatActivityConstraint;
 import model.resource.ResourceTypes;
 import utilities.XMLDataLoader;
 import utilities.PropertiesLoader;
@@ -195,8 +196,8 @@ public class CreatePane extends MainPane {
         VBox vBoxDetails = createLeftOption("Detalii orar", "Metadata");
         VBox vBoxTimes = createLeftOption("Intervale orare", "Adaugă intervale");
         VBox vBoxResources = createLeftOption("Resurse", "Clase", "Profesori", "Săli de clasă");
-        VBox vBoxEvents = createLeftOption("Eveniment", "Adaugă evenimente");
-        VBox vBoxConstraints = createLeftOption("Constrângeri", "Limitare feresetre");
+        VBox vBoxEvents = createLeftOption("Evenimente", "Adaugă evenimente");
+        VBox vBoxConstraints = createLeftOption("Constrângeri", "Limitare feresetre", "Limitare repetiții");
 
         VBox vBox = new VBox(vBoxDetails, vBoxTimes, vBoxResources, vBoxEvents, vBoxConstraints);
         vBox.getStyleClass().add("leftScreen");
@@ -225,22 +226,28 @@ public class CreatePane extends MainPane {
             if (savingFile != null) {
                 if (timetable.getEvents() != null && timetable.getEvents().getEvents() != null && timetable.getEvents().getEvents().size() > 0) {
                     //Adding the base constraints
-                    List<Constraint> eventConstraintList = Arrays.asList(
-                            new AssignResourceConstraint("assignResourceConstraint", true, 1, timetable.getEvents(), null),
-                            new AssignTimeConstraint("assignTimeConstraint", true, 1, timetable.getEvents(), null)
-                    );
+                    Constraints eventConstraints = timetable.getEventConstraints();
+                    boolean asRes = false;
+                    boolean asTime = false;
+                    for (Constraint c: eventConstraints.getConstraints()){
+                        if(c.getId().equals("assignResourceConstraint_1")){
+                            asRes = true;
+                        }
 
-                    Constraints eventConstraints = new Constraints(eventConstraintList);
+                        if(c.getId().equals("assignTimeConstraint_1")){
+                            asTime = true;
+                        }
+                    }
 
+                    if(!asRes){
+                        eventConstraints.getConstraints().add(new AssignResourceConstraint("assignResourceConstraint_1", true, 1, timetable.getEvents(), null));
+                    }
 
-                    List<Constraint> resourceConstraintList = Arrays.asList(
-                            new LimitIdleTimesConstraint("limitIdleTimeConstraint", true, 1, 1, null, timetable.getResources())
-                    );
-
-                    Constraints resourceConstraints = new Constraints(resourceConstraintList);
+                    if(!asTime){
+                        eventConstraints.getConstraints().add(new AssignTimeConstraint("assignTimeConstraint_1", true, 1, timetable.getEvents(), null));
+                    }
 
                     timetable.setEventConstraints(eventConstraints);
-                    timetable.setResourceConstraints(resourceConstraints);
 
                     Algorithm algorithm = new GradingAlgorithm();
                     Timetable solvedTimetable = algorithm.solve(timetable);
@@ -394,8 +401,12 @@ public class CreatePane extends MainPane {
                 this.setCenter(rightPane6.addRightPane());
                 break;
             case "Limitare feresetre":
-                InsertResourceConstraint rightPane9 = new InsertResourceConstraint(primaryStage, "assignTimeConstraint", new AssignTimeConstraint(), rightPaneName);
-                this.setCenter(rightPane9.addRightPane());
+                InsertLimitIdleTimesConstraint rightPane7 = new InsertLimitIdleTimesConstraint(primaryStage, "limitIdleTimesConstraint", new LimitIdleTimesConstraint(), rightPaneName);
+                this.setCenter(rightPane7.addRightPane());
+                break;
+            case "Limitare repetiții":
+                InsertLimitRepeatActivityConstraint rightPane8 = new InsertLimitRepeatActivityConstraint(primaryStage, "limitRepeatActivityConstraint", new LimitRepeatActivityConstraint(), rightPaneName);
+                this.setCenter(rightPane8.addRightPane());
                 break;
             default:
                 break;

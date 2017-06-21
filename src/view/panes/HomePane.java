@@ -22,6 +22,7 @@ import java.util.Map;
  */
 public class HomePane extends MainPane {
     private StageLoader loader;
+    private ListView<String> listView;
 
     public HomePane(){
         Pane left = getAvailableTimetables();
@@ -50,6 +51,10 @@ public class HomePane extends MainPane {
         this.setCenter(gridPane);
     }
 
+    public void resetAvailableTimetablesListView(){
+        listView.getSelectionModel().clearSelection();
+    }
+
     private Pane getAvailableTimetables(){
         File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
 
@@ -62,7 +67,7 @@ public class HomePane extends MainPane {
             }
         }
 
-        ListView<String> listView = new ListView<>();
+        listView = new ListView<>();
         listView.setPrefSize(150, 195);
 
         Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();

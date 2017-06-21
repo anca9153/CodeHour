@@ -100,6 +100,9 @@ public class DisplayPane extends MainPane {
                 clearRightPane();
             }
         });
+        if(timetables.getSelectionModel() == null){
+            System.out.println("it's null!");
+        }
         timetables.getSelectionModel().select(timetable.getId());
 
         HBox t = new HBox(timetableLabel, timetables);

@@ -3,6 +3,7 @@ package model.constraint;
 import model.constraint.types.AssignResourceConstraint;
 import model.constraint.types.AssignTimeConstraint;
 import model.constraint.types.LimitIdleTimesConstraint;
+import model.constraint.types.LimitRepeatActivityConstraint;
 
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
@@ -34,7 +35,8 @@ public class Constraints {
     @XmlElements({
             @XmlElement(name = "assignResourceConstraint", type=AssignResourceConstraint.class),
             @XmlElement(name = "assignTimeConstraint", type=AssignTimeConstraint.class),
-            @XmlElement(name = "limitIdleTimeConstraint", type=LimitIdleTimesConstraint.class)
+            @XmlElement(name = "limitIdleTimeConstraint", type=LimitIdleTimesConstraint.class),
+            @XmlElement(name = "limitRepeatActivityConstraint", type= LimitRepeatActivityConstraint.class)
     })
     public void setConstraints(List<Constraint> constraints) {
         this.constraints = constraints;

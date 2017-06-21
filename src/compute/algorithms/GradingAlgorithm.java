@@ -3,6 +3,8 @@ package compute.algorithms;
 import compute.Algorithm;
 import model.Timetable;
 import model.constraint.Constraint;
+import model.constraint.types.LimitIdleTimesConstraint;
+import model.constraint.types.LimitRepeatActivityConstraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
@@ -11,7 +13,12 @@ import model.solution.Solution;
 import model.solution.Solutions;
 import model.time.Time;
 import utilities.DeepCloner;
+import utilities.PropertiesLoader;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -20,12 +27,15 @@ import java.util.*;
 public class GradingAlgorithm implements Algorithm {
     private Timetable timetable;
     private Map<String, Integer> grades = new HashMap<>();
-    private List<Event> conflictingEvents = new ArrayList<>();
     private Solution solution;
+    private Solutions solutions;
 
     @Override
     public Timetable solve(Timetable timetable) {
         this.timetable = timetable;
+
+        solutions = new Solutions();
+        solutions.setSolutions(new ArrayList<>());
 
         List<Event> clonedList = new ArrayList<>();
 
@@ -35,7 +45,8 @@ public class GradingAlgorithm implements Algorithm {
 
         Events clonedEvents = new Events(clonedList);
 
-        solution = new Solution("sol1","First Solution", clonedEvents, null);
+        int solNo = timetable.getSolutions().getSolutions().size();
+        solution = new Solution("sol"+(solNo+1),"Solution "+ (solNo+1), clonedEvents, null);
 
         //To do list with the events that have not been assigned a Time yet or share resources with other events
         List<Event> toDoList = new ArrayList<>();
@@ -54,48 +65,115 @@ public class GradingAlgorithm implements Algorithm {
 
         solveToDoList(toDoList);
 
-        Report report = new Report();
-        Solutions solutions = new Solutions();
-        solutions.setSolutions(Arrays.asList(solution));
+//        Report report = new Report();
+//        solutions.setSolutions(Arrays.asList(solution));
         timetable.setSolutions(solutions);
         return timetable;
     }
 
     int iteration = 0;
+    boolean lastScheduled = false;
 
     private void solveToDoList(List<Event> toDoList){
-        System.out.println("Events in iteration no " + iteration++);
-        for(Event e: solution.getEvents().getEvents()){
-            System.out.println(e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
-        }
-        for(Event e: conflictingEvents){
-            System.out.println("conflicting "+e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
-        }
+//        System.out.println("Events in iteration no " + iteration++);
+//        int countNotScheduled=0;
+//        for(Event e: solution.getEvents().getEvents()){
+//            if(e.getTime()!=null) {
+//                System.out.println(e.getId() + " " + e.getDescription() + " " + (e.getTime() != null ? e.getTime().getId() : "not scheduled") + " " + grades.get(e.getId()));
+//            }
+//            else{
+//                countNotScheduled++;
+//            }
+//        }
+//        System.out.println("Not scheduled "+countNotScheduled);
+//
+//        for(Event e: toDoList){
+//            System.out.println("to do list "+e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
+//        }
 
         if(toDoList.size() != 0) {
             Event e = toDoList.get(0);
             int bestCostValue = 10000;
-            Time bestTime = null;
+            List<Time> bestTimes = new ArrayList<>();
             for (Time t : timetable.getTimes().getTimes()) {
                 e.setTime(t);
                 int costValue = computeInfeasibility(e);
                 if (costValue < bestCostValue) {
                     bestCostValue = costValue;
-                    bestTime = t;
+                    bestTimes.clear();
+                    bestTimes.add(t);
+                }
+                else {
+                    if (costValue == bestCostValue) {
+                        bestTimes.add(t);
+                    }
                 }
             }
 
-            e.setTime(bestTime);
-            if(bestCostValue>0){
-                conflictingEvents.add(e);
-                solution.getEvents().getEvents().remove(e);
+//            int randomTimeIndex = (int)(Math.random() * bestTimes.size());
+//            solution.getEvents().getEvents().get(index).setTime(bestTimes.get(randomTimeIndex));
+
+            int index = solution.getEvents().getEvents().indexOf(e);
+
+            for(Time bestTime: bestTimes) {
+                lastScheduled = false;
+
+                if (bestCostValue > 0) {
+                    e.setTime(bestTime);
+                    toDoList.remove(e);
+                    List<Event> evs = unscheduleConflictingEvents(e);
+                    if(evs.size() == 0){
+                        solution.getEvents().getEvents().get(index).setTime(bestTime);
+                        lastScheduled = true;
+                    }
+                    else {
+                        List<Event> toRemove = new ArrayList<>();
+                        for (Event eEvs : evs) {
+                            for (Event eToDo : toDoList) {
+                                if (eToDo.getId().equals(eEvs.getId())) {
+                                    toRemove.add(eToDo);
+                                }
+                            }
+                        }
+
+                        toDoList.removeAll(toRemove);
+
+                        toDoList.addAll(evs);
+                        e.setTime(null);
+                        toDoList.add(e);
+
+                        solution.getEvents().getEvents().get(index).setTime(null);
+                    }
+                }
+                else {
+                    solution.getEvents().getEvents().get(index).setTime(bestTime);
+                    toDoList.remove(e);
+                    lastScheduled = true;
+                }
+
+                solveToDoList(toDoList);
+                if (lastScheduled) {
+                    int indexLastProgrammed = solution.getEvents().getEvents().size();
+                    solution.getEvents().getEvents().get(indexLastProgrammed - 1).setTime(null);
+                    toDoList.add(0, e);
+                }
             }
-            toDoList.remove(e);
-            if(bestCostValue == 0){
-                toDoList.addAll(unscheduleConflictingEvents(e));
-            }
-            solveToDoList(toDoList);
         }
+
+        List<Event> clonedList = new ArrayList<>();
+
+        for(Event e: solution.getEvents().getEvents()){
+            clonedList.add((Event)DeepCloner.deepClone(e));
+        }
+
+        Events clonedEvents = new Events(clonedList);
+
+        int solNo = solutions.getSolutions().size();
+        Solution solutionToAdd = new Solution("sol"+(solNo+1),"Solution "+ (solNo+1), clonedEvents, null);
+
+        solutions.getSolutions().add(solutionToAdd);
+
+        System.out.println("Found solution "+solutions.getSolutions().size());
     }
 
     private int computeInfeasibility(Event e){
@@ -103,21 +181,62 @@ public class GradingAlgorithm implements Algorithm {
 
         if(timetable.getEventConstraints() != null && timetable.getEventConstraints().getConstraints() != null) {
             for (Constraint c : timetable.getEventConstraints().getConstraints()) {
-                infeasibility += c.validate(e);
+                if(!c.getId().startsWith("limitRepeatActivity")){
+                    infeasibility += c.validate(e);
+                }
+                else{
+                    if(e.getTime() != null) {
+                        List<String> subjects = readSubjects();
+
+                        ((LimitRepeatActivityConstraint) c).setEventDescriptions(subjects);
+                        ((LimitRepeatActivityConstraint) c).setProgrammedEvents(solution.getEvents());
+
+                        infeasibility += c.validate(e);
+                    }
+                }
             }
         }
 
         if(timetable.getResourceConstraints() != null && timetable.getResourceConstraints().getConstraints() != null) {
             for (Constraint c : timetable.getResourceConstraints().getConstraints()) {
                 for (Resource r : e.getResources().getResources()) {
+                    if(c.getId().startsWith("limitIdleTime")){
+                        ((LimitIdleTimesConstraint) c).setEvents(solution.getEvents());
+                        ((LimitIdleTimesConstraint) c).setTimes(timetable.getTimes());
+                    }
                     infeasibility += c.validate(r);
                 }
             }
         }
+
         Time t = e.getTime();
         e.setTime(null);
         infeasibility += getConflictingEventsCost(t,e);
         return infeasibility;
+    }
+
+    private List<String> readSubjects(){
+        List<String> subjects = new ArrayList<>();
+
+        //Reading the subjects list from file
+        String path = PropertiesLoader.loadSubjectsFilePath();
+
+        try {
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                subjects.add(sCurrentLine);
+            }
+
+        } catch (FileNotFoundException exc) {
+            exc.printStackTrace();
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+
+        return subjects;
     }
 
     private int getConflictingEventsCost(Time time, Event event){
@@ -155,6 +274,22 @@ public class GradingAlgorithm implements Algorithm {
                 }
             }
         }
+
+        for(Constraint c: timetable.getEventConstraints().getConstraints()) {
+            if(c instanceof LimitIdleTimesConstraint) {
+                LimitRepeatActivityConstraint lraConstraint = (LimitRepeatActivityConstraint) c;
+
+                List<String> subjects = readSubjects();
+
+                ((LimitRepeatActivityConstraint) lraConstraint).setEventDescriptions(subjects);
+                ((LimitRepeatActivityConstraint) lraConstraint).setProgrammedEvents(solution.getEvents());
+
+                if(lraConstraint.validate(event)>0){
+                    conflictingEvents.addAll(lraConstraint.getConflictingEvents());
+                }
+            }
+        }
+
         return conflictingEvents;
     }
 

@@ -22,6 +22,7 @@ import model.event.Events;
 import model.resource.Resource;
 import model.resource.Resources;
 import model.time.Time;
+import utilities.DeepCloner;
 import utilities.PropertiesLoader;
 import view.panes.CreatePane;
 import java.io.BufferedReader;
@@ -38,9 +39,11 @@ public class InsertEvent extends InsertPaneWithTable {
     private VBox finalVBox;
 
     private ComboBox<String> descriptionCB;
+    private ComboBox<Integer> eventNoCB;
     private ComboBox<String> timeCB;
     private FlowPane resourcesFP;
     private ObservableList<String> resourceIds;
+    private ObservableList<String> initialResourceIds;
     private ComboBox<String> resourceCB;
 
     public InsertEvent(Stage primaryStage){
@@ -102,12 +105,23 @@ public class InsertEvent extends InsertPaneWithTable {
             e.printStackTrace();
         }
 
+        ObservableList<Integer> eventNoList = FXCollections.observableArrayList();
+        for(int i=1; i<20; i++){
+            eventNoList.add(i);
+        }
+
         HBox descriptionLabel = makeLabel("MATERIE", true);
         descriptionCB = new ComboBox<>(subjects);
         descriptionCB.getStyleClass().add("specialComboBox");
         descriptionCB.setPromptText(textFieldValues.get(2).getKey());
         descriptionCB.setEditable(true);
         vbList.add(new VBox(descriptionLabel, descriptionCB));
+
+        HBox eventNoLabel = makeLabel("NUMAR EVENIMENTE", true);
+        eventNoCB = new ComboBox<>(eventNoList);
+        eventNoCB.getStyleClass().add("specialComboBox");
+        eventNoCB.setValue(1);
+        vbList.add(new VBox(eventNoLabel, eventNoCB));
 
         ObservableList<String> timeIds = FXCollections.observableArrayList();
         if(CreatePane.timetable.getTimes()!=null && CreatePane.timetable.getTimes().getTimes() != null) {
@@ -128,14 +142,17 @@ public class InsertEvent extends InsertPaneWithTable {
 
         //Resources that are added in the timetable object
         resourceIds = FXCollections.observableArrayList();
+        initialResourceIds = FXCollections.observableArrayList();
         if(CreatePane.timetable.getResources()!=null && CreatePane.timetable.getResources().getResources() != null) {
             for (Resource r : CreatePane.timetable.getResources().getResources()) {
                 if(r.getResourceType().equals("teacher")){
                     resourceIds.add(r.getName());
+                    initialResourceIds.add(r.getName());
                     idResourceMap.put(r.getName(), r);
                 }
                 else {
                     resourceIds.add(r.getId());
+                    initialResourceIds.add(r.getId());
                     idResourceMap.put(r.getId(), r);
                 }
             }
@@ -239,9 +256,9 @@ public class InsertEvent extends InsertPaneWithTable {
         saveButton.getStyleClass().add("rightSaveButton");
         saveButton.setOnAction((ActionEvent event) ->{
             //Clearing all errors
-            List<HBox> labels = new ArrayList<>(Arrays.asList( timeLabel, resourceLabel, descriptionLabel));
+            List<HBox> labels = new ArrayList<>(Arrays.asList( timeLabel, resourceLabel, descriptionLabel, eventNoLabel));
             List<TextField> textFields =  new ArrayList<>();
-            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(timeCB, resourceCB, descriptionCB));
+            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(timeCB, resourceCB, descriptionCB, eventNoCB));
 
             clearErrors(labels, textFields);
 
@@ -288,13 +305,13 @@ public class InsertEvent extends InsertPaneWithTable {
                 //Checking if the current event is an existing one and replacing it in the timetable
                 int index = 0;
                 boolean exists = false;
-                for(Event e:CreatePane.timetable.getEvents().getEvents()){
-                    if(e.getId().equals(currentEvent.getId())){
+                for (Event e : CreatePane.timetable.getEvents().getEvents()) {
+                    if (e.getId().equals(currentEvent.getId())) {
                         CreatePane.timetable.getEvents().getEvents().remove(e);
                         CreatePane.timetable.getEvents().getEvents().add(index, currentEvent);
 
                         //Changing all the instances of the changed object from the timetable
-                        if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
+                        if (CreatePane.timetable.getEventConstraints() != null && CreatePane.timetable.getEventConstraints().getConstraints() != null) {
                             for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
                                 int eIndex = 0;
                                 for (Event ev : c.getAppliesToEvents().getEvents()) {
@@ -312,18 +329,20 @@ public class InsertEvent extends InsertPaneWithTable {
                     index++;
                 }
 
-                if(!exists){
-                    currentEvent.setId("ev_"+(int)(CreatePane.timetable.getEvents().getEvents().size()+1));
-                    CreatePane.timetable.getEvents().getEvents().add(currentEvent);
+                if (!exists) {
+                    int eventsNo = CreatePane.timetable.getEvents().getEvents().size()+1;
+                    for(int i = 0; i<eventNoCB.getValue();i++) {
+                        currentEvent.setId("ev_" + eventsNo++);
+                        CreatePane.timetable.getEvents().getEvents().add((Event) DeepCloner.deepClone(currentEvent));
+                    }
                     updateTableData();
                 }
 
-                if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
+                if (saveIntoFile()) { //The save button was pressed, the file to save into was chosen
                     currentEvent = new Event();
                     table.getSelectionModel().clearSelection();
                     clearAllFields();
-                }
-                else{
+                } else {
                     CreatePane.timetable.getEvents().getEvents().remove(currentEvent);
                 }
             }
@@ -353,7 +372,9 @@ public class InsertEvent extends InsertPaneWithTable {
         descriptionCB.setPromptText("Alege materia");
         timeCB.setValue(null);
         timeCB.setPromptText("Alege intervalul orar");
+        eventNoCB.setValue(1);
         resourcesFP.getChildren().clear();
+        resourceIds.setAll(initialResourceIds);
     }
 
     private HBox createEventResourceLabel(String text){
@@ -537,7 +558,7 @@ public class InsertEvent extends InsertPaneWithTable {
         deleteColumn.setMinWidth(30);
         deleteColumn.getStyleClass().add("lastColumn");
 
-        table.getColumns().addAll(idColumn, descriptionColumn, hoursColumn, resorucesColumn, deleteColumn);
+        table.getColumns().addAll(idColumn, descriptionColumn, resorucesColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         table.setEditable(true);
