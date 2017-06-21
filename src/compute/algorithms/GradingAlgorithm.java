@@ -34,8 +34,11 @@ public class GradingAlgorithm implements Algorithm {
     public Timetable solve(Timetable timetable) {
         this.timetable = timetable;
 
-        solutions = new Solutions();
-        solutions.setSolutions(new ArrayList<>());
+        solutions = timetable.getSolutions();
+        if(solutions == null) {
+            solutions = new Solutions();
+            solutions.setSolutions(new ArrayList<>());
+        }
 
         List<Event> clonedList = new ArrayList<>();
 
@@ -43,6 +46,7 @@ public class GradingAlgorithm implements Algorithm {
             clonedList.add((Event)DeepCloner.deepClone(e));
         }
 
+        Collections.shuffle(clonedList);
         Events clonedEvents = new Events(clonedList);
 
         int solNo = timetable.getSolutions().getSolutions().size();
@@ -74,22 +78,22 @@ public class GradingAlgorithm implements Algorithm {
     int iteration = 0;
     boolean lastScheduled = false;
 
-    private void solveToDoList(List<Event> toDoList){
-//        System.out.println("Events in iteration no " + iteration++);
-//        int countNotScheduled=0;
-//        for(Event e: solution.getEvents().getEvents()){
-//            if(e.getTime()!=null) {
-//                System.out.println(e.getId() + " " + e.getDescription() + " " + (e.getTime() != null ? e.getTime().getId() : "not scheduled") + " " + grades.get(e.getId()));
-//            }
-//            else{
-//                countNotScheduled++;
-//            }
-//        }
-//        System.out.println("Not scheduled "+countNotScheduled);
-//
-//        for(Event e: toDoList){
-//            System.out.println("to do list "+e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
-//        }
+    private int solveToDoList(List<Event> toDoList){
+        System.out.println("Events in iteration no " + iteration++);
+        int countNotScheduled=0;
+        for(Event e: solution.getEvents().getEvents()){
+            if(e.getTime()!=null) {
+                System.out.println(e.getId() + " " + e.getDescription() + " " + (e.getTime() != null ? e.getTime().getId() : "not scheduled") + " " + grades.get(e.getId()));
+            }
+            else{
+                countNotScheduled++;
+            }
+        }
+        System.out.println("Not scheduled "+countNotScheduled);
+
+        for(Event e: toDoList){
+            System.out.println("to do list "+e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
+        }
 
         if(toDoList.size() != 0) {
             Event e = toDoList.get(0);
@@ -109,9 +113,6 @@ public class GradingAlgorithm implements Algorithm {
                     }
                 }
             }
-
-//            int randomTimeIndex = (int)(Math.random() * bestTimes.size());
-//            solution.getEvents().getEvents().get(index).setTime(bestTimes.get(randomTimeIndex));
 
             int index = solution.getEvents().getEvents().indexOf(e);
 
@@ -151,11 +152,15 @@ public class GradingAlgorithm implements Algorithm {
                     lastScheduled = true;
                 }
 
-                solveToDoList(toDoList);
-                if (lastScheduled) {
-                    int indexLastProgrammed = solution.getEvents().getEvents().size();
-                    solution.getEvents().getEvents().get(indexLastProgrammed - 1).setTime(null);
-                    toDoList.add(0, e);
+                if(solveToDoList(toDoList) == 1){
+                    return 1;
+                }
+                else {
+                    if (lastScheduled) {
+                        int indexLastProgrammed = solution.getEvents().getEvents().size();
+                        solution.getEvents().getEvents().get(indexLastProgrammed - 1).setTime(null);
+                        toDoList.add(0, e);
+                    }
                 }
             }
         }
@@ -173,7 +178,8 @@ public class GradingAlgorithm implements Algorithm {
 
         solutions.getSolutions().add(solutionToAdd);
 
-        System.out.println("Found solution "+solutions.getSolutions().size());
+        return 1;
+//        System.out.println("Found solution "+solutions.getSolutions().size());
     }
 
     private int computeInfeasibility(Event e){
@@ -267,7 +273,9 @@ public class GradingAlgorithm implements Algorithm {
                         if(r.equals(re)) {
                             e.setTime(null);
                             grades.put(e.getId(), grades.get(e.getId()) + 1);
-                            conflictingEvents.add(e);
+                            if(!conflictingEvents.contains(e)){
+                                conflictingEvents.add(e);
+                            }
                             break;
                         }
                     }

@@ -96,7 +96,7 @@ public class InsertLimitIdleTimesConstraint extends InsertPaneWithTable {
         vbList.add(new VBox(descriptionLabel, descriptionCheckBox));
 
         ObservableList<Integer> numbersList = FXCollections.observableArrayList();
-        for(int i=1; i<50; i++){
+        for(int i=0; i<50; i++){
             numbersList.add(i);
         }
         HBox maximumIdleHoursLabel = makeLabel("NR. MAXIM INTERVALE LIBERE", true);

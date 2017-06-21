@@ -75,6 +75,12 @@ public class PropertiesLoader {
         return prop.getProperty("subjectsFilePath");
     }
 
+    public static String loadSubjectsInfoFilePath(){
+        Properties prop = loadFromProperties();
+
+        return prop.getProperty("subjectsInfoFilePath");
+    }
+
     public static String loadReportsFolderPath(){
         Properties prop = loadFromProperties();
 

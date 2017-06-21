@@ -1,5 +1,7 @@
 package view.panes.display;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -12,10 +14,11 @@ import model.Timetable;
 import model.event.Event;
 import model.resource.Resource;
 import model.time.Time;
+import utilities.PropertiesLoader;
 import utilities.XMLDataLoader;
 import view.panes.DisplayPane;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -25,6 +28,8 @@ public class TimetableGrid {
     private StackPane cellPane;
     private Event eventToIntechange1 = new Event();
     private Event eventToIntechange2 = new Event();
+    private Map<String, String> subjectNameShort = new HashMap<>();
+    private Map<String, String> subjectNameColor = new HashMap<>();
 
     public ScrollPane addRightPane(Timetable timetable, String resource, String resourceType, List<Event> eventList){
         //The timetable for a selected resource, displayed on the right side
@@ -211,7 +216,33 @@ public class TimetableGrid {
         return scrollPane;
     }
 
+    private void readInfoForSubjects(){
+        ObservableList<String> subjects = FXCollections.observableArrayList();
+
+        //Reading the subjects list from file
+        String path = PropertiesLoader.loadSubjectsInfoFilePath();
+
+        try {
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                String[] values = sCurrentLine.split("\\s\\|\\s");
+                subjectNameShort.put(values[0], values[1]);
+                subjectNameColor.put(values[0], values[2]);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ScrollPane addRightPaneGeneralCase(DisplayPane displayPane, File file, Timetable timetable, Map<String, List<Event>> map, String resourceType){
+        readInfoForSubjects();
+
         GridPane pane = new GridPane();
 
         //List with the days displayed on the first row of the timetable
@@ -471,8 +502,8 @@ public class TimetableGrid {
 //            col.setPercentWidth(18.0);
         col.setHalignment(HPos.CENTER);
 //            col.setMinWidth(70);
-        col.setPrefWidth(50 * maxCounter);
-        col.setMinWidth(50 * maxCounter);
+        col.setPrefWidth(70 * maxCounter);
+        col.setMinWidth(70 * maxCounter);
         for(int j=0; j<5;j++) {
             pane.getColumnConstraints().add(col);
         }
@@ -530,9 +561,10 @@ public class TimetableGrid {
 
         detailsCell.setAlignment(Pos.CENTER);
 
-        Label nameLabel = new Label(e.getDescription());
+        Label nameLabel = new Label(subjectNameShort.get(e.getDescription()));
 
         if(!onlyId) {
+            nameLabel.setText(e.getDescription());
             nameLabel.getStyleClass().add("cellBoldWriting");
         }
 
@@ -540,6 +572,9 @@ public class TimetableGrid {
 
         VBox cellVBox = new VBox(nameLabel, detailsCell);
         cellVBox.setAlignment(Pos.CENTER);
+        if(onlyId) {
+            cellVBox.setStyle("-fx-background-color: #" + subjectNameColor.get(e.getDescription()) + "; -fx-border-color: #dfdfdf; -fx-border-width: 0.3;");
+        }
 
         return cellVBox;
     }
@@ -577,7 +612,7 @@ public class TimetableGrid {
 
     private GridPane stylingDailyCells(GridPane dayPane, int maxCounter){
         ColumnConstraints columnSize = new ColumnConstraints();
-        columnSize.setPercentWidth(100.0/maxCounter);
+        columnSize.setMinWidth(70.0);
         columnSize.setHalignment(HPos.CENTER);
 
         dayPane.getColumnConstraints().clear();

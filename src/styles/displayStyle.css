@@ -297,6 +297,11 @@
     -fx-border-width: 0.3;
 }
 
+.thickBorder{
+    -fx-border-color: #ff0000;
+    -fx-border-width: 1;
+}
+
 .tableHourLabel{
     -fx-font: 8pt "Verdana";
     -fx-text-fill: #363636;

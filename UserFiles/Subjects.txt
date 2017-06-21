@@ -1,9 +1,22 @@
-﻿Matematică
-Limba română
-Limba engleză
-Informatică
-Geografie
-Biologie
-Istorie
-Psihologie
+﻿Biologie
+Chimie
+Cultură civică
+Dirigenție
+Economie
+Educație antreprenorială
 Educație fizică
+Educație muzicală
+Educație plastică
+Educație tehnologică
+Fizică
+Geografie
+Informatică
+Istorie
+Limba engleză
+Limba franceză
+Limba latină
+Limba română
+Logică
+Matematică
+Psihologie
+Tehnologia informației și a comunicațiilor

@@ -1,0 +1,22 @@
+﻿Biologie | BIO | FEBDAA
+Chimie | CHIM | FECFAA
+Cultură civică | CIV | FEE0AA
+Dirigenție | DIR | FEF3AA
+Economie | ECN | F5FEAA
+Educație antreprenorială | ED ANT | E0FEAA
+Educație fizică | ED FIZ | CEFEAA
+Educație muzicală | MUZ | BBFEAA
+Educație plastică | ED PLA | AAFEAC
+Educație tehnologică | ED TEH | AAFEC0
+Fizică | FIZ | AAFED4
+Geografie | GEO | AAFEEB
+Informatică | INF | FFBAFA
+Istorie | IST | AAEAFE
+Limba engleză | ENG | AACFFE
+Limba franceză | FR | AAB5FE
+Limba latină | LAT | C4AAFE
+Limba română | ROM | E2AAFE
+Logică | LOG | FCAAFE
+Matematică | MAT | FEAADA
+Psihologie | PSH | FEAAC6
+Tehnologia informației și a comunicațiilor | TIC | FEAABE
