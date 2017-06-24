@@ -18,31 +18,36 @@ import javafx.util.Callback;
 import javafx.util.Pair;
 import model.constraint.Constraint;
 import model.constraint.Constraints;
-import model.constraint.types.AssignResourceConstraint;
-import model.constraint.types.AssignTimeConstraint;
-import model.event.Event;
-import model.event.Events;
-import model.resource.Resource;
-import model.time.Time;
+import model.constraint.types.LimitRepeatDailyConstraint;
+import utilities.PropertiesLoader;
 import view.panes.CreatePane;
-import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Anca on 5/1/2017.
  */
-public class InsertEventConstraint extends InsertPaneWithTable {
-    private Constraint currentConstraint;
+public class InsertLimitRepeatDailyConstraint extends InsertPaneWithTable {
+    private LimitRepeatDailyConstraint currentConstraint;
     private VBox finalVBox;
     private String resourceType;
     private String optionName;
 
     private ComboBox<String> weightCB;
     private CheckBox descriptionCheckBox;
-    private FlowPane eventsFP;
-    private ComboBox<String> eventsCB;
-    private ObservableList<String> eventIds;
+    private ComboBox<Integer> maxNoIntervalsCB;
+    private FlowPane resourcesFP;
+    private ObservableList<String> subjectsIds;
+    private ObservableList<String> initialSubjectsIds;
+    private ComboBox<String> resourceCB;
 
-    public InsertEventConstraint(Stage primaryStage, String resourceType, Constraint c, String optionName){
+    public InsertLimitRepeatDailyConstraint(Stage primaryStage, String resourceType, LimitRepeatDailyConstraint c, String optionName){
         this.currentConstraint = c;
         this.primaryStage = primaryStage;
         this.resourceType = resourceType;
@@ -63,6 +68,7 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         ArrayList<Pair<String, Boolean>> textFieldValues = new ArrayList<>();
 
         textFieldValues.add(new Pair("Adaugă greutate", Boolean.TRUE));
+        textFieldValues.add(new Pair("Alege activitatea", Boolean.TRUE));
 
         if(currentConstraint.getWeight() != 0){
             textFieldValues.remove(0);
@@ -90,49 +96,53 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         descriptionCheckBox = new CheckBox();
         vbList.add(new VBox(descriptionLabel, descriptionCheckBox));
 
+        ObservableList<Integer> numbersList = FXCollections.observableArrayList();
+        for(int i=0; i<50; i++){
+            numbersList.add(i);
+        }
+        HBox maximumIdleHoursLabel = makeLabel("NR. MAXIM REPETIȚII PE ZI", true);
+        maxNoIntervalsCB = new ComboBox<>(numbersList);
+        maxNoIntervalsCB.getStyleClass().add("specialComboBox");
+        maxNoIntervalsCB.setValue(0);
+        vbList.add(new VBox(maximumIdleHoursLabel, maxNoIntervalsCB));
+
         FlowPane fp = getFlowPane(vbList);
 
-        Map<String, Event> idEventMap = new HashMap<>();
+        //Resources that are added in the timetable object
+        subjectsIds = FXCollections.observableArrayList();
+        initialSubjectsIds = FXCollections.observableArrayList();
 
-        //Events that are added in the timetable object
-        eventIds = FXCollections.observableArrayList();
-        if(CreatePane.timetable.getEvents()!=null && CreatePane.timetable.getEvents().getEvents() != null) {
-            for (Event r : CreatePane.timetable.getEvents().getEvents()) {
-                eventIds.add(r.getId());
-                idEventMap.put(r.getId(), r);
+        //Reading the subjects list from file
+        String path = PropertiesLoader.loadSubjectsFilePath();
+
+        try {
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                subjectsIds.add(sCurrentLine);
+                initialSubjectsIds.add(sCurrentLine);
             }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        //Events linked to the current constraint
-        //We also remove the events that are already linked to the current constraint from the possible choices of events
-        ObservableList<HBox> constraintEventIdLabels = FXCollections.observableArrayList();
-        if(currentConstraint.getAppliesToEvents() != null && currentConstraint.getAppliesToEvents().getEvents() != null) {
-            for (Event r : currentConstraint.getAppliesToEvents().getEvents()) {
-                constraintEventIdLabels.add(createConstraintEventLabel(r.getId()));
-                eventIds.remove(r.getId());
-            }
-        }
+        resourceCB = new ComboBox<>(subjectsIds);
+        resourceCB.getStyleClass().add("specialComboBox");
+        resourceCB.setPromptText(textFieldValues.get(1).getKey());
 
-        HBox eventsLabel = makeLabel("LISTA EVENIMENTE", true);
-
-        eventsFP = new FlowPane();
-        eventsFP.getChildren().addAll(constraintEventIdLabels);
-
-        eventsCB = new ComboBox<>(eventIds);
-        eventsCB.getStyleClass().add("specialComboBox");
-
-        ImageView imageView = new ImageView(new Image("\\view\\icons\\addIcon.png"));
-        imageView.setFitHeight(12);
-        imageView.setFitWidth(12);
-        imageView.setPreserveRatio(true);
-
-        Button addButton = new Button();
-        addButton.setGraphic(imageView);
-        addButton.getStyleClass().add("addButton");
-
-        addButton.setOnAction((ActionEvent event) ->{
-            if(eventsCB.getValue()!=null){
-                HBox hb = createConstraintEventLabel(eventsCB.getValue());
+        //Resources linked to the current constraint
+        //We also remove the resources that are already linked to the current constraint from the possible choices of resources
+        ObservableList<HBox> constraintResourceIdLabels = FXCollections.observableArrayList();
+        if(currentConstraint.getAppliesToResources()!=null) {
+            for (String r : initialSubjectsIds) {
+                final HBox hb;
+                hb = createConstraintResourceLabel(r);
+                subjectsIds.remove(r);
 
                 Button remove = new Button();
                 ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
@@ -145,34 +155,75 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 remove.setMaxSize(10, 10);
 
                 remove.setOnAction((ActionEvent e) ->{
-                    eventsFP.getChildren().remove(hb);
-
-                    eventIds.add(hb.getId());
-                    eventsCB.setItems(null);
-                    eventsCB.setItems(eventIds);
+                    resourcesFP.getChildren().remove(hb);
+                    subjectsIds.add(hb.getId());
+                    resourceCB.setItems(null);
+                    resourceCB.setItems(subjectsIds);
 
                 });
 
                 hb.getChildren().add(remove);
-                eventsFP.getChildren().add(hb);
+                constraintResourceIdLabels.add(hb);
+            }
+        }
 
-                eventIds.remove(eventsCB.getValue());
-                eventsCB.setItems(null);
-                eventsCB.setItems(eventIds);
+        HBox resourcesLabel = makeLabel("LISTA ACTIVITĂȚI", true);
+
+        resourcesFP = new FlowPane();
+        resourcesFP.getChildren().addAll(constraintResourceIdLabels);
+
+        ImageView imageView = new ImageView(new Image("\\view\\icons\\addIcon.png"));
+        imageView.setFitHeight(12);
+        imageView.setFitWidth(12);
+        imageView.setPreserveRatio(true);
+
+        Button addButton = new Button();
+        addButton.setGraphic(imageView);
+        addButton.getStyleClass().add("addButton");
+
+        addButton.setOnAction((ActionEvent event) ->{
+            if(resourceCB.getValue()!=null){
+                HBox hb = createConstraintResourceLabel(resourceCB.getValue());
+
+                Button remove = new Button();
+                ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
+                imageView2.setFitHeight(6);
+                imageView2.setFitWidth(6);
+                imageView2.setPreserveRatio(true);
+
+                remove.setGraphic(imageView2);
+                remove.getStyleClass().add("removeEventResource");
+                remove.setMaxSize(10, 10);
+
+                remove.setOnAction((ActionEvent e) ->{
+                    resourcesFP.getChildren().remove(hb);
+
+                    subjectsIds.add(hb.getId());
+                    resourceCB.setItems(null);
+                    resourceCB.setItems(subjectsIds);
+
+                });
+
+                hb.getChildren().add(remove);
+                resourcesFP.getChildren().add(hb);
+
+                subjectsIds.remove(resourceCB.getValue());
+                resourceCB.setItems(null);
+                resourceCB.setItems(subjectsIds);
             }
         });
 
-        HBox addConstraintHBox = new HBox(eventsCB, addButton);
+        HBox addConstraintHBox = new HBox(resourceCB, addButton);
 
-        VBox constraintEventVBox = new VBox(eventsLabel, eventsFP, addConstraintHBox);
-        constraintEventVBox.setPadding(new Insets(20, 0, 0 , 0));
+        VBox constraintResourceVBox = new VBox(resourcesLabel, resourcesFP, addConstraintHBox);
+        constraintResourceVBox.setPadding(new Insets(20, 0, 0 , 0));
 
         Button saveButton = new Button("SALVEAZĂ");
         saveButton.getStyleClass().add("rightSaveButton");
         saveButton.setOnAction((ActionEvent event) ->{
             //Clearing all errors
-            List<HBox> labels = new ArrayList<>(Arrays.asList(weightLabel, eventsLabel));
-            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(eventsCB, weightCB));
+            List<HBox> labels = new ArrayList<>(Arrays.asList(weightLabel, resourcesLabel, maximumIdleHoursLabel));
+            List<ComboBox> comboBoxes = new ArrayList<>(Arrays.asList(resourceCB, weightCB, maxNoIntervalsCB));
 
             //Clearing all previous errors
             clearErrors(labels, new ArrayList<>());
@@ -194,7 +245,6 @@ public class InsertEventConstraint extends InsertPaneWithTable {
             }
             else {
                 int chosenValue = 0;
-                System.out.println(weightCB.getValue());
                 switch (weightCB.getValue()){
                     case "Mică (1)":
                         chosenValue = 1;
@@ -212,16 +262,16 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 currentConstraint.setWeight(chosenValue);
             }
 
-            if(eventsFP.getChildren().size() < 1){
-                showErrorMessage(eventsLabel, "Lista de evenimente este necesară.", eventsCB);
+            if(resourcesFP.getChildren().size() < 1){
+                showErrorMessage(resourcesLabel, "Lista de activități este necesară.", resourceCB);
                 empty = true;
             }
             else{
-                List<Event> eventList = new ArrayList<>();
-                for(Node n: eventsFP.getChildren()){
-                    eventList.add(idEventMap.get(n.getId()));
+                List<String> resourceList = new ArrayList<>();
+                for(Node n: resourcesFP.getChildren()){
+                    resourceList.add(n.getId());
                 }
-                currentConstraint.setAppliesToEvents(new Events(eventList));
+                currentConstraint.setEventDescriptions(resourceList);
             }
 
             if(descriptionCheckBox.isSelected()){
@@ -230,6 +280,8 @@ public class InsertEventConstraint extends InsertPaneWithTable {
             else{
                 currentConstraint.setRequired(false);
             }
+
+            currentConstraint.setMaximumNumberOfRepetitions(maxNoIntervalsCB.getValue());
 
             if(!empty) {
                 //Checking if the current event is an existing one and replacing it in the timetable
@@ -260,18 +312,9 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                 }
 
                 if(saveIntoFile()){ //The save button was pressed, the file to save into was chosen
-                    if(currentConstraint instanceof AssignResourceConstraint) {
-                        currentConstraint = new AssignResourceConstraint();
-                        table.getSelectionModel().clearSelection();
-                        clearAllFields();
-                    }
-                    else{
-                        if(currentConstraint instanceof AssignTimeConstraint) {
-                            currentConstraint = new AssignTimeConstraint();
-                            table.getSelectionModel().clearSelection();
-                            clearAllFields();
-                        }
-                    }
+                    currentConstraint = new LimitRepeatDailyConstraint();
+                    table.getSelectionModel().clearSelection();
+                    clearAllFields();
                 }
                 else{
                     CreatePane.timetable.getEventConstraints().getConstraints().remove(currentConstraint);
@@ -287,7 +330,7 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
         addSaveButtonIntoHBox(saveButton);
 
-        finalVBox = new VBox(getTitleLabel("Adaugă eveniment"), fp, constraintEventVBox, createExplanatory(), saveButtonHB);
+        finalVBox = new VBox(getTitleLabel("Adaugă resursă"), fp, constraintResourceVBox, createExplanatory(), saveButtonHB);
         finalVBox.getStyleClass().add("rightVBox");
 
         //Adding the table with the existing times
@@ -300,12 +343,14 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
     private void clearAllFields(){
         weightCB.setValue("1");
-        eventsCB.setValue("Adaugă eveniment");
-        eventsFP.getChildren().clear();
+        resourceCB.setValue("Adaugă eveniment");
+        resourcesFP.getChildren().clear();
+        subjectsIds.setAll(initialSubjectsIds);
         descriptionCheckBox.setSelected(false);
+        maxNoIntervalsCB.setValue(1);
     }
 
-    private HBox createConstraintEventLabel(String text){
+    private HBox createConstraintResourceLabel(String text){
         Label label = new Label(text.toUpperCase());
         label.getStyleClass().add("resourceLabelForEvent");
 
@@ -332,48 +377,53 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         //Creating the table for the already saved times
         table = new TableView();
         TableColumn idColumn = new TableColumn("Id");
-        idColumn.setCellValueFactory(new PropertyValueFactory<Constraint, String>("id"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<LimitRepeatDailyConstraint, String>("id"));
         idColumn.setMaxWidth(200);
         idColumn.setPrefWidth(200);
         idColumn.setMinWidth(200);
         idColumn.getStyleClass().add("firstColumn");
 
         TableColumn descriptionColumn = new TableColumn("Necesar");
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<Constraint, Boolean>("required"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<LimitRepeatDailyConstraint, Boolean>("required"));
         descriptionColumn.setMaxWidth(100);
         descriptionColumn.setPrefWidth(100);
         descriptionColumn.setMinWidth(100);
 
         TableColumn weightColumn = new TableColumn("Greutate");
-        weightColumn.setCellValueFactory(new PropertyValueFactory<Constraint, Integer>("weight"));
+        weightColumn.setCellValueFactory(new PropertyValueFactory<LimitRepeatDailyConstraint, Integer>("weight"));
         weightColumn.setMaxWidth(100);
         weightColumn.setPrefWidth(100);
         weightColumn.setMinWidth(100);
 
-        TableColumn eventsColumn = new TableColumn("Evenimente");
-        eventsColumn.setCellValueFactory(new PropertyValueFactory<Constraint, Events>("appliesToEvents"));
-        eventsColumn.setCellFactory(new Callback<TableColumn<Constraint, Events>, TableCell<Constraint, Events>>(){
+        TableColumn maxIdleTimesColumn = new TableColumn("Nr. max repetiții");
+        maxIdleTimesColumn.setCellValueFactory(new PropertyValueFactory<LimitRepeatDailyConstraint, Integer>("maximumNumberOfRepetitions"));
+        maxIdleTimesColumn.setMaxWidth(100);
+        maxIdleTimesColumn.setPrefWidth(100);
+        maxIdleTimesColumn.setMinWidth(100);
+
+        TableColumn resourcesColumn = new TableColumn("Activități");
+        resourcesColumn.setCellValueFactory(new PropertyValueFactory<LimitRepeatDailyConstraint, List<String>>("eventDescriptions"));
+        resourcesColumn.setCellFactory(new Callback<TableColumn<LimitRepeatDailyConstraint, List<String>>, TableCell<LimitRepeatDailyConstraint, List<String>>>(){
 
             @Override
-            public TableCell<Constraint, Events> call(TableColumn<Constraint, Events> param) {
+            public TableCell<LimitRepeatDailyConstraint, List<String>> call(TableColumn<LimitRepeatDailyConstraint, List<String>> param) {
 
-                TableCell<Constraint, Events> cityCell = new TableCell<Constraint, Events>(){
+                TableCell<LimitRepeatDailyConstraint, List<String>> cityCell = new TableCell<LimitRepeatDailyConstraint, List<String>>(){
 
                     @Override
-                    protected void updateItem(Events item, boolean empty) {
+                    protected void updateItem(List<String> item, boolean empty) {
                         if (item != null) {
-                            FlowPane fp = new FlowPane();
-                            for(Event r: item.getEvents()){
+                            HBox hb = new HBox();
+                            for(String r: item){
                                 Label l = new Label();
-                                l.setText(r.getId());
+                                l.setText(r);
                                 l.getStyleClass().add("resourceLabelForEvent");
 
-                                fp.getChildren().add(l);
-                                fp.setHgap(5);
-                                fp.setVgap(5);
-                                fp.setAlignment(Pos.CENTER_LEFT);
+                                hb.getChildren().add(l);
+                                hb.setSpacing(5);
+                                hb.setAlignment(Pos.CENTER_LEFT);
                             }
-                            setGraphic(fp);
+                            setGraphic(hb);
                         }
                     }
                 };
@@ -455,13 +505,13 @@ public class InsertEventConstraint extends InsertPaneWithTable {
         deleteColumn.setMinWidth(30);
         deleteColumn.getStyleClass().add("lastColumn");
 
-        table.getColumns().addAll(idColumn, descriptionColumn, weightColumn, eventsColumn, deleteColumn);
+        table.getColumns().addAll(idColumn, descriptionColumn, weightColumn, maxIdleTimesColumn, resourcesColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         table.setEditable(true);
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {
-                Constraint e = (Constraint) newValue;
+                LimitRepeatDailyConstraint e = (LimitRepeatDailyConstraint) newValue;
                 currentConstraint = e;
 
                 String weightString = null;
@@ -483,12 +533,14 @@ public class InsertEventConstraint extends InsertPaneWithTable {
 
                 descriptionCheckBox.setSelected(e.getRequired());
 
-                ObservableList<HBox> constraintEventIdLabels = FXCollections.observableArrayList();
-                if(currentConstraint.getAppliesToEvents().getEvents()!=null) {
-                    for (Event r : currentConstraint.getAppliesToEvents().getEvents()) {
+                maxNoIntervalsCB.setValue(e.getMaximumNumberOfRepetitions());
+
+                ObservableList<HBox> constraintResourceIdLabels = FXCollections.observableArrayList();
+                if(currentConstraint.getEventDescriptions() != null) {
+                    for (String r : currentConstraint.getEventDescriptions()) {
                         final HBox hb;
-                        hb = createConstraintEventLabel(r.getId());
-                        eventIds.remove(r.getId());
+                        hb = createConstraintResourceLabel(r);
+                        subjectsIds.remove(r);
 
                         Button remove = new Button();
                         ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
@@ -501,21 +553,21 @@ public class InsertEventConstraint extends InsertPaneWithTable {
                         remove.setMaxSize(10, 10);
 
                         remove.setOnAction((ActionEvent ev) ->{
-                            eventsFP.getChildren().remove(hb);
+                            resourcesFP.getChildren().remove(hb);
 
-                            eventIds.add(hb.getId());
-                            eventsCB.setItems(null);
-                            eventsCB.setItems(eventIds);
+                            subjectsIds.add(hb.getId());
+                            resourceCB.setItems(null);
+                            resourceCB.setItems(subjectsIds);
 
                         });
 
                         hb.getChildren().add(remove);
-                        constraintEventIdLabels.add(hb);
+                        constraintResourceIdLabels.add(hb);
                     }
                 }
 
-                eventsFP.getChildren().clear();
-                eventsFP.getChildren().addAll(constraintEventIdLabels);
+                resourcesFP.getChildren().clear();
+                resourcesFP.getChildren().addAll(constraintResourceIdLabels);
             }
         });
 
@@ -533,19 +585,8 @@ public class InsertEventConstraint extends InsertPaneWithTable {
     protected void updateTableData(){
         ObservableList<Constraint> data = FXCollections.observableArrayList();
 
-        String constraintType = null;
-
-        if(currentConstraint instanceof AssignResourceConstraint){
-            constraintType = "assignResourceConstraint";
-        }
-        else{
-            if(currentConstraint instanceof AssignTimeConstraint){
-                constraintType = "assignTimeConstraint";
-            }
-        }
-
         for(Constraint c: CreatePane.timetable.getEventConstraints().getConstraints()){
-            if(c.getId().startsWith(constraintType)){
+            if(c.getId().startsWith(resourceType)){
                 data.add(c);
             }
         }

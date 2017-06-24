@@ -110,7 +110,7 @@ public class InsertResourceConstraint extends InsertPaneWithTable {
         ComboBox<String> eventsCB = new ComboBox<>(eventIds);
         eventsCB.getStyleClass().add("specialComboBox");
 
-        ImageView imageView = new ImageView(new Image("\\icons\\addIcon.png"));
+        ImageView imageView = new ImageView(new Image("\\view\\icons\\addIcon.png"));
         imageView.setFitHeight(12);
         imageView.setFitWidth(12);
         imageView.setPreserveRatio(true);
@@ -124,7 +124,7 @@ public class InsertResourceConstraint extends InsertPaneWithTable {
                 HBox hb = createConstraintEventLabel(eventsCB.getValue());
 
                 Button remove = new Button();
-                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
                 imageView2.setFitHeight(6);
                 imageView2.setFitWidth(6);
                 imageView2.setPreserveRatio(true);

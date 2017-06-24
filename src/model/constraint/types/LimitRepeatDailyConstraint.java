@@ -1,10 +1,12 @@
 package model.constraint.types;
+
 import model.FitForConstraint;
 import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
 import model.resource.Resources;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +15,17 @@ import java.util.List;
  * Created by Anca on 6/20/2017.
  */
 @XmlRootElement
-public class LimitRepeatActivityConstraint extends Constraint {
+public class LimitRepeatDailyConstraint extends Constraint {
     private Events programmedEvents;
     private List<String> eventDescriptions;
     private int maximumNumberOfRepetitions;
     private List<Event> conflictingEvents;
 
-    public LimitRepeatActivityConstraint(){
+    public LimitRepeatDailyConstraint(){
 
     }
 
-    public LimitRepeatActivityConstraint(String id, boolean required, int weight, int maximumNumberOfRepetitions, Events appliesToEvents, Resources appliesToResources) {
+    public LimitRepeatDailyConstraint(String id, boolean required, int weight, int maximumNumberOfRepetitions, Events appliesToEvents, Resources appliesToResources) {
         super(id, required, weight, appliesToEvents, appliesToResources);
         this.maximumNumberOfRepetitions = maximumNumberOfRepetitions;
     }
@@ -32,20 +34,6 @@ public class LimitRepeatActivityConstraint extends Constraint {
     public int validate(FitForConstraint value) {
         Event event = (Event) value;
 
-        //The interval in which the events with the same description are found
-        int upperInterval = event.getTime().getId();
-        int lowerInterval = event.getTime().getId();
-
-        //List of programmed events must be set before calling this function
-        if(eventDescriptions.contains(event.getDescription())) {
-            return checkInterval(event, upperInterval, lowerInterval);
-        }
-
-        return 0;
-    }
-
-    private int checkInterval(Event event, int upperInterval, int lowerInterval){
-        conflictingEvents = new ArrayList<>();
         Resource studyGroup =  null;
         for(Resource r: event.getResources().getResources()){
             if(r.getResourceType().equals("studyGroup")){
@@ -53,47 +41,33 @@ public class LimitRepeatActivityConstraint extends Constraint {
             }
         }
 
-        boolean intervalGotBigger = true;
-        while(intervalGotBigger && studyGroup!=null) {
-            intervalGotBigger = false;
+        conflictingEvents = new ArrayList<>();
+
+        if(eventDescriptions.contains(event.getDescription())) {
+            int repeated = 0;
+
             for (Event e : programmedEvents.getEvents()) {
-                if (!e.getId().equals(event.getId()) && e.getDescription().equals(event.getDescription())) {
-                    Resource eStudyGroup = null;
+                if (e.getDescription().equals(event.getDescription()) && !e.getId().equals(event.getId()) && e.getTime().getDay().equals(event.getTime().getDay())) {
+                    Resource eStudyGroup =  null;
                     for(Resource r: e.getResources().getResources()){
                         if(r.getResourceType().equals("studyGroup")){
                             eStudyGroup = r;
                         }
                     }
 
-                    if(eStudyGroup!=null && studyGroup.getId().equals(eStudyGroup.getId())) {
-                        if (upperInterval - e.getTime().getId() == 1) {
-                            upperInterval--;
-                            intervalGotBigger = true;
-                            conflictingEvents.add(e);
-                        } else {
-                            if (e.getTime().getId() - lowerInterval == 1) {
-                                lowerInterval++;
-                                intervalGotBigger = true;
-                                conflictingEvents.add(e);
-                            }
-                        }
-                        if (lowerInterval - upperInterval > maximumNumberOfRepetitions) {
-                            return weight;
-                        }
+                    if(studyGroup.getId().equals(eStudyGroup.getId())) {
+                        repeated++;
+                        conflictingEvents.add(e);
                     }
+                }
+
+                if (repeated > maximumNumberOfRepetitions) {
+                    return weight;
                 }
             }
         }
 
         return 0;
-    }
-
-    public List<String> getEventDescriptions() {
-        return eventDescriptions;
-    }
-
-    public void setEventDescriptions(List<String> eventDescriptions) {
-        this.eventDescriptions = eventDescriptions;
     }
 
     public int getMaximumNumberOfRepetitions() {
@@ -125,5 +99,13 @@ public class LimitRepeatActivityConstraint extends Constraint {
 
     public void setConflictingEvents(List<Event> conflictingEvents) {
         this.conflictingEvents = conflictingEvents;
+    }
+
+    public List<String> getEventDescriptions() {
+        return eventDescriptions;
+    }
+
+    public void setEventDescriptions(List<String> eventDescriptions) {
+        this.eventDescriptions = eventDescriptions;
     }
 }

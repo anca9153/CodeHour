@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <timetable id="exampleTimetable">
+    <basicTimeUnitInMinutes>0</basicTimeUnitInMinutes>
     <eventConstraints>
         <assignResourceConstraint id="assignResourceConstraint">
             <appliesToEvents>
                 <event id="ev1">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -23,7 +23,6 @@
                 </event>
                 <event id="ev2">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -41,7 +40,6 @@
                 </event>
                 <event id="ev3">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -59,7 +57,6 @@
                 </event>
                 <event id="ev4">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -77,7 +74,6 @@
                 </event>
                 <event id="ev5">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -95,7 +91,6 @@
                 </event>
                 <event id="ev6">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="catnis">
                             <name>Catalina Ilas</name>
@@ -113,7 +108,6 @@
                 </event>
                 <event id="ev7">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="catnis">
                             <name>Catalina Ilas</name>
@@ -131,7 +125,6 @@
                 </event>
                 <event id="ev8">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="catnis">
                             <name>Catalina Ilas</name>
@@ -149,7 +142,6 @@
                 </event>
                 <event id="ev9">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
@@ -167,7 +159,6 @@
                 </event>
                 <event id="ev10">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
@@ -185,7 +176,6 @@
                 </event>
                 <event id="ev11">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
@@ -203,7 +193,6 @@
                 </event>
                 <event id="ev12">
                     <description>Eng</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="asava">
                             <name>Ana Savascu</name>
@@ -221,7 +210,6 @@
                 </event>
                 <event id="ev13">
                     <description>Eng</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="asava">
                             <name>Ana Savascu</name>
@@ -239,7 +227,6 @@
                 </event>
                 <event id="ev14">
                     <description>Lb. Rom</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
@@ -257,7 +244,6 @@
                 </event>
                 <event id="ev15">
                     <description>Lb. Rom</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
@@ -275,7 +261,6 @@
                 </event>
                 <event id="ev16">
                     <description>Sport</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="anac">
                             <name>Ana Crin</name>
@@ -293,7 +278,6 @@
                 </event>
                 <event id="ev17">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="stm">
                             <name>Maria Stejar</name>
@@ -311,7 +295,6 @@
                 </event>
                 <event id="ev18">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="cris">
                             <name>Cristian Sava</name>
@@ -329,7 +312,6 @@
                 </event>
                 <event id="ev19">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="cris">
                             <name>Cristian Sava</name>
@@ -347,7 +329,6 @@
                 </event>
                 <event id="ev20">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="cris">
                             <name>Cristian Sava</name>
@@ -371,7 +352,6 @@
             <appliesToEvents>
                 <event id="ev1">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -389,7 +369,6 @@
                 </event>
                 <event id="ev2">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -407,7 +386,6 @@
                 </event>
                 <event id="ev3">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -425,7 +403,6 @@
                 </event>
                 <event id="ev4">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -443,7 +420,6 @@
                 </event>
                 <event id="ev5">
                     <description>Mate</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="dpop">
                             <name>Dan Pop</name>
@@ -461,7 +437,6 @@
                 </event>
                 <event id="ev6">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="catnis">
                             <name>Catalina Ilas</name>
@@ -479,7 +454,6 @@
                 </event>
                 <event id="ev7">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="catnis">
                             <name>Catalina Ilas</name>
@@ -497,7 +471,6 @@
                 </event>
                 <event id="ev8">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="catnis">
                             <name>Catalina Ilas</name>
@@ -515,7 +488,6 @@
                 </event>
                 <event id="ev9">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
@@ -533,7 +505,6 @@
                 </event>
                 <event id="ev10">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
@@ -551,7 +522,6 @@
                 </event>
                 <event id="ev11">
                     <description>Info</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="vhariuc">
                             <name>Virgil Hariuc</name>
@@ -569,7 +539,6 @@
                 </event>
                 <event id="ev12">
                     <description>Eng</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="asava">
                             <name>Ana Savascu</name>
@@ -587,7 +556,6 @@
                 </event>
                 <event id="ev13">
                     <description>Eng</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="asava">
                             <name>Ana Savascu</name>
@@ -605,7 +573,6 @@
                 </event>
                 <event id="ev14">
                     <description>Lb. Rom</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
@@ -623,7 +590,6 @@
                 </event>
                 <event id="ev15">
                     <description>Lb. Rom</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="doniciuc">
                             <name>Daniel Oniciuc</name>
@@ -641,7 +607,6 @@
                 </event>
                 <event id="ev16">
                     <description>Sport</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="anac">
                             <name>Ana Crin</name>
@@ -659,7 +624,6 @@
                 </event>
                 <event id="ev17">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="stm">
                             <name>Maria Stejar</name>
@@ -677,7 +641,6 @@
                 </event>
                 <event id="ev18">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="cris">
                             <name>Cristian Sava</name>
@@ -695,7 +658,6 @@
                 </event>
                 <event id="ev19">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="cris">
                             <name>Cristian Sava</name>
@@ -713,7 +675,6 @@
                 </event>
                 <event id="ev20">
                     <description>Arte</description>
-                    <duration>1</duration>
                     <resources>
                         <resource id="cris">
                             <name>Cristian Sava</name>
@@ -737,7 +698,6 @@
     <events>
         <event id="ev1">
             <description>Mate</description>
-            <duration>1</duration>
             <resources>
                 <resource id="dpop">
                     <name>Dan Pop</name>
@@ -755,7 +715,6 @@
         </event>
         <event id="ev2">
             <description>Mate</description>
-            <duration>1</duration>
             <resources>
                 <resource id="dpop">
                     <name>Dan Pop</name>
@@ -773,7 +732,6 @@
         </event>
         <event id="ev3">
             <description>Mate</description>
-            <duration>1</duration>
             <resources>
                 <resource id="dpop">
                     <name>Dan Pop</name>
@@ -791,7 +749,6 @@
         </event>
         <event id="ev4">
             <description>Mate</description>
-            <duration>1</duration>
             <resources>
                 <resource id="dpop">
                     <name>Dan Pop</name>
@@ -809,7 +766,6 @@
         </event>
         <event id="ev5">
             <description>Mate</description>
-            <duration>1</duration>
             <resources>
                 <resource id="dpop">
                     <name>Dan Pop</name>
@@ -827,7 +783,6 @@
         </event>
         <event id="ev6">
             <description>Info</description>
-            <duration>1</duration>
             <resources>
                 <resource id="catnis">
                     <name>Catalina Ilas</name>
@@ -845,7 +800,6 @@
         </event>
         <event id="ev7">
             <description>Info</description>
-            <duration>1</duration>
             <resources>
                 <resource id="catnis">
                     <name>Catalina Ilas</name>
@@ -863,7 +817,6 @@
         </event>
         <event id="ev8">
             <description>Info</description>
-            <duration>1</duration>
             <resources>
                 <resource id="catnis">
                     <name>Catalina Ilas</name>
@@ -881,7 +834,6 @@
         </event>
         <event id="ev9">
             <description>Info</description>
-            <duration>1</duration>
             <resources>
                 <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
@@ -899,7 +851,6 @@
         </event>
         <event id="ev10">
             <description>Info</description>
-            <duration>1</duration>
             <resources>
                 <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
@@ -917,7 +868,6 @@
         </event>
         <event id="ev11">
             <description>Info</description>
-            <duration>1</duration>
             <resources>
                 <resource id="vhariuc">
                     <name>Virgil Hariuc</name>
@@ -935,7 +885,6 @@
         </event>
         <event id="ev12">
             <description>Eng</description>
-            <duration>1</duration>
             <resources>
                 <resource id="asava">
                     <name>Ana Savascu</name>
@@ -953,7 +902,6 @@
         </event>
         <event id="ev13">
             <description>Eng</description>
-            <duration>1</duration>
             <resources>
                 <resource id="asava">
                     <name>Ana Savascu</name>
@@ -971,7 +919,6 @@
         </event>
         <event id="ev14">
             <description>Lb. Rom</description>
-            <duration>1</duration>
             <resources>
                 <resource id="doniciuc">
                     <name>Daniel Oniciuc</name>
@@ -989,7 +936,6 @@
         </event>
         <event id="ev15">
             <description>Lb. Rom</description>
-            <duration>1</duration>
             <resources>
                 <resource id="doniciuc">
                     <name>Daniel Oniciuc</name>
@@ -1007,7 +953,6 @@
         </event>
         <event id="ev16">
             <description>Sport</description>
-            <duration>1</duration>
             <resources>
                 <resource id="anac">
                     <name>Ana Crin</name>
@@ -1025,7 +970,6 @@
         </event>
         <event id="ev17">
             <description>Arte</description>
-            <duration>1</duration>
             <resources>
                 <resource id="stm">
                     <name>Maria Stejar</name>
@@ -1043,7 +987,6 @@
         </event>
         <event id="ev18">
             <description>Arte</description>
-            <duration>1</duration>
             <resources>
                 <resource id="cris">
                     <name>Cristian Sava</name>
@@ -1061,7 +1004,6 @@
         </event>
         <event id="ev19">
             <description>Arte</description>
-            <duration>1</duration>
             <resources>
                 <resource id="cris">
                     <name>Cristian Sava</name>
@@ -1079,7 +1021,6 @@
         </event>
         <event id="ev20">
             <description>Arte</description>
-            <duration>1</duration>
             <resources>
                 <resource id="cris">
                     <name>Cristian Sava</name>
@@ -1095,12 +1036,43 @@
                 </resource>
             </resources>
         </event>
+        <event id="ev_21">
+            <description>Chimie</description>
+            <resources>
+                <resource id="dpop">
+                    <name>Dan Pop</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource id="9A">
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource id="204">
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+        </event>
+        <event id="ev_22">
+            <description>Chimie</description>
+            <resources>
+                <resource id="dpop">
+                    <name>Dan Pop</name>
+                    <resourceType>teacher</resourceType>
+                </resource>
+                <resource id="9A">
+                    <name></name>
+                    <resourceType>studyGroup</resourceType>
+                </resource>
+                <resource id="204">
+                    <name></name>
+                    <resourceType>classroom</resourceType>
+                </resource>
+            </resources>
+        </event>
     </events>
     <metadata>
-        <contributor>Anca Ad</contributor>
-        <date>2017-03-27T20:33:32.962+03:00</date>
-        <description></description>
-        <name>Example Timetable</name>
+        <date>2017-06-14T14:21:35.811+03:00</date>
     </metadata>
     <resourceConstraints>
         <limitIdleTimeConstraint id="limitIdleTimeConstraint">
@@ -1347,76 +1319,91 @@
             <day>monday</day>
             <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_mon</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="2">
             <day>monday</day>
             <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_mon</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="3">
             <day>monday</day>
             <hourInterval>10:00 - 10:50</hourInterval>
             <name>3_mon</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="4">
             <day>tuesday</day>
             <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_tue</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="5">
             <day>tuesday</day>
             <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_tue</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="6">
             <day>tuesday</day>
             <hourInterval>10:00 - 10:50</hourInterval>
             <name>3_tue</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="7">
             <day>wednesday</day>
             <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_wed</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="8">
             <day>wednesday</day>
             <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_wed</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="9">
             <day>wednesday</day>
             <hourInterval>10:00 - 10:50</hourInterval>
             <name>3_wed</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="10">
             <day>thursday</day>
             <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_thu</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="11">
             <day>thursday</day>
             <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_thu</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="12">
             <day>thursday</day>
             <hourInterval>10:00 - 10:50</hourInterval>
             <name>3_thu</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="13">
             <day>friday</day>
             <hourInterval>8:00 - 8:50</hourInterval>
             <name>1_fri</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="14">
             <day>friday</day>
             <hourInterval>9:00 - 9:50</hourInterval>
             <name>2_fri</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
         <time id="15">
             <day>friday</day>
             <hourInterval>10:00 - 10:50</hourInterval>
             <name>3_fri</name>
+            <numberOfTimeUnits>0</numberOfTimeUnits>
         </time>
     </times>
 </timetable>

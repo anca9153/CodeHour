@@ -98,7 +98,8 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
         for(int i=0; i<50; i++){
             numbersList.add(i);
         }
-        HBox maximumIdleHoursLabel = makeLabel("NR. MAXIM REPETIȚII", true);
+
+        HBox maximumIdleHoursLabel = makeLabel("NR. MAXIM REPETIȚII CONSECUTIVE", true);
         maxNoIntervalsCB = new ComboBox<>(numbersList);
         maxNoIntervalsCB.getStyleClass().add("specialComboBox");
         maxNoIntervalsCB.setValue(1);
@@ -143,7 +144,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
                 subjectsIds.remove(r);
 
                 Button remove = new Button();
-                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
                 imageView2.setFitHeight(6);
                 imageView2.setFitWidth(6);
                 imageView2.setPreserveRatio(true);
@@ -170,7 +171,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
         resourcesFP = new FlowPane();
         resourcesFP.getChildren().addAll(constraintResourceIdLabels);
 
-        ImageView imageView = new ImageView(new Image("\\icons\\addIcon.png"));
+        ImageView imageView = new ImageView(new Image("\\view\\icons\\addIcon.png"));
         imageView.setFitHeight(12);
         imageView.setFitWidth(12);
         imageView.setPreserveRatio(true);
@@ -184,7 +185,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
                 HBox hb = createConstraintResourceLabel(resourceCB.getValue());
 
                 Button remove = new Button();
-                ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
                 imageView2.setFitHeight(6);
                 imageView2.setFitWidth(6);
                 imageView2.setPreserveRatio(true);
@@ -479,7 +480,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
                                         saveIntoFile();
                                     } );
 
-                                    ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                                    ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
                                     imageView2.setFitHeight(10);
                                     imageView2.setFitWidth(10);
                                     imageView2.setPreserveRatio(true);
@@ -541,7 +542,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
                         subjectsIds.remove(r);
 
                         Button remove = new Button();
-                        ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                        ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
                         imageView2.setFitHeight(6);
                         imageView2.setFitWidth(6);
                         imageView2.setPreserveRatio(true);

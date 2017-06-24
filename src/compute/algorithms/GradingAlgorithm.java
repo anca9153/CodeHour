@@ -5,6 +5,7 @@ import model.Timetable;
 import model.constraint.Constraint;
 import model.constraint.types.LimitIdleTimesConstraint;
 import model.constraint.types.LimitRepeatActivityConstraint;
+import model.constraint.types.LimitRepeatDailyConstraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
@@ -20,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Anca on 1/18/2017.
@@ -46,11 +49,10 @@ public class GradingAlgorithm implements Algorithm {
             clonedList.add((Event)DeepCloner.deepClone(e));
         }
 
-        Collections.shuffle(clonedList);
-        Events clonedEvents = new Events(clonedList);
+        Events clonedEvents = new Events(sortByMostConstraints(clonedList));
 
-        int solNo = timetable.getSolutions().getSolutions().size();
-        solution = new Solution("sol"+(solNo+1),"Solution "+ (solNo+1), clonedEvents, null);
+        solution = timetable.getSolutions().getSolutions().get(solutions.getSolutions().size()-1);
+        solution.setEvents(clonedEvents);
 
         //To do list with the events that have not been assigned a Time yet or share resources with other events
         List<Event> toDoList = new ArrayList<>();
@@ -69,17 +71,56 @@ public class GradingAlgorithm implements Algorithm {
 
         solveToDoList(toDoList);
 
-//        Report report = new Report();
-//        solutions.setSolutions(Arrays.asList(solution));
         timetable.setSolutions(solutions);
         return timetable;
+    }
+
+    private List<Event> sortByMostConstraints(List<Event> list){
+        Comparator<Event> cmp = new Comparator<Event>() {
+            public int compare(Event o1, Event o2) {
+                Integer o1Con = 0, o2Con = 0;
+                for(Constraint c: timetable.getEventConstraints().getConstraints()){
+                    if(c.getAppliesToEvents()!=null) {
+                        if (c.getAppliesToEvents().getEvents().contains(o1)) {
+                            o1Con++;
+                        }
+
+                        if (c.getAppliesToEvents().getEvents().contains(o2)) {
+                            o2Con++;
+                        }
+                    }
+                }
+
+                if(timetable.getResourceConstraints()!=null && timetable.getResourceConstraints().getConstraints()!=null) {
+                    for (Constraint c : timetable.getResourceConstraints().getConstraints()) {
+                        for (Resource r : o1.getResources().getResources()) {
+                            if (c.getAppliesToResources().getResources().contains(r)) {
+                                o1Con++;
+                            }
+                        }
+
+                        for (Resource r : o2.getResources().getResources()) {
+                            if (c.getAppliesToResources().getResources().contains(r)) {
+                                o2Con++;
+                            }
+                        }
+                    }
+                }
+
+                return o1Con.compareTo(Integer.valueOf(o2Con));
+            }
+        };
+
+        Collections.sort(list, cmp);
+        return list;
     }
 
     int iteration = 0;
     boolean lastScheduled = false;
 
     private int solveToDoList(List<Event> toDoList){
-        System.out.println("Events in iteration no " + iteration++);
+        //Printing check
+        System.out.println("\n Events in iteration no " + iteration++);
         int countNotScheduled=0;
         for(Event e: solution.getEvents().getEvents()){
             if(e.getTime()!=null) {
@@ -89,12 +130,13 @@ public class GradingAlgorithm implements Algorithm {
                 countNotScheduled++;
             }
         }
-        System.out.println("Not scheduled "+countNotScheduled);
+        System.out.println("Not scheduled "+countNotScheduled +" events");
 
         for(Event e: toDoList){
             System.out.println("to do list "+e.getId()+" "+(e.getTime() != null ? e.getTime().getId() : "not scheduled") +" "+grades.get(e.getId()));
         }
 
+        //Solving the problem
         if(toDoList.size() != 0) {
             Event e = toDoList.get(0);
             int bestCostValue = 10000;
@@ -163,23 +205,10 @@ public class GradingAlgorithm implements Algorithm {
                     }
                 }
             }
+            return 0;
         }
-
-        List<Event> clonedList = new ArrayList<>();
-
-        for(Event e: solution.getEvents().getEvents()){
-            clonedList.add((Event)DeepCloner.deepClone(e));
-        }
-
-        Events clonedEvents = new Events(clonedList);
-
-        int solNo = solutions.getSolutions().size();
-        Solution solutionToAdd = new Solution("sol"+(solNo+1),"Solution "+ (solNo+1), clonedEvents, null);
-
-        solutions.getSolutions().add(solutionToAdd);
 
         return 1;
-//        System.out.println("Found solution "+solutions.getSolutions().size());
     }
 
     private int computeInfeasibility(Event e){
@@ -187,15 +216,21 @@ public class GradingAlgorithm implements Algorithm {
 
         if(timetable.getEventConstraints() != null && timetable.getEventConstraints().getConstraints() != null) {
             for (Constraint c : timetable.getEventConstraints().getConstraints()) {
-                if(!c.getId().startsWith("limitRepeatActivity")){
+                if(!c.getId().startsWith("limitRepeatActivity") && !c.getId().startsWith("limitRepeatDaily")){
                     infeasibility += c.validate(e);
                 }
                 else{
                     if(e.getTime() != null) {
                         List<String> subjects = readSubjects();
 
-                        ((LimitRepeatActivityConstraint) c).setEventDescriptions(subjects);
-                        ((LimitRepeatActivityConstraint) c).setProgrammedEvents(solution.getEvents());
+                        if(c.getId().startsWith("limitRepeatActivity")) {
+                            ((LimitRepeatActivityConstraint) c).setEventDescriptions(subjects);
+                            ((LimitRepeatActivityConstraint) c).setProgrammedEvents(solution.getEvents());
+                        }
+                        else{
+                            ((LimitRepeatDailyConstraint) c).setEventDescriptions(subjects);
+                            ((LimitRepeatDailyConstraint) c).setProgrammedEvents(solution.getEvents());
+                        }
 
                         infeasibility += c.validate(e);
                     }
@@ -284,22 +319,35 @@ public class GradingAlgorithm implements Algorithm {
         }
 
         for(Constraint c: timetable.getEventConstraints().getConstraints()) {
-            if(c instanceof LimitIdleTimesConstraint) {
+            if(c instanceof LimitRepeatActivityConstraint) {
                 LimitRepeatActivityConstraint lraConstraint = (LimitRepeatActivityConstraint) c;
 
                 List<String> subjects = readSubjects();
 
-                ((LimitRepeatActivityConstraint) lraConstraint).setEventDescriptions(subjects);
-                ((LimitRepeatActivityConstraint) lraConstraint).setProgrammedEvents(solution.getEvents());
+                lraConstraint.setEventDescriptions(subjects);
+                lraConstraint.setProgrammedEvents(solution.getEvents());
 
                 if(lraConstraint.validate(event)>0){
                     conflictingEvents.addAll(lraConstraint.getConflictingEvents());
+                }
+            }
+            else {
+                if (c instanceof LimitRepeatDailyConstraint) {
+                    LimitRepeatDailyConstraint lrdConstraint = (LimitRepeatDailyConstraint) c;
+
+                    List<String> subjects = readSubjects();
+
+                    lrdConstraint.setEventDescriptions(subjects);
+                    lrdConstraint.setProgrammedEvents(solution.getEvents());
+
+                    if (lrdConstraint.validate(event) > 0) {
+                        conflictingEvents.addAll(lrdConstraint.getConflictingEvents());
+                    }
                 }
             }
         }
 
         return conflictingEvents;
     }
-
 
 }

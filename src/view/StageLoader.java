@@ -47,7 +47,7 @@ public class StageLoader {
         DisplayPane displayPane = new DisplayPane(idTimetableMap, file, timetable);
         Scene display = new Scene(displayPane, sizes.get(0), sizes.get(1));
 
-        display.getStylesheets().add("styles/displayStyle.css");
+        display.getStylesheets().add("view/styles/displayStyle.css");
 
         load(display);
     }
@@ -61,7 +61,7 @@ public class StageLoader {
 
         Scene createScene = new Scene(createPane, sizes.get(0), sizes.get(1));
 
-        createScene.getStylesheets().add("styles/createStyle.css");
+        createScene.getStylesheets().add("view/styles/createStyle.css");
 
         load(createScene);
     }

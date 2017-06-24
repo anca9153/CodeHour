@@ -58,7 +58,7 @@ public abstract class MainPane extends BorderPane {
     }
 
     protected MenuButton createSettingsButton(){
-        ImageView imageView = new ImageView(new Image("\\icons\\settingsIcon.png"));
+        ImageView imageView = new ImageView(new Image("\\view\\icons\\settingsIcon.png"));
         imageView.setFitHeight(10);
         imageView.setFitWidth(10);
         imageView.setPreserveRatio(true);

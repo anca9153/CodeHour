@@ -316,7 +316,7 @@ public class InsertResource extends InsertPaneWithTable {
                                         saveIntoFile();
                                     } );
 
-                                    ImageView imageView2 = new ImageView(new Image("\\icons\\deleteIcon.png"));
+                                    ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
                                     imageView2.setFitHeight(10);
                                     imageView2.setFitWidth(10);
                                     imageView2.setPreserveRatio(true);
