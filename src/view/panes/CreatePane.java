@@ -194,7 +194,7 @@ public class CreatePane extends MainPane {
         VBox vBoxTimes = createLeftOption("Intervale orare", "Adaugă intervale");
         VBox vBoxResources = createLeftOption("Resurse", "Clase", "Profesori", "Săli de clasă");
         VBox vBoxEvents = createLeftOption("Evenimente", "Adaugă evenimente");
-        VBox vBoxConstraints = createLeftOption("Constrângeri", "Limitare feresetre", "Lim. repetiții consec", "Lim. repetiții zilnice");
+        VBox vBoxConstraints = createLeftOption("Constrângeri", "Limitare feresetre", "Lim. repetiții consec", "Lim. repetiții zilnice", "Lim. ore resurse");
 
         VBox vBox = new VBox(vBoxDetails, vBoxTimes, vBoxResources, vBoxEvents, vBoxConstraints);
         vBox.getStyleClass().add("leftScreen");
@@ -238,21 +238,26 @@ public class CreatePane extends MainPane {
                 Constraints eventConstraints = timetable.getEventConstraints();
                 boolean asRes = false;
                 boolean asTime = false;
-                for (Constraint c: eventConstraints.getConstraints()){
-                    if(c.getId().equals("assignResourceConstraint_1")){
+                if (eventConstraints == null) {
+                    eventConstraints = new Constraints();
+                    eventConstraints.setConstraints(new ArrayList<>());
+                }
+
+                for (Constraint c : eventConstraints.getConstraints()) {
+                    if (c.getId().equals("assignResourceConstraint_1")) {
                         asRes = true;
                     }
 
-                    if(c.getId().equals("assignTimeConstraint_1")){
+                    if (c.getId().equals("assignTimeConstraint_1")) {
                         asTime = true;
                     }
                 }
 
-                if(!asRes){
+                if (!asRes) {
                     eventConstraints.getConstraints().add(new AssignResourceConstraint("assignResourceConstraint_1", true, 1, timetable.getEvents(), null));
                 }
 
-                if(!asTime){
+                if (!asTime) {
                     eventConstraints.getConstraints().add(new AssignTimeConstraint("assignTimeConstraint_1", true, 1, timetable.getEvents(), null));
                 }
 
@@ -261,43 +266,63 @@ public class CreatePane extends MainPane {
                 Algorithm algorithm = new GradingAlgorithm();
                 Timetable solvedTimetable = algorithm.solve(timetable);
 
-                //Saving into the files
-                XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, savingFile);
+                if (solvedTimetable == null) {
+                    error.setText("Nu s-a găsit nicio soluție!");
 
-                if(!savingFile.getPath().equals(PropertiesLoader.loadXMLLocationFolder())){
-                    File f = new File(new String(PropertiesLoader.loadXMLLocationFolder() + savingFile.getName()));
-                    XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, f);
-                    savingFile = f;
-                }
-
-                //Preparing for loading the display pane
-                File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
-
-                List<File> timetablesToDisplay = new ArrayList<>();
-
-                //Reading the XMLs from the given directory
-                for (final File fileEntry : loadFolder.listFiles()) {
-                    if (!fileEntry.isDirectory()){
-                        timetablesToDisplay.add(fileEntry);
-                    }
-                }
-
-                Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();
-                Timetable t;
-                for(File file: timetablesToDisplay) {
-                    if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
-                        t = XMLDataLoader.loadDataFromXML(file.getName());
+                    if (generateVBox.getChildren().size() < 2) {
+                        generateVBox.getChildren().add(0, error);
                     } else {
-                        t = XMLDataLoader.loadDataFromXMLWithPath(file);
-                    }
-                    if(t.getSolutions() != null){
-                        idTimetableWithSolutionMap.put(t.getId(), t);
+                        error.setVisible(true);
                     }
 
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(5)
+                    );
+                    visiblePause.setOnFinished(
+                            e -> error.setVisible(false)
+                    );
+                    visiblePause.play();
                 }
+                else{
 
-                //Opening display pane
-                StageLoader.loadDisplay(idTimetableWithSolutionMap, savingFile, timetable);
+                    //Saving into the files
+                    XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, savingFile);
+
+                    if (!savingFile.getPath().equals(PropertiesLoader.loadXMLLocationFolder())) {
+                        File f = new File(new String(PropertiesLoader.loadXMLLocationFolder() + savingFile.getName()));
+                        XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, f);
+                        savingFile = f;
+                    }
+
+                    //Preparing for loading the display pane
+                    File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
+
+                    List<File> timetablesToDisplay = new ArrayList<>();
+
+                    //Reading the XMLs from the given directory
+                    for (final File fileEntry : loadFolder.listFiles()) {
+                        if (!fileEntry.isDirectory()) {
+                            timetablesToDisplay.add(fileEntry);
+                        }
+                    }
+
+                    Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();
+                    Timetable t;
+                    for (File file : timetablesToDisplay) {
+                        if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
+                            t = XMLDataLoader.loadDataFromXML(file.getName());
+                        } else {
+                            t = XMLDataLoader.loadDataFromXMLWithPath(file);
+                        }
+                        if (t.getSolutions() != null) {
+                            idTimetableWithSolutionMap.put(t.getId(), t);
+                        }
+
+                    }
+
+                    //Opening display pane
+                    StageLoader.loadDisplay(idTimetableWithSolutionMap, savingFile, timetable);
+                }
 
             } else {
                 error.setText("Evenimentele sunt necesare!");
@@ -325,6 +350,107 @@ public class CreatePane extends MainPane {
 
         generate.getStyleClass().add("createButton");
         addToSolution.getStyleClass().add("createButton");
+
+        addToSolution.setOnAction((ActionEvent event) ->
+        {
+            if (savingFile == null) {
+                //Show window to choose file
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setInitialDirectory(new File(PropertiesLoader.loadXMLLocationFolder()));
+
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+                fileChooser.getExtensionFilters().add(extFilter);
+
+                //Show save file dialog
+                CreatePane.savingFile = fileChooser.showSaveDialog(primaryStage);
+            }
+
+            if (timetable.getEvents() != null && timetable.getEvents().getEvents() != null && timetable.getEvents().getEvents().size() > 0) {
+                Algorithm algorithm = new GradingAlgorithm();
+                Timetable solvedTimetable = algorithm.addToSolution(timetable);
+                if (solvedTimetable == null) {
+                    error.setText("Nu s-a găsit nicio soluție!");
+
+                    if (generateVBox.getChildren().size() < 2) {
+                        generateVBox.getChildren().add(0, error);
+                    } else {
+                        error.setVisible(true);
+                    }
+
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(5)
+                    );
+                    visiblePause.setOnFinished(
+                            e -> error.setVisible(false)
+                    );
+                    visiblePause.play();
+                }
+                else{
+
+                    //Saving into the files
+                    XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, savingFile);
+
+                    if (!savingFile.getPath().equals(PropertiesLoader.loadXMLLocationFolder())) {
+                        File f = new File(new String(PropertiesLoader.loadXMLLocationFolder() + savingFile.getName()));
+                        XMLDataLoader.loadSolvedTimetableToXMLWithPath(solvedTimetable, f);
+                        savingFile = f;
+                    }
+
+                    //Preparing for loading the display pane
+                    File loadFolder = new File(PropertiesLoader.loadXMLLocationFolder());
+
+                    List<File> timetablesToDisplay = new ArrayList<>();
+
+                    //Reading the XMLs from the given directory
+                    for (final File fileEntry : loadFolder.listFiles()) {
+                        if (!fileEntry.isDirectory()) {
+                            timetablesToDisplay.add(fileEntry);
+                        }
+                    }
+
+                    Map<String, Timetable> idTimetableWithSolutionMap = new HashMap<>();
+                    Timetable t;
+                    for (File file : timetablesToDisplay) {
+                        if (PropertiesLoader.loadXMLLocationFolder().equals(new String(file.getParent() + "\\"))) {
+                            t = XMLDataLoader.loadDataFromXML(file.getName());
+                        } else {
+                            t = XMLDataLoader.loadDataFromXMLWithPath(file);
+                        }
+                        if (t.getSolutions() != null) {
+                            idTimetableWithSolutionMap.put(t.getId(), t);
+                        }
+
+                    }
+
+                    //Opening display pane
+                    StageLoader.loadDisplay(idTimetableWithSolutionMap, savingFile, timetable);
+                }
+
+            } else {
+                error.setText("Evenimentele sunt necesare!");
+
+                if (generateVBox.getChildren().size() < 2) {
+                    generateVBox.getChildren().add(0, error);
+                } else {
+                    error.setVisible(true);
+                }
+
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(5)
+                );
+                visiblePause.setOnFinished(
+                        e -> error.setVisible(false)
+                );
+                visiblePause.play();
+            }
+
+
+            //The timetable has been generated
+            //Now loading the display pane
+
+        });
+
 
         VBox leftVBox = new VBox(scrollPane, generateVBox);
 
@@ -408,6 +534,10 @@ public class CreatePane extends MainPane {
             case "Lim. repetiții zilnice":
                 InsertLimitRepeatDailyConstraint rightPane9 = new InsertLimitRepeatDailyConstraint(primaryStage, "limitRepeatDailyConstraint", new LimitRepeatDailyConstraint(), rightPaneName);
                 this.setCenter(rightPane9.addRightPane());
+                break;
+            case "Lim. ore resurse":
+                InsertLimitResourceAvailableTimesConstraint rightPane10 = new InsertLimitResourceAvailableTimesConstraint(primaryStage, "limitResourceAvailableTimesConstraint", new LimitResourceAvailableTimesConstraint(), rightPaneName);
+                this.setCenter(rightPane10.addRightPane());
                 break;
             default:
                 break;

@@ -1,11 +1,11 @@
 package model.constraint.types;
-import model.FitForConstraint;
 import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
 import model.resource.Resource;
 import model.resource.Resources;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +29,7 @@ public class LimitRepeatActivityConstraint extends Constraint {
     }
 
     @Override
-    public int validate(FitForConstraint value) {
-        Event event = (Event) value;
-
+    public int validate(Event event) {
         //The interval in which the events with the same description are found
         int upperInterval = event.getTime().getId();
         int lowerInterval = event.getTime().getId();
@@ -108,6 +106,7 @@ public class LimitRepeatActivityConstraint extends Constraint {
         return programmedEvents;
     }
 
+    @XmlTransient
     public void setProgrammedEvents(Events events) {
         List<Event> progEv = new ArrayList<>();
         for(Event e: events.getEvents()){
@@ -123,6 +122,7 @@ public class LimitRepeatActivityConstraint extends Constraint {
         return conflictingEvents;
     }
 
+    @XmlTransient
     public void setConflictingEvents(List<Event> conflictingEvents) {
         this.conflictingEvents = conflictingEvents;
     }

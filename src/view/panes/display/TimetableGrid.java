@@ -306,7 +306,9 @@ public class TimetableGrid {
                 return i1.compareTo(Integer.valueOf(i2));
             }
         };
-        Collections.sort(list, cmp);
+        if(resourceType.equals("studyGroup")) {
+            Collections.sort(list, cmp);
+        }
 
         //Finding out how many hour intervals there can be in a day
         int maxCounter = 0;

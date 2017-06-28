@@ -1,6 +1,5 @@
 package model.constraint.types;
 
-import model.FitForConstraint;
 import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
@@ -23,8 +22,7 @@ public class AssignResourceConstraint extends Constraint{
     }
 
     @Override
-    public int validate(FitForConstraint val) {
-        Event event = (Event) val;
+    public int validate(Event event) {
         List<Resource> eventResourceList = event.getResources().getResources();
         int infeasability = 0;
         for (Resource r : eventResourceList) {

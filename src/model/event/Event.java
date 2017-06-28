@@ -1,6 +1,6 @@
 package model.event;
 
-import model.FitForConstraint;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import model.resource.Resources;
 import model.time.Time;
 
@@ -12,11 +12,12 @@ import java.io.Serializable;
  * Created by Anca on 1/17/2017.
  */
 @XmlRootElement(name = "event")
-public class Event extends FitForConstraint implements Serializable{
+public class Event implements Serializable{
     private String id;
     private Time time;
     private Resources resources;
     private String description;
+    private Boolean toAdd;
 
     public Event(){
 
@@ -60,5 +61,13 @@ public class Event extends FitForConstraint implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getToAdd() {
+        return toAdd;
+    }
+
+    public void setToAdd(Boolean toAdd) {
+        this.toAdd = toAdd;
     }
 }

@@ -4,12 +4,13 @@ import model.constraint.Constraint;
 import model.resource.Resource;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "constraintViolatingResource")
-public class ConstraintViolatingResource {
+public class ConstraintViolatingResource implements Serializable {
     private Resource resource;
     private Constraint constraint;
     private int cost;

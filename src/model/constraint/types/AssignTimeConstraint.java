@@ -1,6 +1,5 @@
 package model.constraint.types;
 
-import model.FitForConstraint;
 import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
@@ -21,8 +20,7 @@ public class AssignTimeConstraint extends Constraint {
     }
 
     @Override
-    public int validate(FitForConstraint val) {
-        Event event = (Event) val;
+    public int validate(Event event) {
         return event.getTime() == null ? this.getWeight() : 0;
     }
 }

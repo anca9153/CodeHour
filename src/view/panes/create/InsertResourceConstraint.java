@@ -108,6 +108,7 @@ public class InsertResourceConstraint extends InsertPaneWithTable {
         eventsFP.getChildren().addAll(constraintEventIdLabels);
 
         ComboBox<String> eventsCB = new ComboBox<>(eventIds);
+        new ComboBoxAutoComplete<>(eventsCB);
         eventsCB.getStyleClass().add("specialComboBox");
 
         ImageView imageView = new ImageView(new Image("\\view\\icons\\addIcon.png"));

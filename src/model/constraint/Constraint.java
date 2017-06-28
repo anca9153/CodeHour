@@ -1,6 +1,6 @@
 package model.constraint;
 
-import model.FitForConstraint;
+import model.event.Event;
 import model.event.Events;
 import model.resource.Resources;
 
@@ -71,5 +71,5 @@ public abstract class Constraint {
         this.appliesToResources = appliesToResources;
     }
 
-    public abstract int validate(FitForConstraint value);
+    public abstract int validate(Event event);
 }

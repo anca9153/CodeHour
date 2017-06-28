@@ -288,14 +288,16 @@ public class InsertResource extends InsertPaneWithTable {
 
                                         if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
                                             for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
-                                                for (Event e : c.getAppliesToEvents().getEvents()) {
-                                                    List<Resource> toRemove = new ArrayList<>();
-                                                    for (Resource res : e.getResources().getResources()) {
-                                                        if (res.getId().equals(resource.getId())) {
-                                                            toRemove.add(res);
+                                                if(c.getAppliesToEvents()!=null && c.getAppliesToEvents().getEvents()!=null) {
+                                                    for (Event e : c.getAppliesToEvents().getEvents()) {
+                                                        List<Resource> toRemove = new ArrayList<>();
+                                                        for (Resource res : e.getResources().getResources()) {
+                                                            if (res.getId().equals(resource.getId())) {
+                                                                toRemove.add(res);
+                                                            }
                                                         }
+                                                        e.getResources().getResources().removeAll(toRemove);
                                                     }
-                                                    e.getResources().getResources().removeAll(toRemove);
                                                 }
                                             }
                                         }

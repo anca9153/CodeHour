@@ -5,12 +5,13 @@ import model.event.Event;
 import model.resource.Resource;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by Anca on 3/24/2017.
  */
 @XmlRootElement(name = "constraintViolatingEvent")
-public class ConstraintViolatingEvent {
+public class ConstraintViolatingEvent implements Serializable {
     private Event event;
     private Constraint constraint;
     private int cost;

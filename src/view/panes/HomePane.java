@@ -21,7 +21,6 @@ import java.util.Map;
  * Created by Anca on 3/16/2017.
  */
 public class HomePane extends MainPane {
-    private StageLoader loader;
     private ListView<String> listView;
 
     public HomePane(){
@@ -182,7 +181,4 @@ public class HomePane extends MainPane {
         return pane;
     }
 
-    public void setLoader(StageLoader loader) {
-        this.loader = loader;
-    }
 }

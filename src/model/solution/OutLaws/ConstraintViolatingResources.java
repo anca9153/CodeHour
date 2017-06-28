@@ -4,13 +4,14 @@ import model.solution.OutLaws.ConstraintViolatingResource;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "constraintViolatingResources")
-public class ConstraintViolatingResources {
+public class ConstraintViolatingResources implements Serializable{
     private List<ConstraintViolatingResource> cvrs;
 
     public ConstraintViolatingResources(){

@@ -4,12 +4,13 @@ import model.event.Events;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "solution")
-public class Solution {
+public class Solution implements Serializable {
     private String id;
     private String description;
     private Events events;

@@ -5,7 +5,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import model.Timetable;
 import model.event.Event;
-import model.event.Events;
 import model.resource.Resource;
 import model.solution.Solution;
 import model.time.Time;
@@ -42,7 +41,7 @@ public class FreeMarkerDataLoader {
 
         try {
             long count = Files.find(Paths.get("UserFiles\\Reports"), 1, (path, attributes) -> attributes.isDirectory()).count();
-            folderName = new String("report_" + count);
+            folderName = new String("Report_"+count+"_Orar_"+timetable.getId().trim());
             Files.createDirectory(Paths.get(PropertiesLoader.loadReportsFolderPath() + folderName));
         } catch (IOException e) {
             e.printStackTrace();

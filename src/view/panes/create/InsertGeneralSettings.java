@@ -147,7 +147,7 @@ public class InsertGeneralSettings extends InsertPane {
                 meta.setContributor(contributorTextField.getText());
             }
 
-            if(timeIntervalCB.getValue().isEmpty()){
+            if(timeIntervalCB.getValue()==null || timeIntervalCB.getValue().isEmpty()){
                 showErrorMessage(timeIntervalLabel, "Durata este necesară", timeIntervalCB);
                 empty = true;
             }

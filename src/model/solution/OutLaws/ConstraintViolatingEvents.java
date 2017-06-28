@@ -2,13 +2,14 @@ package model.solution.OutLaws;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Anca on 3/24/2017.
  */
 @XmlRootElement(name = "constraintViolatingEvents")
-public class ConstraintViolatingEvents {
+public class ConstraintViolatingEvents implements Serializable {
     private List<ConstraintViolatingEvent> cves;
 
     public ConstraintViolatingEvents(){

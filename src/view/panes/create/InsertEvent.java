@@ -45,6 +45,7 @@ public class InsertEvent extends InsertPaneWithTable {
     private ObservableList<String> resourceIds;
     private ObservableList<String> initialResourceIds;
     private ComboBox<String> resourceCB;
+    private CheckBox descriptionCheckBox;
 
     public InsertEvent(Stage primaryStage){
         this.primaryStage = primaryStage;
@@ -115,6 +116,7 @@ public class InsertEvent extends InsertPaneWithTable {
         descriptionCB.getStyleClass().add("specialComboBox");
         descriptionCB.setPromptText(textFieldValues.get(2).getKey());
         descriptionCB.setEditable(true);
+        new ComboBoxAutoComplete<>(descriptionCB);
         vbList.add(new VBox(descriptionLabel, descriptionCB));
 
         HBox eventNoLabel = makeLabel("NUMAR EVENIMENTE", true);
@@ -135,6 +137,10 @@ public class InsertEvent extends InsertPaneWithTable {
         timeCB.getStyleClass().add("specialComboBox");
         timeCB.setPromptText(String.valueOf(textFieldValues.get(0).getKey()));
         vbList.add(new VBox(timeLabel, timeCB));
+
+        HBox addLabel = makeLabel("ADAUGĂ SOLUȚIEI", false);
+        descriptionCheckBox = new CheckBox();
+        vbList.add(new VBox(addLabel, descriptionCheckBox));
 
         FlowPane fp = getFlowPane(vbList);
 
@@ -161,6 +167,7 @@ public class InsertEvent extends InsertPaneWithTable {
         resourceCB = new ComboBox<>(resourceIds);
         resourceCB.getStyleClass().add("specialComboBox");
         resourceCB.setPromptText(textFieldValues.get(1).getKey());
+        new ComboBoxAutoComplete<>(resourceCB);
 
         //Resources linked to the current event
         //We also remove the resources that are already linked to the current event from the possible choices of resources
@@ -301,6 +308,12 @@ public class InsertEvent extends InsertPaneWithTable {
                 currentEvent.setResources(new Resources(resourceList));
             }
 
+            if(descriptionCheckBox.isSelected()){
+                currentEvent.setToAdd(true);
+            }
+            else{
+                currentEvent.setToAdd(false);
+            }
             if(!empty) {
                 //Checking if the current event is an existing one and replacing it in the timetable
                 int index = 0;
@@ -314,11 +327,13 @@ public class InsertEvent extends InsertPaneWithTable {
                         if (CreatePane.timetable.getEventConstraints() != null && CreatePane.timetable.getEventConstraints().getConstraints() != null) {
                             for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
                                 int eIndex = 0;
-                                for (Event ev : c.getAppliesToEvents().getEvents()) {
-                                    if (ev.getId().equals(currentEvent.getId())) {
-                                        c.getAppliesToEvents().getEvents().set(eIndex, currentEvent);
+                                if(c.getAppliesToEvents()!=null && c.getAppliesToEvents().getEvents()!=null) {
+                                    for (Event ev : c.getAppliesToEvents().getEvents()) {
+                                        if (ev.getId().equals(currentEvent.getId())) {
+                                            c.getAppliesToEvents().getEvents().set(eIndex, currentEvent);
+                                        }
+                                        eIndex++;
                                     }
-                                    eIndex++;
                                 }
                             }
                         }
@@ -505,13 +520,15 @@ public class InsertEvent extends InsertPaneWithTable {
                                         //Changing all the instances of the changed object from the timetable
                                         if(CreatePane.timetable.getEventConstraints()!=null && CreatePane.timetable.getEventConstraints().getConstraints()!=null) {
                                             for (Constraint c : CreatePane.timetable.getEventConstraints().getConstraints()) {
-                                                List<Event> toRemove = new ArrayList<>();
-                                                for (Event evn : c.getAppliesToEvents().getEvents()) {
-                                                    if (evn.getId().equals(ev.getId())) {
-                                                        toRemove.add(evn);
+                                                if(c.getAppliesToEvents()!=null) {
+                                                    List<Event> toRemove = new ArrayList<>();
+                                                    for (Event evn : c.getAppliesToEvents().getEvents()) {
+                                                        if (evn.getId().equals(ev.getId())) {
+                                                            toRemove.add(evn);
+                                                        }
                                                     }
+                                                    c.getAppliesToEvents().getEvents().removeAll(toRemove);
                                                 }
-                                                c.getAppliesToEvents().getEvents().removeAll(toRemove);
                                             }
                                         }
 
@@ -558,7 +575,13 @@ public class InsertEvent extends InsertPaneWithTable {
         deleteColumn.setMinWidth(30);
         deleteColumn.getStyleClass().add("lastColumn");
 
-        table.getColumns().addAll(idColumn, descriptionColumn, resorucesColumn, deleteColumn);
+        TableColumn thickColumn = new TableColumn("De adăugat");
+        thickColumn.setCellValueFactory(new PropertyValueFactory<Event, Boolean>("toAdd"));
+        thickColumn.setMaxWidth(100);
+        thickColumn.setPrefWidth(100);
+        thickColumn.setMinWidth(100);
+
+        table.getColumns().addAll(idColumn, descriptionColumn, resorucesColumn, thickColumn, deleteColumn);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         table.setEditable(true);

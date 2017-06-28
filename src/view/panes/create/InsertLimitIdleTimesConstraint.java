@@ -89,6 +89,7 @@ public class InsertLimitIdleTimesConstraint extends InsertPaneWithTable {
         weightCB = new ComboBox<>(weights);
         weightCB.getStyleClass().add("specialComboBox");
         weightCB.setPromptText(String.valueOf(textFieldValues.get(0).getKey()));
+        new ComboBoxAutoComplete<>(weightCB);
         vbList.add(new VBox(weightLabel, weightCB));
 
         HBox descriptionLabel = makeLabel("CONSTRÂNGERE NECESARĂ", false);
@@ -103,6 +104,7 @@ public class InsertLimitIdleTimesConstraint extends InsertPaneWithTable {
         maxNoIntervalsCB = new ComboBox<>(numbersList);
         maxNoIntervalsCB.getStyleClass().add("specialComboBox");
         maxNoIntervalsCB.setValue(1);
+        new ComboBoxAutoComplete<>(maxNoIntervalsCB);
         vbList.add(new VBox(maximumIdleHoursLabel, maxNoIntervalsCB));
 
         FlowPane fp = getFlowPane(vbList);
@@ -130,6 +132,7 @@ public class InsertLimitIdleTimesConstraint extends InsertPaneWithTable {
         resourceCB = new ComboBox<>(resourceIds);
         resourceCB.getStyleClass().add("specialComboBox");
         resourceCB.setPromptText(textFieldValues.get(1).getKey());
+        new ComboBoxAutoComplete<>(resourceCB);
 
         //Resources linked to the current constraint
         //We also remove the resources that are already linked to the current constraint from the possible choices of resources
@@ -147,7 +150,7 @@ public class InsertLimitIdleTimesConstraint extends InsertPaneWithTable {
                 }
 
                 Button remove = new Button();
-                ImageView imageView2 = new ImageView(new Image("\\view\\icons\\deleteIcon.png"));
+                ImageView imageView2 = new ImageView(new Image("\\viewicons\\deleteIcon.png"));
                 imageView2.setFitHeight(6);
                 imageView2.setFitWidth(6);
                 imageView2.setPreserveRatio(true);

@@ -1,6 +1,5 @@
 package model.constraint.types;
 
-import model.FitForConstraint;
 import model.constraint.Constraint;
 import model.event.Event;
 import model.event.Events;
@@ -10,10 +9,8 @@ import model.time.Time;
 import model.time.Times;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.*;
 
 /**
  * Created by Anca on 3/11/2017.
@@ -23,6 +20,7 @@ public class LimitIdleTimesConstraint extends Constraint {
     private Events events;
     private Times times;
     private int maximumIdleHours;
+    private List<Event> conflictingEvents;
 
     public LimitIdleTimesConstraint() {
     }
@@ -33,90 +31,95 @@ public class LimitIdleTimesConstraint extends Constraint {
     }
 
     @Override
-    public int validate(FitForConstraint val) {
+    public int validate(Event event) {
+        int cost = 0;
+        Map<Integer, Event> timeIdEventMap = new HashMap<>();
+        conflictingEvents = new ArrayList<>();
+
         //The resource to be checked
-        Resource resource = (Resource) val;
+        List<Resource> resources = event.getResources().getResources();
+        for(Resource resource: resources) {
+            if (appliesToResources.getResources().contains(resource)) {
+                //The times when the resource is scheduled
+                List<Time> resourceTimes = new ArrayList<>();
 
-        if(appliesToResources.getResources().contains(resource)) {
-
-            //The times when the resource is scheduled
-            List<Time> resourceTimes = new ArrayList<>();
-
-            //The lists events and times must be set before the calling of this validate function
-            //Searching the times when the resource is scheduled
-            for (Event e : events.getEvents()) {
-                for (Resource r : e.getResources().getResources()) {
-                    if (resource.equals(r) && e.getTime() != null) {
-                        resourceTimes.add(e.getTime());
-                        break;
-                    }
-                }
-            }
-
-            //Sorting the times when the resource is scheduled
-            Collections.sort(resourceTimes, new Comparator<Time>() {
-                public int compare(Time one, Time other) {
-                    if (one.getDay().matches(other.getDay())) {
-                        int difference = Math.abs(one.getId() - other.getId());
-                        return difference;
-                    }
-                    return one.getDay().compareTo(other.getDay());
-                }
-            });
-
-            int cost = 0;
-
-            if (resourceTimes.size() != 0) {
-                if (resourceTimes.size() == 1) {
-                    return 0;
-                }
-
-                for (int i = 1; i < resourceTimes.size(); i++) {
-                    Time t1 = resourceTimes.get(i - 1);
-                    Time t2 = resourceTimes.get(i);
-
-                    //If the times have the same day they have maximumIdleHours between them
-                    if (t1.getDay().matches(t2.getDay())) {
-                        int t1_index = -1;
-
-                        for (int j = 0; j < times.getTimes().size() - 1; j++) {
-                            if (times.getTimes().get(j).getId() == t1.getId()) {
-                                t1_index = j;
-                            }
-
-                            //If the times compared t1 and t2 are not consecutive the cost is raised
-                            if (t1_index >= 0) {
-                                j++;
-
-                                //Claculating the hours distance between times
-                                int hoursBetween = 0;
-                                while (j < times.getTimes().size() && !(times.getTimes().get(j).getId() == t2.getId())) {
-                                    hoursBetween++;
-                                    j++;
-                                }
-
-                                //Adding to the cost
-                                if (hoursBetween > getMaximumIdleHours()) {
-                                    cost += this.getWeight() * (hoursBetween - getMaximumIdleHours());
-                                }
-
-                                break;
-                            }
+                //The lists events and times must be set before the calling of this validate function
+                //Searching the times when the resource is scheduled
+                for (Event e : events.getEvents()) {
+                    for (Resource r : e.getResources().getResources()) {
+                        if (e.getTime() != null && resource.getId().equals(r.getId())) {
+                            resourceTimes.add(e.getTime());
+                            timeIdEventMap.put(e.getTime().getId(), e);
+                            break;
                         }
                     }
                 }
 
-                return cost;
+                //Sorting the times when the resource is scheduled
+                Collections.sort(resourceTimes, new Comparator<Time>() {
+                    public int compare(Time one, Time other) {
+                        return Integer.valueOf(one.getId()).compareTo(Integer.valueOf(other.getId()));
+                    }
+                });
+
+                int eventTimeIndex = -1;
+                if (resourceTimes.size() > 1) {
+                    for (Time t: resourceTimes) {
+                        if(t.getId() == event.getTime().getId()){
+                            eventTimeIndex = resourceTimes.indexOf(t);
+                            break;
+                        }
+                    }
+
+                    int maximumPosibleEvents = unprogrammedEventsWithResource(resource);
+
+                    if(eventTimeIndex>0){
+                        Time previousTime = resourceTimes.get(eventTimeIndex-1);
+                        if(previousTime.getDay().equals(event.getTime().getDay())) {
+                            int hoursBetween = event.getTime().getId() - previousTime.getId();
+                            if (hoursBetween - maximumPosibleEvents > maximumIdleHours) {
+                                cost += this.getWeight() * (hoursBetween - maximumIdleHours);
+                                conflictingEvents.add(timeIdEventMap.get(previousTime.getId()));
+                            }
+                        }
+                    }
+                    if(eventTimeIndex<resourceTimes.size() - 1){
+                        Time nextTime = resourceTimes.get(eventTimeIndex+1);
+                        if(nextTime.getDay().equals(event.getTime().getDay())) {
+                            int hoursBetween = nextTime.getId() - event.getTime().getId();
+                            if (hoursBetween - maximumPosibleEvents > maximumIdleHours) {
+                                cost += this.getWeight() * (hoursBetween - maximumIdleHours);
+                                conflictingEvents.add(timeIdEventMap.get(nextTime.getId()));
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        return 0;
+        return cost;
+    }
+
+    private int unprogrammedEventsWithResource(Resource resource){
+        int counter = 0;
+        for(Event e: events.getEvents()){
+            if(e.getTime() == null) {
+                for (Resource r : e.getResources().getResources()) {
+                    if (r.getId().equals(resource.getId())) {
+                        counter ++;
+                        break;
+                    }
+                }
+            }
+        }
+        return counter;
     }
 
     public Events getEvents() {
         return events;
     }
 
+    @XmlTransient
     public void setEvents(Events events) {
         this.events = events;
     }
@@ -125,6 +128,7 @@ public class LimitIdleTimesConstraint extends Constraint {
         return times;
     }
 
+    @XmlTransient
     public void setTimes(Times times) {
         this.times = times;
     }
@@ -135,5 +139,14 @@ public class LimitIdleTimesConstraint extends Constraint {
 
     public void setMaximumIdleHours(int maximumIdleHours) {
         this.maximumIdleHours = maximumIdleHours;
+    }
+
+    public List<Event> getConflictingEvents() {
+        return conflictingEvents;
+    }
+
+    @XmlTransient
+    public void setConflictingEvents(List<Event> conflictingEvents) {
+        this.conflictingEvents = conflictingEvents;
     }
 }

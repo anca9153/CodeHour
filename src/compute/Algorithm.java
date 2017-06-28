@@ -7,4 +7,5 @@ import model.Timetable;
  */
 public interface Algorithm {
     Timetable solve(Timetable timetable);
+    Timetable addToSolution(Timetable timetable);
 }

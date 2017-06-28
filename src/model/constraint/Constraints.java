@@ -34,7 +34,8 @@ public class Constraints {
             @XmlElement(name = "assignTimeConstraint", type=AssignTimeConstraint.class),
             @XmlElement(name = "limitIdleTimeConstraint", type=LimitIdleTimesConstraint.class),
             @XmlElement(name = "limitRepeatActivityConstraint", type= LimitRepeatActivityConstraint.class),
-            @XmlElement(name = "limitRepeatDailyConstraint", type= LimitRepeatDailyConstraint.class)
+            @XmlElement(name = "limitRepeatDailyConstraint", type= LimitRepeatDailyConstraint.class),
+            @XmlElement(name = "limitResourceAvailableTimesConstraint", type= LimitResourceAvailableTimesConstraint.class)
     })
     public void setConstraints(List<Constraint> constraints) {
         this.constraints = constraints;

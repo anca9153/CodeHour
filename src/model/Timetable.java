@@ -2,7 +2,6 @@ package model;
 
 import model.solution.Solutions;
 import model.time.Times;
-
 import model.constraint.Constraints;
 import model.event.Events;
 import model.resource.ResourceTypes;

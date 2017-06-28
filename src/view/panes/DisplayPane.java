@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.Timetable;
 import model.event.Event;
@@ -103,7 +102,10 @@ public class DisplayPane extends MainPane {
         if(timetables.getSelectionModel() == null){
             System.out.println("it's null!");
         }
-        timetables.getSelectionModel().select(timetable.getId());
+
+        if(timetable != null) {
+            timetables.getSelectionModel().select(timetable.getId());
+        }
 
         HBox t = new HBox(timetableLabel, timetables);
         t.getStyleClass().add("otherTimetables");
@@ -285,7 +287,7 @@ public class DisplayPane extends MainPane {
         HBox scoreBox = new HBox(scoreLabel, rightScoreBox);
         scoreBox.getStyleClass().add("scoreBox");
 
-        VBox smallVBox = new VBox(new HBox(sLabel, detailsBox), solutionsComboBox, scoreBox);
+        VBox smallVBox = new VBox(new HBox(sLabel), solutionsComboBox);
         smallVBox.getStyleClass().add("optionVBox");
 
         final Label error = new Label("");
@@ -359,19 +361,20 @@ public class DisplayPane extends MainPane {
         }
 
         for(Event e: solution.getEvents().getEvents()){
-            for(Resource r : e.getResources().getResources()){
-                if(r.getResourceType().equals(resourceType)) {
-                    List<Event> subPart;
-                    if(resourceType.equals("teacher")){
-                        String id = map.get(r.getName()) != null? r.getName() : new String(r.getName()+" "+r.getId());
-                        subPart = map.get(id);
-                        subPart.add(e);
-                        map.put(id, subPart);
-                    }
-                    else {
-                        subPart = map.get(r.getId());
-                        subPart.add(e);
-                        map.put(r.getId(), subPart);
+            if(e.getTime()!=null) {
+                for (Resource r : e.getResources().getResources()) {
+                    if (r.getResourceType().equals(resourceType)) {
+                        List<Event> subPart;
+                        if (resourceType.equals("teacher")) {
+                            String id = map.get(r.getName()) != null ? r.getName() : new String(r.getName() + " " + r.getId());
+                            subPart = map.get(id);
+                            subPart.add(e);
+                            map.put(id, subPart);
+                        } else {
+                            subPart = map.get(r.getId());
+                            subPart.add(e);
+                            map.put(r.getId(), subPart);
+                        }
                     }
                 }
             }

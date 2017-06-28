@@ -88,6 +88,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
         weightCB = new ComboBox<>(weights);
         weightCB.getStyleClass().add("specialComboBox");
         weightCB.setPromptText(String.valueOf(textFieldValues.get(0).getKey()));
+        new ComboBoxAutoComplete<>(weightCB);
         vbList.add(new VBox(weightLabel, weightCB));
 
         HBox descriptionLabel = makeLabel("CONSTRÂNGERE NECESARĂ", false);
@@ -103,6 +104,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
         maxNoIntervalsCB = new ComboBox<>(numbersList);
         maxNoIntervalsCB.getStyleClass().add("specialComboBox");
         maxNoIntervalsCB.setValue(1);
+        new ComboBoxAutoComplete<>(maxNoIntervalsCB);
         vbList.add(new VBox(maximumIdleHoursLabel, maxNoIntervalsCB));
 
         FlowPane fp = getFlowPane(vbList);
@@ -133,6 +135,7 @@ public class InsertLimitRepeatActivityConstraint extends InsertPaneWithTable {
         resourceCB = new ComboBox<>(subjectsIds);
         resourceCB.getStyleClass().add("specialComboBox");
         resourceCB.setPromptText(textFieldValues.get(1).getKey());
+        new ComboBoxAutoComplete<>(resourceCB);
 
         //Resources linked to the current constraint
         //We also remove the resources that are already linked to the current constraint from the possible choices of resources

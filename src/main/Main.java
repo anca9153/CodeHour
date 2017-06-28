@@ -26,8 +26,6 @@ public class Main extends Application {
 
         StageLoader loader = new StageLoader(primaryStage, home, homeScene, width, height);
 
-        home.setLoader(loader);
-
         loader.loadHome();
     }
 

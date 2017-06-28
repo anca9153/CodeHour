@@ -5,12 +5,13 @@ import model.solution.OutLaws.ConstraintViolatingResources;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by Anca on 3/9/2017.
  */
 @XmlRootElement(name = "report")
-public class Report {
+public class Report implements Serializable{
     private int infeasibilityValue;
     private ConstraintViolatingResources cvrs;
     private ConstraintViolatingEvents cves;
